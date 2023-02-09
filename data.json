@@ -544,5 +544,1055 @@
             "times": "TBD",
             "instructor": "Jeremy R Johnson"
         }
+    ],
+    "41750": [
+        {
+            "subject_code": "CT",
+            "course_number": "140",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41750",
+            "course_title": "Network Administration I",
+            "days": "TR",
+            "times": "05:00 pm - 06:20 pm",
+            "instructor": "STAFF"
+        }
+    ],
+    "40862": [
+        {
+            "subject_code": "CT",
+            "course_number": "250",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40862",
+            "course_title": "IT Security Awareness",
+            "days": "MW",
+            "times": "12:00 pm - 01:20 pm",
+            "instructor": "Hengyi M Chu"
+        }
+    ],
+    "40863": [
+        {
+            "subject_code": "CT",
+            "course_number": "250",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40863",
+            "course_title": "IT Security Awareness",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Thomas J Heverin"
+        }
+    ],
+    "40864": [
+        {
+            "subject_code": "CT",
+            "course_number": "301",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40864",
+            "course_title": "Information Technology Security II",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "40865": [
+        {
+            "subject_code": "CT",
+            "course_number": "310",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40865",
+            "course_title": "Open Server II",
+            "days": "TR",
+            "times": "09:30 am - 10:50 am",
+            "instructor": "Chris J Carroll"
+        }
+    ],
+    "40866": [
+        {
+            "subject_code": "CT",
+            "course_number": "310",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40866",
+            "course_title": "Open Server II",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "40797": [
+        {
+            "subject_code": "CT",
+            "course_number": "320",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40797",
+            "course_title": "Server II",
+            "days": "MW",
+            "times": "10:30 am - 11:50 am",
+            "instructor": "Hengyi M Chu"
+        }
+    ],
+    "40798": [
+        {
+            "subject_code": "CT",
+            "course_number": "320",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40798",
+            "course_title": "Server II",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "40867": [
+        {
+            "subject_code": "CT",
+            "course_number": "330",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40867",
+            "course_title": "Network Administration II",
+            "days": "TR",
+            "times": "11:00 am - 12:20 pm",
+            "instructor": "Chris J Carroll"
+        }
+    ],
+    "40868": [
+        {
+            "subject_code": "CT",
+            "course_number": "330",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40868",
+            "course_title": "Network Administration II",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "41451": [
+        {
+            "subject_code": "CT",
+            "course_number": "355",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41451",
+            "course_title": "Wireless Network Security Technology",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Michelle A Tarbutton"
+        }
+    ],
+    "41452": [
+        {
+            "subject_code": "CT",
+            "course_number": "400",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41452",
+            "course_title": "Network Security",
+            "days": "MW",
+            "times": "03:00 pm - 04:20 pm",
+            "instructor": "Hengyi M Chu"
+        }
+    ],
+    "40317": [
+        {
+            "subject_code": "CT",
+            "course_number": "412",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40317",
+            "course_title": "Information Technology Security Policies",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "40869": [
+        {
+            "subject_code": "CT",
+            "course_number": "414",
+            "instruction_type": "Integrated Lecture & Lab",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40869",
+            "course_title": "Ethical Hacking and Penetration Testing",
+            "days": "M",
+            "times": "09:00 am - 11:50 am",
+            "instructor": "Chris J Carroll"
+        }
+    ],
+    "40870": [
+        {
+            "subject_code": "CT",
+            "course_number": "414",
+            "instruction_type": "Integrated Lecture & Lab",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40870",
+            "course_title": "Ethical Hacking and Penetration Testing",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "40593": [
+        {
+            "subject_code": "CT",
+            "course_number": "415",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40593",
+            "course_title": "Disaster Recovery and Continuity Planning",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "40318": [
+        {
+            "subject_code": "CT",
+            "course_number": "432",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40318",
+            "course_title": "Information Technology Security Systems Audits",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Michael S Cordano"
+        }
+    ],
+    "42030": [
+        {
+            "subject_code": "CT",
+            "course_number": "600",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "42030",
+            "course_title": "Cloud Technology",
+            "days": "W",
+            "times": "06:00 pm - 08:50 pm",
+            "instructor": "Chad E Peiper"
+        }
+    ],
+    "41753": [
+        {
+            "subject_code": "CT",
+            "course_number": "600",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41753",
+            "course_title": "Cloud Technology",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Chad E Peiper"
+        }
+    ],
+    "41754": [
+        {
+            "subject_code": "CT",
+            "course_number": "605",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41754",
+            "course_title": "Cloud Security and Virtual Environments",
+            "days": "M",
+            "times": "06:00 pm - 08:50 pm",
+            "instructor": "Chad E Peiper"
+        }
+    ],
+    "41755": [
+        {
+            "subject_code": "CT",
+            "course_number": "605",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "901",
+            "crn": "41755",
+            "course_title": "Cloud Security and Virtual Environments",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Chad E Peiper"
+        }
+    ],
+    "42028": [
+        {
+            "subject_code": "DSCI",
+            "course_number": "351",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "42028",
+            "course_title": "Recommender Systems",
+            "days": "MW",
+            "times": "01:30 pm - 02:50 pm",
+            "instructor": "Lei Wang"
+        }
+    ],
+    "41449": [
+        {
+            "subject_code": "DSCI",
+            "course_number": "501",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41449",
+            "course_title": "Quantitative Foundations of Data Science",
+            "days": "W",
+            "times": "06:00 pm - 08:50 pm",
+            "instructor": "Bhupesh Y Shetty"
+        }
+    ],
+    "41071": [
+        {
+            "subject_code": "DSCI",
+            "course_number": "521",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41071",
+            "course_title": "Data Analysis and Interpretation",
+            "days": "T",
+            "times": "06:30 pm - 09:20 pm",
+            "instructor": "Milad Toutounchian"
+        }
+    ],
+    "41072": [
+        {
+            "subject_code": "DSCI",
+            "course_number": "521",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41072",
+            "course_title": "Data Analysis and Interpretation",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Milad Toutounchian"
+        }
+    ],
+    "41213": [
+        {
+            "subject_code": "DSCI",
+            "course_number": "592",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41213",
+            "course_title": "Data Science Capstone II",
+            "days": "M",
+            "times": "06:00 pm - 08:50 pm",
+            "instructor": "Milad Toutounchian"
+        }
+    ],
+    "41214": [
+        {
+            "subject_code": "DSCI",
+            "course_number": "592",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41214",
+            "course_title": "Data Science Capstone II",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Milad Toutounchian"
+        }
+    ],
+    "41749": [
+        {
+            "subject_code": "DSCI",
+            "course_number": "632",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41749",
+            "course_title": "Applied Cloud Computing",
+            "days": "T",
+            "times": "06:30 pm - 09:20 pm",
+            "instructor": "Lei Wang"
+        }
+    ],
+    "42029": [
+        {
+            "subject_code": "DSCI",
+            "course_number": "632",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "42029",
+            "course_title": "Applied Cloud Computing",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Lei Wang"
+        }
+    ],
+    "40594": [
+        {
+            "subject_code": "INFO",
+            "course_number": "101",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40594",
+            "course_title": "Introduction to Computing and Security Technology",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Michelle A Tarbutton"
+        }
+    ],
+    "41220": [
+        {
+            "subject_code": "INFO",
+            "course_number": "102",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41220",
+            "course_title": "Introduction to Information Systems",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "41221": [
+        {
+            "subject_code": "INFO",
+            "course_number": "103",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41221",
+            "course_title": "Introduction to Data Science",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "42031": [
+        {
+            "subject_code": "INFO",
+            "course_number": "103",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "901",
+            "crn": "42031",
+            "course_title": "Introduction to Data Science",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "41222": [
+        {
+            "subject_code": "INFO",
+            "course_number": "152",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41222",
+            "course_title": "Web Systems and Services II",
+            "days": "TR",
+            "times": "09:30 am - 10:50 am",
+            "instructor": "Bo Song"
+        }
+    ],
+    "41063": [
+        {
+            "subject_code": "INFO",
+            "course_number": "152",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41063",
+            "course_title": "Web Systems and Services II",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Bo Song"
+        }
+    ],
+    "40534": [
+        {
+            "subject_code": "INFO",
+            "course_number": "200",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40534",
+            "course_title": "Systems Analysis I",
+            "days": "TR",
+            "times": "11:00 am - 12:20 pm",
+            "instructor": "Michael S Cordano"
+        }
+    ],
+    "40113": [
+        {
+            "subject_code": "INFO",
+            "course_number": "210",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40113",
+            "course_title": "Database Management Systems",
+            "days": "MW",
+            "times": "01:30 pm - 02:50 pm",
+            "instructor": "STAFF"
+        }
+    ],
+    "40871": [
+        {
+            "subject_code": "INFO",
+            "course_number": "213",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40871",
+            "course_title": "Data Science Programming II",
+            "days": "TR",
+            "times": "12:30 pm - 01:50 pm",
+            "instructor": "Bhupesh Y Shetty"
+        }
+    ],
+    "42033": [
+        {
+            "subject_code": "INFO",
+            "course_number": "215",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "42033",
+            "course_title": "Social Aspects of Information Systems",
+            "days": "MW",
+            "times": "01:30 pm - 02:50 pm",
+            "instructor": "STAFF"
+        }
+    ],
+    "40807": [
+        {
+            "subject_code": "INFO",
+            "course_number": "250",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40807",
+            "course_title": "Information Visualization",
+            "days": "MW",
+            "times": "12:00 pm - 01:20 pm",
+            "instructor": "Erjia Yan"
+        }
+    ],
+    "40228": [
+        {
+            "subject_code": "INFO",
+            "course_number": "310",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40228",
+            "course_title": "Human-Centered Design Process & Methods",
+            "days": "TR",
+            "times": "12:30 pm - 01:50 pm",
+            "instructor": "Tim J Gorichanaz"
+        }
+    ],
+    "41759": [
+        {
+            "subject_code": "INFO",
+            "course_number": "310",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "002",
+            "crn": "41759",
+            "course_title": "Human-Centered Design Process & Methods",
+            "days": "TR",
+            "times": "05:00 pm - 06:20 pm",
+            "instructor": "Tim J Gorichanaz"
+        }
+    ],
+    "40554": [
+        {
+            "subject_code": "INFO",
+            "course_number": "324",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40554",
+            "course_title": "Team Process and Product",
+            "days": "MW",
+            "times": "10:30 am - 11:50 am",
+            "instructor": "Michael S Cordano"
+        }
+    ],
+    "41760": [
+        {
+            "subject_code": "INFO",
+            "course_number": "324",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41760",
+            "course_title": "Team Process and Product",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "42035": [
+        {
+            "subject_code": "INFO",
+            "course_number": "355",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "42035",
+            "course_title": "Systems Analysis II",
+            "days": "MW",
+            "times": "01:30 pm - 02:50 pm",
+            "instructor": "Hegler Correa Tissot"
+        }
+    ],
+    "41453": [
+        {
+            "subject_code": "INFO",
+            "course_number": "355",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41453",
+            "course_title": "Systems Analysis II",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "42036": [
+        {
+            "subject_code": "INFO",
+            "course_number": "355",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "901",
+            "crn": "42036",
+            "course_title": "Systems Analysis II",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "42037": [
+        {
+            "subject_code": "INFO",
+            "course_number": "366",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "42037",
+            "course_title": "Database Administration II",
+            "days": "MW",
+            "times": "03:00 pm - 04:20 pm",
+            "instructor": "Hegler Correa Tissot"
+        }
+    ],
+    "40872": [
+        {
+            "subject_code": "INFO",
+            "course_number": "366",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40872",
+            "course_title": "Database Administration II",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Hegler Correa Tissot"
+        }
+    ],
+    "42038": [
+        {
+            "subject_code": "INFO",
+            "course_number": "420",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "42038",
+            "course_title": "Software Project Management",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "42039": [
+        {
+            "subject_code": "INFO",
+            "course_number": "432",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "42039",
+            "course_title": "Advanced Data Analytics",
+            "days": "TR",
+            "times": "12:30 pm - 01:50 pm",
+            "instructor": "Bo Song"
+        }
+    ],
+    "42040": [
+        {
+            "subject_code": "INFO",
+            "course_number": "440",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "42040",
+            "course_title": "Social Media Data Analysis",
+            "days": "TR",
+            "times": "11:00 am - 12:20 pm",
+            "instructor": "Bhupesh Y Shetty"
+        }
+    ],
+    "41762": [
+        {
+            "subject_code": "INFO",
+            "course_number": "442",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41762",
+            "course_title": "Data Science Projects",
+            "days": "MW",
+            "times": "12:00 pm - 01:20 pm",
+            "instructor": "Lei Wang"
+        }
+    ],
+    "40799": [
+        {
+            "subject_code": "INFO",
+            "course_number": "507",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40799",
+            "course_title": "Leading and Managing Information Organizations",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "40297": [
+        {
+            "subject_code": "INFO",
+            "course_number": "552",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40297",
+            "course_title": "Introduction to Web Design for Information Organizations",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Tim J Gorichanaz"
+        }
+    ],
+    "40874": [
+        {
+            "subject_code": "INFO",
+            "course_number": "590",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40874",
+            "course_title": "Foundations of Data and Information",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Heather L Willever-Farr"
+        }
+    ],
+    "42041": [
+        {
+            "subject_code": "INFO",
+            "course_number": "600",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "42041",
+            "course_title": "Web Systems & Architecture",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "40595": [
+        {
+            "subject_code": "INFO",
+            "course_number": "605",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40595",
+            "course_title": "Database Management Systems",
+            "days": "W",
+            "times": "06:00 pm - 08:50 pm",
+            "instructor": "Hegler Correa Tissot"
+        }
+    ],
+    "40058": [
+        {
+            "subject_code": "INFO",
+            "course_number": "605",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40058",
+            "course_title": "Database Management Systems",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Hegler Correa Tissot"
+        }
+    ],
+    "40213": [
+        {
+            "subject_code": "INFO",
+            "course_number": "608",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40213",
+            "course_title": "Human-Computer Interaction",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Kasey D Meredith"
+        }
+    ],
+    "41763": [
+        {
+            "subject_code": "INFO",
+            "course_number": "616",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41763",
+            "course_title": "Social and Collaborative Computing",
+            "days": "R",
+            "times": "06:30 pm - 09:20 pm",
+            "instructor": "Erica J Racine"
+        }
+    ],
+    "41764": [
+        {
+            "subject_code": "INFO",
+            "course_number": "616",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "901",
+            "crn": "41764",
+            "course_title": "Social and Collaborative Computing",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Erica J Racine"
+        }
+    ],
+    "42042": [
+        {
+            "subject_code": "INFO",
+            "course_number": "629",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "42042",
+            "course_title": "Applied Artificial Intelligence",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "40253": [
+        {
+            "subject_code": "INFO",
+            "course_number": "651",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40253",
+            "course_title": "Academic Library Service",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "41224": [
+        {
+            "subject_code": "INFO",
+            "course_number": "657",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41224",
+            "course_title": "Digital Library Technologies",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "41765": [
+        {
+            "subject_code": "INFO",
+            "course_number": "690",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41765",
+            "course_title": "Understanding Users: User Experience Research Methods",
+            "days": "T",
+            "times": "06:30 pm - 09:20 pm",
+            "instructor": "STAFF"
+        }
+    ],
+    "41766": [
+        {
+            "subject_code": "INFO",
+            "course_number": "690",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41766",
+            "course_title": "Understanding Users: User Experience Research Methods",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "42043": [
+        {
+            "subject_code": "INFO",
+            "course_number": "710",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "42043",
+            "course_title": "Information Forensics",
+            "days": "M",
+            "times": "06:00 pm - 08:50 pm",
+            "instructor": "Michelle A Tarbutton"
+        }
+    ],
+    "41064": [
+        {
+            "subject_code": "INFO",
+            "course_number": "710",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41064",
+            "course_title": "Information Forensics",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Michelle A Tarbutton"
+        }
+    ],
+    "40393": [
+        {
+            "subject_code": "INFO",
+            "course_number": "712",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40393",
+            "course_title": "Information Assurance",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Chad E Peiper"
+        }
+    ],
+    "40875": [
+        {
+            "subject_code": "INFO",
+            "course_number": "890",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "40875",
+            "course_title": "Capstone Project",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Heather L Willever-Farr"
+        }
+    ],
+    "42044": [
+        {
+            "subject_code": "INFO",
+            "course_number": "890",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "901",
+            "crn": "42044",
+            "course_title": "Capstone Project",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Troy Abel"
+        }
+    ],
+    "42026": [
+        {
+            "subject_code": "SE",
+            "course_number": "310",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "42026",
+            "course_title": "Software Architecture I",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "41447": [
+        {
+            "subject_code": "SE",
+            "course_number": "572",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41447",
+            "course_title": "Web Services and Mobile Architectures",
+            "days": "M",
+            "times": "10:30 am - 01:20 pm",
+            "instructor": "Galen Long"
+        }
+    ],
+    "41448": [
+        {
+            "subject_code": "SE",
+            "course_number": "572",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "901",
+            "crn": "41448",
+            "course_title": "Web Services and Mobile Architectures",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Galen Long"
+        }
     ]
 }

@@ -3,6 +3,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import config.urls as urls
 import config.buttons as buttons
+import config.partial_links as partial_links
+from collections import defaultdict
+
 
 from parse import parse
 
@@ -11,8 +14,25 @@ def scrape(driver: webdriver.Chrome):
     go_to_tms(driver)
     click_button_by_button_text(driver, buttons.quarter_button)
     click_button_by_button_text(driver, buttons.college_button)
-    click_button_by_button_text(driver, buttons.college_subject_button)
-    data = parse(driver.page_source)
+    data = parse_all_colleges(driver)
+    return data
+
+
+def parse_all_colleges(driver: webdriver.Chrome):
+    data = defaultdict(list)
+    college_buttons = driver.find_elements(
+        By.CSS_SELECTOR, "a[href^='{}']".format(partial_links.colleges))
+
+    count = 0
+
+    for _ in college_buttons:
+        college_buttons[count].click()
+        parse(driver.page_source, data)
+        driver.back()
+        college_buttons = driver.find_elements(
+            By.CSS_SELECTOR, "a[href^='{}']".format(partial_links.colleges))
+        count += 1
+
     return data
 
 

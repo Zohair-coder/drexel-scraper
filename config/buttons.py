@@ -2,4 +2,3 @@
 
 quarter_button = "Summer Quarter 22-23"
 college_button = "Col of Computing & Informatics"
-college_subject_button = "Computer Science (CS)"

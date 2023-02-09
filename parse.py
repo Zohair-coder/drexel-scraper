@@ -1,10 +1,8 @@
 from bs4 import BeautifulSoup
 import config.attributes as attributes
-from collections import defaultdict
 
 
-def parse(html):
-    extracted_data = defaultdict(list)
+def parse(html, data: dict):
 
     soup = BeautifulSoup(html, "html.parser")
     table_rows = soup.find_all(attrs=attributes.rows)
@@ -21,7 +19,7 @@ def parse(html):
 
         crn = row_data_strs[5]
 
-        extracted_data[crn].append({
+        data[crn].append({
             "subject_code": row_data_strs[0],
             "course_number": row_data_strs[1],
             "instruction_type": row_data_strs[2],
@@ -34,7 +32,7 @@ def parse(html):
             "instructor": row_data_strs[10],
         })
 
-    return extracted_data
+    return data
 
 
 def fix_encoding_issue(text: str) -> str:
