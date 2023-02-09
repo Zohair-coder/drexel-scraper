@@ -1,0 +1,548 @@
+{
+    "41739": [
+        {
+            "subject_code": "CS",
+            "course_number": "171",
+            "instruction_type": "Lab",
+            "instruction_method": "Face To Face",
+            "section": "060",
+            "crn": "41739",
+            "course_title": "Computer Programming I",
+            "days": "R",
+            "times": "09:00 am - 10:50 am",
+            "instructor": "STAFF"
+        }
+    ],
+    "41740": [
+        {
+            "subject_code": "CS",
+            "course_number": "171",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "A",
+            "crn": "41740",
+            "course_title": "Computer Programming I",
+            "days": "T",
+            "times": "09:00 am - 10:50 am",
+            "instructor": "STAFF"
+        }
+    ],
+    "40574": [
+        {
+            "subject_code": "CS",
+            "course_number": "172",
+            "instruction_type": "Lab",
+            "instruction_method": "Face To Face",
+            "section": "060",
+            "crn": "40574",
+            "course_title": "Computer Programming II",
+            "days": "W",
+            "times": "10:00 am - 11:50 am",
+            "instructor": "STAFF"
+        }
+    ],
+    "40591": [
+        {
+            "subject_code": "CS",
+            "course_number": "172",
+            "instruction_type": "Lab",
+            "instruction_method": "Face To Face",
+            "section": "061",
+            "crn": "40591",
+            "course_title": "Computer Programming II",
+            "days": "W",
+            "times": "10:00 am - 11:50 am",
+            "instructor": "STAFF"
+        }
+    ],
+    "40101": [
+        {
+            "subject_code": "CS",
+            "course_number": "172",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "A",
+            "crn": "40101",
+            "course_title": "Computer Programming II",
+            "days": "M",
+            "times": "10:00 am - 11:50 am",
+            "instructor": "STAFF"
+        }
+    ],
+    "40027": [
+        {
+            "subject_code": "CS",
+            "course_number": "260",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40027",
+            "course_title": "Data Structures",
+            "days": "TR",
+            "times": "11:00 am - 12:20 pm",
+            "instructor": "Yusuf Osmanlioglu"
+        }
+    ],
+    "40592": [
+        {
+            "subject_code": "CS",
+            "course_number": "260",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "002",
+            "crn": "40592",
+            "course_title": "Data Structures",
+            "days": "TR",
+            "times": "02:00 pm - 03:20 pm",
+            "instructor": "Yusuf Osmanlioglu"
+        }
+    ],
+    "41204": [
+        {
+            "subject_code": "CS",
+            "course_number": "260",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "003",
+            "crn": "41204",
+            "course_title": "Data Structures",
+            "days": "TR",
+            "times": "03:30 pm - 04:50 pm",
+            "instructor": "Yusuf Osmanlioglu"
+        }
+    ],
+    "41205": [
+        {
+            "subject_code": "CS",
+            "course_number": "260",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "004",
+            "crn": "41205",
+            "course_title": "Data Structures",
+            "days": "MW",
+            "times": "01:30 pm - 02:50 pm",
+            "instructor": "Yusuf Osmanlioglu"
+        }
+    ],
+    "41206": [
+        {
+            "subject_code": "CS",
+            "course_number": "260",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "005",
+            "crn": "41206",
+            "course_title": "Data Structures",
+            "days": "MW",
+            "times": "04:30 pm - 05:50 pm",
+            "instructor": "Krzysztof Nowak"
+        }
+    ],
+    "40800": [
+        {
+            "subject_code": "CS",
+            "course_number": "265",
+            "instruction_type": "Integrated Lecture & Lab",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40800",
+            "course_title": "Advanced Programming Tools and Techniques",
+            "days": "TR",
+            "times": "02:00 pm - 03:20 pm",
+            "instructor": "Galen Long"
+        }
+    ],
+    "41207": [
+        {
+            "subject_code": "CS",
+            "course_number": "265",
+            "instruction_type": "Integrated Lecture & Lab",
+            "instruction_method": "Face To Face",
+            "section": "002",
+            "crn": "41207",
+            "course_title": "Advanced Programming Tools and Techniques",
+            "days": "TR",
+            "times": "03:30 pm - 04:50 pm",
+            "instructor": "Galen Long"
+        }
+    ],
+    "41208": [
+        {
+            "subject_code": "CS",
+            "course_number": "265",
+            "instruction_type": "Integrated Lecture & Lab",
+            "instruction_method": "Face To Face",
+            "section": "003",
+            "crn": "41208",
+            "course_title": "Advanced Programming Tools and Techniques",
+            "days": "MW",
+            "times": "03:00 pm - 04:20 pm",
+            "instructor": "STAFF"
+        }
+    ],
+    "41209": [
+        {
+            "subject_code": "CS",
+            "course_number": "270",
+            "instruction_type": "Lecture & Lab",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41209",
+            "course_title": "Mathematical Foundations of Computer Science",
+            "days": "MW",
+            "times": "10:00 am - 11:50 am",
+            "instructor": "STAFF"
+        }
+    ],
+    "40590": [
+        {
+            "subject_code": "CS",
+            "course_number": "283",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40590",
+            "course_title": "Systems Programming",
+            "days": "M",
+            "times": "03:00 pm - 05:50 pm",
+            "instructor": "Brian L Stuart"
+        }
+    ],
+    "40451": [
+        {
+            "subject_code": "CS",
+            "course_number": "283",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "002",
+            "crn": "40451",
+            "course_title": "Systems Programming",
+            "days": "W",
+            "times": "03:00 pm - 05:50 pm",
+            "instructor": "Brian L Stuart"
+        }
+    ],
+    "42024": [
+        {
+            "subject_code": "CS",
+            "course_number": "283",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "003",
+            "crn": "42024",
+            "course_title": "Systems Programming",
+            "days": "W",
+            "times": "09:00 am - 11:50 am",
+            "instructor": "Brian L Stuart"
+        }
+    ],
+    "40718": [
+        {
+            "subject_code": "CS",
+            "course_number": "345",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40718",
+            "course_title": "Computer Game Design and Development",
+            "days": "M",
+            "times": "09:00 am - 11:50 am",
+            "instructor": "STAFF"
+        }
+    ],
+    "40164": [
+        {
+            "subject_code": "CS",
+            "course_number": "360",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40164",
+            "course_title": "Programming Language Concepts",
+            "days": "TR",
+            "times": "02:00 pm - 03:20 pm",
+            "instructor": "Krzysztof Nowak"
+        }
+    ],
+    "41277": [
+        {
+            "subject_code": "CS",
+            "course_number": "360",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "002",
+            "crn": "41277",
+            "course_title": "Programming Language Concepts",
+            "days": "TR",
+            "times": "03:30 pm - 04:50 pm",
+            "instructor": "Krzysztof Nowak"
+        }
+    ],
+    "42025": [
+        {
+            "subject_code": "CS",
+            "course_number": "360",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "003",
+            "crn": "42025",
+            "course_title": "Programming Language Concepts",
+            "days": "TR",
+            "times": "05:00 pm - 06:20 pm",
+            "instructor": "Krzysztof Nowak"
+        }
+    ],
+    "40044": [
+        {
+            "subject_code": "CS",
+            "course_number": "370",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "40044",
+            "course_title": "Operating Systems",
+            "days": "MW",
+            "times": "12:00 pm - 01:20 pm",
+            "instructor": "Brian L Stuart"
+        }
+    ],
+    "41210": [
+        {
+            "subject_code": "CS",
+            "course_number": "375",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41210",
+            "course_title": "Web Development",
+            "days": "TR",
+            "times": "11:00 am - 12:20 pm",
+            "instructor": "Galen Long"
+        }
+    ],
+    "41742": [
+        {
+            "subject_code": "CS",
+            "course_number": "383",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41742",
+            "course_title": "Machine Learning",
+            "days": "TR",
+            "times": "09:30 am - 10:50 am",
+            "instructor": "Matthew J Burlick"
+        }
+    ],
+    "41437": [
+        {
+            "subject_code": "CS",
+            "course_number": "432",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41437",
+            "course_title": "Interactive Computer Graphics",
+            "days": "TR",
+            "times": "03:30 pm - 04:50 pm",
+            "instructor": "Matthew J Burlick"
+        }
+    ],
+    "41438": [
+        {
+            "subject_code": "CS",
+            "course_number": "435",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41438",
+            "course_title": "Computational Photography",
+            "days": "T",
+            "times": "12:30 pm - 03:20 pm",
+            "instructor": "Matthew J Burlick"
+        }
+    ],
+    "41744": [
+        {
+            "subject_code": "CS",
+            "course_number": "472",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41744",
+            "course_title": "Computer Networks: Theory, Applications and Programming",
+            "days": "R",
+            "times": "12:30 pm - 03:20 pm",
+            "instructor": "STAFF"
+        }
+    ],
+    "41439": [
+        {
+            "subject_code": "CS",
+            "course_number": "502",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41439",
+            "course_title": "Data Structures and Algorithms",
+            "days": "R",
+            "times": "06:30 pm - 09:20 pm",
+            "instructor": "Mark W Boady"
+        }
+    ],
+    "41440": [
+        {
+            "subject_code": "CS",
+            "course_number": "502",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41440",
+            "course_title": "Data Structures and Algorithms",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Mark W Boady"
+        }
+    ],
+    "41441": [
+        {
+            "subject_code": "CS",
+            "course_number": "504",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41441",
+            "course_title": "Introduction to Software Design",
+            "days": "T",
+            "times": "06:30 pm - 09:20 pm",
+            "instructor": "STAFF"
+        }
+    ],
+    "41442": [
+        {
+            "subject_code": "CS",
+            "course_number": "504",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41442",
+            "course_title": "Introduction to Software Design",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "41443": [
+        {
+            "subject_code": "CS",
+            "course_number": "521",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41443",
+            "course_title": "Data Structures and Algorithms I",
+            "days": "M",
+            "times": "06:00 pm - 08:50 pm",
+            "instructor": "STAFF"
+        }
+    ],
+    "41444": [
+        {
+            "subject_code": "CS",
+            "course_number": "521",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "901",
+            "crn": "41444",
+            "course_title": "Data Structures and Algorithms I",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "STAFF"
+        }
+    ],
+    "41745": [
+        {
+            "subject_code": "CS",
+            "course_number": "523",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41745",
+            "course_title": "Cryptography",
+            "days": "R",
+            "times": "06:30 pm - 09:20 pm",
+            "instructor": "Jeremy R Johnson"
+        }
+    ],
+    "41746": [
+        {
+            "subject_code": "CS",
+            "course_number": "523",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "901",
+            "crn": "41746",
+            "course_title": "Cryptography",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Jeremy R Johnson"
+        }
+    ],
+    "41445": [
+        {
+            "subject_code": "CS",
+            "course_number": "615",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41445",
+            "course_title": "Deep Learning",
+            "days": "R",
+            "times": "06:30 pm - 09:20 pm",
+            "instructor": "Matthew J Burlick"
+        }
+    ],
+    "41446": [
+        {
+            "subject_code": "CS",
+            "course_number": "615",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41446",
+            "course_title": "Deep Learning",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Matthew J Burlick"
+        }
+    ],
+    "41211": [
+        {
+            "subject_code": "CS",
+            "course_number": "660",
+            "instruction_type": "Lecture",
+            "instruction_method": "Face To Face",
+            "section": "001",
+            "crn": "41211",
+            "course_title": "Data Analysis at Scale",
+            "days": "W",
+            "times": "06:00 pm - 08:50 pm",
+            "instructor": "Jeremy R Johnson"
+        }
+    ],
+    "41212": [
+        {
+            "subject_code": "CS",
+            "course_number": "660",
+            "instruction_type": "Lecture",
+            "instruction_method": "Online",
+            "section": "900",
+            "crn": "41212",
+            "course_title": "Data Analysis at Scale",
+            "days": "TBD",
+            "times": "TBD",
+            "instructor": "Jeremy R Johnson"
+        }
+    ]
+}
