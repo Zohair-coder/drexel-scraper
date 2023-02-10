@@ -20,7 +20,6 @@ def main():
         json.dump(data, f, indent=4)
 
     print("Found {} items".format(len(data)))
-
     print("Data written to data.json")
 
     driver.close()
