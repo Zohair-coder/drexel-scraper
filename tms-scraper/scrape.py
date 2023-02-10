@@ -25,15 +25,12 @@ def parse_all_colleges(driver: webdriver.Chrome, data: dict):
     college_buttons = driver.find_elements(
         By.CSS_SELECTOR, "a[href^='{}']".format(partial_links.colleges))
 
-    count = 0
-
-    for _ in college_buttons:
-        college_buttons[count].click()
+    for i in range(len(college_buttons)):
+        college_buttons[i].click()
         parse(driver.page_source, data)
         driver.back()
         college_buttons = driver.find_elements(
             By.CSS_SELECTOR, "a[href^='{}']".format(partial_links.colleges))
-        count += 1
 
     return data
 

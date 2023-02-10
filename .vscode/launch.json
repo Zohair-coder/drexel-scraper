@@ -8,9 +8,10 @@
       "name": "Python: main.py",
       "type": "python",
       "request": "launch",
-      "program": "${cwd}/main.py",
+      "program": "${workspaceFolder}/tms-scraper/main.py",
       "console": "integratedTerminal",
-      "justMyCode": true
+      "justMyCode": true,
+      "cwd": "${workspaceFolder}/tms-scraper"
     }
   ]
 }
