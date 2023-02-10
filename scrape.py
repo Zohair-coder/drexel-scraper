@@ -13,13 +13,15 @@ from parse import parse
 def scrape(driver: webdriver.Chrome):
     go_to_tms(driver)
     click_button_by_button_text(driver, buttons.quarter_button)
+
+    data = defaultdict(list)
+
     click_button_by_button_text(driver, buttons.college_button)
-    data = parse_all_colleges(driver)
+    parse_all_colleges(driver, data)
     return data
 
 
-def parse_all_colleges(driver: webdriver.Chrome):
-    data = defaultdict(list)
+def parse_all_colleges(driver: webdriver.Chrome, data: dict):
     college_buttons = driver.find_elements(
         By.CSS_SELECTOR, "a[href^='{}']".format(partial_links.colleges))
 

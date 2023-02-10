@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 from scrape import scrape
 
@@ -6,7 +7,14 @@ import json
 
 
 def main():
-    driver = webdriver.Chrome()
+    options = Options()
+
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+
+    driver = webdriver.Chrome(options=options)
+
     data = scrape(driver)
 
     with open("data.json", "w") as f:
