@@ -26,6 +26,8 @@ def parse(html, data: dict):
             "instruction_method": row_data_strs[3],
             "section": row_data_strs[4],
             "crn": row_data_strs[5],
+            "enroll": get_enroll(row_data[5]),
+            "max_enroll": get_max_enroll(row_data[5]),
             "course_title": row_data_strs[6],
             "days": row_data_strs[8],
             "times": row_data_strs[9],
@@ -33,6 +35,20 @@ def parse(html, data: dict):
         })
 
     return data
+
+
+def get_enroll(td):
+    span = td.contents[0]
+    title_attr = span.attrs["title"]
+    enroll = title_attr.split(";")[1]
+    return enroll.split("=")[1]
+
+
+def get_max_enroll(td):
+    span = td.contents[0]
+    title_attr = span.attrs["title"]
+    enroll = title_attr.split(";")[0]
+    return enroll.split("=")[1]
 
 
 def fix_encoding_issue(text: str) -> str:
