@@ -1,8 +1,9 @@
 from bs4 import BeautifulSoup
 import config.attributes as attributes
+from ratings import rating
 
 
-def parse(html, data: dict):
+def parse(html, data: dict, include_ratings: bool = False):
 
     soup = BeautifulSoup(html, "html.parser")
     table_rows = soup.find_all(attrs=attributes.rows)
@@ -33,6 +34,13 @@ def parse(html, data: dict):
             "times": row_data_strs[9],
             "instructor": row_data_strs[10],
         })
+
+        if include_ratings:
+            first_name = row_data_strs[10].split(" ")[0]
+            last_name = row_data_strs[10].split(" ")[-1]
+
+            data[crn][-1]["ratings"] = rating(
+                first_name + " " + last_name)
 
     return data
 

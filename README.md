@@ -12,6 +12,14 @@ Make sure you have Python 3 installed. Then install bs4 and selenium. Installing
 
 To run the scraper, simply run the `python3 main.py` command. The scraper will output a JSON file called `data.json` in the same directory as the scraper.
 
+To also include the ratings field in `data.json` that requests data from RateMyProfessor, run the following command:
+
+```bash
+python3 main.py --ratings
+```
+
+Note that this will take a lot longer to run.
+
 ## Docker
 
 Build the docker container by executing the following command:

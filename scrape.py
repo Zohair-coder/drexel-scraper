@@ -10,24 +10,24 @@ from collections import defaultdict
 from parse import parse
 
 
-def scrape(driver: webdriver.Chrome):
+def scrape(driver: webdriver.Chrome, include_ratings: bool = False):
     go_to_tms(driver)
     click_button_by_button_text(driver, buttons.quarter_button)
 
     data = defaultdict(list)
 
     click_button_by_button_text(driver, buttons.college_button)
-    parse_all_colleges(driver, data)
+    parse_all_colleges(driver, data, include_ratings)
     return data
 
 
-def parse_all_colleges(driver: webdriver.Chrome, data: dict):
+def parse_all_colleges(driver: webdriver.Chrome, data: dict, include_ratings: bool):
     college_buttons = driver.find_elements(
         By.CSS_SELECTOR, "a[href^='{}']".format(partial_href_attributes.colleges))
 
     for i in range(len(college_buttons)):
         college_buttons[i].click()
-        parse(driver.page_source, data)
+        parse(driver.page_source, data, include_ratings)
         driver.back()
         college_buttons = driver.find_elements(
             By.CSS_SELECTOR, "a[href^='{}']".format(partial_href_attributes.colleges))

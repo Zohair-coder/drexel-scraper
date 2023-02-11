@@ -5,6 +5,8 @@ from scrape import scrape
 
 import json
 
+import sys
+
 
 def main():
     options = Options()
@@ -14,7 +16,11 @@ def main():
 
     driver = webdriver.Chrome(options=options)
 
-    data = scrape(driver)
+    include_ratings = False
+    if "--ratings" in sys.argv:
+        include_ratings = True
+
+    data = scrape(driver, include_ratings)
 
     with open("data.json", "w") as f:
         json.dump(data, f, indent=4)
