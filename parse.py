@@ -30,23 +30,31 @@ def parse(html, data: dict, include_ratings: bool = False):
             "course_title": row_data_strs[6],
             "days": row_data_strs[8],
             "times": row_data_strs[9],
-            "instructor": {
-                "name": row_data_strs[10],
-            }
+            "instructors": get_instructors(row_data_strs[10]),
         })
 
         if include_ratings:
-            name_tokens = row_data_strs[10].split(" ")
-            name = name_tokens[0] + " " + name_tokens[-1]
+            for index, instructor in enumerate(data[crn][-1]["instructors"]):
+                name_tokens = instructor["name"].split(" ")
+                name = name_tokens[0] + " " + name_tokens[-1]
 
-            if name not in ratings_cache:
-                ratings_cache[name] = rating(name)
+                if name not in ratings_cache:
+                    ratings_cache[name] = rating(name)
 
-            rating_obj = ratings_cache[name]
+                rating_obj = ratings_cache[name]
 
-            data[crn][-1]["instructor"]["rating"] = rating_obj
+                data[crn][-1]["instructors"][index]["rating"] = rating_obj
 
     return data
+
+
+def get_instructors(instructors_str: str) -> list:
+    instructors = []
+    for instructor in instructors_str.split(","):
+        instructors.append({
+            "name": instructor.strip(),
+        })
+    return instructors
 
 
 def get_enroll(td):

@@ -8,12 +8,10 @@ import config
 
 def scrape(include_ratings: bool = False):
     session = Session()
-    response = go_to_cci_page(session)
-
     data = defaultdict(list)
 
+    response = go_to_cci_page(session)
     parse_all_subjects(session, data, response.text, include_ratings)
-
     return data
 
 
