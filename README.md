@@ -26,4 +26,4 @@ To run the scraper in a Docker container, run the following command:
 docker run -v $(pwd):/app drexel-scraper
 ```
 
-Make sure you execute this in the `tms-scraper` directory. The scraper should then output the `data.json` file in the same directory.
+Make sure you execute this in the root directory. The scraper should then output the `data.json` file in the same directory.
