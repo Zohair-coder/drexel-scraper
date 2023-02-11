@@ -12,6 +12,8 @@ def parse(html, data: dict, include_ratings: bool = False):
     # last row is empty
     table_rows.pop()
 
+    ratings_cache = {}
+
     for table_row in table_rows:
         row_data = table_row.find_all("td")
 
@@ -32,15 +34,25 @@ def parse(html, data: dict, include_ratings: bool = False):
             "course_title": row_data_strs[6],
             "days": row_data_strs[8],
             "times": row_data_strs[9],
-            "instructor": row_data_strs[10],
+            "instructor": {
+                "name": row_data_strs[10],
+            }
         })
 
         if include_ratings:
-            first_name = row_data_strs[10].split(" ")[0]
-            last_name = row_data_strs[10].split(" ")[-1]
+            name_tokens = row_data_strs[10].split(" ")
+            name = name_tokens[0] + " " + name_tokens[-1]
 
-            data[crn][-1]["ratings"] = rating(
-                first_name + " " + last_name)
+            if name in ratings_cache:
+                rating_obj = ratings_cache[name]
+            else:
+                rating_obj = rating(name)
+                ratings_cache[name] = rating_obj
+
+            data[crn][-1]["instructor"] = {
+                "name": row_data_strs[10],
+                "rating": rating_obj
+            }
 
     return data
 
