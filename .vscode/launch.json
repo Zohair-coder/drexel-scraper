@@ -12,6 +12,15 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Python: ratings.py",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/ratings.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "cwd": "${workspaceFolder}"
     }
   ]
 }
