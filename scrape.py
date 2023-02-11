@@ -1,43 +1,33 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-import config.urls as urls
-import config.buttons as buttons
-import config.partial_href_attributes as partial_href_attributes
 from collections import defaultdict
-
+from requests import Session
+from bs4 import BeautifulSoup
 
 from parse import parse
+import config
 
 
-def scrape(driver: webdriver.Chrome, include_ratings: bool = False):
-    go_to_tms(driver)
-    click_button_by_button_text(driver, buttons.quarter_button)
+def scrape(include_ratings: bool = False):
+    session = Session()
+    response = go_to_cci_page(session)
 
     data = defaultdict(list)
 
-    click_button_by_button_text(driver, buttons.college_button)
-    parse_all_colleges(driver, data, include_ratings)
-    return data
-
-
-def parse_all_colleges(driver: webdriver.Chrome, data: dict, include_ratings: bool):
-    college_buttons = driver.find_elements(
-        By.CSS_SELECTOR, "a[href^='{}']".format(partial_href_attributes.colleges))
-
-    for i in range(len(college_buttons)):
-        college_buttons[i].click()
-        parse(driver.page_source, data, include_ratings)
-        driver.back()
-        college_buttons = driver.find_elements(
-            By.CSS_SELECTOR, "a[href^='{}']".format(partial_href_attributes.colleges))
+    parse_all_subjects(session, data, response.text, include_ratings)
 
     return data
 
 
-def go_to_tms(driver: webdriver.Chrome) -> None:
-    driver.get(urls.term_master_schedule)
+def get_soup(html):
+    return BeautifulSoup(html, "html.parser")
 
 
-def click_button_by_button_text(driver: webdriver.Chrome, button_text: str):
-    driver.find_element(By.LINK_TEXT, button_text).click()
+def go_to_cci_page(session: Session):
+    return session.get(config.get_college_page_url(config.college))
+
+
+def parse_all_subjects(session: Session, data: dict, html: str, include_ratings: bool):
+    soup = get_soup(html)
+    for link in soup.find_all("a", href=lambda href: href and href.startswith("/webtms_du/courseList")):
+        response = session.get(config.tms_base_url + link["href"])
+        parse(response.text, data, include_ratings)
+    return data

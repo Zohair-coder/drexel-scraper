@@ -1,16 +1,12 @@
 from bs4 import BeautifulSoup
-import config.attributes as attributes
+from config import attributes
 from ratings import rating
 
 
 def parse(html, data: dict, include_ratings: bool = False):
 
     soup = BeautifulSoup(html, "html.parser")
-    table_rows = soup.find_all(attrs=attributes.rows)
-    filter_out_headers(table_rows)
-
-    # last row is empty
-    table_rows.pop()
+    table_rows = soup.find_all("tr", class_=["odd", "even"])
 
     ratings_cache = {}
 
@@ -56,6 +52,10 @@ def parse(html, data: dict, include_ratings: bool = False):
 def get_enroll(td):
     span = td.contents[0]
     title_attr = span.attrs["title"]
+
+    if "FULL" in title_attr:
+        return "FULL"
+
     enroll = title_attr.split(";")[1]
     return enroll.split("=")[1]
 
@@ -63,15 +63,13 @@ def get_enroll(td):
 def get_max_enroll(td):
     span = td.contents[0]
     title_attr = span.attrs["title"]
+
+    if "FULL" in title_attr:
+        return "FULL"
+
     enroll = title_attr.split(";")[0]
     return enroll.split("=")[1]
 
 
 def fix_encoding_issue(text: str) -> str:
     return text.replace("\xa0", " ")
-
-
-def filter_out_headers(rows):
-    for row in rows:
-        if row.find("th"):
-            rows.remove(row)
