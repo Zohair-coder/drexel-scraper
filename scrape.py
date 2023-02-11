@@ -10,7 +10,7 @@ def scrape(include_ratings: bool = False):
     session = Session()
     data = defaultdict(list)
 
-    response = go_to_cci_page(session)
+    response = go_to_college_page(session)
     parse_all_subjects(session, data, response.text, include_ratings)
     return data
 
@@ -19,7 +19,7 @@ def get_soup(html):
     return BeautifulSoup(html, "html.parser")
 
 
-def go_to_cci_page(session: Session):
+def go_to_college_page(session: Session):
     return session.get(config.get_college_page_url(config.college_code))
 
 

@@ -33,8 +33,13 @@ def parse(html, data: dict, include_ratings: bool = False):
             "instructors": get_instructors(row_data_strs[-1]),
         })
 
+        print("Parsed CRN: " + crn)
+
         if include_ratings:
             for index, instructor in enumerate(data[crn][-1]["instructors"]):
+
+                print("Getting rating for " + instructor["name"])
+
                 name_tokens = instructor["name"].split(" ")
                 name = name_tokens[0] + " " + name_tokens[-1]
 
@@ -44,6 +49,9 @@ def parse(html, data: dict, include_ratings: bool = False):
                 rating_obj = ratings_cache[name]
 
                 data[crn][-1]["instructors"][index]["rating"] = rating_obj
+                print("Done")
+
+        print()
 
     return data
 
