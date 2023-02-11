@@ -6,7 +6,7 @@ Currently, the scraper only supports scraping the term master schedule for the s
 
 ## Installation
 
-Make sure you have Python 3 installed. Then install bs4 and selenium. Installing selenium is a little more complex than simply running the `pip install selenium` command. You also have to download the web driver and make sure it matches with the current browser version. For a more detailed explanation, see [this](https://selenium-python.readthedocs.io/installation.html).
+Make sure you have Python 3 installed. Then install requests, bs4 and selenium. Installing selenium is a little more complex than simply running the `pip install selenium` command. You also have to download the web driver and make sure it matches with the current browser version. For a more detailed explanation, see [this](https://selenium-python.readthedocs.io/installation.html).
 
 ## Usage
 

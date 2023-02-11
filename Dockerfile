@@ -18,7 +18,7 @@ RUN apk add chromium=109.0.5414.74-r0 chromium-chromedriver=109.0.5414.74-r0
 RUN pip install --upgrade pip
 
 # install selenium and BeautifulSoup
-RUN pip install selenium bs4
+RUN pip install selenium bs4 requests
 
 # Run the Python script
-CMD ["python", "main.py"]
+CMD ["python", "main.py", "--ratings"]

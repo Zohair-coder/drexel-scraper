@@ -43,16 +43,12 @@ def parse(html, data: dict, include_ratings: bool = False):
             name_tokens = row_data_strs[10].split(" ")
             name = name_tokens[0] + " " + name_tokens[-1]
 
-            if name in ratings_cache:
-                rating_obj = ratings_cache[name]
-            else:
-                rating_obj = rating(name)
-                ratings_cache[name] = rating_obj
+            if name not in ratings_cache:
+                ratings_cache[name] = rating(name)
 
-            data[crn][-1]["instructor"] = {
-                "name": row_data_strs[10],
-                "rating": rating_obj
-            }
+            rating_obj = ratings_cache[name]
+
+            data[crn][-1]["instructor"]["rating"] = rating_obj
 
     return data
 
