@@ -18,7 +18,7 @@ def parse(html, data: dict, include_ratings: bool = False):
 
         crn = row_data_strs[5]
 
-        data[crn].append({
+        data[crn] = {
             "subject_code": row_data_strs[0],
             "course_number": row_data_strs[1],
             "instruction_type": row_data_strs[2],
@@ -31,12 +31,12 @@ def parse(html, data: dict, include_ratings: bool = False):
             "days": row_data_strs[8],
             "times": row_data_strs[9],
             "instructors": get_instructors(row_data_strs[-1]),
-        })
+        }
 
         print("Parsed CRN: " + crn)
 
         if include_ratings:
-            for index, instructor in enumerate(data[crn][-1]["instructors"]):
+            for index, instructor in enumerate(data[crn]["instructors"]):
 
                 print("Getting rating for " + instructor["name"])
 
@@ -48,7 +48,7 @@ def parse(html, data: dict, include_ratings: bool = False):
 
                 rating_obj = ratings_cache[name]
 
-                data[crn][-1]["instructors"][index]["rating"] = rating_obj
+                data[crn]["instructors"][index]["rating"] = rating_obj
                 print("Done")
 
         print()

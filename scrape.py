@@ -1,4 +1,3 @@
-from collections import defaultdict
 from requests import Session
 from bs4 import BeautifulSoup
 
@@ -8,7 +7,7 @@ import config
 
 def scrape(include_ratings: bool = False):
     session = Session()
-    data = defaultdict(list)
+    data = {}
 
     response = go_to_college_page(session)
     parse_all_subjects(session, data, response.text, include_ratings)
