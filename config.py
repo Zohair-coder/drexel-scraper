@@ -1,6 +1,6 @@
 year = "2022"
 quarter = "45"
-college = "CI"
+college_code = "CI"
 
 # URL's
 tms_base_url = "https://termmasterschedule.drexel.edu"

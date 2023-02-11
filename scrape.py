@@ -20,7 +20,7 @@ def get_soup(html):
 
 
 def go_to_cci_page(session: Session):
-    return session.get(config.get_college_page_url(config.college))
+    return session.get(config.get_college_page_url(config.college_code))
 
 
 def parse_all_subjects(session: Session, data: dict, html: str, include_ratings: bool):

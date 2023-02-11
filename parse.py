@@ -30,7 +30,7 @@ def parse(html, data: dict, include_ratings: bool = False):
             "course_title": row_data_strs[6],
             "days": row_data_strs[8],
             "times": row_data_strs[9],
-            "instructors": get_instructors(row_data_strs[10]),
+            "instructors": get_instructors(row_data_strs[-1]),
         })
 
         if include_ratings:
