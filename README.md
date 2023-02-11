@@ -6,7 +6,11 @@ Currently, the scraper only supports scraping the term master schedule for the s
 
 ## Installation
 
-Make sure you have Python 3 installed. Then install requests, bs4 and selenium. Installing selenium is a little more complex than simply running the `pip install selenium` command. You also have to download the web driver and make sure it matches with the current browser version. For a more detailed explanation, see [this](https://selenium-python.readthedocs.io/installation.html).
+Make sure you have Python 3 installed. Then install requests and bs4.
+
+```bash
+pip3 install requests bs4
+```
 
 ## Usage
 
@@ -18,7 +22,7 @@ To also include the ratings field in `data.json` that requests data from RateMyP
 python3 main.py --ratings
 ```
 
-Note that this will take a lot longer to run.
+Note that this will take longer to run since the scraper has to look up the rating on ratemyprofessors.
 
 ## Docker
 
@@ -34,4 +38,4 @@ To run the scraper in a Docker container, run the following command:
 docker run -v $(pwd):/app drexel-scraper
 ```
 
-Make sure you execute this in the root directory. The scraper should then output the `data.json` file in the same directory.
+Make sure you execute this in the project root directory. The scraper should then output the `data.json` file in the same directory.
