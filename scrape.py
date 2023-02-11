@@ -3,7 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import config.urls as urls
 import config.buttons as buttons
-import config.partial_links as partial_links
+import config.partial_href_attributes as partial_href_attributes
 from collections import defaultdict
 
 
@@ -23,14 +23,14 @@ def scrape(driver: webdriver.Chrome):
 
 def parse_all_colleges(driver: webdriver.Chrome, data: dict):
     college_buttons = driver.find_elements(
-        By.CSS_SELECTOR, "a[href^='{}']".format(partial_links.colleges))
+        By.CSS_SELECTOR, "a[href^='{}']".format(partial_href_attributes.colleges))
 
     for i in range(len(college_buttons)):
         college_buttons[i].click()
         parse(driver.page_source, data)
         driver.back()
         college_buttons = driver.find_elements(
-            By.CSS_SELECTOR, "a[href^='{}']".format(partial_links.colleges))
+            By.CSS_SELECTOR, "a[href^='{}']".format(partial_href_attributes.colleges))
 
     return data
 
