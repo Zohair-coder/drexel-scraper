@@ -2,7 +2,7 @@
 
 Scrapes data from the Drexel term master schedule and outputs a JSON file.
 
-Currently, the scraper only supports scraping the term master schedule for the summer term for the CCI college.
+Currently, the scraper only supports scraping the term master schedule for the summer term for the CCI college. You can, however, choose to modify these settings at your own risk by changing the `year`, `quarter`, and `college` variables in `config.py`.
 
 ## Installation
 
