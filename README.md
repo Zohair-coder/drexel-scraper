@@ -16,6 +16,14 @@ pip3 install requests bs4
 
 To run the scraper, simply run the `python3 main.py` command. The scraper will output a JSON file called `data.json` in the same directory as the scraper.
 
+You can modify the scraper to scrape other terms by changing the `year`, `quarter`, and `college_code` variables in `config.py`.
+
+To scrape all colleges instead of just the one specified in the `config.json`, run the following command:
+
+```bash
+python3 main.py --all-colleges
+```
+
 To also include the ratings field in `data.json` that requests data from RateMyProfessor, run the following command:
 
 ```bash
