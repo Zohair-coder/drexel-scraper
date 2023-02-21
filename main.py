@@ -9,7 +9,11 @@ def main():
     if "--ratings" in sys.argv:
         include_ratings = True
 
-    data = scrape(include_ratings=include_ratings)
+    all_colleges = False
+    if "--all-colleges" in sys.argv:
+        all_colleges = True
+
+    data = scrape(include_ratings=include_ratings, all_colleges=all_colleges)
 
     with open("data.json", "w") as f:
         json.dump(data, f, indent=4)

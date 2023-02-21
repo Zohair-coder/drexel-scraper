@@ -5,21 +5,39 @@ from parse import parse
 import config
 
 
-def scrape(include_ratings: bool = False):
+def scrape(include_ratings: bool = False, all_colleges: bool = False):
     session = Session()
     data = {}
 
-    response = go_to_college_page(session)
-    parse_all_subjects(session, data, response.text, include_ratings)
+    if not all_colleges:
+        college_codes = [config.college_code]
+    else:
+        college_codes = get_all_college_codes(session)
+
+    for college_code in college_codes:
+        response = go_to_college_page(session, college_code)
+        parse_all_subjects(session, data, response.text, include_ratings)
+
     return data
+
+
+def get_all_college_codes(session: Session):
+    response = session.get(config.get_college_page_url(""))
+    soup = get_soup(response.text)
+    college_codes = []
+
+    for link in soup.find_all("a", href=lambda href: href and href.startswith("/webtms_du/collegesSubjects")):
+        college_codes.append(link["href"].split("=")[-1])
+
+    return college_codes
 
 
 def get_soup(html):
     return BeautifulSoup(html, "html.parser")
 
 
-def go_to_college_page(session: Session):
-    return session.get(config.get_college_page_url(config.college_code))
+def go_to_college_page(session: Session, college_code: str):
+    return session.get(config.get_college_page_url(college_code))
 
 
 def parse_all_subjects(session: Session, data: dict, html: str, include_ratings: bool):

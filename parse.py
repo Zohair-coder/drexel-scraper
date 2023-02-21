@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from config import attributes
 from ratings import rating
 from datetime import datetime
+import json
 
 
 def parse(html, data: dict, include_ratings: bool = False):
@@ -9,7 +10,11 @@ def parse(html, data: dict, include_ratings: bool = False):
     soup = BeautifulSoup(html, "html.parser")
     table_rows = soup.find_all("tr", class_=["odd", "even"])
 
-    ratings_cache = {}
+    try:
+        with open("ratings_cache.json", "r") as f:
+            ratings_cache = json.load(f)
+    except FileNotFoundError:
+        ratings_cache = {}
 
     for table_row in table_rows:
         row_data = table_row.find_all("td")
@@ -38,8 +43,11 @@ def parse(html, data: dict, include_ratings: bool = False):
             "instructors": get_instructors(row_data_strs[-1], include_ratings, ratings_cache),
         }
 
-        print("Parsed CRN: " + crn)
+        print("Parsed CRN: " + crn + " (" + row_data_strs[6] + ")")
         print()
+
+    with open("ratings_cache.json", "w") as f:
+        json.dump(ratings_cache, f, indent=4)
 
     return data
 

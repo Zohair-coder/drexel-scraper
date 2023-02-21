@@ -12,7 +12,9 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "cwd": "${workspaceFolder}",
-      "args": ["--ratings"]
+      // "args": ["--ratings"]
+      // "args": ["--all-colleges"]
+      "args": ["--ratings", "--all-colleges"]
     },
     {
       "name": "Python: ratings.py",
