@@ -46,6 +46,8 @@ schedulerdb=# SELECT * FROM instructors;
 schedulerdb=# SELECT * FROM course_instructor;
 ```
 
+I recommend viewing the data using another program like pgAdmin.
+
 #### All Colleges
 
 To scrape all colleges instead of just the one specified in the `config.json`, run the following command:
