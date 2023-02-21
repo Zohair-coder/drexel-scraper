@@ -136,8 +136,12 @@ def parse_time(t: str):
     start_str, end_str = t.split(" - ")
     start_time = time_str_to_object(start_str)
     end_time = time_str_to_object(end_str)
-    return (start_time.isoformat(), end_time.isoformat())
+    return (time_obj_to_str(start_time), time_obj_to_str(end_time))
 
 
 def time_str_to_object(t: str):
     return datetime.strptime(t, "%I:%M %p")
+
+
+def time_obj_to_str(t: datetime):
+    return t.strftime("%H:%M")
