@@ -9,6 +9,7 @@ quarter = "45"
 # the characters after the = sign is your college code
 # e.g. in this URL the college code is CI
 # https://termmasterschedule.drexel.edu/webtms_du/collegesSubjects/202245?collCode=CI
+# NOTE: This configuration will be ignored if the --all-colleges flag is used
 # example values = CI, A, AS
 college_code = "CI"
 

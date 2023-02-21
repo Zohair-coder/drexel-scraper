@@ -22,7 +22,7 @@ To also include the ratings field in `data.json` that requests data from RateMyP
 python3 main.py --ratings
 ```
 
-Note that this will take longer to run since the scraper has to look up the rating on ratemyprofessors.
+Note that this will take longer to run since the scraper has to look up the rating on ratemyprofessors. However, it will cache the ratings in a file called `ratings_cache` so that it doesn't have to look up the same professor again, which will run much faster. If you want to clear the cache to get new ratings, simply delete the `ratings_cache.json` file.
 
 ## Docker
 

@@ -72,6 +72,10 @@ def rating(professor_name):
     professor_id = professor[0]["node"]["id"]
 
     ratings = get_ratings(professor_id)
+
+    if ratings is None:
+        return None
+
     del ratings["__typename"]
 
     return ratings
