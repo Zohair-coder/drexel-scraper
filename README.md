@@ -34,6 +34,18 @@ This will create a new database `schedulerdb` and the necessary tables if they a
 
 To view the schema for the tables, you can look at the `create_tables.sql` file.
 
+Connect to the database using the following command:
+
+```bash
+psql -U postgres schedulerdb
+```
+
+```sql
+schedulerdb=# SELECT * FROM courses;
+schedulerdb=# SELECT * FROM instructors;
+schedulerdb=# SELECT * FROM course_instructor;
+```
+
 #### All Colleges
 
 To scrape all colleges instead of just the one specified in the `config.json`, run the following command:
