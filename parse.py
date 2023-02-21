@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from config import attributes
 from ratings import rating
+from datetime import datetime
 
 
 def parse(html, data: dict, include_ratings: bool = False):
@@ -18,6 +19,8 @@ def parse(html, data: dict, include_ratings: bool = False):
 
         crn = row_data_strs[5]
 
+        start_time, end_time = parse_time(row_data_strs[9])
+
         data[crn] = {
             "subject_code": row_data_strs[0],
             "course_number": row_data_strs[1],
@@ -29,7 +32,8 @@ def parse(html, data: dict, include_ratings: bool = False):
             "max_enroll": get_max_enroll(row_data[5]),
             "course_title": row_data_strs[6],
             "days": row_data_strs[8],
-            "times": row_data_strs[9],
+            "start_time": start_time,
+            "end_time": end_time,
             "instructors": get_instructors(row_data_strs[-1]),
         }
 
@@ -89,3 +93,16 @@ def get_max_enroll(td):
 
 def fix_encoding_issue(text: str) -> str:
     return text.replace("\xa0", " ")
+
+
+def parse_time(t: str):
+    if t == "TBD":
+        return (None, None)
+    start_str, end_str = t.split(" - ")
+    start_time = time_str_to_object(start_str)
+    end_time = time_str_to_object(end_str)
+    return (start_time.isoformat(), end_time.isoformat())
+
+
+def time_str_to_object(t: str):
+    return datetime.strptime(t, "%I:%M %p")
