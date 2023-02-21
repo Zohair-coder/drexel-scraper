@@ -35,38 +35,42 @@ def parse(html, data: dict, include_ratings: bool = False):
             "days": days,
             "start_time": start_time,
             "end_time": end_time,
-            "instructors": get_instructors(row_data_strs[-1]),
+            "instructors": get_instructors(row_data_strs[-1], include_ratings, ratings_cache),
         }
 
         print("Parsed CRN: " + crn)
-
-        if include_ratings:
-            for index, instructor in enumerate(data[crn]["instructors"]):
-
-                print("Getting rating for " + instructor["name"])
-
-                name_tokens = instructor["name"].split(" ")
-                name = name_tokens[0] + " " + name_tokens[-1]
-
-                if name not in ratings_cache:
-                    ratings_cache[name] = rating(name)
-
-                rating_obj = ratings_cache[name]
-
-                data[crn]["instructors"][index]["rating"] = rating_obj
-                print("Done")
-
         print()
 
     return data
 
 
-def get_instructors(instructors_str: str) -> list:
+def get_instructors(instructors_str: str, include_ratings: bool, ratings_cache: dict) -> list or None:
+    if instructors_str == "STAFF":
+        return None
+
     instructors = []
     for instructor in instructors_str.split(","):
-        instructors.append({
-            "name": instructor.strip(),
-        })
+        name = instructor.strip()
+
+        if include_ratings:
+            name_tokens = name.split(" ")
+            rmp_name = name_tokens[0] + " " + name_tokens[-1]
+
+            if rmp_name not in ratings_cache:
+                ratings_cache[rmp_name] = rating(rmp_name)
+
+            rating_obj = ratings_cache[rmp_name]
+
+            instructors.append({
+                "name": name,
+                "rating": rating_obj,
+            })
+
+        else:
+            instructors.append({
+                "name": name,
+            })
+
     return instructors
 
 

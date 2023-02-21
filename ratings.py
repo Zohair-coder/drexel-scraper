@@ -67,9 +67,7 @@ def rating(professor_name):
     professor = search_professors(professor_name)
 
     if len(professor) == 0:
-        return {
-            "error": "No professor found"
-        }
+        return None
 
     professor_id = professor[0]["node"]["id"]
 
