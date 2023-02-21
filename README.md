@@ -18,11 +18,31 @@ To run the scraper, simply run the `python3 main.py` command. The scraper will o
 
 You can modify the scraper to scrape other terms by changing the `year`, `quarter`, and `college_code` variables in `config.py`.
 
+#### PostgreSQL
+
+To add the data to a PostgreSQL database, make sure a PostgreSQL server is running in the background and then run the following command:
+
+```bash
+python3 main.py --db
+```
+
+This will create a new database `schedulerdb` and the necessary tables if they aren't already created, and then insert the data into the database. If the data is already populated, it will update the existing data. It won't delete any data, it will only update it. To delete all the data, you can run the following command:
+
+```
+./reset_db.sh
+```
+
+To view the schema for the tables, you can look at the `create_tables.sql` file.
+
+#### All Colleges
+
 To scrape all colleges instead of just the one specified in the `config.json`, run the following command:
 
 ```bash
 python3 main.py --all-colleges
 ```
+
+#### Ratings
 
 To also include the ratings field in `data.json` that requests data from RateMyProfessor, run the following command:
 

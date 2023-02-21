@@ -33,7 +33,6 @@ def connect_to_db() -> tuple[cursor, connection]:
     try:
         conn = psycopg2.connect(dbname=dbname, user=user,
                                 password=password, host=host, port=port)
-        print("Successfully connected to database!")
     except psycopg2.OperationalError as e:
         # If the database doesn't exist, create it
         if "database" in str(e) and "does not exist" in str(e):
@@ -47,7 +46,6 @@ def connect_to_db() -> tuple[cursor, connection]:
             # Connect to the newly created database
             conn = psycopg2.connect(dbname=dbname, user=user,
                                     password=password, host=host, port=port)
-            print("Successfully created and connected to database!")
         else:
             raise e
 
@@ -183,7 +181,6 @@ def create_tables(cur: cursor, conn: connection):
 
     cur.execute(create_table_sql)
     conn.commit()
-    print("Tables created successfully!")
 
 
 def do_tables_exist(cur: cursor):

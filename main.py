@@ -2,7 +2,7 @@ from scrape import scrape
 
 import json
 import sys
-# import db
+import db
 
 
 def main():
@@ -22,7 +22,11 @@ def main():
     print("Found {} items".format(len(data)))
     print("Data written to data.json")
 
-    # db.populate_db(data)
+    if "--db" in sys.argv:
+        print("Updating database...")
+        db.populate_db(data)
+
+    print("Done!")
 
 
 if __name__ == "__main__":
