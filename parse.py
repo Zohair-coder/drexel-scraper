@@ -20,6 +20,7 @@ def parse(html, data: dict, include_ratings: bool = False):
         crn = row_data_strs[5]
 
         start_time, end_time = parse_time(row_data_strs[9])
+        days = parse_days(row_data_strs[8])
 
         data[crn] = {
             "subject_code": row_data_strs[0],
@@ -27,11 +28,11 @@ def parse(html, data: dict, include_ratings: bool = False):
             "instruction_type": row_data_strs[2],
             "instruction_method": row_data_strs[3],
             "section": row_data_strs[4],
-            "crn": row_data_strs[5],
+            "crn": int(row_data_strs[5]),
             "enroll": get_enroll(row_data[5]),
             "max_enroll": get_max_enroll(row_data[5]),
             "course_title": row_data_strs[6],
-            "days": row_data_strs[8],
+            "days": days,
             "start_time": start_time,
             "end_time": end_time,
             "instructors": get_instructors(row_data_strs[-1]),
@@ -93,6 +94,28 @@ def get_max_enroll(td):
 
 def fix_encoding_issue(text: str) -> str:
     return text.replace("\xa0", " ")
+
+
+def parse_days(d: str):
+
+    if d == "TBD":
+        return None
+
+    days = []
+    mapping = {
+        "M": "Monday",
+        "T": "Tuesday",
+        "W": "Wednesday",
+        "R": "Thursday",
+        "F": "Friday",
+        "S": "Saturday",
+        "U": "Sunday",
+    }
+
+    for day in d:
+        days.append(mapping[day])
+
+    return days
 
 
 def parse_time(t: str):
