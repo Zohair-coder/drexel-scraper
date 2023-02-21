@@ -10,6 +10,25 @@ host = "localhost"
 port = "5432"
 
 
+def populate_db(data: dict):
+    cur, conn = connect_to_db()
+
+    if not do_tables_exist(cur):
+        create_tables(cur, conn)
+
+    for course in data.values():
+        course_id = insert_course(cur, course)
+        instructor_ids = insert_instructors(cur, course)
+
+        for instructor_id in instructor_ids:
+            insert_course_instructor(cur, course_id, instructor_id)
+
+    conn.commit()
+
+    cur.close()
+    conn.close()
+
+
 def connect_to_db() -> tuple[cursor, connection]:
     try:
         conn = psycopg2.connect(dbname=dbname, user=user,
@@ -38,26 +57,23 @@ def connect_to_db() -> tuple[cursor, connection]:
     return cur, conn
 
 
-def populate_db(data: dict):
-    cur, conn = connect_to_db()
-
-    if not do_tables_exist(cur):
-        create_tables(cur, conn)
-
-    for course in data.values():
-        course_id = insert_course(cur, course)
-        instructor_ids = insert_instructors(cur, course)
-
-        for instructor_id in instructor_ids:
-            insert_course_instructor(cur, course_id, instructor_id)
-
-    conn.commit()
-
-    cur.close()
-    conn.close()
-
-
 def insert_course_instructor(cur: cursor, course_id: int, instructor_id: int):
+
+    if not course_instructor_in_db(cur, course_id, instructor_id):
+        insert_new_course_instructor(cur, course_id, instructor_id)
+
+
+def course_instructor_in_db(cur: cursor, course_id: int, instructor_id: int) -> bool:
+    cur.execute("""
+        SELECT COUNT(*)
+        FROM course_instructor
+        WHERE course_id = %s AND instructor_id = %s
+        """, (course_id, instructor_id))
+
+    return cur.fetchone()[0] == 1
+
+
+def insert_new_course_instructor(cur: cursor, course_id: int, instructor_id: int):
     cur.execute("""
         INSERT INTO course_instructor (course_id, instructor_id)
         VALUES (%s, %s)
@@ -78,25 +94,79 @@ def insert_instructors(cur, course):
 
 
 def insert_instructor(cur: cursor, instructor) -> int:
+    if not instructor_name_in_db(cur, instructor["name"]):
+        insert_new_instructor(cur, instructor)
+    return update_instructor(cur, instructor)
+
+
+def instructor_name_in_db(cur: cursor, name: str) -> bool:
     cur.execute("""
-            INSERT INTO instructors (name)
-            VALUES (%s)
-            RETURNING id
+        SELECT COUNT(*)
+        FROM instructors
+        WHERE name = %s
+        """, (name,))
+
+    return cur.fetchone()[0] == 1
+
+
+def update_instructor(cur: cursor, instructor) -> int:
+    if instructor["rating"] is None:
+        cur.execute("""
+            SELECT id
+            FROM instructors
+            WHERE name = %s
             """, (instructor["name"],))
-
-    instructor_id = cur.fetchone()[0]
-
-    if instructor["rating"] is not None:
+    else:
         cur.execute("""
             UPDATE instructors
             SET avg_difficulty = %s, avg_rating = %s, num_ratings = %s
-            WHERE id = %s
-            """, (instructor["rating"]["avgDifficulty"], instructor["rating"]["avgRating"], instructor["rating"]["numRatings"], instructor_id))
+            WHERE name = %s
+            RETURNING id
+            """, (instructor["rating"]["avgDifficulty"], instructor["rating"]["avgRating"], instructor["rating"]["numRatings"], instructor["name"]))
 
-    return instructor_id
+    return cur.fetchone()[0]
+
+
+def insert_new_instructor(cur: cursor, instructor) -> int:
+    cur.execute("""
+        INSERT INTO instructors (name)
+        VALUES (%s)
+        RETURNING id
+        """, (instructor["name"],))
+
+    return cur.fetchone()[0]
 
 
 def insert_course(cur: cursor, course) -> int:
+    if crn_in_db(cur, course["crn"]):
+        return update_course(cur, course)
+    else:
+        return insert_new_course(cur, course)
+
+
+def crn_in_db(cur: cursor, crn: int) -> bool:
+    cur.execute("""
+        SELECT COUNT(*)
+        FROM courses
+        WHERE crn = %s
+        """, (crn,))
+
+    return cur.fetchone()[0] == 1
+
+
+def update_course(cur: cursor, course) -> int:
+    cur.execute("""
+        UPDATE courses
+        SET subject_code = %s, course_number = %s, instruction_type = %s, instruction_method = %s, section = %s, enroll = %s, max_enroll = %s, course_title = %s, start_time = %s, end_time = %s, days = %s
+        WHERE crn = %s
+        RETURNING crn
+        """, (course["subject_code"], course["course_number"], course["instruction_type"], course["instruction_method"],
+              course["section"], course["enroll"], course["max_enroll"], course["course_title"], course["start_time"], course["end_time"], course["days"], course["crn"]))
+
+    return cur.fetchone()[0]
+
+
+def insert_new_course(cur: cursor, course) -> int:
     cur.execute("""
         INSERT INTO courses (crn, subject_code, course_number, instruction_type, instruction_method, section, enroll, max_enroll, course_title, start_time, end_time, days)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
@@ -120,7 +190,7 @@ def do_tables_exist(cur: cursor):
     cur.execute("""
     SELECT COUNT(*)
     FROM information_schema.tables
-    WHERE table_name IN ('courses', 'instructors')
+    WHERE table_name IN('courses', 'instructors')
 """)
     return cur.fetchone()[0] == 2
 

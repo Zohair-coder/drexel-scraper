@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS course_instructor CASCADE;
 
 CREATE TABLE instructors (
     id              SERIAL PRIMARY KEY,
-    name            TEXT NOT NULL,
+    name            TEXT UNIQUE NOT NULL,
     avg_difficulty  NUMERIC,
     avg_rating      NUMERIC,
     num_ratings     INTEGER
