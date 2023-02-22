@@ -23,7 +23,7 @@ def populate_db(data: dict):
         for instructor_id in instructor_ids:
             insert_course_instructor(cur, course_id, instructor_id)
 
-        conn.commit()
+    conn.commit()
 
     cur.close()
     conn.close()
