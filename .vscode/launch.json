@@ -23,7 +23,7 @@
       "cwd": "${workspaceFolder}",
       // "args": ["--ratings"]
       // "args": ["--all-colleges"]
-      "args": ["--ratings", "--all-colleges", "--db"]
+      "args": ["--ratings", "--db"]
     },
     {
       "name": "Python: ratings.py",

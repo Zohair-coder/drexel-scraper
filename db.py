@@ -23,7 +23,7 @@ def populate_db(data: dict):
         for instructor_id in instructor_ids:
             insert_course_instructor(cur, course_id, instructor_id)
 
-    conn.commit()
+        conn.commit()
 
     cur.close()
     conn.close()
@@ -190,9 +190,3 @@ def do_tables_exist(cur: cursor):
     WHERE table_name IN('courses', 'instructors')
 """)
     return cur.fetchone()[0] == 2
-
-
-with open("data.json") as f:
-    data = json.load(f)
-
-populate_db(data)
