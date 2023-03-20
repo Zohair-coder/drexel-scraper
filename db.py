@@ -108,7 +108,7 @@ def instructor_name_in_db(cur: cursor, name: str) -> bool:
 
 
 def update_instructor(cur: cursor, instructor) -> int:
-    if instructor["rating"] is None:
+    if instructor.get("rating", None) is None:
         cur.execute("""
             SELECT id
             FROM instructors

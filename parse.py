@@ -66,6 +66,9 @@ def get_instructors(instructors_str: str, include_ratings: bool, ratings_cache: 
 
             if rmp_name not in ratings_cache:
                 ratings_cache[rmp_name] = rating(rmp_name)
+                if ratings_cache[rmp_name] is None and len(name_tokens) > 2:
+                    rmp_name = name_tokens[0] + " " + name_tokens[1]
+                    ratings_cache[rmp_name] = rating(rmp_name)
 
             rating_obj = ratings_cache[rmp_name]
 
