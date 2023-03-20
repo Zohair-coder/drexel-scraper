@@ -1,13 +1,7 @@
 import psycopg2
-import json
+from db_config import DBNAME, USER, PASSWORD, HOST, PORT
 
 from psycopg2.extensions import cursor, connection
-
-dbname = "schedulerdb"
-user = "postgres"
-password = ""
-host = "localhost"
-port = "5432"
 
 
 def populate_db(data: dict):
@@ -31,21 +25,21 @@ def populate_db(data: dict):
 
 def connect_to_db() -> tuple[cursor, connection]:
     try:
-        conn = psycopg2.connect(dbname=dbname, user=user,
-                                password=password, host=host, port=port)
+        conn = psycopg2.connect(dbname=DBNAME, user=USER,
+                                password=PASSWORD, host=HOST, port=PORT)
     except psycopg2.OperationalError as e:
         # If the database doesn't exist, create it
         if "database" in str(e) and "does not exist" in str(e):
             conn = psycopg2.connect(
-                user=user, password=password, host=host, port=port)
+                user=USER, password=PASSWORD, host=HOST, port=PORT)
             conn.autocommit = True
             cur = conn.cursor()
-            cur.execute(f"CREATE DATABASE {dbname}")
+            cur.execute(f"CREATE DATABASE {DBNAME}")
             cur.close()
             conn.close()
             # Connect to the newly created database
-            conn = psycopg2.connect(dbname=dbname, user=user,
-                                    password=password, host=host, port=port)
+            conn = psycopg2.connect(dbname=DBNAME, user=USER,
+                                    password=PASSWORD, host=HOST, port=PORT)
         else:
             raise e
 

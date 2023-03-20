@@ -6,10 +6,17 @@ Currently, the scraper only supports scraping the term master schedule for the s
 
 ## Installation
 
-Make sure you have [Python 3](https://www.python.org/downloads/) and [PostgreSQL](https://www.postgresql.org/download/) installed. Then install the following packages:
+Make sure [git](https://git-scm.com/downloads) is installed. Clone the repository:
 
 ```bash
-pip3 install requests bs4 psycopg2
+git clone https://github.com/Zohair-coder/drexel-scraper.git
+cd drexel-scraper
+```
+
+Make sure you have [Python 3](https://www.python.org/downloads/). Then install the following packages:
+
+```bash
+pip3 install requests bs4
 ```
 
 ## Usage
@@ -20,7 +27,13 @@ You can modify the scraper to scrape other terms by changing the `year`, `quarte
 
 #### PostgreSQL
 
-To add the data to a PostgreSQL database, make sure a PostgreSQL server is running in the background and then run the following command:
+To add the data to a PostgreSQL database, make sure the [PostgreSQL](https://www.postgresql.org/download/) server is installed and running in the background. Check the settings in the db_config.py file. Install the psycopg2 package:
+
+```bash
+pip3 install  psycopg2
+```
+
+And then run the scraper with the `--db` flag:
 
 ```bash
 python3 main.py --db
@@ -46,7 +59,7 @@ schedulerdb=# SELECT * FROM instructors;
 schedulerdb=# SELECT * FROM course_instructor;
 ```
 
-I recommend viewing the data using another program like pgAdmin.
+I recommend viewing the data using another program like [pgAdmin](https://www.pgadmin.org/download/).
 
 #### All Colleges
 
@@ -64,7 +77,7 @@ To also include the ratings field in `data.json` that requests data from RateMyP
 python3 main.py --ratings
 ```
 
-Note that this will take longer to run since the scraper has to look up the rating on ratemyprofessors. However, it will cache the ratings in a file called `ratings_cache` so that it doesn't have to look up the same professor again, which will run much faster. If you want to clear the cache to get new ratings, simply delete the `ratings_cache.json` file.
+Note that this will take longer to run since the scraper has to look up the rating on ratemyprofessors. However, it will cache the ratings in a file called `ratings_cache.json` so that it doesn't have to look up the same professor again, which will run much faster. If you want to clear the cache to get new ratings, simply delete the `ratings_cache.json` file.
 
 You can also combine all the options together:
 
