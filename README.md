@@ -6,10 +6,10 @@ Currently, the scraper only supports scraping the term master schedule for the s
 
 ## Installation
 
-Make sure you have Python 3 installed. Then install requests and bs4.
+Make sure you have [Python 3](https://www.python.org/downloads/) and [PostgreSQL](https://www.postgresql.org/download/) installed. Then install the following packages:
 
 ```bash
-pip3 install requests bs4
+pip3 install requests bs4 psycopg2
 ```
 
 ## Usage
