@@ -30,7 +30,7 @@ You can modify the scraper to scrape other terms by changing the `year`, `quarte
 To add the data to a PostgreSQL database, make sure the [PostgreSQL](https://www.postgresql.org/download/) server is installed and running in the background. Check the settings in the db_config.py file. Install the psycopg2 package:
 
 ```bash
-pip3 install  psycopg2
+pip3 install  psycopg2-binary
 ```
 
 And then run the scraper with the `--db` flag:
