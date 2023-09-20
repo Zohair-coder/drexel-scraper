@@ -1,0 +1,31 @@
+name: Run Python Script
+
+on:
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: pip install requests bs4 psycopg2-binary
+
+      - name: Run script
+        env:
+          SCHEDULER_DB_DBNAME: ${{ secrets.SCHEDULER_DB_DBNAME_DEV }}
+          SCHEDULER_DB_USERNAME: ${{ secrets.SCHEDULER_DB_USERNAME_DEV }}
+          SCHEDULER_DB_PG_PASSWORD: ${{ secrets.SCHEDULER_DB_PG_PASSWORD_DEV }}
+          SCHEDULER_DB_HOSTNAME: ${{ secrets.SCHEDULER_DB_HOSTNAME_DEV }}
+          SCHEDULER_DB_PORT: ${{ secrets.SCHEDULER_DB_PORT_DEV }}
+          SCHEDULER_DB_DEFAULT_DB: ${{ secrets.SCHEDULER_DB_DEFAULT_DB_DEV }}
+
+        run: python main.py --db --all-colleges --ratings

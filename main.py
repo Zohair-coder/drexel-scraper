@@ -2,9 +2,10 @@ from scrape import scrape
 
 import json
 import sys
-
+import time
 
 def main():
+
     include_ratings = False
     if "--ratings" in sys.argv:
         include_ratings = True
@@ -28,6 +29,7 @@ def main():
 
     print("Done!")
 
-
 if __name__ == "__main__":
+    start_time = time.time()
     main()
+    print("--- {} seconds ---".format(time.time() - start_time))

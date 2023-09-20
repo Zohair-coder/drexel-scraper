@@ -1,4 +1,4 @@
 __pycache__
 .DS_Store
 data.json
-ratings_cache.json
+.env
