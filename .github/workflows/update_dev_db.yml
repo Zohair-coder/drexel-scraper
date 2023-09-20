@@ -27,6 +27,4 @@ jobs:
           SCHEDULER_DB_HOSTNAME: ${{ secrets.SCHEDULER_DB_HOSTNAME_DEV }}
           SCHEDULER_DB_PORT: ${{ secrets.SCHEDULER_DB_PORT_DEV }}
           SCHEDULER_DB_DEFAULT_DB: ${{ secrets.SCHEDULER_DB_DEFAULT_DB_DEV }}
-        run: |
-          echo "Using db: $SCHEDULER_DB_DBNAME"
-          python main.py --db --all-colleges --ratings
+        run: python main.py --db --all-colleges --ratings
