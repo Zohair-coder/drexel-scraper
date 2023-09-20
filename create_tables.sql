@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS all_course_instructor_data;
 DROP TABLE IF EXISTS course_instructor CASCADE;
 DROP TABLE IF EXISTS instructors CASCADE;
 DROP TABLE IF EXISTS courses CASCADE;
