@@ -1,4 +1,4 @@
-name: Run Python Script
+name: Scrape Data
 
 on:
   workflow_dispatch: # Allows manual trigger
@@ -21,11 +21,10 @@ jobs:
 
       - name: Run script
         env:
-          SCHEDULER_DB_DBNAME: ${{ secrets.SCHEDULER_DB_DBNAME_DEV }}
-          SCHEDULER_DB_USERNAME: ${{ secrets.SCHEDULER_DB_USERNAME_DEV }}
-          SCHEDULER_DB_PG_PASSWORD: ${{ secrets.SCHEDULER_DB_PG_PASSWORD_DEV }}
-          SCHEDULER_DB_HOSTNAME: ${{ secrets.SCHEDULER_DB_HOSTNAME_DEV }}
-          SCHEDULER_DB_PORT: ${{ secrets.SCHEDULER_DB_PORT_DEV }}
-          SCHEDULER_DB_DEFAULT_DB: ${{ secrets.SCHEDULER_DB_DEFAULT_DB_DEV }}
-
+          SCHEDULER_DB_DBNAME: ${{ secrets.SCHEDULER_DB_DBNAME }}
+          SCHEDULER_DB_USERNAME: ${{ secrets.SCHEDULER_DB_USERNAME }}
+          SCHEDULER_DB_PG_PASSWORD: ${{ secrets.SCHEDULER_DB_PG_PASSWORD }}
+          SCHEDULER_DB_HOSTNAME: ${{ secrets.SCHEDULER_DB_HOSTNAME }}
+          SCHEDULER_DB_PORT: ${{ secrets.SCHEDULER_DB_PORT }}
+          SCHEDULER_DB_DEFAULT_DB: ${{ secrets.SCHEDULER_DB_DEFAULT_DB }}
         run: python main.py --db --all-colleges --ratings
