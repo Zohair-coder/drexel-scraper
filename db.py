@@ -10,6 +10,8 @@ def populate_db(data: dict):
     if not do_tables_exist(cur):
         create_tables(cur, conn)
 
+    delete_old_data(cur, data)
+    
     for course in data.values():
         course_id = insert_course(cur, course)
         instructor_ids = insert_instructors(cur, course)
@@ -17,7 +19,6 @@ def populate_db(data: dict):
         for instructor_id in instructor_ids:
             insert_course_instructor(cur, course_id, instructor_id)
 
-    delete_old_data(cur, data)
 
     conn.commit()
 
