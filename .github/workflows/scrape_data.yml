@@ -12,6 +12,7 @@ jobs:
   run-script:
     environment: ${{ github.event.inputs.environment }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
       - name: Check out code
