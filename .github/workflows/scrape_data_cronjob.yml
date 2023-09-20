@@ -1,4 +1,4 @@
-name: Scrape Data
+name: Scrape Data Cronjob
 
 on:
   schedule:
