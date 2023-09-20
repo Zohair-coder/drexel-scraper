@@ -53,13 +53,13 @@ def delete_old_data(cur: cursor, data: dict):
     crns = [course["crn"] for course in data.values()]
 
     cur.execute("""
-        DELETE FROM courses
-        WHERE crn NOT IN %s
+        DELETE FROM course_instructor
+        WHERE course_id NOT IN %s
         """, (tuple(crns),))
 
     cur.execute("""
-        DELETE FROM course_instructor
-        WHERE course_id NOT IN (
+        DELETE FROM courses
+        WHERE crn NOT IN (
             SELECT course_id
             FROM courses
         )
