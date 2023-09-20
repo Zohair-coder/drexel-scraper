@@ -2,7 +2,7 @@ name: Scrape Data Cronjob
 
 on:
   schedule:
-    - cron: "0 3,6,9,12,15,18 * * *" # UTC time
+    - cron: "0 11,16,21 * * *" # UTC time
 
 jobs:
   run-script:
