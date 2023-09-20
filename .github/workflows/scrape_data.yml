@@ -5,6 +5,7 @@ on:
 
 jobs:
   run-script:
+    environment: dev
     runs-on: ubuntu-latest
 
     steps:
