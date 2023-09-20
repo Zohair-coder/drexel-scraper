@@ -1,0 +1,15 @@
+version: "3"
+services:
+  scraper:
+    image: drexelscheduler-scraper
+    env_file:
+      - .env
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: $SCHEDULER_DB_PG_PASSWORD
+      POSTGRES_USER: $SCHEDULER_DB_USERNAME
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data

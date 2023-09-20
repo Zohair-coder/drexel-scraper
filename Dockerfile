@@ -9,8 +9,8 @@ COPY . /app
 # upgrade pip
 RUN pip install --upgrade pip
 
-# install requests and BeautifulSoup
-RUN pip install bs4 requests
+# install dependencies
+RUN pip install bs4 requests psycopg2-binary
 
 # Run the Python script
-CMD ["python", "main.py", "--ratings"]
+CMD ["python", "main.py", "--db", "--all-colleges", "--ratings"]

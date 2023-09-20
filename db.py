@@ -1,5 +1,5 @@
 import psycopg2
-from db_config import DBNAME, USER, PASSWORD, HOST, PORT
+from db_config import DBNAME, USER, PASSWORD, HOST, PORT, DEFAULT_DB
 
 from psycopg2.extensions import cursor, connection
 
@@ -17,28 +17,29 @@ def populate_db(data: dict):
         for instructor_id in instructor_ids:
             insert_course_instructor(cur, course_id, instructor_id)
 
+    delete_old_data(cur, data)
+
     conn.commit()
 
     cur.close()
     conn.close()
 
-
 def connect_to_db() -> tuple[cursor, connection]:
     try:
-        conn = psycopg2.connect(dbname=DBNAME, user=USER,
+        conn = psycopg2.connect(dbname=DBNAME.lower(), user=USER,
                                 password=PASSWORD, host=HOST, port=PORT)
     except psycopg2.OperationalError as e:
         # If the database doesn't exist, create it
         if "database" in str(e) and "does not exist" in str(e):
             conn = psycopg2.connect(
-                user=USER, password=PASSWORD, host=HOST, port=PORT)
+                dbname=DEFAULT_DB.lower(), user=USER, password=PASSWORD, host=HOST, port=PORT)
             conn.autocommit = True
             cur = conn.cursor()
             cur.execute(f"CREATE DATABASE {DBNAME}")
             cur.close()
             conn.close()
             # Connect to the newly created database
-            conn = psycopg2.connect(dbname=DBNAME, user=USER,
+            conn = psycopg2.connect(dbname=DBNAME.lower(), user=USER,
                                     password=PASSWORD, host=HOST, port=PORT)
         else:
             raise e
@@ -48,6 +49,29 @@ def connect_to_db() -> tuple[cursor, connection]:
 
     return cur, conn
 
+def delete_old_data(cur: cursor, data: dict):
+    crns = [course["crn"] for course in data.values()]
+
+    cur.execute("""
+        DELETE FROM courses
+        WHERE crn NOT IN %s
+        """, (tuple(crns),))
+
+    cur.execute("""
+        DELETE FROM course_instructor
+        WHERE course_id NOT IN (
+            SELECT course_id
+            FROM courses
+        )
+        """)
+
+    cur.execute("""
+        DELETE FROM instructors
+        WHERE id NOT IN (
+            SELECT instructor_id
+            FROM course_instructor
+        )
+        """)
 
 def insert_course_instructor(cur: cursor, course_id: int, instructor_id: int):
 
