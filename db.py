@@ -61,7 +61,7 @@ def delete_old_data(cur: cursor, data: dict):
         DELETE FROM courses
         WHERE crn NOT IN (
             SELECT course_id
-            FROM courses
+            FROM course_instructor
         )
         """)
 
