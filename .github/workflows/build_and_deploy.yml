@@ -10,7 +10,7 @@ env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   KUBECONFIG: ${{ secrets.KUBECONFIG }}
-  IMAGE_NAME: zohiarr/drexelscheduler-scraper
+  IMAGE_NAME: zohairr/drexelscheduler-scraper
 
 jobs:
   build-and-push:
