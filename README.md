@@ -1,6 +1,6 @@
 # TMS-Scraper
 
-Scrapes data from the Drexel term master schedule and outputs a JSON file. Note that this scraper is not officially supported by Drexel University, and may break if the term master schedule website changes.
+Scrapes data from the Drexel Term Master Schedule and outputs a JSON file. Note that this scraper is not officially supported by Drexel University, and may break if the term master schedule website changes.
 
 ## Installation
 
@@ -11,7 +11,7 @@ git clone https://github.com/Zohair-coder/drexel-scraper.git
 cd drexel-scraper
 ```
 
-Make sure you have [Python 3](https://www.python.org/downloads/). Then install the following packages:
+Make sure you have [Python 3](https://www.python.org/downloads/) installed. Then install the following packages:
 
 ```bash
 pip3 install requests bs4
@@ -86,16 +86,10 @@ python3 main.py --db --all-colleges --ratings
 
 ## Docker
 
-Build the docker container by executing the following command:
+You can also run the scraper in a Docker container. Make sure [Docker](https://docs.docker.com/get-docker/) is installed. Then run the following command to run it:
 
 ```bash
-docker build -t drexel-scraper .
+docker compose up -d
 ```
 
-To run the scraper in a Docker container, run the following command:
-
-```bash
-docker run -v $(pwd):/app drexel-scraper
-```
-
-Make sure you execute this in the project root directory. The scraper should then output the `data.json` file in the same directory.
+Make sure you execute this in the project root directory. The scraper should then output the `data.json` file in the same directory. You can view the data inside the database by going to `http://localhost:30012` in your browser.
