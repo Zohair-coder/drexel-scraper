@@ -1,8 +1,6 @@
 # TMS-Scraper
 
-Scrapes data from the Drexel term master schedule and outputs a JSON file.
-
-Currently, the scraper only supports scraping the term master schedule for the summer term for the CCI college. You can, however, choose to modify these settings at your own risk by changing the `year`, `quarter`, and `college` variables in `config.py`.
+Scrapes data from the Drexel term master schedule and outputs a JSON file. Note that this scraper is not officially supported by Drexel University, and may break if the term master schedule website changes.
 
 ## Installation
 
