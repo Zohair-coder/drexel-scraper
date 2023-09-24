@@ -13,4 +13,4 @@ RUN pip install --upgrade pip
 RUN pip install bs4 requests psycopg2-binary
 
 # Run the Python script
-CMD ["python", "main.py", "--db", "--all-colleges", "--ratings"]
+CMD ["python3", "main.py", "--db", "--all-colleges", "--ratings"]

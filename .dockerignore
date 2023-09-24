@@ -1,1 +1,6 @@
-ratings_cache.json
+cache/ratings_cache.json
+data.json
+postgres-data
+.git
+.github
+.gitignore
