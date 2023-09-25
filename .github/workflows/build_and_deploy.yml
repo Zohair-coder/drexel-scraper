@@ -50,5 +50,6 @@ jobs:
         run: |
           COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
           sed -i 's|image:.*|image: '"$IMAGE_NAME:$COMMIT_SHA"'|' k8s/cronjob.yaml
+          kubectl apply -n ${{ env.NAMESPACE }} -f k8s/ratings-pvc.yaml --kubeconfig=kubeconfig.yaml 
           kubectl apply -f k8s/cronjob-configmap-${{ env.NAMESPACE }}.yaml --kubeconfig=kubeconfig.yaml
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/cronjob.yaml --kubeconfig=kubeconfig.yaml
