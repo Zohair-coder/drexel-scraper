@@ -209,9 +209,9 @@ def do_tables_exist(cur: cursor):
     cur.execute("""
     SELECT COUNT(*)
     FROM information_schema.tables
-    WHERE table_name IN('courses', 'instructors')
+    WHERE table_name IN('courses', 'instructors', 'course_instructor', 'metadata')
 """)
-    return cur.fetchone()[0] == 2
+    return cur.fetchone()[0] == 4
 
 def update_metadata(cur: cursor):
     tz = timezone('US/Eastern')
