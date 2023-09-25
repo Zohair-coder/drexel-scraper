@@ -1,8 +1,10 @@
 import psycopg2
-from db_config import DBNAME, USER, PASSWORD, HOST, PORT, DEFAULT_DB
-
 from psycopg2.extensions import cursor, connection
 
+from db_config import DBNAME, USER, PASSWORD, HOST, PORT, DEFAULT_DB
+
+from datetime import datetime
+from pytz import timezone
 
 def populate_db(data: dict):
     cur, conn = connect_to_db()
@@ -19,6 +21,7 @@ def populate_db(data: dict):
         for instructor_id in instructor_ids:
             insert_course_instructor(cur, course_id, instructor_id)
 
+    update_metadata(cur)
 
     conn.commit()
 
@@ -206,6 +209,16 @@ def do_tables_exist(cur: cursor):
     cur.execute("""
     SELECT COUNT(*)
     FROM information_schema.tables
-    WHERE table_name IN('courses', 'instructors')
+    WHERE table_name IN('courses', 'instructors', 'course_instructor', 'metadata')
 """)
-    return cur.fetchone()[0] == 2
+    return cur.fetchone()[0] == 4
+
+def update_metadata(cur: cursor):
+    tz = timezone('US/Eastern')
+    current_datetime = datetime.now(tz).strftime("%m/%d/%y %I:%M %p")
+    cur.execute("""
+    INSERT INTO metadata (key, value)
+      VALUES ('last_updated', %s)
+      ON CONFLICT (key)
+      DO UPDATE SET value = EXCLUDED.value;
+""", (current_datetime,))

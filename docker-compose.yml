@@ -1,15 +1,32 @@
 version: "3"
 services:
   scraper:
-    image: drexelscheduler-scraper
-    env_file:
-      - .env
+    build: .
+    environment:
+      SCHEDULER_DB_HOSTNAME: postgres
+      SCHEDULER_DB_PG_PASSWORD: super-secret-password
+      SCHEDULER_DB_DBNAME: postgres
+    volumes:
+      - ./:/app
+    depends_on:
+      - postgres
+
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_PASSWORD: $SCHEDULER_DB_PG_PASSWORD
-      POSTGRES_USER: $SCHEDULER_DB_USERNAME
+      POSTGRES_PASSWORD: super-secret-password
     ports:
       - "5432:5432"
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./postgres-data:/var/lib/postgresql/data
+
+  pgweb:
+    container_name: pgweb
+    restart: always
+    image: sosedoff/pgweb
+    ports:
+      - "30012:8081"
+    environment:
+      - DATABASE_URL=postgres://postgres:super-secret-password@postgres:5432/postgres?sslmode=disable
+    depends_on:
+      - postgres

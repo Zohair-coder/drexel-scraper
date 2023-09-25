@@ -2,3 +2,5 @@ __pycache__
 .DS_Store
 data.json
 .env
+postgres-data
+.vscode

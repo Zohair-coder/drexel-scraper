@@ -1,8 +1,6 @@
 # TMS-Scraper
 
-Scrapes data from the Drexel term master schedule and outputs a JSON file.
-
-Currently, the scraper only supports scraping the term master schedule for the summer term for the CCI college. You can, however, choose to modify these settings at your own risk by changing the `year`, `quarter`, and `college` variables in `config.py`.
+Scrapes data from the Drexel Term Master Schedule and outputs a JSON file. Note that this scraper is not officially supported by Drexel University, and may break if the term master schedule website changes.
 
 ## Installation
 
@@ -13,7 +11,7 @@ git clone https://github.com/Zohair-coder/drexel-scraper.git
 cd drexel-scraper
 ```
 
-Make sure you have [Python 3](https://www.python.org/downloads/). Then install the following packages:
+Make sure you have [Python 3](https://www.python.org/downloads/) installed. Then install the following packages:
 
 ```bash
 pip3 install requests bs4
@@ -27,10 +25,10 @@ You can modify the scraper to scrape other terms by changing the `year`, `quarte
 
 #### PostgreSQL
 
-To add the data to a PostgreSQL database, make sure the [PostgreSQL](https://www.postgresql.org/download/) server is installed and running in the background. Check the settings in the db_config.py file. Install the psycopg2 package:
+To add the data to a PostgreSQL database, make sure the [PostgreSQL](https://www.postgresql.org/download/) server is installed and running in the background. Check the settings in the db_config.py file. It is recommended that you set the necessary environment variables listed in the file, but if not, it will use the defaults for Postgres. You can follow [this](https://phoenixnap.com/kb/windows-set-environment-variable) guide for Windows, and [this](https://phoenixnap.com/kb/set-environment-variable-mac) guide for MacOS to set environment variables. Install the psycopg2 and pytz package:
 
 ```bash
-pip3 install  psycopg2-binary
+pip3 install psycopg2-binary pytz
 ```
 
 And then run the scraper with the `--db` flag:
@@ -39,10 +37,10 @@ And then run the scraper with the `--db` flag:
 python3 main.py --db
 ```
 
-This will create a new database `schedulerdb` and the necessary tables if they aren't already created, and then insert the data into the database. If the data is already populated, it will update the existing data. It won't delete any data, it will only update it. To delete all the data, you can run the following command:
+This will create a new database `schedulerdb` and the necessary tables if they aren't already created, and then insert the data into the database. If the data is already populated, it will update the existing data. To delete all the data (e.g. for scraping another quarter's data), make sure the environment variables specified in `db_config.py` are set and then run the following command:
 
 ```
-./reset_db.sh
+./reset_db.bash
 ```
 
 To view the schema for the tables, you can look at the `create_tables.sql` file.
@@ -57,6 +55,7 @@ psql -U postgres schedulerdb
 schedulerdb=# SELECT * FROM courses;
 schedulerdb=# SELECT * FROM instructors;
 schedulerdb=# SELECT * FROM course_instructor;
+schedulerdb=# SELECT * FROM all_course_instructor_data;
 ```
 
 I recommend viewing the data using another program like [pgAdmin](https://www.pgadmin.org/download/).
@@ -77,7 +76,7 @@ To also include the ratings field in `data.json` that requests data from RateMyP
 python3 main.py --ratings
 ```
 
-Note that this will take longer to run since the scraper has to look up the rating on ratemyprofessors. However, it will cache the ratings in a file called `ratings_cache.json` so that it doesn't have to look up the same professor again, which will run much faster. If you want to clear the cache to get new ratings, simply delete the `ratings_cache.json` file.
+Note that this will take longer to run since the scraper has to look up the rating on RateMyProfessors. However, it will cache the ratings in a file called `ratings_cache.json` so that it doesn't have to look up the same professor again, which will run much faster. If you want to clear the cache to get new ratings, simply delete the `ratings_cache.json` file.
 
 You can also combine all the options together:
 
@@ -87,16 +86,10 @@ python3 main.py --db --all-colleges --ratings
 
 ## Docker
 
-Build the docker container by executing the following command:
+You can also run the scraper in a Docker container. Make sure [Docker](https://docs.docker.com/get-docker/) is installed. Then run the following command to run it:
 
 ```bash
-docker build -t drexel-scraper .
+docker compose up -d --build
 ```
 
-To run the scraper in a Docker container, run the following command:
-
-```bash
-docker run -v $(pwd):/app drexel-scraper
-```
-
-Make sure you execute this in the project root directory. The scraper should then output the `data.json` file in the same directory.
+Make sure you execute this in the project root directory. Let the scraper container finish/exit. The scraper should then output the `data.json` file in the same directory. You can view the data inside the database by going to `http://localhost:30012` in your browser.

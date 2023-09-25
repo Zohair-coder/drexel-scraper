@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: drexel-scheduler-cronjob
+spec:
+  schedule: "23 */1 * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  timeZone: "US/Eastern"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      backoffLimit: 10
+      template:
+        spec:
+          containers:
+            - name: drexel-scheduler-job
+              image: zohairr/drexelscheduler-scraper:1.0
+              envFrom:
+                - configMapRef:
+                    name: drexel-scheduler-configmap
+                - secretRef:
+                    name: drexel-scheduler-env-secrets
+              volumeMounts:
+                - name: ratings-cache
+                  mountPath: /app/cache
+          volumes:
+            - name: ratings-cache
+              persistentVolumeClaim:
+                claimName: drexel-scheduler-ratings-pvc
+          restartPolicy: OnFailure

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: drexel-scheduler-configmap
+  namespace: default
+data:
+  SCHEDULER_DB_DBNAME: "schedulerdb_202315.v2"

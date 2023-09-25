@@ -3,7 +3,7 @@ from config import attributes
 from ratings import rating
 from datetime import datetime
 import json
-
+import os
 
 def parse(html, data: dict, include_ratings: bool = False):
 
@@ -11,9 +11,11 @@ def parse(html, data: dict, include_ratings: bool = False):
     table_rows = soup.find_all("tr", class_=["odd", "even"])
 
     try:
-        with open("ratings_cache.json", "r") as f:
+        with open("cache/ratings_cache.json", "r") as f:
+            print("Found cached ratings...")
             ratings_cache = json.load(f)
     except FileNotFoundError:
+        print("No cached ratings found...")
         ratings_cache = {}
 
     for table_row in table_rows:
@@ -46,7 +48,10 @@ def parse(html, data: dict, include_ratings: bool = False):
         print("Parsed CRN: " + crn + " (" + row_data_strs[6] + ")")
         print()
 
-    with open("ratings_cache.json", "w") as f:
+    if not os.path.exists("cache"):
+        os.makedirs("cache")
+
+    with open("cache/ratings_cache.json", "w") as f:
         json.dump(ratings_cache, f, indent=4)
 
     return data
