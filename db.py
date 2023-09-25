@@ -215,7 +215,7 @@ def do_tables_exist(cur: cursor):
 
 def update_metadata(cur: cursor):
     tz = timezone('US/Eastern')
-    current_datetime = datetime.now(tz).strftime('%Y-%m-%d %H:%M:%S')
+    current_datetime = datetime.now(tz).strftime("%m/%d/%y %I:%M %p")
     cur.execute("""
     INSERT INTO metadata (key, value)
       VALUES ('last_updated', %s)
