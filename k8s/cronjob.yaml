@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: drexel-scheduler-cronjob
 spec:
-  schedule: "0 */1 * * *"
+  schedule: "23 */1 * * *"
   successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 3
   timeZone: "US/Eastern"
