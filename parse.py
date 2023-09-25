@@ -12,8 +12,10 @@ def parse(html, data: dict, include_ratings: bool = False):
 
     try:
         with open("cache/ratings_cache.json", "r") as f:
+            print("Found cached ratings...")
             ratings_cache = json.load(f)
     except FileNotFoundError:
+        print("No cached ratings found...")
         ratings_cache = {}
 
     for table_row in table_rows:
@@ -23,6 +25,8 @@ def parse(html, data: dict, include_ratings: bool = False):
             data.text).strip() for data in row_data]
 
         crn = row_data_strs[5]
+
+        print("Parsing CRN: " + crn + " (" + row_data_strs[6] + ")...")
 
         start_time, end_time = parse_time(row_data_strs[9])
         days = parse_days(row_data_strs[8])
@@ -68,10 +72,13 @@ def get_instructors(instructors_str: str, include_ratings: bool, ratings_cache: 
             rmp_name = name_tokens[0] + " " + name_tokens[-1]
 
             if rmp_name not in ratings_cache:
+                print("Rating not found in cache for " + rmp_name + ". Fetching...")
                 ratings_cache[rmp_name] = rating(rmp_name)
                 if ratings_cache[rmp_name] is None and len(name_tokens) > 2:
                     rmp_name = name_tokens[0] + " " + name_tokens[1]
                     ratings_cache[rmp_name] = rating(rmp_name)
+            else:
+                print("Found cached rating for " + rmp_name + "...")
 
             rating_obj = ratings_cache[rmp_name]
 

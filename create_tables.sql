@@ -2,6 +2,13 @@ DROP VIEW IF EXISTS all_course_instructor_data;
 DROP TABLE IF EXISTS course_instructor CASCADE;
 DROP TABLE IF EXISTS instructors CASCADE;
 DROP TABLE IF EXISTS courses CASCADE;
+DROP TABLE IF EXISTS metadata;
+
+CREATE TABLE metadata (
+    key VARCHAR(255) NOT NULL,
+    value TEXT,
+    PRIMARY KEY (key)
+);
 
 CREATE TABLE instructors (
     id              SERIAL PRIMARY KEY,

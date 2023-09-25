@@ -25,10 +25,10 @@ You can modify the scraper to scrape other terms by changing the `year`, `quarte
 
 #### PostgreSQL
 
-To add the data to a PostgreSQL database, make sure the [PostgreSQL](https://www.postgresql.org/download/) server is installed and running in the background. Check the settings in the db_config.py file. It is recommended that you set the necessary environment variables listed in the file, but if not, it will use the defaults for Postgres. You can follow [this](https://phoenixnap.com/kb/windows-set-environment-variable) guide for Windows, and [this](https://phoenixnap.com/kb/set-environment-variable-mac) guide for MacOS to set environment variables. Install the psycopg2 package:
+To add the data to a PostgreSQL database, make sure the [PostgreSQL](https://www.postgresql.org/download/) server is installed and running in the background. Check the settings in the db_config.py file. It is recommended that you set the necessary environment variables listed in the file, but if not, it will use the defaults for Postgres. You can follow [this](https://phoenixnap.com/kb/windows-set-environment-variable) guide for Windows, and [this](https://phoenixnap.com/kb/set-environment-variable-mac) guide for MacOS to set environment variables. Install the psycopg2 and pytz package:
 
 ```bash
-pip3 install  psycopg2-binary
+pip3 install psycopg2-binary pytz
 ```
 
 And then run the scraper with the `--db` flag:
@@ -89,7 +89,7 @@ python3 main.py --db --all-colleges --ratings
 You can also run the scraper in a Docker container. Make sure [Docker](https://docs.docker.com/get-docker/) is installed. Then run the following command to run it:
 
 ```bash
-docker compose up -d
+docker compose up -d --build
 ```
 
-Make sure you execute this in the project root directory. The scraper should then output the `data.json` file in the same directory. You can view the data inside the database by going to `http://localhost:30012` in your browser.
+Make sure you execute this in the project root directory. Let the scraper container finish/exit. The scraper should then output the `data.json` file in the same directory. You can view the data inside the database by going to `http://localhost:30012` in your browser.
