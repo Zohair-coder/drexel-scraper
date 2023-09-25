@@ -4,8 +4,13 @@ metadata:
   name: drexel-scheduler-cronjob
 spec:
   schedule: "0 */1 * * *"
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 3
+  timeZone: "US/Eastern"
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
+      backoffLimit: 10
       template:
         spec:
           containers:
