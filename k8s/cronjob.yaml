@@ -16,37 +16,11 @@ spec:
           containers:
             - name: drexel-scheduler-job
               image: zohairr/drexelscheduler-scraper:1.0
-              env:
-                - name: SCHEDULER_DB_USERNAME
-                  valueFrom:
-                    secretKeyRef:
-                      name: drexel-scheduler-env-secrets
-                      key: SCHEDULER_DB_USERNAME
-                - name: SCHEDULER_DB_DBNAME
-                  valueFrom:
-                    secretKeyRef:
-                      name: drexel-scheduler-env-secrets
-                      key: SCHEDULER_DB_DBNAME
-                - name: SCHEDULER_DB_HOSTNAME
-                  valueFrom:
-                    secretKeyRef:
-                      name: drexel-scheduler-env-secrets
-                      key: SCHEDULER_DB_HOSTNAME
-                - name: SCHEDULER_DB_PORT
-                  valueFrom:
-                    secretKeyRef:
-                      name: drexel-scheduler-env-secrets
-                      key: SCHEDULER_DB_PORT
-                - name: SCHEDULER_DB_PG_PASSWORD
-                  valueFrom:
-                    secretKeyRef:
-                      name: drexel-scheduler-env-secrets
-                      key: SCHEDULER_DB_PG_PASSWORD
-                - name: SCHEDULER_DB_DEFAULT_DB
-                  valueFrom:
-                    secretKeyRef:
-                      name: drexel-scheduler-env-secrets
-                      key: SCHEDULER_DB_DEFAULT_DB
+              envFrom:
+                - configMapRef:
+                    name: drexel-scheduler-configmap
+                - secretRef:
+                    name: drexel-scheduler-env-secrets
               volumeMounts:
                 - name: ratings-cache
                   mountPath: /app/cache
