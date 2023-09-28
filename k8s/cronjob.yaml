@@ -24,8 +24,13 @@ spec:
               volumeMounts:
                 - name: ratings-cache
                   mountPath: /app/cache
+                - name: performance
+                  mountPath: /app/performance
           volumes:
             - name: ratings-cache
               persistentVolumeClaim:
                 claimName: drexel-scheduler-ratings-pvc
+            - name: performance
+              persistentVolumeClaim:
+                claimName: drexel-scheduler-performance-pvc
           restartPolicy: OnFailure
