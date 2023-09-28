@@ -8,3 +8,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO grafana_read
 ```
 
 And then update the data source (and dashboard if necessary) in Grafana.
+
+## Useful links
+
+Accessing PVC: https://stackoverflow.com/a/70323207
