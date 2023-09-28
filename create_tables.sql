@@ -15,7 +15,8 @@ CREATE TABLE instructors (
     name            TEXT UNIQUE NOT NULL,
     avg_difficulty  NUMERIC,
     avg_rating      NUMERIC,
-    num_ratings     INTEGER
+    num_ratings     INTEGER,
+    rmp_id          INTEGER
 );
 
 CREATE TABLE courses
@@ -46,6 +47,7 @@ CREATE VIEW all_course_instructor_data AS
 SELECT 
     i.id AS instructor_id,
     i.name AS instructor_name,
+    i.rmp_id AS instructor_rmp_id,
     i.avg_difficulty,
     i.avg_rating,
     i.num_ratings,

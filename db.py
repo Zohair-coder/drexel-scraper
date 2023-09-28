@@ -140,10 +140,10 @@ def update_instructor(cur: cursor, instructor) -> int:
     else:
         cur.execute("""
             UPDATE instructors
-            SET avg_difficulty = %s, avg_rating = %s, num_ratings = %s
+            SET rmp_id = %s, avg_difficulty = %s, avg_rating = %s, num_ratings = %s
             WHERE name = %s
             RETURNING id
-            """, (instructor["rating"]["avgDifficulty"], instructor["rating"]["avgRating"], instructor["rating"]["numRatings"], instructor["name"]))
+            """, (instructor["rating"]["legacyId"], instructor["rating"]["avgDifficulty"], instructor["rating"]["avgRating"], instructor["rating"]["numRatings"], instructor["name"]))
 
     return cur.fetchone()[0]
 

@@ -45,6 +45,7 @@ def get_ratings(id):
                 avgRating
                 avgDifficulty
                 numRatings
+                legacyId
             }
         }
     }"""
