@@ -44,5 +44,6 @@ containers:
 kubectl cp dev/pvc-inspector:pvc/profile_output.pstat ./performance/profile_output.pstat
 pyprof2calltree -i performance/profile_output.pstat -o performance/callgrind.out.profile
 qcachegrind performance/callgrind.out.profile
+python3 performance/analyze.py
 kubectl delete pod pvc-inspector
 ```
