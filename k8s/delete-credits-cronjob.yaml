@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: delete-ratings-cronjob
+  name: delete-credits-cronjob
 spec:
   schedule: "10 5 * * *" # Every night at 05:10
   jobTemplate:
