@@ -45,13 +45,11 @@ def parse_subject_page(html, data: dict, include_ratings: bool = False, ratings_
 def parse_crn_page(html, data: dict):
     soup = BeautifulSoup(html, "html.parser")
     table_datas = soup.find_all("td", class_=["odd", "even"])
-    try:
-        credits = float(table_datas[4].text.strip())
-    except ValueError:
-        credits = None
-
+    
+    credits = table_datas[4].text.strip()
     crn = table_datas[0].text.strip()
-    data[crn]["credits"] = credits if credits != 0 else None
+    
+    data[crn]["credits"] = credits
     
 
 def get_instructors(instructors_str: str, include_ratings: bool, ratings_cache: dict) -> list or None:
