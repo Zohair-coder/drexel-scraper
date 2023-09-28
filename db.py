@@ -177,22 +177,22 @@ def crn_in_db(cur: cursor, crn: int) -> bool:
 def update_course(cur: cursor, course) -> int:
     cur.execute("""
         UPDATE courses
-        SET subject_code = %s, course_number = %s, instruction_type = %s, instruction_method = %s, section = %s, enroll = %s, max_enroll = %s, course_title = %s, start_time = %s, end_time = %s, days = %s
+        SET subject_code = %s, course_number = %s, instruction_type = %s, instruction_method = %s, section = %s, enroll = %s, max_enroll = %s, course_title = %s, credits = %s, start_time = %s, end_time = %s, days = %s
         WHERE crn = %s
         RETURNING crn
         """, (course["subject_code"], course["course_number"], course["instruction_type"], course["instruction_method"],
-              course["section"], course["enroll"], course["max_enroll"], course["course_title"], course["start_time"], course["end_time"], course["days"], course["crn"]))
+              course["section"], course["enroll"], course["max_enroll"], course["course_title"], course["credits"], course["start_time"], course["end_time"], course["days"], course["crn"]))
 
     return cur.fetchone()[0]
 
 
 def insert_new_course(cur: cursor, course) -> int:
     cur.execute("""
-        INSERT INTO courses (crn, subject_code, course_number, instruction_type, instruction_method, section, enroll, max_enroll, course_title, start_time, end_time, days)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        INSERT INTO courses (crn, subject_code, course_number, instruction_type, instruction_method, section, enroll, max_enroll, course_title, credits, start_time, end_time, days)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         RETURNING crn
         """, (course["crn"], course["subject_code"], course["course_number"], course["instruction_type"], course["instruction_method"],
-              course["section"], course["enroll"], course["max_enroll"], course["course_title"], course["start_time"], course["end_time"], course["days"]))
+              course["section"], course["enroll"], course["max_enroll"], course["course_title"], course["credits"], course["start_time"], course["end_time"], course["days"]))
 
     return cur.fetchone()[0]
 

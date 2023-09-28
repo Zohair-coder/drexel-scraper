@@ -1,5 +1,7 @@
 from requests import Session
 from bs4 import BeautifulSoup
+import json
+import os
 
 from parse import parse_subject_page, parse_crn_page
 import config
@@ -41,13 +43,41 @@ def go_to_college_page(session: Session, college_code: str):
 
 
 def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings: bool):
+    try:
+        with open("cache/credits_cache.json", "r") as f:
+            credits_cache = json.load(f)
+    except FileNotFoundError:
+        credits_cache = {}
+
+    try:
+        with open("cache/ratings_cache.json", "r") as f:
+            ratings_cache = json.load(f)
+    except FileNotFoundError:
+        ratings_cache = {}
+    
     college_page_soup = get_soup(html)
     for subject_page_link in college_page_soup.find_all("a", href=lambda href: href and href.startswith("/webtms_du/courseList")):
         response = session.get(config.tms_base_url + subject_page_link["href"])
-        parse_subject_page(response.text, data, include_ratings)
+        parsed_crns = parse_subject_page(response.text, data, include_ratings, ratings_cache)
 
-        subject_page_soup = get_soup(response.text)
-        for crn_page_link in subject_page_soup.find_all("a", href=lambda href: href and href.startswith("/webtms_du/courseDetails")):
-            response = session.get(config.tms_base_url + crn_page_link["href"])
-            parse_crn_page(response.text, data)
+        for crn, crn_page_link in parsed_crns.items():
+            if crn in credits_cache:
+                data[crn]["credits"] = credits_cache[crn]
+            else:
+                response = session.get(config.tms_base_url + crn_page_link)
+                parse_crn_page(response.text, data)
+                credits_cache[crn] = data[crn]["credits"]
+
+            print("Parsed CRN: " + crn + " (" + data[crn].get("course_title") + ")")
+            print()
+
+    if not os.path.exists("cache"):
+        os.makedirs("cache")
+
+    with open("cache/ratings_cache.json", "w") as f:
+        json.dump(ratings_cache, f, indent=4)
+
+    with open("cache/credits_cache.json", "w") as f:
+        json.dump(credits_cache, f, indent=4)
+
     return data

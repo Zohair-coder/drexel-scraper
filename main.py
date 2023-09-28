@@ -16,6 +16,8 @@ def main():
 
     data = scrape(include_ratings=include_ratings, all_colleges=all_colleges)
 
+    assert len(data) > 0, "No data found"
+
     with open("data.json", "w") as f:
         json.dump(data, f, indent=4)
 

@@ -5,19 +5,12 @@ from datetime import datetime
 import json
 import os
 
-def parse_subject_page(html, data: dict, include_ratings: bool = False):
+def parse_subject_page(html, data: dict, include_ratings: bool = False, ratings_cache: dict = {}):
 
     soup = BeautifulSoup(html, "html.parser")
     table_rows = soup.find_all("tr", class_=["odd", "even"])
 
-    try:
-        with open("cache/ratings_cache.json", "r") as f:
-            print("Found cached ratings...")
-            ratings_cache = json.load(f)
-    except FileNotFoundError:
-        print("No cached ratings found...")
-        ratings_cache = {}
-
+    parsed_crns = {}
     for table_row in table_rows:
         row_data = table_row.find_all("td")
 
@@ -45,16 +38,9 @@ def parse_subject_page(html, data: dict, include_ratings: bool = False):
             "instructors": get_instructors(row_data_strs[-1], include_ratings, ratings_cache),
         }
 
-        print("Parsed CRN: " + crn + " (" + row_data_strs[6] + ")")
-        print()
+        parsed_crns[crn] = row_data[5].find("a")["href"]  
 
-    if not os.path.exists("cache"):
-        os.makedirs("cache")
-
-    with open("cache/ratings_cache.json", "w") as f:
-        json.dump(ratings_cache, f, indent=4)
-
-    return data
+    return parsed_crns
 
 def parse_crn_page(html, data: dict):
     soup = BeautifulSoup(html, "html.parser")
@@ -65,7 +51,8 @@ def parse_crn_page(html, data: dict):
         credits = None
 
     crn = table_datas[0].text.strip()
-    data[crn]["credits"] = credits
+    data[crn]["credits"] = credits if credits != 0 else None
+    
 
 def get_instructors(instructors_str: str, include_ratings: bool, ratings_cache: dict) -> list or None:
     if instructors_str == "STAFF":
