@@ -1,4 +1,4 @@
-cache/ratings_cache.json
+cache/*
 data.json
 .git
 .github

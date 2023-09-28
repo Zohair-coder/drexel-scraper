@@ -4,3 +4,4 @@ data.json
 .env
 postgres-data
 .vscode
+trash.py

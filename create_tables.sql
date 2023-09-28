@@ -29,6 +29,7 @@ CREATE TABLE courses
     enroll              TEXT,
     max_enroll          TEXT,
     course_title        TEXT NOT NULL,
+    credits             REAL,
     start_time          TIME,
     end_time            TIME,
     days                TEXT[]
@@ -57,6 +58,7 @@ SELECT
     c.enroll,
     c.max_enroll,
     c.course_title,
+    c.credits,
     c.start_time,
     c.end_time,
     c.days
