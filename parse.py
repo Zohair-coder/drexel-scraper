@@ -5,7 +5,7 @@ from datetime import datetime
 import json
 import os
 
-def parse(html, data: dict, include_ratings: bool = False):
+def parse_subject_page(html, data: dict, include_ratings: bool = False):
 
     soup = BeautifulSoup(html, "html.parser")
     table_rows = soup.find_all("tr", class_=["odd", "even"])
@@ -56,6 +56,16 @@ def parse(html, data: dict, include_ratings: bool = False):
 
     return data
 
+def parse_crn_page(html, data: dict):
+    soup = BeautifulSoup(html, "html.parser")
+    table_datas = soup.find_all("td", class_=["odd", "even"])
+    try:
+        credits = float(table_datas[4].text.strip())
+    except ValueError:
+        credits = None
+
+    crn = table_datas[0].text.strip()
+    data[crn]["credits"] = credits
 
 def get_instructors(instructors_str: str, include_ratings: bool, ratings_cache: dict) -> list or None:
     if instructors_str == "STAFF":
