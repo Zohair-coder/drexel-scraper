@@ -3,6 +3,7 @@ from scrape import scrape
 import json
 import sys
 import time
+import cProfile
 
 def main():
 
@@ -33,5 +34,5 @@ def main():
 
 if __name__ == "__main__":
     start_time = time.time()
-    main()
+    cProfile.run("main()", "profile_output.pstat")
     print("--- {} seconds ---".format(time.time() - start_time))

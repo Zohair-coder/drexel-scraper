@@ -5,3 +5,5 @@ data.json
 postgres-data
 .vscode
 trash.py
+profile_output.pstat
+callgrind.out.profile
