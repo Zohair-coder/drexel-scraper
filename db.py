@@ -1,7 +1,8 @@
 import psycopg2
+from psycopg2 import sql
 from psycopg2.extensions import cursor, connection
 
-from db_config import DBNAME, USER, PASSWORD, HOST, PORT, DEFAULT_DB
+from db_config import DBNAME, USER, PASSWORD, HOST, PORT, DEFAULT_DB, GRAFANA_SERVICE_ACCOUNT_USERNAME, GRAFANA_SERVICE_ACCOUNT_PASSWORD
 
 from datetime import datetime
 from pytz import timezone
@@ -12,6 +13,11 @@ def populate_db(data: dict):
     if not do_tables_exist(cur):
         create_tables(cur, conn)
     
+    if not grafana_user_exists(cur):
+        create_grafana_user(cur)
+    
+    assign_grafana_user_permissions(cur)
+
     update_metadata(cur)
 
     delete_old_data(cur, data)
@@ -223,3 +229,29 @@ def update_metadata(cur: cursor):
       ON CONFLICT (key)
       DO UPDATE SET value = EXCLUDED.value;
 """, (current_datetime,))
+    
+def grafana_user_exists(cur: cursor):
+    cur.execute("""
+    SELECT 1
+    FROM pg_roles
+    WHERE rolname = 'grafana_readonly'
+""")
+    row = cur.fetchone()
+    return row is not None and cur.fetchone()[0] == 1
+
+def create_grafana_user(cur: cursor):
+    grafana_username = GRAFANA_SERVICE_ACCOUNT_USERNAME
+    grafana_password = GRAFANA_SERVICE_ACCOUNT_PASSWORD
+
+    create_role_command = sql.SQL(
+            "CREATE ROLE {} WITH LOGIN PASSWORD %s;"
+        ).format(sql.Identifier(grafana_username))
+    
+    cur.execute(create_role_command, [grafana_password])
+
+def assign_grafana_user_permissions(cur: cursor):
+    grafana_username = GRAFANA_SERVICE_ACCOUNT_USERNAME
+    cmd = sql.SQL(
+        "GRANT SELECT ON ALL TABLES IN SCHEMA public TO {};"
+    ).format(sql.Identifier(grafana_username))
+    cur.execute(cmd)
