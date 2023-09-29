@@ -4177,5 +4177,12 @@
         "avgRating": 4.5,
         "legacyId": 2703275,
         "numRatings": 2
+    },
+    "Bill Rees": null,
+    "Bill B": {
+        "avgDifficulty": 4.1,
+        "avgRating": 2.3,
+        "legacyId": 24609,
+        "numRatings": 12
     }
 }
