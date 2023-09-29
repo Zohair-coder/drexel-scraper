@@ -237,7 +237,7 @@ def grafana_user_exists(cur: cursor):
     WHERE rolname = 'grafana_readonly'
 """)
     row = cur.fetchone()
-    return row is not None and cur.fetchone()[0] == 1
+    return row is not None and row[0] == 1
 
 def create_grafana_user(cur: cursor):
     grafana_username = GRAFANA_SERVICE_ACCOUNT_USERNAME
