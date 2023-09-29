@@ -4,4 +4,4 @@ metadata:
   name: drexel-scheduler-configmap
   namespace: dev
 data:
-  SCHEDULER_DB_DBNAME: "schedulerdb_202325_dev__v1"
+  SCHEDULER_DB_DBNAME: "schedulerdb_202325_dev__v2"
