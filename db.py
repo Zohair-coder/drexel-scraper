@@ -231,11 +231,12 @@ def update_metadata(cur: cursor):
 """, (current_datetime,))
     
 def grafana_user_exists(cur: cursor):
+    grafana_user = GRAFANA_SERVICE_ACCOUNT_USERNAME
     cur.execute("""
     SELECT 1
     FROM pg_roles
-    WHERE rolname = 'grafana_readonly'
-""")
+    WHERE rolname = %s
+""", (grafana_user,))
     row = cur.fetchone()
     return row is not None and row[0] == 1
 

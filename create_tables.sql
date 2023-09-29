@@ -64,6 +64,6 @@ SELECT
     c.start_time,
     c.end_time,
     c.days
-FROM instructors i
-JOIN course_instructor ci ON i.id = ci.instructor_id
-JOIN courses c ON ci.course_id = c.crn;
+FROM courses c
+LEFT JOIN course_instructor ci ON c.crn = ci.course_id
+LEFT JOIN instructors i ON i.id = ci.instructor_id;
