@@ -4,6 +4,8 @@ metadata:
   name: delete-credits-cronjob
 spec:
   schedule: "10 5 * * *" # Every night at 05:10
+  timeZone: "US/Eastern"
+  successfulJobsHistoryLimit: 0
   jobTemplate:
     spec:
       template:

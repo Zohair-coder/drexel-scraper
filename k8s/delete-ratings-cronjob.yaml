@@ -4,6 +4,8 @@ metadata:
   name: delete-ratings-cronjob
 spec:
   schedule: "10 3 * * 5" # Every Friday at 03:10
+  timeZone: "US/Eastern"
+  successfulJobsHistoryLimit: 0
   jobTemplate:
     spec:
       template:
