@@ -5,7 +5,7 @@ metadata:
 spec:
   schedule: "10 3 * * 5" # Every Friday at 03:10
   timeZone: "US/Eastern"
-  successfulJobsHistoryLimit: 0
+  successfulJobsHistoryLimit: 1
   jobTemplate:
     spec:
       template:
