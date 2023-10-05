@@ -52,10 +52,11 @@ jobs:
           sed -i 's|image:.*|image: '"$IMAGE_NAME:$COMMIT_SHA"'|' k8s/cronjob.yaml
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/ratings-pvc.yaml --kubeconfig=kubeconfig.yaml
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/performance-pvc.yaml --kubeconfig=kubeconfig.yaml
-          kubectl apply -f k8s/cronjob-configmap-${{ env.NAMESPACE }}.yaml --kubeconfig=kubeconfig.yaml
+          kubectl apply -n ${{ env.NAMESPACE }} -f k8s/cronjob-configmap-${{ env.NAMESPACE }}.yaml --kubeconfig=kubeconfig.yaml
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/delete-credits-cronjob.yaml --kubeconfig=kubeconfig.yaml
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/delete-ratings-cronjob.yaml --kubeconfig=kubeconfig.yaml
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/cronjob.yaml --kubeconfig=kubeconfig.yaml
+          kubectl apply -n ${{ env.NAMESPACE }} -f k8s/grafana-${{ env.NAMESPACE }}-ingress.yaml --kubeconfig=kubeconfig.yaml
 
       - name: Set up Helm
         run: |
@@ -71,11 +72,9 @@ jobs:
       - name: Deploy Grafana to Dev
         if: github.ref == 'refs/heads/dev'
         run: |
-          kubectl apply -f k8s/grafana-dev-ingress.yaml --kubeconfig=kubeconfig.yaml -n dev
           KUBECONFIG=kubeconfig.yaml helm upgrade grafana-dev grafana/grafana -f k8s/grafana-dev-values.yaml -n dev
 
       - name: Deploy Grafana to Prod
         if: github.ref == 'refs/heads/main'
         run: |
-          kubectl apply -f k8s/grafana-default-ingress.yaml --kubeconfig=kubeconfig.yaml -n default
           KUBECONFIG=kubeconfig.yaml helm upgrade grafana grafana/grafana -f k8s/grafana-default-values.yaml --set env.GF_ANALYTICS_GOOGLE_ANALYTICS_4_ID=${{ secrets.GOOGLE_ANALYTICS_ID }} -n default
