@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: delete-ratings-cronjob
+spec:
+  schedule: "10 3 * * 5" # Every Friday at 03:10
+  timeZone: "US/Eastern"
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: ratings-cache
+              persistentVolumeClaim:
+                claimName: drexel-scheduler-ratings-pvc
+          containers:
+            - name: delete-ratings-file
+              image: busybox
+              volumeMounts:
+                - name: ratings-cache
+                  mountPath: /data
+              command: ["/bin/sh", "-c", "rm /data/ratings_cache.json"]
+          restartPolicy: OnFailure

@@ -1,7 +1,9 @@
 from requests import Session
 from bs4 import BeautifulSoup
+import json
+import os
 
-from parse import parse
+from parse import parse_subject_page, parse_crn_page
 import config
 
 
@@ -16,7 +18,7 @@ def scrape(include_ratings: bool = False, all_colleges: bool = False):
 
     for college_code in college_codes:
         response = go_to_college_page(session, college_code)
-        parse_all_subjects(session, data, response.text, include_ratings)
+        scrape_all_subjects(session, data, response.text, include_ratings)
 
     return data
 
@@ -40,9 +42,42 @@ def go_to_college_page(session: Session, college_code: str):
     return session.get(config.get_college_page_url(college_code))
 
 
-def parse_all_subjects(session: Session, data: dict, html: str, include_ratings: bool):
-    soup = get_soup(html)
-    for link in soup.find_all("a", href=lambda href: href and href.startswith("/webtms_du/courseList")):
-        response = session.get(config.tms_base_url + link["href"])
-        parse(response.text, data, include_ratings)
+def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings: bool):
+    try:
+        with open("cache/credits_cache.json", "r") as f:
+            credits_cache = json.load(f)
+    except FileNotFoundError:
+        credits_cache = {}
+
+    try:
+        with open("cache/ratings_cache.json", "r") as f:
+            ratings_cache = json.load(f)
+    except FileNotFoundError:
+        ratings_cache = {}
+    
+    college_page_soup = get_soup(html)
+    for subject_page_link in college_page_soup.find_all("a", href=lambda href: href and href.startswith("/webtms_du/courseList")):
+        response = session.get(config.tms_base_url + subject_page_link["href"])
+        parsed_crns = parse_subject_page(response.text, data, include_ratings, ratings_cache)
+
+        for crn, crn_page_link in parsed_crns.items():
+            if crn in credits_cache:
+                data[crn]["credits"] = credits_cache[crn]
+            else:
+                response = session.get(config.tms_base_url + crn_page_link)
+                parse_crn_page(response.text, data)
+                credits_cache[crn] = data[crn]["credits"]
+
+            print("Parsed CRN: " + crn + " (" + data[crn].get("course_title") + ")")
+            print()
+
+    if not os.path.exists("cache"):
+        os.makedirs("cache")
+
+    with open("cache/ratings_cache.json", "w") as f:
+        json.dump(ratings_cache, f, indent=4)
+
+    with open("cache/credits_cache.json", "w") as f:
+        json.dump(credits_cache, f, indent=4)
+
     return data

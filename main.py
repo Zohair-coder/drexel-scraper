@@ -3,6 +3,8 @@ from scrape import scrape
 import json
 import sys
 import time
+import os
+import cProfile
 
 def main():
 
@@ -15,6 +17,8 @@ def main():
         all_colleges = True
 
     data = scrape(include_ratings=include_ratings, all_colleges=all_colleges)
+
+    assert len(data) > 0, "No data found"
 
     with open("data.json", "w") as f:
         json.dump(data, f, indent=4)
@@ -31,5 +35,8 @@ def main():
 
 if __name__ == "__main__":
     start_time = time.time()
-    main()
+
+    if not os.path.exists("performance"):
+        os.makedirs("performance")
+    cProfile.run("main()", "performance/profile_output.pstat")
     print("--- {} seconds ---".format(time.time() - start_time))

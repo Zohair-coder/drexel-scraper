@@ -94,6 +94,38 @@ docker compose up -d --build
 
 Make sure you execute this in the project root directory. Let the scraper container finish/exit. The scraper should then output the `data.json` file in the same directory. You can view the data inside the database by going to `http://localhost:30012` in your browser.
 
+You can also view a Grafana instance by going to `http://localhost:3000`. You will have to log in with the username `admin` and password `admin`. The first time you log in, you will have to set up the datasource and dashboard. To set up the datasource, click the sidebar menu and go to `Connections -> Data Sources -> Add new data source` and search for `PostgreSQL`. Enter in the following information:
+
+```
+Host: postgres
+Database: postgres
+User: postgres
+Password: super-secret-password
+TLS/SSL Mode: disable
+```
+
+And then click `Save and test`.
+
+You will also have to import the dashboard at [schedulerdev.zohair.dev](https://schedulerdev.zohair.dev). Click the share icon at the top and then go to the export tab. Check the "Export for sharing externally" box and then click "Save to file". You can then import this dashboard by going to `Home > Dashboards` on your local Grafana instance and then clicking `New > Import`. Upload the file you just downloaded and everything should be set up.
+
+To run the script again after the container has exited, run the following command:
+
+```bash
+docker compose up -d
+```
+
+To stop the containers, run the following command:
+
+```bash
+docker compose down
+```
+
+If you want to reset the database, delete the postgres-data directory inside the project root directory.
+
+If you want to reset the Grafana settings, delete the grafana_data directory inside the project root directory.
+
+NOTE: Docker Compose is only used for local development. The production version of the scraper uses Kubernetes. The Kubernetes configuration files live in the `k8s` directory.
+
 ## Contributing
 
 If you wish to contribute, please take a look at the "Issues" tab and see if there are any issues you can help with. If you wish to add/request a new feature, you can create a new issue, and we can talk about it there before you start working on it. If you wish to work on an existing issue, please comment on the issue so that I can assign it to you. Once you have completed the issue, you can create a pull request to the dev branch, and I will review it. After merging the changes to the dev branch, the job will be deployed on the dev server (https://schedulerdev.zohair.dev). If there are no issues, I will merge the changes to the main branch, and the job will be deployed on the main server (https://scheduler.zohair.dev).

@@ -1,7 +1,8 @@
 import psycopg2
+from psycopg2 import sql
 from psycopg2.extensions import cursor, connection
 
-from db_config import DBNAME, USER, PASSWORD, HOST, PORT, DEFAULT_DB
+from db_config import DBNAME, USER, PASSWORD, HOST, PORT, DEFAULT_DB, GRAFANA_SERVICE_ACCOUNT_USERNAME, GRAFANA_SERVICE_ACCOUNT_PASSWORD
 
 from datetime import datetime
 from pytz import timezone
@@ -11,6 +12,13 @@ def populate_db(data: dict):
 
     if not do_tables_exist(cur):
         create_tables(cur, conn)
+    
+    if not grafana_user_exists(cur):
+        create_grafana_user(cur)
+    
+    assign_grafana_user_permissions(cur)
+
+    update_metadata(cur)
 
     delete_old_data(cur, data)
     
@@ -21,7 +29,6 @@ def populate_db(data: dict):
         for instructor_id in instructor_ids:
             insert_course_instructor(cur, course_id, instructor_id)
 
-    update_metadata(cur)
 
     conn.commit()
 
@@ -139,10 +146,10 @@ def update_instructor(cur: cursor, instructor) -> int:
     else:
         cur.execute("""
             UPDATE instructors
-            SET avg_difficulty = %s, avg_rating = %s, num_ratings = %s
+            SET rmp_id = %s, avg_difficulty = %s, avg_rating = %s, num_ratings = %s
             WHERE name = %s
             RETURNING id
-            """, (instructor["rating"]["avgDifficulty"], instructor["rating"]["avgRating"], instructor["rating"]["numRatings"], instructor["name"]))
+            """, (instructor["rating"]["legacyId"], instructor["rating"]["avgDifficulty"], instructor["rating"]["avgRating"], instructor["rating"]["numRatings"], instructor["name"]))
 
     return cur.fetchone()[0]
 
@@ -177,22 +184,22 @@ def crn_in_db(cur: cursor, crn: int) -> bool:
 def update_course(cur: cursor, course) -> int:
     cur.execute("""
         UPDATE courses
-        SET subject_code = %s, course_number = %s, instruction_type = %s, instruction_method = %s, section = %s, enroll = %s, max_enroll = %s, course_title = %s, start_time = %s, end_time = %s, days = %s
+        SET subject_code = %s, course_number = %s, instruction_type = %s, instruction_method = %s, section = %s, enroll = %s, max_enroll = %s, course_title = %s, credits = %s, start_time = %s, end_time = %s, days = %s
         WHERE crn = %s
         RETURNING crn
         """, (course["subject_code"], course["course_number"], course["instruction_type"], course["instruction_method"],
-              course["section"], course["enroll"], course["max_enroll"], course["course_title"], course["start_time"], course["end_time"], course["days"], course["crn"]))
+              course["section"], course["enroll"], course["max_enroll"], course["course_title"], course["credits"], course["start_time"], course["end_time"], course["days"], course["crn"]))
 
     return cur.fetchone()[0]
 
 
 def insert_new_course(cur: cursor, course) -> int:
     cur.execute("""
-        INSERT INTO courses (crn, subject_code, course_number, instruction_type, instruction_method, section, enroll, max_enroll, course_title, start_time, end_time, days)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        INSERT INTO courses (crn, subject_code, course_number, instruction_type, instruction_method, section, enroll, max_enroll, course_title, credits, start_time, end_time, days)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         RETURNING crn
         """, (course["crn"], course["subject_code"], course["course_number"], course["instruction_type"], course["instruction_method"],
-              course["section"], course["enroll"], course["max_enroll"], course["course_title"], course["start_time"], course["end_time"], course["days"]))
+              course["section"], course["enroll"], course["max_enroll"], course["course_title"], course["credits"], course["start_time"], course["end_time"], course["days"]))
 
     return cur.fetchone()[0]
 
@@ -222,3 +229,30 @@ def update_metadata(cur: cursor):
       ON CONFLICT (key)
       DO UPDATE SET value = EXCLUDED.value;
 """, (current_datetime,))
+    
+def grafana_user_exists(cur: cursor):
+    grafana_user = GRAFANA_SERVICE_ACCOUNT_USERNAME
+    cur.execute("""
+    SELECT 1
+    FROM pg_roles
+    WHERE rolname = %s
+""", (grafana_user,))
+    row = cur.fetchone()
+    return row is not None and row[0] == 1
+
+def create_grafana_user(cur: cursor):
+    grafana_username = GRAFANA_SERVICE_ACCOUNT_USERNAME
+    grafana_password = GRAFANA_SERVICE_ACCOUNT_PASSWORD
+
+    create_role_command = sql.SQL(
+            "CREATE ROLE {} WITH LOGIN PASSWORD %s;"
+        ).format(sql.Identifier(grafana_username))
+    
+    cur.execute(create_role_command, [grafana_password])
+
+def assign_grafana_user_permissions(cur: cursor):
+    grafana_username = GRAFANA_SERVICE_ACCOUNT_USERNAME
+    cmd = sql.SQL(
+        "GRANT SELECT ON ALL TABLES IN SCHEMA public TO {};"
+    ).format(sql.Identifier(grafana_username))
+    cur.execute(cmd)

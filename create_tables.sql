@@ -15,7 +15,8 @@ CREATE TABLE instructors (
     name            TEXT UNIQUE NOT NULL,
     avg_difficulty  NUMERIC,
     avg_rating      NUMERIC,
-    num_ratings     INTEGER
+    num_ratings     INTEGER,
+    rmp_id          INTEGER
 );
 
 CREATE TABLE courses
@@ -29,6 +30,7 @@ CREATE TABLE courses
     enroll              TEXT,
     max_enroll          TEXT,
     course_title        TEXT NOT NULL,
+    credits             TEXT,
     start_time          TIME,
     end_time            TIME,
     days                TEXT[]
@@ -45,6 +47,7 @@ CREATE VIEW all_course_instructor_data AS
 SELECT 
     i.id AS instructor_id,
     i.name AS instructor_name,
+    i.rmp_id AS instructor_rmp_id,
     i.avg_difficulty,
     i.avg_rating,
     i.num_ratings,
@@ -57,9 +60,10 @@ SELECT
     c.enroll,
     c.max_enroll,
     c.course_title,
+    c.credits,
     c.start_time,
     c.end_time,
     c.days
-FROM instructors i
-JOIN course_instructor ci ON i.id = ci.instructor_id
-JOIN courses c ON ci.course_id = c.crn;
+FROM courses c
+LEFT JOIN course_instructor ci ON c.crn = ci.course_id
+LEFT JOIN instructors i ON i.id = ci.instructor_id;

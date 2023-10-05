@@ -11,6 +11,21 @@ services:
     depends_on:
       - postgres
 
+  grafana:
+    image: grafana/grafana-oss
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_NAME="Main Org."
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_UNIFIED_ALERTING_ENABLED=false
+      - GF_ALERTING_ENABLE=false
+    volumes:
+      - ./grafana_data:/var/lib/grafana
+
   postgres:
     image: postgres:latest
     environment:

@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: delete-credits-cronjob
+spec:
+  schedule: "10 5 * * *" # Every night at 05:10
+  timeZone: "US/Eastern"
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: credits-cache
+              persistentVolumeClaim:
+                claimName: drexel-scheduler-ratings-pvc
+          containers:
+            - name: delete-credits-file
+              image: busybox
+              volumeMounts:
+                - name: credits-cache
+                  mountPath: /data
+              command: ["/bin/sh", "-c", "rm /data/credits_cache.json"]
+          restartPolicy: OnFailure
