@@ -13,6 +13,9 @@ grafana.ini:
   server:
     root_url: "https://schedulerdev.zohair.dev"
 
+  panels:
+    disable_sanatize_html: true
+
   news:
     news_feed_enabled: false
 
