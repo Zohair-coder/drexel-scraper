@@ -1,0 +1,27 @@
+replicas: 1
+grafana.ini:
+  auth.anonymous:
+    enabled: true
+    org_name: Main Org.
+    org_role: Viewer
+
+  unified_alerting:
+    enabled: false
+
+  alerting:
+    enabled: false
+
+  server:
+    root_url: "https://scheduler.zohair.dev"
+
+  news:
+    news_feed_enabled: false
+
+persistence:
+  enabled: true
+  type: pvc
+  size: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  finalizers:
+    - kubernetes.io/pvc-protection
