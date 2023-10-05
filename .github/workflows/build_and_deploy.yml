@@ -72,10 +72,10 @@ jobs:
         if: github.ref == 'refs/heads/dev'
         run: |
           kubectl apply -f k8s/grafana-dev-ingress.yaml --kubeconfig=kubeconfig.yaml -n dev
-          helm upgrade grafana-dev grafana/grafana -f k8s/grafana-dev-values.yaml -n dev
+          KUBECONFIG=kubeconfig.yaml helm upgrade grafana-dev grafana/grafana -f k8s/grafana-dev-values.yaml -n dev
 
       - name: Deploy Grafana to Prod
         if: github.ref == 'refs/heads/main'
         run: |
           kubectl apply -f k8s/grafana-default-ingress.yaml --kubeconfig=kubeconfig.yaml -n default
-          helm upgrade grafana grafana/grafana -f k8s/grafana-default-values.yaml --set env.GF_ANALYTICS_GOOGLE_ANALYTICS_4_ID=${{ secrets.GOOGLE_ANALYTICS_ID }} -n default
+          KUBECONFIG=kubeconfig.yaml helm upgrade grafana grafana/grafana -f k8s/grafana-default-values.yaml --set env.GF_ANALYTICS_GOOGLE_ANALYTICS_4_ID=${{ secrets.GOOGLE_ANALYTICS_ID }} -n default
