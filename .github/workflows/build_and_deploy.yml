@@ -55,6 +55,8 @@ jobs:
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/cronjob-configmap-${{ env.NAMESPACE }}.yaml --kubeconfig=kubeconfig.yaml
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/delete-credits-cronjob.yaml --kubeconfig=kubeconfig.yaml
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/delete-ratings-cronjob.yaml --kubeconfig=kubeconfig.yaml
+          kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-credits-cronjob github-actions-delete-credits-job --kubeconfig=kubeconfig.yaml
+          kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-ratings-cronjob github-actions-delete-ratings-job --kubeconfig=kubeconfig.yaml
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/cronjob.yaml --kubeconfig=kubeconfig.yaml
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/grafana-${{ env.NAMESPACE }}-ingress.yaml --kubeconfig=kubeconfig.yaml
 
