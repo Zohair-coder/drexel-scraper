@@ -21,5 +21,10 @@ spec:
               volumeMounts:
                 - name: ratings-cache
                   mountPath: /data
-              command: ["/bin/sh", "-c", "rm /data/ratings_cache.json"]
+              command:
+                [
+                  "/bin/sh",
+                  "-c",
+                  "[ -f /data/ratings_cache.json ] && rm /data/ratings_cache.json",
+                ]
           restartPolicy: OnFailure

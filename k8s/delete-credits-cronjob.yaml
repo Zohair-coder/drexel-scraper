@@ -21,5 +21,10 @@ spec:
               volumeMounts:
                 - name: credits-cache
                   mountPath: /data
-              command: ["/bin/sh", "-c", "rm /data/credits_cache.json"]
+              command:
+                [
+                  "/bin/sh",
+                  "-c",
+                  "[ -f /data/credits_cache.json ] && rm /data/credits_cache.json",
+                ]
           restartPolicy: OnFailure
