@@ -25,6 +25,6 @@ spec:
                 [
                   "/bin/sh",
                   "-c",
-                  "[ -f /data/ratings_cache.json ] && rm /data/ratings_cache.json",
+                  "[ ! -f /data/ratings_cache.json ] || rm /data/ratings_cache.json",
                 ]
           restartPolicy: OnFailure
