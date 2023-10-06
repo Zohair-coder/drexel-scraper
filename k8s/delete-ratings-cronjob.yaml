@@ -22,9 +22,10 @@ spec:
                 - name: ratings-cache
                   mountPath: /data
               command:
-                [
-                  "/bin/sh",
-                  "-c",
-                  "[ ! -f /data/ratings_cache.json ] || rm /data/ratings_cache.json",
-                ]
+                - "/bin/sh"
+                - "-c"
+                - |
+                  if [ -f /data/ratings_cache.json ]; then
+                    rm /data/ratings_cache.json
+                  fi
           restartPolicy: OnFailure

@@ -22,9 +22,10 @@ spec:
                 - name: credits-cache
                   mountPath: /data
               command:
-                [
-                  "/bin/sh",
-                  "-c",
-                  "[ ! -f /data/credits_cache.json ] || rm /data/credits_cache.json",
-                ]
+                - "/bin/sh"
+                - "-c"
+                - |
+                  if [ -f /data/credits_cache.json ]; then
+                    rm /data/credits_cache.json
+                  fi
           restartPolicy: OnFailure
