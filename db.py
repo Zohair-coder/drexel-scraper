@@ -148,15 +148,6 @@ def insert_course(cur: cursor, course) -> int:
     
     return cur.fetchone()[0]
 
-def crn_in_db(cur: cursor, crn: int) -> bool:
-    cur.execute("""
-        SELECT COUNT(*)
-        FROM courses
-        WHERE crn = %s
-        """, (crn,))
-
-    return cur.fetchone()[0] == 1
-
 def create_tables(cur: cursor, conn: connection):
     with open("create_tables.sql") as f:
         create_table_sql = f.read()
