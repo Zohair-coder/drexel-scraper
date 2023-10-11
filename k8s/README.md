@@ -20,26 +20,24 @@ Accessing PVC: https://stackoverflow.com/a/70323207
 #### Accessing performance file
 
 ```
-cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Pod
 metadata:
-name: pvc-inspector
-spec:
-containers:
-
-- image: busybox
   name: pvc-inspector
-  command: ["tail"]
-  args: ["-f", "/dev/null"]
-  volumeMounts:
-  - mountPath: /pvc
-    name: pvc-mount
-    volumes:
-- name: pvc-mount
-  persistentVolumeClaim:
-  claimName: drexel-scheduler-performance-pvc
-  EOF
+spec:
+  containers:
+  - image: busybox
+    name: pvc-inspector
+    command: ["tail"]
+    args: ["-f", "/dev/null"]
+    volumeMounts:
+    - mountPath: /pvc
+      name: pvc-mount
+  volumes:
+  - name: pvc-mount
+    persistentVolumeClaim:
+      claimName: drexel-scheduler-performance-pvc
+EOF
 ```
 
 ```
