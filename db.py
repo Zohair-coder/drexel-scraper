@@ -17,21 +17,20 @@ def populate_db(data: dict):
         create_grafana_user(cur)
     
     assign_grafana_user_permissions(cur)
-
     update_metadata(cur)
-
     delete_old_data(cur, data)
-    
+
+    course_instructor_relationships = []
     for course in data.values():
-        course_id = insert_course(cur, course)
-        instructor_ids = insert_instructors(cur, course)
+        instructor_ids = bulk_insert_instructors(cur, course)
 
         for instructor_id in instructor_ids:
-            insert_course_instructor(cur, course_id, instructor_id)
+            course_instructor_relationships.append((course["crn"], instructor_id))
 
+    bulk_insert_courses(cur, data.values())
+    bulk_insert_course_instructors(cur, course_instructor_relationships)
 
     conn.commit()
-
     cur.close()
     conn.close()
 
@@ -84,125 +83,77 @@ def delete_old_data(cur: cursor, data: dict):
         )
         """)
 
-def insert_course_instructor(cur: cursor, course_id: int, instructor_id: int):
-
-    if not course_instructor_in_db(cur, course_id, instructor_id):
-        insert_new_course_instructor(cur, course_id, instructor_id)
-
-
-def course_instructor_in_db(cur: cursor, course_id: int, instructor_id: int) -> bool:
-    cur.execute("""
-        SELECT COUNT(*)
-        FROM course_instructor
-        WHERE course_id = %s AND instructor_id = %s
-        """, (course_id, instructor_id))
-
-    return cur.fetchone()[0] == 1
-
-
-def insert_new_course_instructor(cur: cursor, course_id: int, instructor_id: int):
-    cur.execute("""
+def bulk_insert_course_instructors(cur: cursor, relationships: list[tuple[int, int]]):
+    cur.executemany("""
         INSERT INTO course_instructor (course_id, instructor_id)
         VALUES (%s, %s)
-        """, (course_id, instructor_id))
+        ON CONFLICT (course_id, instructor_id)
+        DO NOTHING
+    """, relationships)
 
 
-def insert_instructors(cur, course):
+def bulk_insert_instructors(cur: cursor, course: dict) -> list[int]:
     if course["instructors"] is None:
         return []
 
-    instructor_ids = []
-
+    instructor_data = []
+    instructor_names = []
     for instructor in course["instructors"]:
-        instructor_id = insert_instructor(cur, instructor)
-        instructor_ids.append(instructor_id)
+        instructor_data.append((
+            instructor["name"],
+            instructor["rating"]["legacyId"] if instructor.get("rating", None) is not None else None,
+            instructor["rating"]["avgDifficulty"] if instructor.get("rating", None) is not None else None,
+            instructor["rating"]["avgRating"] if instructor.get("rating", None) is not None else None,
+            instructor["rating"]["numRatings"] if instructor.get("rating", None) is not None else None
+        ))
 
-    return instructor_ids
+        instructor_names.append(instructor["name"])
 
-
-def insert_instructor(cur: cursor, instructor) -> int:
-    if not instructor_name_in_db(cur, instructor["name"]):
-        insert_new_instructor(cur, instructor)
-    return update_instructor(cur, instructor)
-
-
-def instructor_name_in_db(cur: cursor, name: str) -> bool:
-    cur.execute("""
-        SELECT COUNT(*)
-        FROM instructors
-        WHERE name = %s
-        """, (name,))
-
-    return cur.fetchone()[0] == 1
-
-
-def update_instructor(cur: cursor, instructor) -> int:
-    if instructor.get("rating", None) is None:
-        cur.execute("""
-            SELECT id
-            FROM instructors
-            WHERE name = %s
-            """, (instructor["name"],))
-    else:
-        cur.execute("""
-            UPDATE instructors
-            SET rmp_id = %s, avg_difficulty = %s, avg_rating = %s, num_ratings = %s
-            WHERE name = %s
-            RETURNING id
-            """, (instructor["rating"]["legacyId"], instructor["rating"]["avgDifficulty"], instructor["rating"]["avgRating"], instructor["rating"]["numRatings"], instructor["name"]))
-
-    return cur.fetchone()[0]
-
-
-def insert_new_instructor(cur: cursor, instructor) -> int:
-    cur.execute("""
-        INSERT INTO instructors (name)
-        VALUES (%s)
+    cur.executemany("""
+        INSERT INTO instructors (name, rmp_id, avg_difficulty, avg_rating, num_ratings)
+        VALUES (%s, %s, %s, %s, %s)
+        ON CONFLICT (name)
+        DO UPDATE SET 
+            rmp_id = EXCLUDED.rmp_id,
+            avg_difficulty = EXCLUDED.avg_difficulty,
+            avg_rating = EXCLUDED.avg_rating,
+            num_ratings = EXCLUDED.num_ratings
         RETURNING id
-        """, (instructor["name"],))
+    """, instructor_data)
 
-    return cur.fetchone()[0]
-
-
-def insert_course(cur: cursor, course) -> int:
-    if crn_in_db(cur, course["crn"]):
-        return update_course(cur, course)
-    else:
-        return insert_new_course(cur, course)
-
-
-def crn_in_db(cur: cursor, crn: int) -> bool:
     cur.execute("""
-        SELECT COUNT(*)
-        FROM courses
-        WHERE crn = %s
-        """, (crn,))
+        SELECT id FROM instructors WHERE name IN %s
+    """, (tuple(instructor_names),))
 
-    return cur.fetchone()[0] == 1
+    return [row[0] for row in cur.fetchall()]
 
+def bulk_insert_courses(cur: cursor, courses_data: list[dict]):
+    courses = []
+    for course in courses_data:
+        courses.append((course["crn"], course["subject_code"], course["course_number"], course["instruction_type"], 
+                        course["instruction_method"], course["section"], course["enroll"], course["max_enroll"], 
+                        course["course_title"], course["credits"], course["start_time"], course["end_time"], 
+                        course["days"]))
 
-def update_course(cur: cursor, course) -> int:
-    cur.execute("""
-        UPDATE courses
-        SET subject_code = %s, course_number = %s, instruction_type = %s, instruction_method = %s, section = %s, enroll = %s, max_enroll = %s, course_title = %s, credits = %s, start_time = %s, end_time = %s, days = %s
-        WHERE crn = %s
-        RETURNING crn
-        """, (course["subject_code"], course["course_number"], course["instruction_type"], course["instruction_method"],
-              course["section"], course["enroll"], course["max_enroll"], course["course_title"], course["credits"], course["start_time"], course["end_time"], course["days"], course["crn"]))
-
-    return cur.fetchone()[0]
-
-
-def insert_new_course(cur: cursor, course) -> int:
-    cur.execute("""
-        INSERT INTO courses (crn, subject_code, course_number, instruction_type, instruction_method, section, enroll, max_enroll, course_title, credits, start_time, end_time, days)
+    cur.executemany("""
+        INSERT INTO courses (crn, subject_code, course_number, instruction_type, instruction_method, 
+                             section, enroll, max_enroll, course_title, credits, start_time, end_time, days)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        RETURNING crn
-        """, (course["crn"], course["subject_code"], course["course_number"], course["instruction_type"], course["instruction_method"],
-              course["section"], course["enroll"], course["max_enroll"], course["course_title"], course["credits"], course["start_time"], course["end_time"], course["days"]))
-
-    return cur.fetchone()[0]
-
+        ON CONFLICT (crn)
+        DO UPDATE SET 
+            subject_code = EXCLUDED.subject_code, 
+            course_number = EXCLUDED.course_number, 
+            instruction_type = EXCLUDED.instruction_type, 
+            instruction_method = EXCLUDED.instruction_method,
+            section = EXCLUDED.section,
+            enroll = EXCLUDED.enroll,
+            max_enroll = EXCLUDED.max_enroll,
+            course_title = EXCLUDED.course_title,
+            credits = EXCLUDED.credits,
+            start_time = EXCLUDED.start_time,
+            end_time = EXCLUDED.end_time,
+            days = EXCLUDED.days
+    """, courses)
 
 def create_tables(cur: cursor, conn: connection):
     with open("create_tables.sql") as f:

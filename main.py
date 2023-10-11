@@ -26,7 +26,10 @@ def main():
     print("Found {} items".format(len(data)))
     print("Data written to data.json")
 
+
     if "--db" in sys.argv:
+        print("Time taken to scrape data: {} seconds".format(time.time() - start_time))
+        print()
         import db
         print("Updating database...")
         db.populate_db(data)
