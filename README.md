@@ -1,3 +1,6 @@
+![defaultdrexelschedulercronjob](https://cronitor.io/badges/AZopCT/production/TTopK9fZt6v789plG6okrYsoMZo.svg)
+![devdrexelschedulercronjob](https://cronitor.io/badges/1KsIDl/production/Csb1Ree1fzmrFc12-GQrYdh7u-s.svg)
+
 # TMS-Scraper
 
 Scrapes data from the Drexel Term Master Schedule and outputs a JSON file. Note that this scraper is not officially supported by Drexel University, and may break if the term master schedule website changes.
