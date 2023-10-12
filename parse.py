@@ -1,9 +1,6 @@
 from bs4 import BeautifulSoup
-from config import attributes
 from ratings import rating
 from datetime import datetime
-import json
-import os
 
 def parse_subject_page(html, data: dict, include_ratings: bool = False, ratings_cache: dict = {}):
 
@@ -65,7 +62,7 @@ def get_instructors(instructors_str: str, include_ratings: bool, ratings_cache: 
             rmp_name = name_tokens[0] + " " + name_tokens[-1]
 
             if rmp_name not in ratings_cache:
-                ratings_cache[rmp_name] = rating(rmp_name)
+                ratings_cache[rmp_name] = rating(rmp_name) 
                 if ratings_cache[rmp_name] is None and len(name_tokens) > 2:
                     rmp_name = name_tokens[0] + " " + name_tokens[1]
                     ratings_cache[rmp_name] = rating(rmp_name)
