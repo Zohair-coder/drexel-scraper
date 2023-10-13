@@ -11,7 +11,7 @@ quarter = "25"
 # https://termmasterschedule.drexel.edu/webtms_du/collegesSubjects/202245?collCode=CI
 # NOTE: This configuration will be ignored if the --all-colleges flag is used
 # example values = CI, A, AS
-college_code = "CI"
+college_code = "PH"
 
 # URL's
 tms_base_url = "https://termmasterschedule.drexel.edu"

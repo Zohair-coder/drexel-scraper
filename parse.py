@@ -61,13 +61,13 @@ def get_instructors(instructors_str: str, include_ratings: bool, ratings_cache: 
             name_tokens = name.split(" ")
             rmp_name = name_tokens[0] + " " + name_tokens[-1]
 
-            if rmp_name not in ratings_cache:
-                ratings_cache[rmp_name] = rating(rmp_name) 
-                if ratings_cache[rmp_name] is None and len(name_tokens) > 2:
+            if name not in ratings_cache:
+                ratings_cache[name] = rating(rmp_name) 
+                if ratings_cache[name] is None and len(name_tokens) > 2:
                     rmp_name = name_tokens[0] + " " + name_tokens[1]
-                    ratings_cache[rmp_name] = rating(rmp_name)
+                    ratings_cache[name] = rating(rmp_name)
 
-            rating_obj = ratings_cache[rmp_name]
+            rating_obj = ratings_cache[name]
 
             instructors.append({
                 "name": name,

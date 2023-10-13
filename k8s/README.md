@@ -20,6 +20,7 @@ Accessing PVC: https://stackoverflow.com/a/70323207
 #### Accessing performance file
 
 ```
+cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Pod
 metadata:
