@@ -141,8 +141,6 @@ def create_tables(cur: cursor, conn: connection):
         create_table_sql = f.read()
 
     cur.execute(create_table_sql)
-    conn.commit()
-
 
 def do_tables_exist(cur: cursor):
     cur.execute("""
