@@ -79,6 +79,9 @@ def rating(professor_name):
 
     del ratings["__typename"]
 
+    if ratings["numRatings"] == 0:
+        return None
+
     return ratings
 
 

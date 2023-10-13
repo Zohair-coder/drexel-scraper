@@ -18,7 +18,7 @@ def populate_db(data: dict):
     
     assign_grafana_user_permissions(cur)
     update_metadata(cur)
-    delete_old_data(cur, data)
+    delete_old_data(cur)
 
     course_instructor_relationships = []
     for course in data.values():
@@ -59,29 +59,10 @@ def connect_to_db() -> tuple[cursor, connection]:
 
     return cur, conn
 
-def delete_old_data(cur: cursor, data: dict):
-    crns = [course["crn"] for course in data.values()]
-
-    cur.execute("""
-        DELETE FROM course_instructor
-        WHERE course_id NOT IN %s
-        """, (tuple(crns),))
-
-    cur.execute("""
-        DELETE FROM courses
-        WHERE crn NOT IN (
-            SELECT course_id
-            FROM course_instructor
-        )
-        """)
-
-    cur.execute("""
-        DELETE FROM instructors
-        WHERE id NOT IN (
-            SELECT instructor_id
-            FROM course_instructor
-        )
-        """)
+def delete_old_data(cur: cursor):
+    cur.execute("DELETE FROM course_instructor")
+    cur.execute("DELETE FROM courses")
+    cur.execute("DELETE FROM instructors")
 
 def bulk_insert_course_instructors(cur: cursor, relationships: list[tuple[int, int]]):
     cur.executemany("""
@@ -160,8 +141,6 @@ def create_tables(cur: cursor, conn: connection):
         create_table_sql = f.read()
 
     cur.execute(create_table_sql)
-    conn.commit()
-
 
 def do_tables_exist(cur: cursor):
     cur.execute("""
