@@ -32,10 +32,10 @@
     "Aasta D": null,
     "Elizabeth Valdez": null,
     "Elizabeth S": {
-        "avgDifficulty": 3.5,
-        "avgRating": 3.8,
-        "legacyId": 970300,
-        "numRatings": 6
+        "avgDifficulty": 3,
+        "avgRating": 4,
+        "legacyId": 2280285,
+        "numRatings": 1
     },
     "Javier Lopez-Rios": null,
     "Nancy Epstein": null,
@@ -462,7 +462,12 @@
     "Dara Meredith": null,
     "Dara J": null,
     "Abigail Toll": null,
-    "Abigail S": null,
+    "Abigail S": {
+        "avgDifficulty": 4,
+        "avgRating": 1,
+        "legacyId": 2776751,
+        "numRatings": 1
+    },
     "Elizabeth McNamara": null,
     "Val Ifill": null,
     "Val J": null,
@@ -475,12 +480,11 @@
         "legacyId": 2472785,
         "numRatings": 3
     },
-    "Nick Cassway": null,
-    "Nick A": {
-        "avgDifficulty": 3,
-        "avgRating": 5,
-        "legacyId": 2324089,
-        "numRatings": 1
+    "Nick Cassway": {
+        "avgDifficulty": 4,
+        "avgRating": 3.8,
+        "legacyId": 2606948,
+        "numRatings": 3
     },
     "Chris Baeza": {
         "avgDifficulty": 4,
@@ -1092,12 +1096,8 @@
     "Tasneem Siddiqui": null,
     "Tasneem A": null,
     "Jakeya Caruthers": null,
-    "Toni Pitock": {
-        "avgDifficulty": 3.9,
-        "avgRating": 4,
-        "legacyId": 2757782,
-        "numRatings": 6
-    },
+    "Toni Pitock": null,
+    "Toni F": null,
     "Vincent Williams": {
         "avgDifficulty": 2.5,
         "avgRating": 4.8,
@@ -1582,10 +1582,10 @@
     "Erica Kleckner": null,
     "Jami Benton": null,
     "Jami J": {
-        "avgDifficulty": 3.4,
-        "avgRating": 2.4,
-        "legacyId": 2750892,
-        "numRatings": 6
+        "avgDifficulty": 2.8,
+        "avgRating": 4.4,
+        "legacyId": 811799,
+        "numRatings": 11
     },
     "William Vargo": null,
     "William G": null,
@@ -1743,12 +1743,11 @@
         "legacyId": 1114609,
         "numRatings": 11
     },
-    "Amanda Lequieu": null,
-    "Amanda M": {
-        "avgDifficulty": 3.9,
-        "avgRating": 4.4,
-        "legacyId": 2645186,
-        "numRatings": 6
+    "Amanda Lequieu": {
+        "avgDifficulty": 2.6,
+        "avgRating": 4.5,
+        "legacyId": 2748506,
+        "numRatings": 7
     },
     "Tatyana Livshultz": null,
     "Rick McCourt": null,
@@ -2534,8 +2533,7 @@
         "legacyId": 775233,
         "numRatings": 7
     },
-    "Samuel Szewczyk": null,
-    "Samuel H": {
+    "Samuel Szewczyk": {
         "avgDifficulty": 1,
         "avgRating": 4,
         "legacyId": 2751567,
@@ -2694,12 +2692,7 @@
         "legacyId": 1292968,
         "numRatings": 4
     },
-    "Qizhi Dai": {
-        "avgDifficulty": 1,
-        "avgRating": 5,
-        "legacyId": 2773405,
-        "numRatings": 1
-    },
+    "Qizhi Dai": null,
     "Orakwue Arinze": null,
     "Orakwue B": null,
     "Samir Shah": {
@@ -2785,12 +2778,7 @@
         "legacyId": 1972081,
         "numRatings": 11
     },
-    "Wenjing Shen": {
-        "avgDifficulty": 3,
-        "avgRating": 3,
-        "legacyId": 2771807,
-        "numRatings": 2
-    },
+    "Wenjing Shen": null,
     "Liza Barnes": null,
     "Liza Y": null,
     "Liza Herzog": null,
@@ -2839,11 +2827,12 @@
     "Tony P": null,
     "Bryan Rishforth": null,
     "Bryan L": null,
-    "John Wilson": {
-        "avgDifficulty": 3,
-        "avgRating": 3.4,
-        "legacyId": 2771884,
-        "numRatings": 3
+    "John Wilson": null,
+    "John H": {
+        "avgDifficulty": 2,
+        "avgRating": 3.8,
+        "legacyId": 2420031,
+        "numRatings": 14
     },
     "Ozlem Ogutveren-Gonul": {
         "avgDifficulty": 4.1,
@@ -4234,5 +4223,123 @@
         "numRatings": 1
     },
     "Natalia Broz": null,
-    "Natalia J": null
+    "Natalia J": null,
+    "Chris Vorndran": {
+        "avgDifficulty": 3.5,
+        "avgRating": 3.5,
+        "legacyId": 2606676,
+        "numRatings": 2
+    },
+    "Bridget Blakely": null,
+    "Bridget S": null,
+    "Fredricka Reisman": null,
+    "Fredricka K": null,
+    "Jen Katz-Buonincontro": null,
+    "Jen L": {
+        "avgDifficulty": 2,
+        "avgRating": 2,
+        "legacyId": 1778049,
+        "numRatings": 1
+    },
+    "Larry Keiser": null,
+    "Larry J": null,
+    "Kristen Betts": null,
+    "Kristen S": {
+        "avgDifficulty": 3,
+        "avgRating": 3,
+        "legacyId": 2469726,
+        "numRatings": 1
+    },
+    "William Lynch": null,
+    "William F": {
+        "avgDifficulty": 1.3,
+        "avgRating": 5,
+        "legacyId": 2539593,
+        "numRatings": 6
+    },
+    "Sheila Vaidya": {
+        "avgDifficulty": 3.8,
+        "avgRating": 1.6,
+        "legacyId": 630105,
+        "numRatings": 6
+    },
+    "Jose Chavez": null,
+    "Jose L": null,
+    "Rajashi Ghosh": null,
+    "Samantha Mercanti-Anthony": null,
+    "Aroutis Foster": null,
+    "Aroutis N": null,
+    "Valerie Klein": null,
+    "Valerie E": {
+        "avgDifficulty": 4,
+        "avgRating": 3.3,
+        "legacyId": 1977937,
+        "numRatings": 3
+    },
+    "Colin Elliott": null,
+    "Colin Hennessy": null,
+    "Kate Piselli": null,
+    "Kate D": null,
+    "Dominic Gullo": {
+        "avgDifficulty": 2,
+        "avgRating": 5,
+        "legacyId": 1414109,
+        "numRatings": 3
+    },
+    "James Connell": null,
+    "James E": {
+        "avgDifficulty": 3,
+        "avgRating": 1,
+        "legacyId": 2662346,
+        "numRatings": 1
+    },
+    "Amy Edwards": null,
+    "Amy D": null,
+    "Andrea DiMola": null,
+    "Andrea R": null,
+    "Michael Haslip": {
+        "avgDifficulty": 3.8,
+        "avgRating": 2.8,
+        "legacyId": 2512280,
+        "numRatings": 3
+    },
+    "Kristine Grant": {
+        "avgDifficulty": 3,
+        "avgRating": 5,
+        "legacyId": 2913201,
+        "numRatings": 1
+    },
+    "Christopher Wright": {
+        "avgDifficulty": 1,
+        "avgRating": 5,
+        "legacyId": 2631923,
+        "numRatings": 1
+    },
+    "Mary DeCarlo": null,
+    "Mary Jean": {
+        "avgDifficulty": 3,
+        "avgRating": 2,
+        "legacyId": 2463679,
+        "numRatings": 2
+    },
+    "Kareem Edouard": null,
+    "Sarah Ulrich": null,
+    "Sarah P": null,
+    "Deanna Hill": null,
+    "Deanna D": {
+        "avgDifficulty": 4,
+        "avgRating": 4.5,
+        "legacyId": 2151457,
+        "numRatings": 2
+    },
+    "Elena Cohen": null,
+    "Chava Spivak-Birndorf": null,
+    "Chava Y": null,
+    "Nathan Orians": null,
+    "Nathan N": {
+        "avgDifficulty": 2,
+        "avgRating": 4.5,
+        "legacyId": 2703275,
+        "numRatings": 2
+    }
 }
