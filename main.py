@@ -8,7 +8,6 @@ import cProfile
 import traceback
 
 def main():
-    0/0 # added for testing purposes
     start_time = time.time()
 
     include_ratings = False
