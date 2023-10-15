@@ -8,6 +8,8 @@ import cProfile
 
 def main():
 
+    start_time = time.time()
+
     include_ratings = False
     if "--ratings" in sys.argv:
         include_ratings = True
@@ -36,10 +38,10 @@ def main():
 
     print("Done!")
 
+    print("--- {} seconds ---".format(time.time() - start_time))
+
 if __name__ == "__main__":
-    start_time = time.time()
 
     if not os.path.exists("performance"):
         os.makedirs("performance")
     cProfile.run("main()", "performance/profile_output.pstat")
-    print("--- {} seconds ---".format(time.time() - start_time))
