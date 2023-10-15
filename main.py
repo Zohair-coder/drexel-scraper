@@ -50,11 +50,13 @@ if __name__ == "__main__":
     except Exception as e:
         trace = traceback.format_exc()
         print(trace)
-        
+
         if "--email" in sys.argv:
             import emailer
             if emailer.send_email("Error running scraper", trace):
                 print("Exeception email sent")
             else:
                 print("Error sending exception email")
+
+        sys.exit(1)
 
