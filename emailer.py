@@ -1,3 +1,8 @@
+# Make sure the following environment variables are set:
+# AWS_DEFAULT_REGION
+# AWS_ACCESS_KEY_ID
+# AWS_SECRET_ACCESS_KEY
+
 import boto3
 import config
 
