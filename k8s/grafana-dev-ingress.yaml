@@ -28,8 +28,8 @@ spec:
                 name: grafana-dev
                 port:
                   number: 80
-  # tls:
-  #   - hosts:
-  #       - schedulerdev.zohair.dev
-  #       - www.schedulerdev.zohair.dev
-  #     secretName: grafana-dev-tls
+  tls:
+    - hosts:
+        - schedulerdev.zohair.dev
+        - www.schedulerdev.zohair.dev
+      secretName: grafana-dev-tls
