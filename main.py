@@ -5,8 +5,10 @@ import sys
 import time
 import os
 import cProfile
+import traceback
 
 def main():
+    start_time = time.time()
 
     include_ratings = False
     if "--ratings" in sys.argv:
@@ -36,10 +38,24 @@ def main():
 
     print("Done!")
 
-if __name__ == "__main__":
-    start_time = time.time()
-
-    if not os.path.exists("performance"):
-        os.makedirs("performance")
-    cProfile.run("main()", "performance/profile_output.pstat")
     print("--- {} seconds ---".format(time.time() - start_time))
+
+if __name__ == "__main__":
+
+    try:
+        if not os.path.exists("performance"):
+            os.makedirs("performance")
+        cProfile.run("main()", "performance/profile_output.pstat")
+    except Exception as e:
+        trace = traceback.format_exc()
+        print(trace)
+
+        if "--email" in sys.argv:
+            import emailer
+            if emailer.send_email("Error running scraper", trace):
+                print("Exeception email sent")
+            else:
+                print("Error sending exception email")
+
+        sys.exit(1)
+

@@ -20,6 +20,9 @@ grafana.ini:
   news:
     news_feed_enabled: false
 
+  users:
+    default_theme: dark
+
 persistence:
   enabled: true
   type: pvc

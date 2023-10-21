@@ -57,15 +57,22 @@ def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings
     
     college_page_soup = get_soup(html)
     for subject_page_link in college_page_soup.find_all("a", href=lambda href: href and href.startswith("/webtms_du/courseList")):
-        response = session.get(config.tms_base_url + subject_page_link["href"])
-        parsed_crns = parse_subject_page(response.text, data, include_ratings, ratings_cache)
+        
+        try:
+            response = session.get(config.tms_base_url + subject_page_link["href"])
+            parsed_crns = parse_subject_page(response.text, data, include_ratings, ratings_cache)
+        except Exception as e:
+            raise Exception("Error scraping/parsing subject page: {}".format(subject_page_link["href"])) from e
 
         for crn, crn_page_link in parsed_crns.items():
             if crn in credits_cache:
                 data[crn]["credits"] = credits_cache[crn]
             else:
-                response = session.get(config.tms_base_url + crn_page_link)
-                parse_crn_page(response.text, data)
+                try:
+                    response = session.get(config.tms_base_url + crn_page_link)
+                    parse_crn_page(response.text, data)
+                except Exception as e:
+                    raise Exception("Error scraping/parsing CRN {}: {}".format(crn, crn_page_link)) from e
                 credits_cache[crn] = data[crn]["credits"]
 
             print("Parsed CRN: " + crn + " (" + data[crn].get("course_title") + ")")

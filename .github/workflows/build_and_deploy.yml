@@ -19,6 +19,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -28,8 +31,8 @@ jobs:
       - name: Build and push Docker image
         run: |
           COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
-          docker build -t $IMAGE_NAME:$COMMIT_SHA .
-          docker push $IMAGE_NAME:$COMMIT_SHA
+          docker buildx create --use
+          docker buildx build --platform linux/arm64 -t $IMAGE_NAME:$COMMIT_SHA . --push
 
   deploy:
     needs: build-and-push
@@ -74,9 +77,9 @@ jobs:
       - name: Deploy Grafana to Dev
         if: github.ref == 'refs/heads/dev'
         run: |
-          KUBECONFIG=kubeconfig.yaml helm upgrade grafana-dev grafana/grafana -f k8s/grafana-dev-values.yaml -n dev
+          KUBECONFIG=kubeconfig.yaml helm upgrade --install grafana-dev grafana/grafana -f k8s/grafana-dev-values.yaml -n dev
 
       - name: Deploy Grafana to Prod
         if: github.ref == 'refs/heads/main'
         run: |
-          KUBECONFIG=kubeconfig.yaml helm upgrade grafana grafana/grafana -f k8s/grafana-default-values.yaml --set env.GF_ANALYTICS_GOOGLE_ANALYTICS_4_ID=${{ secrets.GOOGLE_ANALYTICS_ID }} -n default
+          KUBECONFIG=kubeconfig.yaml helm upgrade --install grafana grafana/grafana -f k8s/grafana-default-values.yaml --set env.GF_ANALYTICS_GOOGLE_ANALYTICS_4_ID=${{ secrets.GOOGLE_ANALYTICS_ID }} -n default
