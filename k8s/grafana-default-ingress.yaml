@@ -8,7 +8,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   rules:
-    - host: scheduler.zohair.dev
+    - host: scheduler2.zohair.dev
       http:
         paths:
           - path: /
@@ -18,7 +18,7 @@ spec:
                 name: grafana
                 port:
                   number: 80
-    - host: www.scheduler.zohair.dev
+    - host: www.scheduler2.zohair.dev
       http:
         paths:
           - path: /
@@ -30,6 +30,6 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - scheduler.zohair.dev
-        - www.scheduler.zohair.dev
+        - scheduler2.zohair.dev
+        - www.scheduler2.zohair.dev
       secretName: grafana-tls
