@@ -19,6 +19,9 @@ grafana.ini:
   news:
     news_feed_enabled: false
 
+  users:
+    default_theme: light
+
 persistence:
   enabled: true
   type: pvc

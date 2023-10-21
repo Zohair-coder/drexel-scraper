@@ -18,7 +18,7 @@ spec:
                 name: grafana-dev
                 port:
                   number: 80
-    - host: www.scheduler.zohair.dev
+    - host: www.schedulerdev.zohair.dev
       http:
         paths:
           - path: /
