@@ -5,7 +5,6 @@ on:
     branches:
       - main
       - dev
-      - oracle
 
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -74,11 +73,6 @@ jobs:
         run: |
           helm repo add grafana https://grafana.github.io/helm-charts
           helm repo update
-
-      - name: Deploy Grafana to Orcale Dev
-        if: github.ref == 'refs/heads/oracle'
-        run: |
-          KUBECONFIG=kubeconfig.yaml helm upgrade --install grafana-dev grafana/grafana -f k8s/grafana-dev-values.yaml -n dev
 
       - name: Deploy Grafana to Dev
         if: github.ref == 'refs/heads/dev'
