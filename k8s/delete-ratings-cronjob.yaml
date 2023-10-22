@@ -14,7 +14,7 @@ spec:
           volumes:
             - name: ratings-cache
               persistentVolumeClaim:
-                claimName: pvc1
+                claimName: drexel-scheduler-ratings-pvc
           containers:
             - name: delete-ratings-file
               image: busybox

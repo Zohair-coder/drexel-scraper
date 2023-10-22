@@ -37,8 +37,8 @@ spec:
           volumes:
             - name: ratings-cache
               persistentVolumeClaim:
-                claimName: pvc1
+                claimName: drexel-scheduler-ratings-pvc
             - name: performance
               persistentVolumeClaim:
-                claimName: pvc1
+                claimName: drexel-scheduler-performance-pvc
           restartPolicy: OnFailure
