@@ -19,8 +19,16 @@ spec:
               envFrom:
                 - configMapRef:
                     name: drexel-scheduler-configmap
+                - configMapRef:
+                    name: aws-configmap
+                - configMapRef:
+                    name: postgres-configmap
                 - secretRef:
-                    name: drexel-scheduler-env-secrets
+                    name: aws-pwds
+                - secretRef:
+                    name: grafana-sa-pwd
+                - secretRef:
+                    name: postgres-pwd
               volumeMounts:
                 - name: ratings-cache
                   mountPath: /app/cache

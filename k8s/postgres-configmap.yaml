@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-configmap
+data:
+  SCHEDULER_DB_USERNAME: "postgres"
+  SCHEDULER_DB_HOSTNAME: "postgres-postgresql.postgres.svc.cluster.local"
+  SCHEDULER_DB_PORT: "5432"
+  SCHEDULER_DB_DEFAULT_DB: "postgres"
+  SCHEDULER_DB_GRAFANA_SERVICE_ACCOUNT_USERNAME: "grafana_readonly"
