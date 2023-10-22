@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aws-configmap
+data:
+  DREXEL_SCHEDULER_TOPIC_ARN: "arn:aws:sns:us-east-1:780880122047:DrexelScheduler"
+  AWS_DEFAULT_REGION: "us-east-1"
