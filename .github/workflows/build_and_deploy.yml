@@ -56,6 +56,8 @@ jobs:
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/ratings-pvc.yaml --kubeconfig=kubeconfig.yaml
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/performance-pvc.yaml --kubeconfig=kubeconfig.yaml
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/cronjob-configmap-${{ env.NAMESPACE }}.yaml --kubeconfig=kubeconfig.yaml
+          kubectl apply -n ${{ env.NAMESPACE }} -f k8s/aws-configmap.yaml --kubeconfig=kubeconfig.yaml
+          kubectl apply -n ${{ env.NAMESPACE }} -f k8s/postgres-configmap.yaml --kubeconfig=kubeconfig.yaml
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/delete-credits-cronjob.yaml --kubeconfig=kubeconfig.yaml
           kubectl apply -n ${{ env.NAMESPACE }} -f k8s/delete-ratings-cronjob.yaml --kubeconfig=kubeconfig.yaml
           kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-credits-cronjob github-actions-delete-credits-job --kubeconfig=kubeconfig.yaml
