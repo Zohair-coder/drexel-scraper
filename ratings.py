@@ -1,4 +1,5 @@
 import requests
+from helpers import send_request
 
 DREXEL_RMP_ID = "U2Nob29sLTE1MjE="
 AUTHORIZATION_HEADER = "Basic dGVzdDp0ZXN0"
@@ -27,13 +28,15 @@ def search_professors(professor_name):
         }
     }
 
-    response = requests.post(
+    response = send_request(
+        requests.Session(),
         "https://www.ratemyprofessors.com/graphql",
+        "POST",
         json={"query": query, "variables": variables},
         headers={
             "Authorization": AUTHORIZATION_HEADER
-        }
-    )
+        })
+
     return response.json()["data"]["newSearch"]["teachers"]["edges"]
 
 
@@ -54,13 +57,15 @@ def get_ratings(id):
         "id": id
     }
 
-    response = requests.post(
+    response = send_request(
+        requests.Session(),
         "https://www.ratemyprofessors.com/graphql",
+        "POST",
         json={"query": query, "variables": variables},
         headers={
             "Authorization": AUTHORIZATION_HEADER
         })
-
+    
     return response.json()["data"]["node"]
 
 
