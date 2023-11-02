@@ -39,7 +39,9 @@ def get_soup(html):
 
 
 def go_to_college_page(session: Session, college_code: str):
-    return session.get(config.get_college_page_url(college_code))
+    resp = session.get(config.get_college_page_url(college_code))
+    resp.raise_for_status()
+    return resp
 
 
 def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings: bool):
@@ -60,6 +62,7 @@ def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings
         
         try:
             response = session.get(config.tms_base_url + subject_page_link["href"])
+            response.raise_for_status()
             parsed_crns = parse_subject_page(response.text, data, include_ratings, ratings_cache)
         except Exception as e:
             raise Exception("Error scraping/parsing subject page: {}".format(subject_page_link["href"])) from e
@@ -70,6 +73,7 @@ def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings
             else:
                 try:
                     response = session.get(config.tms_base_url + crn_page_link)
+                    response.raise_for_status()
                     parse_crn_page(response.text, data)
                 except Exception as e:
                     raise Exception("Error scraping/parsing CRN {}: {}".format(crn, crn_page_link)) from e
