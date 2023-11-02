@@ -34,6 +34,9 @@ def search_professors(professor_name):
             "Authorization": AUTHORIZATION_HEADER
         }
     )
+
+    response.raise_for_status()
+
     return response.json()["data"]["newSearch"]["teachers"]["edges"]
 
 
@@ -60,6 +63,8 @@ def get_ratings(id):
         headers={
             "Authorization": AUTHORIZATION_HEADER
         })
+    
+    response.raise_for_status()
 
     return response.json()["data"]["node"]
 
