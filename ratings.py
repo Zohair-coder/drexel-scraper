@@ -60,7 +60,7 @@ def get_ratings(id):
     response = send_request(
         requests.Session(),
         "https://www.ratemyprofessors.com/graphql",
-        "POST"
+        "POST",
         json={"query": query, "variables": variables},
         headers={
             "Authorization": AUTHORIZATION_HEADER
