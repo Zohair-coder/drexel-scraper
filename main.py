@@ -57,5 +57,5 @@ if __name__ == "__main__":
             else:
                 print("Error sending exception email")
 
-        sys.exit(1)
+        
 

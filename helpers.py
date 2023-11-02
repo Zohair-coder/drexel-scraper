@@ -2,8 +2,9 @@ from requests import Session
 from requests.exceptions import HTTPError
 import time
 
-def send_get_request(session: Session, url: str):
-    resp = session.get(url)
+def send_request(session: Session, url: str, method: str = "GET", json: dict = {}, headers: dict = {}):
+    
+    resp = send_request_helper(session, url, method, json, headers)
 
     try:
         resp.raise_for_status()
@@ -12,7 +13,8 @@ def send_get_request(session: Session, url: str):
         wait = 1
         for _ in range(retries):
             time.sleep(wait)
-            resp = session.get(url)
+
+            resp = send_request_helper(session, url, method, json, headers)
             try:
                 resp.raise_for_status()
             except HTTPError as e:
@@ -27,3 +29,12 @@ def send_get_request(session: Session, url: str):
         raise Exception("Error sending HTTP request to {}.\nResponse headers: {}\nResponse text received: {}".format(url, resp_headers, resp_text)) from e
     
     return resp 
+
+def send_request_helper(session, url, method, json, headers):
+    if method == "GET":
+        resp = session.get(url)
+    elif method == "POST":
+        resp = session.post(url, json=json, headers=headers)
+    else:
+        raise Exception("Invalid method: {}".format(method))
+    return resp
