@@ -9,16 +9,14 @@ from pytz import timezone
 
 def populate_db(data: dict):
     cur, conn = connect_to_db()
-
-    if not do_tables_exist(cur):
-        create_tables(cur, conn)
+    
+    create_tables(cur, conn)
     
     if not grafana_user_exists(cur):
         create_grafana_user(cur)
     
     assign_grafana_user_permissions(cur)
     update_metadata(cur)
-    delete_old_data(cur)
 
     course_instructor_relationships = []
     for course in data.values():
@@ -58,11 +56,6 @@ def connect_to_db() -> tuple[cursor, connection]:
     cur = conn.cursor()
 
     return cur, conn
-
-def delete_old_data(cur: cursor):
-    cur.execute("DELETE FROM course_instructor")
-    cur.execute("DELETE FROM courses")
-    cur.execute("DELETE FROM instructors")
 
 def bulk_insert_course_instructors(cur: cursor, relationships: list[tuple[int, int]]):
     cur.executemany("""
@@ -141,14 +134,6 @@ def create_tables(cur: cursor, conn: connection):
         create_table_sql = f.read()
 
     cur.execute(create_table_sql)
-
-def do_tables_exist(cur: cursor):
-    cur.execute("""
-    SELECT COUNT(*)
-    FROM information_schema.tables
-    WHERE table_name IN('courses', 'instructors', 'course_instructor', 'metadata')
-""")
-    return cur.fetchone()[0] == 4
 
 def update_metadata(cur: cursor):
     tz = timezone('US/Eastern')

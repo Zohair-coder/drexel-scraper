@@ -1,7 +1,7 @@
 DROP VIEW IF EXISTS all_course_instructor_data;
-DROP TABLE IF EXISTS course_instructor CASCADE;
-DROP TABLE IF EXISTS instructors CASCADE;
-DROP TABLE IF EXISTS courses CASCADE;
+DROP TABLE IF EXISTS course_instructor;
+DROP TABLE IF EXISTS instructors;
+DROP TABLE IF EXISTS courses;
 DROP TABLE IF EXISTS metadata;
 
 CREATE TABLE metadata (
