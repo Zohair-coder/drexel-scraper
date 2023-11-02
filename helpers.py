@@ -13,7 +13,7 @@ def send_request(session: Session, url: str, method: str = "GET", json: dict = {
                 resp = send_request_helper(session, url, method, json, headers)
                 resp.raise_for_status()
             except Exception as inner_ex:
-                if isinstance(inner_ex, HTTPError) and inner_ex.response.status_code == 429 and inner_ex.response.headers.get("Retry-After") is not None:
+                if isinstance(inner_ex, HTTPError) and inner_ex.response.status_code == 429:
                     if inner_ex.response.headers.get("Retry-After"):
                         time.sleep(int(inner_ex.response.headers["Retry-After"]))
                     else:
