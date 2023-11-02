@@ -1,35 +1,34 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: grafana-dev-ingress
-  namespace: dev
+  name: grafana-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   rules:
-    - host: schedulerdev.zohair.dev
+    - host: {{ .Values.host }}
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: grafana-dev
+                name: grafana
                 port:
                   number: 80
-    - host: www.schedulerdev.zohair.dev
+    - host: www.{{ .Values.host }}
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: grafana-dev
+                name: grafana
                 port:
                   number: 80
   tls:
     - hosts:
-        - schedulerdev.zohair.dev
-        - www.schedulerdev.zohair.dev
-      secretName: grafana-dev-tls
+        - {{ .Values.host }}
+        - www.{{ .Values.host }}
+      secretName: {{ .Values.tlsSecretName }}

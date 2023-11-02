@@ -48,28 +48,24 @@ jobs:
 
       - name: Set Namespace based on Branch
         run: echo "NAMESPACE=$(if [ "${{ github.ref }}" = "refs/heads/main" ]; then echo 'default'; else echo 'dev'; fi)" >> $GITHUB_ENV
-
-      - name: Deploy to Kubernetes
-        run: |
-          COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
-          sed -i 's|image:.*|image: '"$IMAGE_NAME:$COMMIT_SHA"'|' k8s/cronjob.yaml
-          kubectl apply -n ${{ env.NAMESPACE }} -f k8s/ratings-pvc.yaml --kubeconfig=kubeconfig.yaml
-          kubectl apply -n ${{ env.NAMESPACE }} -f k8s/performance-pvc.yaml --kubeconfig=kubeconfig.yaml
-          kubectl apply -n ${{ env.NAMESPACE }} -f k8s/cronjob-configmap-${{ env.NAMESPACE }}.yaml --kubeconfig=kubeconfig.yaml
-          kubectl apply -n ${{ env.NAMESPACE }} -f k8s/aws-configmap.yaml --kubeconfig=kubeconfig.yaml
-          kubectl apply -n ${{ env.NAMESPACE }} -f k8s/postgres-configmap.yaml --kubeconfig=kubeconfig.yaml
-          kubectl apply -n ${{ env.NAMESPACE }} -f k8s/delete-credits-cronjob.yaml --kubeconfig=kubeconfig.yaml
-          kubectl apply -n ${{ env.NAMESPACE }} -f k8s/delete-ratings-cronjob.yaml --kubeconfig=kubeconfig.yaml
-          kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-credits-cronjob github-actions-delete-credits-job --kubeconfig=kubeconfig.yaml
-          kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-ratings-cronjob github-actions-delete-ratings-job --kubeconfig=kubeconfig.yaml
-          kubectl apply -n ${{ env.NAMESPACE }} -f k8s/cronjob.yaml --kubeconfig=kubeconfig.yaml
-          kubectl apply -n ${{ env.NAMESPACE }} -f k8s/grafana-${{ env.NAMESPACE }}-ingress.yaml --kubeconfig=kubeconfig.yaml
-
+      
       - name: Set up Helm
         run: |
           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
           chmod 700 get_helm.sh
           ./get_helm.sh
+        
+      - name: Deploy to Kubernetes
+        run: |
+          COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+          VALUES_FILE="./k8s/drexel-scraper/values-${{ env.NAMESPACE }}.yaml"
+          RELEASE_NAME="drexel-scraper-${{ env.NAMESPACE }}"
+          KUBECONFIG=kubeconfig.yaml helm upgrade --install $RELEASE_NAME ./k8s/drexel-scraper -f $VALUES_FILE -n ${{ env.NAMESPACE }} --set image.tag=$COMMIT_SHA
+
+      - name: Clear Cache
+        run: |
+          kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-credits-cronjob github-actions-delete-credits-job --kubeconfig=kubeconfig.yaml
+          kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-ratings-cronjob github-actions-delete-ratings-job --kubeconfig=kubeconfig.yaml
 
       - name: Add Grafana Helm Repo
         run: |

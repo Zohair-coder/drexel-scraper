@@ -1,0 +1,4 @@
+env: dev
+dbName: schedulerdb_dev
+host: schedulerdev.zohair.dev
+tlsSecretName: grafana-dev-tls
