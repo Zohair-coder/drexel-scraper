@@ -2,6 +2,7 @@ from requests import Session
 from bs4 import BeautifulSoup
 import json
 import os
+from helpers import send_get_request
 
 from parse import parse_subject_page, parse_crn_page
 import config
@@ -24,7 +25,7 @@ def scrape(include_ratings: bool = False, all_colleges: bool = False):
 
 
 def get_all_college_codes(session: Session):
-    response = session.get(config.get_college_page_url(""))
+    response = send_get_request(session, config.get_college_page_url(""))
     soup = get_soup(response.text)
     college_codes = []
 
@@ -39,9 +40,7 @@ def get_soup(html):
 
 
 def go_to_college_page(session: Session, college_code: str):
-    resp = session.get(config.get_college_page_url(college_code))
-    resp.raise_for_status()
-    return resp
+    return send_get_request(session, config.get_college_page_url(college_code))
 
 
 def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings: bool):
@@ -61,8 +60,7 @@ def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings
     for subject_page_link in college_page_soup.find_all("a", href=lambda href: href and href.startswith("/webtms_du/courseList")):
         
         try:
-            response = session.get(config.tms_base_url + subject_page_link["href"])
-            response.raise_for_status()
+            response = send_get_request(session, config.tms_base_url + subject_page_link["href"])
             parsed_crns = parse_subject_page(response.text, data, include_ratings, ratings_cache)
         except Exception as e:
             raise Exception("Error scraping/parsing subject page: {}".format(subject_page_link["href"])) from e
@@ -72,8 +70,7 @@ def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings
                 data[crn]["credits"] = credits_cache[crn]
             else:
                 try:
-                    response = session.get(config.tms_base_url + crn_page_link)
-                    response.raise_for_status()
+                    response = send_get_request(session, config.tms_base_url + crn_page_link)
                     parse_crn_page(response.text, data)
                 except Exception as e:
                     raise Exception("Error scraping/parsing CRN {}: {}".format(crn, crn_page_link)) from e
