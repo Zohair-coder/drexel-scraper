@@ -3,13 +3,14 @@ kind: CronJob
 metadata:
   name: drexel-scheduler-cronjob
 spec:
-  schedule: "23 */1 * * *"
+  schedule: "10,30,50 * * * *"
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
   timeZone: "US/Eastern"
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
+      activeDeadlineSeconds: 3600
       backoffLimit: 10
       template:
         spec:

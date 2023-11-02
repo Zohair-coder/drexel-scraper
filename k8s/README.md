@@ -35,3 +35,9 @@ qcachegrind performance/callgrind.out.profile
 python3 performance/analyze.py
 kubectl delete pod pvc-inspector
 ```
+
+#### Accessing database locally
+
+```
+kubectl port-forward service/postgres-postgresql 5432:5432 -n postgres
+```
