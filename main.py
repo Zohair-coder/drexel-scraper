@@ -51,8 +51,9 @@ if __name__ == "__main__":
         print(trace)
 
         if "--email" in sys.argv:
+            environment = os.environ.get("ENVIRONMENT", "UNKNOWN")
             import emailer
-            if emailer.send_email("Error running scraper", trace):
+            if emailer.send_email(f"{environment}: Error running scraper", trace):
                 print("Exeception email sent")
             else:
                 print("Error sending exception email")
