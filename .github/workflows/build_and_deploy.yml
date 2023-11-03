@@ -60,7 +60,7 @@ jobs:
           COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
           VALUES_FILE="./k8s/drexel-scraper/values-${{ env.NAMESPACE }}.yaml"
           RELEASE_NAME="drexel-scraper-${{ env.NAMESPACE }}"
-          KUBECONFIG=kubeconfig.yaml helm upgrade --install $RELEASE_NAME ./k8s/drexel-scraper -f $VALUES_FILE -n ${{ env.NAMESPACE }} --set image.tag=$COMMIT_SHA
+          KUBECONFIG=kubeconfig.yaml helm upgrade --install $RELEASE_NAME ./k8s/drexel-scraper -f $VALUES_FILE -n ${{ env.NAMESPACE }} --set image.tag=$COMMIT_SHA --atomic
 
       - name: Clear Cache
         run: |
