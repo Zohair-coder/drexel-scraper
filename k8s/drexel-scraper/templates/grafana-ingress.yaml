@@ -24,7 +24,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: grafana
+                name: {{ .Values.serviceName }}
                 port:
                   number: 80
   tls:
