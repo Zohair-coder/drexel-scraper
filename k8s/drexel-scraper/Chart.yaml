@@ -1,0 +1,5 @@
+apiVersion: v2
+name: drexel-scraper
+version: 1.0.0
+
+appVersion: "1.0.0" # will be overriden by the image tag

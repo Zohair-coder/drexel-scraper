@@ -16,7 +16,10 @@ spec:
         spec:
           containers:
             - name: drexel-scheduler-job
-              image: zohairr/drexelscheduler-scraper:1.0
+              image: zohairr/drexelscheduler-scraper:{{ .Values.image.tag }}
+              env:
+                - name: ENVIROMENT
+                  value: {{ .Values.env }}
               envFrom:
                 - configMapRef:
                     name: drexel-scheduler-configmap
