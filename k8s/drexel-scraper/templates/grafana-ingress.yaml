@@ -14,7 +14,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: grafana
+                name: {{ .Values.serviceName }}
                 port:
                   number: 80
     - host: www.{{ .Values.host }}
