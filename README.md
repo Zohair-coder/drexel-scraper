@@ -1,3 +1,5 @@
+UI for data: https://scheduler.zohair.dev
+
 # TMS-Scraper
 
 Scrapes data from the Drexel Term Master Schedule and outputs a JSON file. Note that this scraper is not officially supported by Drexel University, and may break if the term master schedule website changes.
