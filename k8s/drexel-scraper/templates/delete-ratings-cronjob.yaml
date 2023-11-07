@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: delete-ratings-cronjob
 spec:
-  schedule: "10 3 * * 5" # Every Friday at 03:10
+  schedule: "0 3 * * 5" # Every Friday at 03:00
   timeZone: "US/Eastern"
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 1
