@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: delete-credits-cronjob
 spec:
-  schedule: "10 5 * * *" # Every night at 05:10
+  schedule: "0 5 * * *" # Every night at 05:00
   timeZone: "US/Eastern"
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 1

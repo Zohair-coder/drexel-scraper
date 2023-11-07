@@ -1,5 +1,4 @@
-![defaultdrexelschedulercronjob](https://cronitor.io/badges/AZopCT/production/TTopK9fZt6v789plG6okrYsoMZo.svg)
-![devdrexelschedulercronjob](https://cronitor.io/badges/1KsIDl/production/Csb1Ree1fzmrFc12-GQrYdh7u-s.svg)
+UI for data: https://scheduler.zohair.dev
 
 # TMS-Scraper
 

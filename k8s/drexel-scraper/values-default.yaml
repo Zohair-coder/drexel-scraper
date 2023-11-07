@@ -1,4 +1,4 @@
-env: default
+env: PROD
 dbName: schedulerdb
 host: scheduler.zohair.dev
 tlsSecretName: grafana-tls
