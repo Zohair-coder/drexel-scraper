@@ -12,15 +12,16 @@ spec:
       template:
         spec:
           volumes:
-            - name: credits-cache
+            - name: shared-pvc
               persistentVolumeClaim:
-                claimName: drexel-scheduler-ratings-pvc
+                claimName: shared-pvc
           containers:
             - name: delete-credits-file
               image: busybox
               volumeMounts:
-                - name: credits-cache
+                - name: shared-pvc
                   mountPath: /data
+                  subPath: cronjob_cache
               command:
                 - "/bin/sh"
                 - "-c"

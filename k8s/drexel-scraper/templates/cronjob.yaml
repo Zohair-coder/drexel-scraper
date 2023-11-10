@@ -34,15 +34,14 @@ spec:
                 - secretRef:
                     name: postgres-pwd
               volumeMounts:
-                - name: ratings-cache
+                - name: shared-pvc
                   mountPath: /app/cache
-                - name: performance
+                  subPath: cronjob_cache
+                - name: shared-pvc
                   mountPath: /app/performance
+                  subPath: cronjob_performance
           volumes:
-            - name: ratings-cache
+            - name: shared-pvc
               persistentVolumeClaim:
-                claimName: drexel-scheduler-ratings-pvc
-            - name: performance
-              persistentVolumeClaim:
-                claimName: drexel-scheduler-performance-pvc
+                claimName: shared-pvc
           restartPolicy: OnFailure
