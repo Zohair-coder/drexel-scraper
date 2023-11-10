@@ -25,8 +25,5 @@ grafana.ini:
 persistence:
   enabled: true
   type: pvc
-  size: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  finalizers:
-    - kubernetes.io/pvc-protection
+  existingClaim: shared-pvc
+  subPath: grafana
