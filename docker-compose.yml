@@ -23,6 +23,8 @@ services:
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_UNIFIED_ALERTING_ENABLED=false
       - GF_ALERTING_ENABLE=false
+      - GF_PANELS_DISABLE_SANITIZE_HTML=true
+      - GF_NEWS_NEWS_FEED_ENABLED=false
     volumes:
       - ./grafana_data:/var/lib/grafana
 

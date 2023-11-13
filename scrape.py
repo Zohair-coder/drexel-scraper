@@ -67,14 +67,19 @@ def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings
 
         for crn, crn_page_link in parsed_crns.items():
             if crn in extra_course_data_cache:
-                data[crn]["credits"] = extra_course_data_cache[crn]
+                data[crn]["credits"] = extra_course_data_cache[crn]["credits"]
+                data[crn]["prereqs"] = extra_course_data_cache[crn]["prereqs"]
             else:
                 try:
                     response = send_request(session, config.tms_base_url + crn_page_link)
                     parse_crn_page(response.text, data)
                 except Exception as e:
                     raise Exception("Error scraping/parsing CRN {}: {}".format(crn, crn_page_link)) from e
-                extra_course_data_cache[crn] = data[crn]["credits"]
+                
+                extra_course_data_cache[crn] = {
+                    "credits": data[crn]["credits"],
+                    "prereqs": data[crn]["prereqs"],
+                }
 
             print("Parsed CRN: " + crn + " (" + data[crn].get("course_title") + ")")
             print()

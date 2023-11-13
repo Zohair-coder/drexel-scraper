@@ -106,13 +106,13 @@ def bulk_insert_courses(cur: cursor, courses_data: list[dict]):
     for course in courses_data:
         courses.append((course["crn"], course["subject_code"], course["course_number"], course["instruction_type"], 
                         course["instruction_method"], course["section"], course["enroll"], course["max_enroll"], 
-                        course["course_title"], course["credits"], course["start_time"], course["end_time"], 
+                        course["course_title"], course["credits"], course["prereqs"], course["start_time"], course["end_time"], 
                         course["days"]))
 
     cur.executemany("""
         INSERT INTO courses (crn, subject_code, course_number, instruction_type, instruction_method, 
-                             section, enroll, max_enroll, course_title, credits, start_time, end_time, days)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                             section, enroll, max_enroll, course_title, credits, prereqs, start_time, end_time, days)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         ON CONFLICT (crn)
         DO UPDATE SET 
             subject_code = EXCLUDED.subject_code, 
@@ -124,6 +124,7 @@ def bulk_insert_courses(cur: cursor, courses_data: list[dict]):
             max_enroll = EXCLUDED.max_enroll,
             course_title = EXCLUDED.course_title,
             credits = EXCLUDED.credits,
+            prereqs = EXCLUDED.prereqs,
             start_time = EXCLUDED.start_time,
             end_time = EXCLUDED.end_time,
             days = EXCLUDED.days
