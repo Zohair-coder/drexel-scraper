@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from ratings import rating
 from datetime import datetime
+import re
 
 def parse_subject_page(html, data: dict, include_ratings: bool = False, ratings_cache: dict = {}):
 
@@ -41,11 +42,25 @@ def parse_subject_page(html, data: dict, include_ratings: bool = False, ratings_
 
 def parse_crn_page(html, data: dict):
     soup = BeautifulSoup(html, "html.parser")
+
+    # Extract credits
     table_datas = soup.find_all("td", class_=["odd", "even"])
     
     credits = table_datas[4].text.strip()
     crn = table_datas[0].text.strip()
     
+    # Extract prereqs
+    prereqs_heading_element = soup.find("b", string=re.compile("pre-requisites:", re.IGNORECASE))
+    
+    sibling_texts = []
+    if prereqs_heading_element is not None:
+        for sibling in prereqs_heading_element.next_siblings:
+            if sibling.name == "span":
+                sibling_texts.append(sibling.text.strip())
+
+    prereqs = " ".join(sibling_texts)
+    
+    data[crn]["prereqs"] = prereqs
     data[crn]["credits"] = credits
     
 

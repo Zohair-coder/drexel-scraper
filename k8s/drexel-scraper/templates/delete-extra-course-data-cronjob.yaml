@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: delete-credits-cronjob
+  name: delete-extra-course-data-cronjob
 spec:
   schedule: "0 5 * * *" # Every night at 05:00
   timeZone: "US/Eastern"
@@ -16,7 +16,7 @@ spec:
               persistentVolumeClaim:
                 claimName: shared-pvc
           containers:
-            - name: delete-credits-file
+            - name: delete-extra-course-data-cache-file
               image: busybox
               volumeMounts:
                 - name: shared-pvc
@@ -26,7 +26,7 @@ spec:
                 - "/bin/sh"
                 - "-c"
                 - |
-                  if [ -f /data/credits_cache.json ]; then
-                    rm /data/credits_cache.json
+                  if [ -f /data/extra_course_data_cache.json ]; then
+                    rm /data/extra_course_data_cache.json
                   fi
           restartPolicy: OnFailure

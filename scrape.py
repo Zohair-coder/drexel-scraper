@@ -45,10 +45,10 @@ def go_to_college_page(session: Session, college_code: str):
 
 def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings: bool):
     try:
-        with open("cache/credits_cache.json", "r") as f:
-            credits_cache = json.load(f)
+        with open("cache/extra_course_data_cache.json", "r") as f:
+            extra_course_data_cache = json.load(f)
     except FileNotFoundError:
-        credits_cache = {}
+        extra_course_data_cache = {}
 
     try:
         with open("cache/ratings_cache.json", "r") as f:
@@ -66,15 +66,20 @@ def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings
             raise Exception("Error scraping/parsing subject page: {}".format(subject_page_link["href"])) from e
 
         for crn, crn_page_link in parsed_crns.items():
-            if crn in credits_cache:
-                data[crn]["credits"] = credits_cache[crn]
+            if crn in extra_course_data_cache:
+                data[crn]["credits"] = extra_course_data_cache[crn]["credits"]
+                data[crn]["prereqs"] = extra_course_data_cache[crn]["prereqs"]
             else:
                 try:
                     response = send_request(session, config.tms_base_url + crn_page_link)
                     parse_crn_page(response.text, data)
                 except Exception as e:
                     raise Exception("Error scraping/parsing CRN {}: {}".format(crn, crn_page_link)) from e
-                credits_cache[crn] = data[crn]["credits"]
+                
+                extra_course_data_cache[crn] = {
+                    "credits": data[crn]["credits"],
+                    "prereqs": data[crn]["prereqs"],
+                }
 
             print("Parsed CRN: " + crn + " (" + data[crn].get("course_title") + ")")
             print()
@@ -85,7 +90,7 @@ def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings
     with open("cache/ratings_cache.json", "w") as f:
         json.dump(ratings_cache, f, indent=4)
 
-    with open("cache/credits_cache.json", "w") as f:
-        json.dump(credits_cache, f, indent=4)
+    with open("cache/extra_course_data_cache.json", "w") as f:
+        json.dump(extra_course_data_cache, f, indent=4)
 
     return data
