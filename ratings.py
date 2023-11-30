@@ -1,3 +1,7 @@
+# Allows you to get the ratings of a professor from RateMyProfessors.com
+# Makes a request to the RateMyProfessors GraphQL API
+# I found out that the GraphQL API is used by inspecting the network tab in the browser
+
 import requests
 from helpers import send_request
 
