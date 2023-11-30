@@ -6,6 +6,10 @@ import requests
 from helpers import send_request
 
 DREXEL_RMP_ID = "U2Nob29sLTE1MjE="
+
+# I found this header by inspecting the network tab in the browser
+# It does not change: it is the same for every request (even if you're not logged in)
+# So I don't think it's a security risk to hardcode it
 AUTHORIZATION_HEADER = "Basic dGVzdDp0ZXN0"
 
 
@@ -86,7 +90,7 @@ def rating(professor_name):
     if ratings is None:
         return None
 
-    del ratings["__typename"]
+    del ratings["__typename"] # Not needed
 
     if ratings["numRatings"] == 0:
         return None
