@@ -55,7 +55,7 @@ And then run the scraper with the `--db` flag:
 python3 main.py --db
 ```
 
-This will create a new database `schedulerdb` and the necessary tables if they aren't already created, and then insert the data into the database. If the data is already populated, it will update the existing data. To delete all the data (e.g. for scraping another quarter's data), make sure the environment variables specified in `db_config.py` are set and then run the following command:
+This will create a new database `schedulerdb` and the necessary tables if they aren't already created, and then insert the data into the database. If the data is already populated, it will update the existing data. To delete all the data, make sure the environment variables specified in `db_config.py` are set and then run the following command:
 
 ```
 ./reset_db.bash
