@@ -10,7 +10,7 @@ from pytz import timezone
 def populate_db(data: dict):
     cur, conn = connect_to_db()
     
-    create_tables(cur, conn)
+    create_tables(cur)
     
     if not grafana_user_exists(cur):
         create_grafana_user(cur)
@@ -130,7 +130,7 @@ def bulk_insert_courses(cur: cursor, courses_data: list[dict]):
             days = EXCLUDED.days
     """, courses)
 
-def create_tables(cur: cursor, conn: connection):
+def create_tables(cur: cursor):
     with open("create_tables.sql") as f:
         create_table_sql = f.read()
 

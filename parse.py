@@ -73,6 +73,11 @@ def get_instructors(instructors_str: str, include_ratings: bool, ratings_cache: 
         name = instructor.strip()
 
         if include_ratings:
+            
+            # Search for first word and last word in name first
+            # If that doesn't work, try first two words
+            # If that still doesn't work, don't include rating
+
             name_tokens = name.split(" ")
             rmp_name = name_tokens[0] + " " + name_tokens[-1]
 

@@ -15,33 +15,91 @@ cd drexel-scraper
 
 Make sure you have [Python 3](https://www.python.org/downloads/) installed. Then install the following packages:
 
+###### Mac/Linux
 ```bash
 pip3 install requests bs4
 ```
 
+###### Windows
+```bash
+pip install requests bs4
+```
+
 ## Usage
 
-To run the scraper, simply run the `python3 main.py` command. The scraper will output a JSON file called `data.json` in the same directory as the scraper.
+To run the scraper, simply run:
+
+###### Mac/Linux
+```bash
+python3 main.py
+```
+
+###### Windows
+```bash
+python main.py
+```
+
+The scraper will output a JSON file called `data.json` in the same directory as the scraper.
 
 You can modify the scraper to scrape other terms by changing the `year`, `quarter`, and `college_code` variables in `config.py`.
+
+#### All Colleges
+
+To scrape all colleges instead of just the one specified in the `config.json`, run the following command:
+
+###### Mac/Linux
+```bash
+python3 main.py --all-colleges
+```
+
+###### Windows
+```bash
+python main.py --all-colleges
+```
+
+#### Ratings
+
+To also include the ratings field in `data.json` that requests data from RateMyProfessor, run the following command:
+
+###### Mac/Linux
+```bash
+python3 main.py --ratings
+```
+
+###### Windows
+```bash
+python main.py --ratings
+```
 
 #### PostgreSQL
 
 To add the data to a PostgreSQL database, make sure the [PostgreSQL](https://www.postgresql.org/download/) server is installed and running in the background. Check the settings in the db_config.py file. It is recommended that you set the necessary environment variables listed in the file, but if not, it will use the defaults for Postgres. You can follow [this](https://phoenixnap.com/kb/windows-set-environment-variable) guide for Windows, and [this](https://phoenixnap.com/kb/set-environment-variable-mac) guide for MacOS to set environment variables. Install the psycopg2 and pytz package:
 
+###### Mac/Linux
 ```bash
 pip3 install psycopg2-binary pytz
 ```
 
+###### Windows
+```bash
+pip install psycopg2-binary pytz
+```
+
 And then run the scraper with the `--db` flag:
 
+###### Mac/Linux
 ```bash
 python3 main.py --db
 ```
 
-This will create a new database `schedulerdb` and the necessary tables if they aren't already created, and then insert the data into the database. If the data is already populated, it will update the existing data. To delete all the data (e.g. for scraping another quarter's data), make sure the environment variables specified in `db_config.py` are set and then run the following command:
-
+###### Windows
+```bash
+python main.py --db
 ```
+
+This will create a new database `schedulerdb` and the necessary tables if they aren't already created, and then insert the data into the database. If the data is already populated, it will update the existing data. To delete all the data, make sure the environment variables specified in `db_config.py` are set and then run the following command (make sure you're using the Git Bash terminal if you're using Windows):
+
+```bash
 ./reset_db.bash
 ```
 
@@ -62,28 +120,18 @@ schedulerdb=# SELECT * FROM all_course_instructor_data;
 
 I recommend viewing the data using another program like [pgAdmin](https://www.pgadmin.org/download/).
 
-#### All Colleges
-
-To scrape all colleges instead of just the one specified in the `config.json`, run the following command:
-
-```bash
-python3 main.py --all-colleges
-```
-
-#### Ratings
-
-To also include the ratings field in `data.json` that requests data from RateMyProfessor, run the following command:
-
-```bash
-python3 main.py --ratings
-```
-
-Note that this will take longer to run since the scraper has to look up the rating on RateMyProfessors. However, it will cache the ratings in a file called `ratings_cache.json` so that it doesn't have to look up the same professor again, which will run much faster. If you want to clear the cache to get new ratings, simply delete the `ratings_cache.json` file.
+Note that this will take longer to run since the scraper has to look up the rating on RateMyProfessors. However, it will cache the ratings in a file called `ratings_cache.json` (inside the `cache` directory) so that it doesn't have to look up the same professor again, which will run much faster. If you want to clear the cache to get new ratings, simply delete the `ratings_cache.json` file.
 
 You can also combine all the options together:
 
+###### Mac/Linux
 ```bash
 python3 main.py --db --all-colleges --ratings
+```
+
+###### Windows
+```bash
+python main.py --db --all-colleges --ratings
 ```
 
 ## Docker
@@ -116,7 +164,7 @@ To run the script again after the container has exited, run the following comman
 docker compose up -d
 ```
 
-To stop the containers, run the following command:
+To delete the containers, run the following command:
 
 ```bash
 docker compose down
