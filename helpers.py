@@ -30,7 +30,7 @@ def send_request(session: Session, url: str, method: str = "GET", json: dict = {
     return resp 
 
 def send_request_helper(session: Session, url: str, method: str, json: dict, headers: dict):
-    timeout = 2
+    timeout = 5
     if method == "GET":
         resp = session.get(url, headers=headers, timeout=timeout)
     elif method == "POST":
