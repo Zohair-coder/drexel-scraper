@@ -23,6 +23,9 @@ jobs:
           sleep 1
         done
     
+    - name: Delete cache
+      run: rm cache/*
+    
     - name: Run the scraper
       run: docker compose run scraper python3 main.py --db --all-colleges --ratings
     
