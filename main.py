@@ -6,19 +6,12 @@ import time
 import os
 import cProfile
 import traceback
+import argparse
 
-def main():
+def main(args: argparse.Namespace):
     start_time = time.time()
 
-    include_ratings = False
-    if "--ratings" in sys.argv:
-        include_ratings = True
-
-    all_colleges = False
-    if "--all-colleges" in sys.argv:
-        all_colleges = True
-
-    data = scrape(include_ratings=include_ratings, all_colleges=all_colleges)
+    data = scrape(include_ratings=args.ratings, all_colleges=args.all_colleges)
 
     assert len(data) > 0, "No data found"
 
@@ -29,7 +22,7 @@ def main():
     print("Data written to data.json")
 
 
-    if "--db" in sys.argv:
+    if args.db:
         print("Time taken to scrape data: {} seconds".format(time.time() - start_time))
         print()
         import db
@@ -42,15 +35,23 @@ def main():
 
 if __name__ == "__main__":
 
+    parser = argparse.ArgumentParser(description="Scrape data from Term Master Schedule and save it to a data.json file.")
+    parser.add_argument("--ratings", action="store_true", help="Include Rate My Professor ratings in the data")
+    parser.add_argument("--all-colleges", action="store_true", help="Include all colleges in the data, not just the one in the config.py file")
+    parser.add_argument("--db", action="store_true", help="Update the database with the scraped data, or create a new one if it doesn't exist")
+    parser.add_argument("--email", action="store_true", help="Send an email if an exception occurs (requires DREXEL_SCHEDULER_TOPIC_ARN environment variable to be set to the ARN of an AWS SNS topic)")
+
+    args = parser.parse_args()
+
     try:
         if not os.path.exists("performance"):
             os.makedirs("performance")
-        cProfile.run("main()", "performance/profile_output.pstat")
+        cProfile.run("main(args)", "performance/profile_output.pstat")
     except Exception as e:
         trace = traceback.format_exc()
         print(trace)
 
-        if "--email" in sys.argv:
+        if args.email:
             environment = os.environ.get("ENVIRONMENT", "UNKNOWN")
             import emailer
             if emailer.send_email(f"{environment}: Error running scraper", trace):
