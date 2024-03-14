@@ -10,7 +10,6 @@ import argparse
 import emailer
 import db
 
-
 def main(args: argparse.Namespace):
     start_time = time.time()
 
