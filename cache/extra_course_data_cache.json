@@ -30850,5 +30850,9 @@
     "34891": {
         "credits": "4.00",
         "prereqs": ""
+    },
+    "35431": {
+        "credits": "3.00",
+        "prereqs": "DIGM 501  Minimum Grade: B"
     }
 }
