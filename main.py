@@ -7,6 +7,9 @@ import os
 import cProfile
 import traceback
 import argparse
+import emailer
+import db
+
 
 def main(args: argparse.Namespace):
     start_time = time.time()
@@ -25,7 +28,6 @@ def main(args: argparse.Namespace):
     if args.db:
         print("Time taken to scrape data: {} seconds".format(time.time() - start_time))
         print()
-        import db
         print("Updating database...")
         db.populate_db(data)
 
@@ -53,7 +55,6 @@ if __name__ == "__main__":
 
         if args.email:
             environment = os.environ.get("ENVIRONMENT", "UNKNOWN")
-            import emailer
             if emailer.send_email(f"{environment}: Error running scraper", trace):
                 print("Exeception email sent")
             else:
