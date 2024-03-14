@@ -71,6 +71,8 @@ python3 main.py --ratings
 python main.py --ratings
 ```
 
+Note that this will take longer to run since the scraper has to look up the rating on RateMyProfessors. However, it will cache the ratings in a file called `ratings_cache.json` (inside the `cache` directory) so that it doesn't have to look up the same professor again, which will run much faster. If you want to clear the cache to get new ratings, simply delete the `ratings_cache.json` file.
+
 #### PostgreSQL
 
 To add the data to a PostgreSQL database, make sure the [PostgreSQL](https://www.postgresql.org/download/) server is installed and running in the background. Check the settings in the db_config.py file. It is recommended that you set the necessary environment variables listed in the file, but if not, it will use the defaults for Postgres. You can follow [this](https://phoenixnap.com/kb/windows-set-environment-variable) guide for Windows, and [this](https://phoenixnap.com/kb/set-environment-variable-mac) guide for MacOS to set environment variables. Install the psycopg2 and pytz package:
@@ -119,8 +121,6 @@ schedulerdb=# SELECT * FROM all_course_instructor_data;
 ```
 
 I recommend viewing the data using another program like [pgAdmin](https://www.pgadmin.org/download/).
-
-Note that this will take longer to run since the scraper has to look up the rating on RateMyProfessors. However, it will cache the ratings in a file called `ratings_cache.json` (inside the `cache` directory) so that it doesn't have to look up the same professor again, which will run much faster. If you want to clear the cache to get new ratings, simply delete the `ratings_cache.json` file.
 
 You can also combine all the options together:
 

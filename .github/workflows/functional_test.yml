@@ -1,0 +1,140 @@
+name: Functional test
+
+on:
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  functional-test:
+    name: Functional Test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Docker Compose
+      uses: docker/setup-buildx-action@v3
+
+    - name: Start PostgreSQL
+      run: docker-compose up -d postgres
+
+    - name: Wait for PostgreSQL to become ready
+      run: |
+        until docker compose exec postgres pg_isready ; do
+          echo "Waiting for PostgreSQL to become ready..."
+          sleep 1
+        done
+    
+    - name: Delete cache
+      run: rm cache/*
+    
+    - name: Run the scraper
+      run: docker compose run scraper python3 main.py --db --all-colleges --ratings
+    
+    - name: Verify courses data exists in database
+      run: |
+        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM courses;" | awk 'FNR == 3 {print $1}')
+        if [ "$RESULT" = "0" ]; then
+          echo "No data found in the database. Failing the pipeline."
+          exit 1
+        else
+          echo "Data successfully stored in the database. Found $RESULT records."
+        fi
+    
+    - name: Verify instructors data exists in database
+      run: |
+        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM instructors;" | awk 'FNR == 3 {print $1}')
+        if [ "$RESULT" = "0" ]; then
+          echo "No data found in the database. Failing the pipeline."
+          exit 1
+        else
+          echo "Data successfully stored in the database. Found $RESULT records."
+        fi
+    
+    - name: Verify course_instructor data exists in database
+      run: |
+        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM course_instructor;" | awk 'FNR == 3 {print $1}')
+        if [ "$RESULT" = "0" ]; then
+          echo "No data found in the database. Failing the pipeline."
+          exit 1
+        else
+          echo "Data successfully stored in the database. Found $RESULT records."
+        fi
+    
+    - name: Verify all_course_instructor_data exists in database
+      run: |
+        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM all_course_instructor_data;" | awk 'FNR == 3 {print $1}')
+        if [ "$RESULT" = "0" ]; then
+          echo "No data found in the database. Failing the pipeline."
+          exit 1
+        else
+          echo "Data successfully stored in the database. Found $RESULT records."
+        fi
+    
+    - name: Verify metadata exists in database
+      run: |
+        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM metadata;" | awk 'FNR == 3 {print $1}')
+        if [ "$RESULT" = "0" ]; then
+          echo "No data found in the database. Failing the pipeline."
+          exit 1
+        else
+          echo "Data successfully stored in the database. Found $RESULT records."
+        fi
+
+    - name: Reset database
+      run: docker compose run scraper python3 db.py create_tables
+
+    - name: Run scraper again (to test cache)
+      run: docker compose run scraper python3 main.py --db --all-colleges --ratings
+      
+    - name: Verify courses data exists in database
+      run: |
+        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM courses;" | awk 'FNR == 3 {print $1}')
+        if [ "$RESULT" = "0" ]; then
+          echo "No data found in the database. Failing the pipeline."
+          exit 1
+        else
+          echo "Data successfully stored in the database. Found $RESULT records."
+        fi
+    
+    - name: Verify instructors data exists in database
+      run: |
+        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM instructors;" | awk 'FNR == 3 {print $1}')
+        if [ "$RESULT" = "0" ]; then
+          echo "No data found in the database. Failing the pipeline."
+          exit 1
+        else
+          echo "Data successfully stored in the database. Found $RESULT records."
+        fi
+    
+    - name: Verify course_instructor data exists in database
+      run: |
+        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM course_instructor;" | awk 'FNR == 3 {print $1}')
+        if [ "$RESULT" = "0" ]; then
+          echo "No data found in the database. Failing the pipeline."
+          exit 1
+        else
+          echo "Data successfully stored in the database. Found $RESULT records."
+        fi
+    
+    - name: Verify all_course_instructor_data exists in database
+      run: |
+        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM all_course_instructor_data;" | awk 'FNR == 3 {print $1}')
+        if [ "$RESULT" = "0" ]; then
+          echo "No data found in the database. Failing the pipeline."
+          exit 1
+        else
+          echo "Data successfully stored in the database. Found $RESULT records."
+        fi
+    
+    - name: Verify metadata exists in database
+      run: |
+        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM metadata;" | awk 'FNR == 3 {print $1}')
+        if [ "$RESULT" = "0" ]; then
+          echo "No data found in the database. Failing the pipeline."
+          exit 1
+        else
+          echo "Data successfully stored in the database. Found $RESULT records."
+        fi
+    
+    - name: Cleanup
+      run: docker-compose down -v
