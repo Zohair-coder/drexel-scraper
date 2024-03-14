@@ -38,12 +38,3 @@ jobs:
     
     - name: Cleanup
       run: docker-compose down -v
-
-
-      
-    
-    
-
-
-    - name: Wait for PostgreSQL to become ready
-      run: docker-compose exec postgres sh -c "until pg_isready ; do sleep 1; done"
