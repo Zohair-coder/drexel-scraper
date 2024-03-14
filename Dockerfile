@@ -10,7 +10,7 @@ COPY . /app
 RUN pip install --upgrade pip
 
 # install dependencies
-RUN pip install bs4 requests psycopg2-binary pytz boto3
+RUN pip install -r requirements.txt
 
 # Run the Python script
 # CMD ["python3", "main.py"]

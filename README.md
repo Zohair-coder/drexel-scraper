@@ -13,16 +13,16 @@ git clone https://github.com/Zohair-coder/drexel-scraper.git
 cd drexel-scraper
 ```
 
-Make sure you have [Python 3](https://www.python.org/downloads/) installed. Then install the following packages:
+Make sure you have [Python 3](https://www.python.org/downloads/) installed. Then install the dependencies by running the following command:
 
 ###### Mac/Linux
 ```bash
-pip3 install requests bs4
+pip3 install -r requirements.txt
 ```
 
 ###### Windows
 ```bash
-pip install requests bs4
+pip install -r requirements.txt
 ```
 
 ## Usage
@@ -75,19 +75,9 @@ Note that this will take longer to run since the scraper has to look up the rati
 
 #### PostgreSQL
 
-To add the data to a PostgreSQL database, make sure the [PostgreSQL](https://www.postgresql.org/download/) server is installed and running in the background. Check the settings in the db_config.py file. It is recommended that you set the necessary environment variables listed in the file, but if not, it will use the defaults for Postgres. You can follow [this](https://phoenixnap.com/kb/windows-set-environment-variable) guide for Windows, and [this](https://phoenixnap.com/kb/set-environment-variable-mac) guide for MacOS to set environment variables. Install the psycopg2 and pytz package:
+To add the data to a PostgreSQL database, make sure the [PostgreSQL](https://www.postgresql.org/download/) server is installed and running in the background. Check the settings in the db_config.py file. It is recommended that you set the necessary environment variables listed in the file, but if not, it will use the defaults for Postgres. You can follow [this](https://phoenixnap.com/kb/windows-set-environment-variable) guide for Windows, and [this](https://phoenixnap.com/kb/set-environment-variable-mac) guide for MacOS to set environment variables.
 
-###### Mac/Linux
-```bash
-pip3 install psycopg2-binary pytz
-```
-
-###### Windows
-```bash
-pip install psycopg2-binary pytz
-```
-
-And then run the scraper with the `--db` flag:
+Then run the scraper with the `--db` flag:
 
 ###### Mac/Linux
 ```bash
