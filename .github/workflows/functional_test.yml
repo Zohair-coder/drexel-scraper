@@ -28,7 +28,7 @@ jobs:
       run: rm cache/*
     
     - name: Run the scraper
-      run: docker compose run scraper python3 main.py --db --all-colleges --ratings
+      run: docker compose run scraper python3 src/main.py --db --all-colleges --ratings
     
     - name: Verify courses data exists in database
       run: |
@@ -84,7 +84,7 @@ jobs:
       run: docker compose run scraper python3 db.py create_tables
 
     - name: Run scraper again (to test cache)
-      run: docker compose run scraper python3 main.py --db --all-colleges --ratings
+      run: docker compose run scraper python3 src/main.py --db --all-colleges --ratings
       
     - name: Verify courses data exists in database
       run: |
