@@ -54,7 +54,15 @@ jobs:
           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
           chmod 700 get_helm.sh
           ./get_helm.sh
-        
+      
+      - name: Check for running Kubernetes jobs
+        run: |
+          KUBECONFIG=kubeconfig.yaml
+          while kubectl get jobs -n ${{ env.NAMESPACE }} -o jsonpath='{.items[?(@.status.active)].metadata.name}' | grep "drexel-scheduler-cronjob"; do
+            echo "Waiting for jobs to complete..."
+            sleep 30
+          done
+
       - name: Deploy to Kubernetes
         run: |
           COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
