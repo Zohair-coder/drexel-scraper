@@ -3,9 +3,11 @@ services:
   scraper:
     build: .
     environment:
-      SCHEDULER_DB_HOSTNAME: postgres
-      SCHEDULER_DB_PG_PASSWORD: super-secret-password
+      SCHEDULER_DB_USERNAME: postgres
       SCHEDULER_DB_DBNAME: postgres
+      SCHEDULER_DB_HOSTNAME: postgres
+      SCHEDULER_DB_PORT: 5432
+      SCHEDULER_DB_PG_PASSWORD: super-secret-password
     volumes:
       - ./:/app
     depends_on:

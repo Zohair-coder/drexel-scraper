@@ -173,8 +173,3 @@ def assign_grafana_user_permissions(cur: cursor):
         "GRANT SELECT ON ALL TABLES IN SCHEMA public TO {};"
     ).format(sql.Identifier(grafana_username))
     cur.execute(cmd)
-
-if __name__ == "__main__":
-    if "create_tables" in sys.argv:
-        cur, conn = connect_to_db()
-        create_tables(cur)
