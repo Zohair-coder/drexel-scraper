@@ -132,7 +132,7 @@ def bulk_insert_courses(cur: cursor, courses_data: list[dict]):
     """, courses)
 
 def create_tables(cur: cursor):
-    with open("create_tables.sql") as f:
+    with open("src/create_tables.sql") as f:
         create_table_sql = f.read()
 
     cur.execute(create_table_sql)

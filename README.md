@@ -31,30 +31,30 @@ To run the scraper, simply run:
 
 ###### Mac/Linux
 ```bash
-python3 main.py
+python3 src/main.py
 ```
 
 ###### Windows
 ```bash
-python main.py
+python src/main.py
 ```
 
 The scraper will output a JSON file called `data.json` in the same directory as the scraper.
 
-You can modify the scraper to scrape other terms by changing the `year`, `quarter`, and `college_code` variables in `config.py`.
+You can modify the scraper to scrape other terms by changing the `year`, `quarter`, and `college_code` variables in `src/config.py`.
 
 #### All Colleges
 
-To scrape all colleges instead of just the one specified in the `config.json`, run the following command:
+To scrape all colleges instead of just the one specified in the `src/config.py`, run the following command:
 
 ###### Mac/Linux
 ```bash
-python3 main.py --all-colleges
+python3 src/main.py --all-colleges
 ```
 
 ###### Windows
 ```bash
-python main.py --all-colleges
+python src/main.py --all-colleges
 ```
 
 #### Ratings
@@ -63,12 +63,12 @@ To also include the ratings field in `data.json` that requests data from RateMyP
 
 ###### Mac/Linux
 ```bash
-python3 main.py --ratings
+python3 src/main.py --ratings
 ```
 
 ###### Windows
 ```bash
-python main.py --ratings
+python src/main.py --ratings
 ```
 
 Note that this will take longer to run since the scraper has to look up the rating on RateMyProfessors. However, it will cache the ratings in a file called `ratings_cache.json` (inside the `cache` directory) so that it doesn't have to look up the same professor again, which will run much faster. If you want to clear the cache to get new ratings, simply delete the `ratings_cache.json` file.
@@ -81,21 +81,21 @@ Then run the scraper with the `--db` flag:
 
 ###### Mac/Linux
 ```bash
-python3 main.py --db
+python3 src/main.py --db
 ```
 
 ###### Windows
 ```bash
-python main.py --db
+python src/main.py --db
 ```
 
-This will create a new database `schedulerdb` and the necessary tables if they aren't already created, and then insert the data into the database. If the data is already populated, it will update the existing data. To delete all the data, make sure the environment variables specified in `db_config.py` are set and then run the following command (make sure you're using the Git Bash terminal if you're using Windows):
+This will create a new database `schedulerdb` and the necessary tables if they aren't already created, and then insert the data into the database. If the data is already populated, it will update the existing data. To delete all the data, make sure the environment variables specified in `src/db_config.py` are set and then run the following command (make sure you're using the Git Bash terminal if you're using Windows):
 
 ```bash
 ./reset_db.bash
 ```
 
-To view the schema for the tables, you can look at the `create_tables.sql` file.
+To view the schema for the tables, you can look at the `src/create_tables.sql` file.
 
 Connect to the database using the following command:
 
@@ -116,12 +116,12 @@ You can also combine all the options together:
 
 ###### Mac/Linux
 ```bash
-python3 main.py --db --all-colleges --ratings
+python3 src/main.py --db --all-colleges --ratings
 ```
 
 ###### Windows
 ```bash
-python main.py --db --all-colleges --ratings
+python src/main.py --db --all-colleges --ratings
 ```
 
 ## Docker
