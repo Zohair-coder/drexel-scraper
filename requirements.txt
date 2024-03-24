@@ -1,6 +1,6 @@
 beautifulsoup4==4.12.3
 black==24.3.0
-boto3==1.34.63
+boto3==1.34.69
 botocore==1.34.63
 bs4==0.0.2
 certifi==2024.2.2
