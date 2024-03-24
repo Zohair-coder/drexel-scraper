@@ -10,6 +10,7 @@ import argparse
 import emailer
 import db
 
+
 def main(args: argparse.Namespace):
     start_time = time.time()
 
@@ -23,7 +24,6 @@ def main(args: argparse.Namespace):
     print("Found {} items".format(len(data)))
     print("Data written to data.json")
 
-
     if args.db:
         print("Time taken to scrape data: {} seconds".format(time.time() - start_time))
         print()
@@ -34,13 +34,32 @@ def main(args: argparse.Namespace):
 
     print("--- {} seconds ---".format(time.time() - start_time))
 
+
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description="Scrape data from Term Master Schedule and save it to a data.json file.")
-    parser.add_argument("--ratings", action="store_true", help="Include Rate My Professor ratings in the data")
-    parser.add_argument("--all-colleges", action="store_true", help="Include all colleges in the data, not just the one in the config.py file")
-    parser.add_argument("--db", action="store_true", help="Update the database with the scraped data, or create a new one if it doesn't exist")
-    parser.add_argument("--email", action="store_true", help="Send an email if an exception occurs (requires DREXEL_SCHEDULER_TOPIC_ARN environment variable to be set to the ARN of an AWS SNS topic)")
+    parser = argparse.ArgumentParser(
+        description="Scrape data from Term Master Schedule and save it to a data.json file."
+    )
+    parser.add_argument(
+        "--ratings",
+        action="store_true",
+        help="Include Rate My Professor ratings in the data",
+    )
+    parser.add_argument(
+        "--all-colleges",
+        action="store_true",
+        help="Include all colleges in the data, not just the one in the config.py file",
+    )
+    parser.add_argument(
+        "--db",
+        action="store_true",
+        help="Update the database with the scraped data, or create a new one if it doesn't exist",
+    )
+    parser.add_argument(
+        "--email",
+        action="store_true",
+        help="Send an email if an exception occurs (requires DREXEL_SCHEDULER_TOPIC_ARN environment variable to be set to the ARN of an AWS SNS topic)",
+    )
 
     args = parser.parse_args()
 
@@ -59,5 +78,3 @@ if __name__ == "__main__":
             else:
                 print("Error sending exception email")
         sys.exit(1)
-        
-
