@@ -12,6 +12,5 @@ RUN pip install --upgrade pip
 # install dependencies
 RUN pip install -r requirements.txt
 
-
 # Run the Python script
 CMD ["python3", "src/main.py", "--db", "--all-colleges", "--ratings", "--email"]
