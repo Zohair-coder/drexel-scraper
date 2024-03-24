@@ -11,13 +11,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.9'
-
     - name: Check code formatting with Black
-      run: pip install black && black --check .
+      uses: psf/black@stable
+      with:
+        options: "--check --verbose"
+        src: "./src"
 
     - name: Set up Docker Compose
       uses: docker/setup-buildx-action@v3
