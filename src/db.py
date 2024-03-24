@@ -15,7 +15,6 @@ from db_config import (
 
 from datetime import datetime
 from pytz import timezone
-import sys
 
 
 def populate_db(data: dict):
