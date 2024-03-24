@@ -3,7 +3,10 @@ from ratings import rating
 from datetime import datetime
 import re
 
-def parse_subject_page(html, data: dict, include_ratings: bool = False, ratings_cache: dict = {}):
+
+def parse_subject_page(
+    html, data: dict, include_ratings: bool = False, ratings_cache: dict = {}
+):
 
     soup = BeautifulSoup(html, "html.parser")
     table_rows = soup.find_all("tr", class_=["odd", "even"])
@@ -12,8 +15,7 @@ def parse_subject_page(html, data: dict, include_ratings: bool = False, ratings_
     for table_row in table_rows:
         row_data = table_row.find_all("td")
 
-        row_data_strs = [fix_encoding_issue(
-            data.text).strip() for data in row_data]
+        row_data_strs = [fix_encoding_issue(data.text).strip() for data in row_data]
 
         crn = row_data_strs[5]
 
@@ -33,25 +35,30 @@ def parse_subject_page(html, data: dict, include_ratings: bool = False, ratings_
             "days": days,
             "start_time": start_time,
             "end_time": end_time,
-            "instructors": get_instructors(row_data_strs[-1], include_ratings, ratings_cache),
+            "instructors": get_instructors(
+                row_data_strs[-1], include_ratings, ratings_cache
+            ),
         }
 
-        parsed_crns[crn] = row_data[5].find("a")["href"]  
+        parsed_crns[crn] = row_data[5].find("a")["href"]
 
     return parsed_crns
+
 
 def parse_crn_page(html, data: dict):
     soup = BeautifulSoup(html, "html.parser")
 
     # Extract credits
     table_datas = soup.find_all("td", class_=["odd", "even"])
-    
+
     credits = table_datas[4].text.strip()
     crn = table_datas[0].text.strip()
-    
+
     # Extract prereqs
-    prereqs_heading_element = soup.find("b", string=re.compile("pre-requisites:", re.IGNORECASE))
-    
+    prereqs_heading_element = soup.find(
+        "b", string=re.compile("pre-requisites:", re.IGNORECASE)
+    )
+
     sibling_texts = []
     if prereqs_heading_element is not None:
         for sibling in prereqs_heading_element.next_siblings:
@@ -59,12 +66,14 @@ def parse_crn_page(html, data: dict):
                 sibling_texts.append(sibling.text.strip())
 
     prereqs = " ".join(sibling_texts)
-    
+
     data[crn]["prereqs"] = prereqs
     data[crn]["credits"] = credits
-    
 
-def get_instructors(instructors_str: str, include_ratings: bool, ratings_cache: dict) -> list or None:
+
+def get_instructors(
+    instructors_str: str, include_ratings: bool, ratings_cache: dict
+) -> list or None:
     if instructors_str == "STAFF":
         return None
 
@@ -73,7 +82,7 @@ def get_instructors(instructors_str: str, include_ratings: bool, ratings_cache: 
         name = instructor.strip()
 
         if include_ratings:
-            
+
             # Search for first word and last word in name first
             # If that doesn't work, try first two words
             # If that still doesn't work, don't include rating
@@ -82,22 +91,26 @@ def get_instructors(instructors_str: str, include_ratings: bool, ratings_cache: 
             rmp_name = name_tokens[0] + " " + name_tokens[-1]
 
             if name not in ratings_cache:
-                ratings_cache[name] = rating(rmp_name) 
+                ratings_cache[name] = rating(rmp_name)
                 if ratings_cache[name] is None and len(name_tokens) > 2:
                     rmp_name = name_tokens[0] + " " + name_tokens[1]
                     ratings_cache[name] = rating(rmp_name)
 
             rating_obj = ratings_cache[name]
 
-            instructors.append({
-                "name": name,
-                "rating": rating_obj,
-            })
+            instructors.append(
+                {
+                    "name": name,
+                    "rating": rating_obj,
+                }
+            )
 
         else:
-            instructors.append({
-                "name": name,
-            })
+            instructors.append(
+                {
+                    "name": name,
+                }
+            )
 
     return instructors
 

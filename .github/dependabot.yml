@@ -1,0 +1,16 @@
+version: 2
+updates:
+ - package-ecosystem: "devcontainers"
+   directory: "/"
+   schedule:
+     interval: weekly
+
+ - package-ecosystem: "docker"
+   directory: "/"
+   schedule:
+     interval: weekly
+
+ - package-ecosystem: "pip"
+   directory: "/"
+   schedule:
+     interval: daily

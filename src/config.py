@@ -23,11 +23,10 @@ tms_quarter_url = tms_home_url + "/collegesSubjects/" + year + quarter
 # Email AWS Configuration
 topic_arn = os.getenv("DREXEL_SCHEDULER_TOPIC_ARN")
 
+
 # element attribute dictionaries the soup will look for
 class attributes:
-    rows = {
-        "role": "row"
-    }
+    rows = {"role": "row"}
 
 
 def get_college_page_url(college_name):

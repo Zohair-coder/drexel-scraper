@@ -4,7 +4,6 @@ data.json
 .env
 postgres-data
 grafana_data
-.vscode
 trash.py
 profile_output.pstat
 callgrind.out.profile

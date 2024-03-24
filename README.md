@@ -126,7 +126,7 @@ python src/main.py --db --all-colleges --ratings
 
 ## Docker
 
-You can also run the scraper in a Docker container. Make sure [Docker](https://docs.docker.com/get-docker/) is installed. Then run the following command to run it:
+You can also run the scraper in a Docker container. Make sure [Docker](https://docs.docker.com/get-docker/) is installed. You can then either open up the folder in VS Code as a Dev Container (preferred), or run the following command to run it:
 
 ```bash
 docker compose up -d --build
