@@ -24,4 +24,4 @@ six==1.16.0
 smmap==5.0.1
 soupsieve==2.5
 urllib3==2.2.1
-wheel==0.42.0
+wheel==0.43.0
