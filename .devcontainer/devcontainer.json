@@ -12,8 +12,12 @@
 		"vscode": {
 			"extensions": [
 				"ms-python.python",
-				"ms-python.black-formatter"
-			]
+				"charliermarsh.ruff"
+			],
+			"settings": {
+				"editor.defaultFormatter": "charliermarsh.ruff",
+				"editor.formatOnSave": true
+			}
 		}
 	}
 }

@@ -66,4 +66,4 @@ services:
       - EDGE_PORT=4566
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "./sns-init-scripts/create-sns-topic.sh:/etc/localstack/init/ready.d/init-aws.sh"
+      - "./scripts/create-sns-topic.sh:/etc/localstack/init/ready.d/init-aws.sh"

@@ -36,7 +36,6 @@ def main(args: argparse.Namespace):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(
         description="Scrape data from Term Master Schedule and save it to a data.json file."
     )
@@ -67,7 +66,7 @@ if __name__ == "__main__":
         if not os.path.exists("performance"):
             os.makedirs("performance")
         cProfile.run("main(args)", "performance/profile_output.pstat")
-    except Exception as e:
+    except Exception:
         trace = traceback.format_exc()
         print(trace)
 
