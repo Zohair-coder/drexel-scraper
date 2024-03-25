@@ -1,12 +1,17 @@
 from bs4 import BeautifulSoup
+from bs4.element import Tag
 from ratings import rating
 from datetime import datetime
 import re
+from typing import Any
 
 
 def parse_subject_page(
-    html, data: dict, include_ratings: bool = False, ratings_cache: dict = {}
-):
+    html: str,
+    data: dict[str, dict[str, Any]],
+    include_ratings: bool = False,
+    ratings_cache: dict[str, dict[str, int] | None] = {},
+) -> dict[str, str]:
     soup = BeautifulSoup(html, "html.parser")
     table_rows = soup.find_all("tr", class_=["odd", "even"])
 
@@ -44,7 +49,7 @@ def parse_subject_page(
     return parsed_crns
 
 
-def parse_crn_page(html, data: dict):
+def parse_crn_page(html: str, data: dict[str, dict[str, Any]]) -> None:
     soup = BeautifulSoup(html, "html.parser")
 
     # Extract credits
@@ -61,7 +66,7 @@ def parse_crn_page(html, data: dict):
     sibling_texts = []
     if prereqs_heading_element is not None:
         for sibling in prereqs_heading_element.next_siblings:
-            if sibling.name == "span":
+            if isinstance(sibling, Tag) and sibling.name == "span":
                 sibling_texts.append(sibling.text.strip())
 
     prereqs = " ".join(sibling_texts)
@@ -71,8 +76,10 @@ def parse_crn_page(html, data: dict):
 
 
 def get_instructors(
-    instructors_str: str, include_ratings: bool, ratings_cache: dict
-) -> list or None:
+    instructors_str: str,
+    include_ratings: bool,
+    ratings_cache: dict[str, dict[str, int] | None],
+) -> list[dict[str, Any]] | None:
     if instructors_str == "STAFF":
         return None
 
@@ -113,8 +120,12 @@ def get_instructors(
     return instructors
 
 
-def get_enroll(td):
+def get_enroll(td: Tag) -> str:
     span = td.contents[0]
+
+    if not isinstance(span, Tag):
+        raise Exception("Enrollment HTML span tag inside td not structured as expected")
+
     title_attr = span.attrs["title"]
 
     if "FULL" in title_attr:
@@ -124,8 +135,14 @@ def get_enroll(td):
     return enroll.split("=")[1]
 
 
-def get_max_enroll(td):
+def get_max_enroll(td: Tag) -> str:
     span = td.contents[0]
+
+    if not isinstance(span, Tag):
+        raise Exception(
+            "Max enrollment HTML span tag inside td not structured as expected"
+        )
+
     title_attr = span.attrs["title"]
 
     if "FULL" in title_attr:
@@ -139,7 +156,7 @@ def fix_encoding_issue(text: str) -> str:
     return text.replace("\xa0", " ")
 
 
-def parse_days(d: str):
+def parse_days(d: str) -> list[str] | None:
     if d == "TBD":
         return None
 
@@ -160,7 +177,7 @@ def parse_days(d: str):
     return days
 
 
-def parse_time(t: str):
+def parse_time(t: str) -> tuple[str | None, str | None]:
     if t == "TBD":
         return (None, None)
     start_str, end_str = t.split(" - ")
@@ -169,9 +186,9 @@ def parse_time(t: str):
     return (time_obj_to_str(start_time), time_obj_to_str(end_time))
 
 
-def time_str_to_object(t: str):
+def time_str_to_object(t: str) -> datetime:
     return datetime.strptime(t, "%I:%M %p")
 
 
-def time_obj_to_str(t: datetime):
+def time_obj_to_str(t: datetime) -> str:
     return t.strftime("%H:%M")

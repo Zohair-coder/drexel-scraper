@@ -4,6 +4,7 @@
 
 import requests
 from helpers import send_request
+from typing import Any, cast
 
 DREXEL_RMP_ID = "U2Nob29sLTE1MjE="
 
@@ -13,7 +14,7 @@ DREXEL_RMP_ID = "U2Nob29sLTE1MjE="
 AUTHORIZATION_HEADER = "Basic dGVzdDp0ZXN0"
 
 
-def search_professors(professor_name):
+def search_professors(professor_name: str) -> list[dict[str, dict[str, str]]]:
     query = """query searchProf($query: TeacherSearchQuery!){
         newSearch {
             teachers(query: $query) {
@@ -39,10 +40,13 @@ def search_professors(professor_name):
         headers={"Authorization": AUTHORIZATION_HEADER},
     )
 
-    return response.json()["data"]["newSearch"]["teachers"]["edges"]
+    return cast(
+        list[dict[str, dict[str, str]]],
+        response.json()["data"]["newSearch"]["teachers"]["edges"],
+    )
 
 
-def get_ratings(id):
+def get_ratings(id: str) -> dict[str, Any]:
     query = """query TeacherRatingsPageQuery($id: ID!){
         node(id: $id) {
             __typename
@@ -65,10 +69,10 @@ def get_ratings(id):
         headers={"Authorization": AUTHORIZATION_HEADER},
     )
 
-    return response.json()["data"]["node"]
+    return cast(dict[str, Any], response.json()["data"]["node"])
 
 
-def rating(professor_name):
+def rating(professor_name: str) -> dict[str, int] | None:
     professor = search_professors(professor_name)
 
     if len(professor) == 0:

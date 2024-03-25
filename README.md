@@ -92,7 +92,7 @@ python src/main.py --db
 This will create a new database `schedulerdb` and the necessary tables if they aren't already created, and then insert the data into the database. If the data is already populated, it will update the existing data. To delete all the data, make sure the environment variables specified in `src/db_config.py` are set and then run the following command (make sure you're using the Git Bash terminal if you're using Windows):
 
 ```bash
-./scripts/reset_db.sh
+./scripts/reset-db.sh
 ```
 
 To view the schema for the tables, you can look at the `src/create_tables.sql` file.

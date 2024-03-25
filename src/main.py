@@ -11,7 +11,7 @@ import emailer
 import db
 
 
-def main(args: argparse.Namespace):
+def main(args: argparse.Namespace) -> None:
     start_time = time.time()
 
     data = scrape(include_ratings=args.ratings, all_colleges=args.all_colleges)

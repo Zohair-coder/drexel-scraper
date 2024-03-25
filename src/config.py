@@ -30,5 +30,5 @@ class attributes:
     rows = {"role": "row"}
 
 
-def get_college_page_url(college_name):
+def get_college_page_url(college_name: str) -> str:
     return tms_quarter_url + "?collCode=" + college_name

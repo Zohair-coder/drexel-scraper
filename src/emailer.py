@@ -12,7 +12,7 @@ def send_email(subject: str, body: str) -> bool:
     return publish_to_sns(topic_arn, subject, body)
 
 
-def publish_to_sns(topic_arn: str, subject: str, body: str) -> bool:
+def publish_to_sns(topic_arn: str | None, subject: str, body: str) -> bool:
     sns = boto3.client("sns", endpoint_url=config.sns_endpoint)
 
     if topic_arn is None:  # will be None for local testing
@@ -24,10 +24,11 @@ def publish_to_sns(topic_arn: str, subject: str, body: str) -> bool:
     return False
 
 
-def get_sns_topic_arn(topic_name):
+def get_sns_topic_arn(topic_name: str) -> str | None:
     sns = boto3.client("sns", endpoint_url=config.sns_endpoint)
     response = sns.list_topics()
     for topic in response["Topics"]:
         if topic_name in topic["TopicArn"]:
+            assert isinstance(topic["TopicArn"], str), "TopicArn should be a string"
             return topic["TopicArn"]
     return None

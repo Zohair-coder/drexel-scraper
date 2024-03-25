@@ -15,9 +15,10 @@ from db_config import (
 
 from datetime import datetime
 from pytz import timezone
+from typing import Any
 
 
-def populate_db(data: dict):
+def populate_db(data: dict[str, dict[str, Any]]) -> None:
     cur, conn = connect_to_db()
 
     create_tables(cur)
@@ -35,7 +36,7 @@ def populate_db(data: dict):
         for instructor_id in instructor_ids:
             course_instructor_relationships.append((course["crn"], instructor_id))
 
-    bulk_insert_courses(cur, data.values())
+    bulk_insert_courses(cur, list(data.values()))
     bulk_insert_course_instructors(cur, course_instructor_relationships)
 
     conn.commit()
@@ -80,7 +81,9 @@ def connect_to_db() -> tuple[cursor, connection]:
     return cur, conn
 
 
-def bulk_insert_course_instructors(cur: cursor, relationships: list[tuple[int, int]]):
+def bulk_insert_course_instructors(
+    cur: cursor, relationships: list[tuple[int, int]]
+) -> None:
     cur.executemany(
         """
         INSERT INTO course_instructor (course_id, instructor_id)
@@ -92,7 +95,7 @@ def bulk_insert_course_instructors(cur: cursor, relationships: list[tuple[int, i
     )
 
 
-def bulk_insert_instructors(cur: cursor, course: dict) -> list[int]:
+def bulk_insert_instructors(cur: cursor, course: dict[str, Any]) -> list[int]:
     if course["instructors"] is None:
         return []
 
@@ -152,7 +155,7 @@ def bulk_insert_instructors(cur: cursor, course: dict) -> list[int]:
     return [row[0] for row in cur.fetchall()]
 
 
-def bulk_insert_courses(cur: cursor, courses_data: list[dict]):
+def bulk_insert_courses(cur: cursor, courses_data: list[dict[str, Any]]) -> None:
     courses = []
     for course in courses_data:
         courses.append(
@@ -199,14 +202,14 @@ def bulk_insert_courses(cur: cursor, courses_data: list[dict]):
     )
 
 
-def create_tables(cur: cursor):
+def create_tables(cur: cursor) -> None:
     with open("src/create_tables.sql") as f:
         create_table_sql = f.read()
 
     cur.execute(create_table_sql)
 
 
-def update_metadata(cur: cursor):
+def update_metadata(cur: cursor) -> None:
     tz = timezone("US/Eastern")
     current_datetime = datetime.now(tz).strftime("%m/%d/%y %I:%M %p")
     cur.execute(
@@ -220,7 +223,7 @@ def update_metadata(cur: cursor):
     )
 
 
-def grafana_user_exists(cur: cursor):
+def grafana_user_exists(cur: cursor) -> bool:
     grafana_user = GRAFANA_SERVICE_ACCOUNT_USERNAME
     cur.execute(
         """
@@ -234,7 +237,7 @@ def grafana_user_exists(cur: cursor):
     return row is not None and row[0] == 1
 
 
-def create_grafana_user(cur: cursor):
+def create_grafana_user(cur: cursor) -> None:
     grafana_username = GRAFANA_SERVICE_ACCOUNT_USERNAME
     grafana_password = GRAFANA_SERVICE_ACCOUNT_PASSWORD
 
@@ -245,7 +248,7 @@ def create_grafana_user(cur: cursor):
     cur.execute(create_role_command, [grafana_password])
 
 
-def assign_grafana_user_permissions(cur: cursor):
+def assign_grafana_user_permissions(cur: cursor) -> None:
     grafana_username = GRAFANA_SERVICE_ACCOUNT_USERNAME
     cmd = sql.SQL("GRANT SELECT ON ALL TABLES IN SCHEMA public TO {};").format(
         sql.Identifier(grafana_username)
