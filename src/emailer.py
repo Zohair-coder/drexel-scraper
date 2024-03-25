@@ -29,5 +29,6 @@ def get_sns_topic_arn(topic_name: str) -> str | None:
     response = sns.list_topics()
     for topic in response["Topics"]:
         if topic_name in topic["TopicArn"]:
+            assert isinstance(topic["TopicArn"], str), "TopicArn should be a string"
             return topic["TopicArn"]
     return None

@@ -95,7 +95,7 @@ def bulk_insert_course_instructors(
     )
 
 
-def bulk_insert_instructors(cur: cursor, course: dict) -> list[int]:
+def bulk_insert_instructors(cur: cursor, course: dict[str, Any]) -> list[int]:
     if course["instructors"] is None:
         return []
 
@@ -155,7 +155,7 @@ def bulk_insert_instructors(cur: cursor, course: dict) -> list[int]:
     return [row[0] for row in cur.fetchall()]
 
 
-def bulk_insert_courses(cur: cursor, courses_data: list[dict]) -> None:
+def bulk_insert_courses(cur: cursor, courses_data: list[dict[str, Any]]) -> None:
     courses = []
     for course in courses_data:
         courses.append(

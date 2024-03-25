@@ -46,7 +46,7 @@ def go_to_college_page(session: Session, college_code: str) -> Response:
     return send_request(session, config.get_college_page_url(college_code))
 
 
-def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings: bool) -> dict[str, dict[str, Any]]:
+def scrape_all_subjects(session: Session, data: dict[str, dict[str, Any]], html: str, include_ratings: bool) -> dict[str, dict[str, Any]]:
     try:
         with open("cache/extra_course_data_cache.json", "r") as f:
             extra_course_data_cache = json.load(f)
@@ -97,7 +97,7 @@ def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings
                     "prereqs": data[crn]["prereqs"],
                 }
 
-            print("Parsed CRN: " + crn + " (" + data[crn].get("course_title") + ")")
+            print("Parsed CRN: " + crn + " (" + data[crn]["course_title"] + ")")
             print()
 
     if not os.path.exists("cache"):

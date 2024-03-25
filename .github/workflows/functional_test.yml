@@ -22,7 +22,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run mypy
-      run: mypy src
+      run: mypy src --strict
       
     - name: Run Linter
       run: ruff check --output-format=github src

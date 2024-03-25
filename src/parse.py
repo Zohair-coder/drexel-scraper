@@ -3,10 +3,10 @@ from bs4.element import Tag
 from ratings import rating
 from datetime import datetime
 import re
-
+from typing import Any
 
 def parse_subject_page(
-    html: str, data: dict, include_ratings: bool = False, ratings_cache: dict = {}
+    html: str, data: dict[str, dict[str, Any]], include_ratings: bool = False, ratings_cache: dict[str, dict[str, int] | None] = {}
 ) -> dict[str, str]:
     soup = BeautifulSoup(html, "html.parser")
     table_rows = soup.find_all("tr", class_=["odd", "even"])
@@ -45,7 +45,7 @@ def parse_subject_page(
     return parsed_crns
 
 
-def parse_crn_page(html: str, data: dict) -> None:
+def parse_crn_page(html: str, data: dict[str, dict[str, Any]]) -> None:
     soup = BeautifulSoup(html, "html.parser")
 
     # Extract credits
@@ -72,8 +72,8 @@ def parse_crn_page(html: str, data: dict) -> None:
 
 
 def get_instructors(
-    instructors_str: str, include_ratings: bool, ratings_cache: dict
-) -> list | None:
+    instructors_str: str, include_ratings: bool, ratings_cache: dict[str, dict[str, int] | None]
+) -> list[dict[str, Any]] | None:
     if instructors_str == "STAFF":
         return None
 
