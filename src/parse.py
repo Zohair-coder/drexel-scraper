@@ -5,8 +5,12 @@ from datetime import datetime
 import re
 from typing import Any
 
+
 def parse_subject_page(
-    html: str, data: dict[str, dict[str, Any]], include_ratings: bool = False, ratings_cache: dict[str, dict[str, int] | None] = {}
+    html: str,
+    data: dict[str, dict[str, Any]],
+    include_ratings: bool = False,
+    ratings_cache: dict[str, dict[str, int] | None] = {},
 ) -> dict[str, str]:
     soup = BeautifulSoup(html, "html.parser")
     table_rows = soup.find_all("tr", class_=["odd", "even"])
@@ -72,7 +76,9 @@ def parse_crn_page(html: str, data: dict[str, dict[str, Any]]) -> None:
 
 
 def get_instructors(
-    instructors_str: str, include_ratings: bool, ratings_cache: dict[str, dict[str, int] | None]
+    instructors_str: str,
+    include_ratings: bool,
+    ratings_cache: dict[str, dict[str, int] | None],
 ) -> list[dict[str, Any]] | None:
     if instructors_str == "STAFF":
         return None
@@ -133,7 +139,9 @@ def get_max_enroll(td: Tag) -> str:
     span = td.contents[0]
 
     if not isinstance(span, Tag):
-        raise Exception("Max enrollment HTML span tag inside td not structured as expected")
+        raise Exception(
+            "Max enrollment HTML span tag inside td not structured as expected"
+        )
 
     title_attr = span.attrs["title"]
 

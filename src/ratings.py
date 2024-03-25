@@ -40,7 +40,10 @@ def search_professors(professor_name: str) -> list[dict[str, dict[str, str]]]:
         headers={"Authorization": AUTHORIZATION_HEADER},
     )
 
-    return cast(list[dict[str, dict[str, str]]], response.json()["data"]["newSearch"]["teachers"]["edges"])
+    return cast(
+        list[dict[str, dict[str, str]]],
+        response.json()["data"]["newSearch"]["teachers"]["edges"],
+    )
 
 
 def get_ratings(id: str) -> dict[str, Any]:

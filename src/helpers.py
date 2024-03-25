@@ -5,7 +5,11 @@ from typing import Any
 
 
 def send_request(
-    session: Session, url: str, method: str = "GET", json: dict[str, Any] = {}, headers: dict[str, str] = {}
+    session: Session,
+    url: str,
+    method: str = "GET",
+    json: dict[str, Any] = {},
+    headers: dict[str, str] = {},
 ) -> Response:
     try:
         resp = send_request_helper(session, url, method, json, headers)
@@ -42,7 +46,11 @@ def send_request(
 
 
 def send_request_helper(
-    session: Session, url: str, method: str, json: dict[str, Any], headers: dict[str, str]
+    session: Session,
+    url: str,
+    method: str,
+    json: dict[str, Any],
+    headers: dict[str, str],
 ) -> Response:
     timeout = 2
     if method == "GET":
