@@ -97,7 +97,7 @@ jobs:
         fi
 
     - name: Reset database
-      run: docker compose run scraper sh -c 'apk add postgresql-client && ./reset_db.bash;'
+      run: docker compose run scraper sh -c 'apk add postgresql-client && ./scripts/reset_db.sh;'
 
     - name: Run scraper again (to test cache)
       run: docker compose run scraper python3 src/main.py --db --all-colleges --ratings
