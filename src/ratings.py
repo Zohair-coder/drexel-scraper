@@ -4,6 +4,7 @@
 
 import requests
 from helpers import send_request
+from typing import Any, List, Dict, Optional
 
 DREXEL_RMP_ID = "U2Nob29sLTE1MjE="
 
@@ -13,7 +14,7 @@ DREXEL_RMP_ID = "U2Nob29sLTE1MjE="
 AUTHORIZATION_HEADER = "Basic dGVzdDp0ZXN0"
 
 
-def search_professors(professor_name):
+def search_professors(professor_name: str) -> List[Dict[str, Dict[str, str]]]:
     query = """query searchProf($query: TeacherSearchQuery!){
         newSearch {
             teachers(query: $query) {
@@ -42,7 +43,7 @@ def search_professors(professor_name):
     return response.json()["data"]["newSearch"]["teachers"]["edges"]
 
 
-def get_ratings(id):
+def get_ratings(id: str) -> Dict[str, Any]:
     query = """query TeacherRatingsPageQuery($id: ID!){
         node(id: $id) {
             __typename
@@ -68,7 +69,7 @@ def get_ratings(id):
     return response.json()["data"]["node"]
 
 
-def rating(professor_name):
+def rating(professor_name: str) -> Optional[Dict[str, int]]:
     professor = search_professors(professor_name)
 
     if len(professor) == 0:

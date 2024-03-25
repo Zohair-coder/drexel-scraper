@@ -7,8 +7,8 @@ from typing import Optional
 
 
 def parse_subject_page(
-    html, data: dict, include_ratings: bool = False, ratings_cache: dict = {}
-):
+    html: str, data: dict, include_ratings: bool = False, ratings_cache: dict = {}
+) -> dict[str, str]:
     soup = BeautifulSoup(html, "html.parser")
     table_rows = soup.find_all("tr", class_=["odd", "even"])
 
@@ -46,7 +46,7 @@ def parse_subject_page(
     return parsed_crns
 
 
-def parse_crn_page(html, data: dict):
+def parse_crn_page(html: str, data: dict) -> None:
     soup = BeautifulSoup(html, "html.parser")
 
     # Extract credits
@@ -115,8 +115,12 @@ def get_instructors(
     return instructors
 
 
-def get_enroll(td):
+def get_enroll(td: Tag) -> str:
     span = td.contents[0]
+
+    if not isinstance(span, Tag):
+        raise Exception("Enrollment HTML span tag inside td not structured as expected")
+
     title_attr = span.attrs["title"]
 
     if "FULL" in title_attr:
@@ -126,8 +130,12 @@ def get_enroll(td):
     return enroll.split("=")[1]
 
 
-def get_max_enroll(td):
+def get_max_enroll(td: Tag) -> str:
     span = td.contents[0]
+
+    if not isinstance(span, Tag):
+        raise Exception("Max enrollment HTML span tag inside td not structured as expected")
+
     title_attr = span.attrs["title"]
 
     if "FULL" in title_attr:
@@ -141,7 +149,7 @@ def fix_encoding_issue(text: str) -> str:
     return text.replace("\xa0", " ")
 
 
-def parse_days(d: str):
+def parse_days(d: str) -> Optional[list[str]]:
     if d == "TBD":
         return None
 
@@ -162,7 +170,7 @@ def parse_days(d: str):
     return days
 
 
-def parse_time(t: str):
+def parse_time(t: str) -> tuple[Optional[str], Optional[str]]:
     if t == "TBD":
         return (None, None)
     start_str, end_str = t.split(" - ")
@@ -171,9 +179,9 @@ def parse_time(t: str):
     return (time_obj_to_str(start_time), time_obj_to_str(end_time))
 
 
-def time_str_to_object(t: str):
+def time_str_to_object(t: str) -> datetime:
     return datetime.strptime(t, "%I:%M %p")
 
 
-def time_obj_to_str(t: datetime):
+def time_obj_to_str(t: datetime) -> str:
     return t.strftime("%H:%M")

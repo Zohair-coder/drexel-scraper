@@ -1,11 +1,11 @@
-from requests import Session
+from requests import Session, Response
 from requests.exceptions import HTTPError
 import time
 
 
 def send_request(
     session: Session, url: str, method: str = "GET", json: dict = {}, headers: dict = {}
-):
+) -> Response:
     try:
         resp = send_request_helper(session, url, method, json, headers)
         resp.raise_for_status()
@@ -42,7 +42,7 @@ def send_request(
 
 def send_request_helper(
     session: Session, url: str, method: str, json: dict, headers: dict
-):
+) -> Response:
     timeout = 2
     if method == "GET":
         resp = session.get(url, headers=headers, timeout=timeout)

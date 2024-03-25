@@ -25,7 +25,7 @@ def publish_to_sns(topic_arn: Optional[str], subject: str, body: str) -> bool:
     return False
 
 
-def get_sns_topic_arn(topic_name):
+def get_sns_topic_arn(topic_name: str) -> Optional[str]:
     sns = boto3.client("sns", endpoint_url=config.sns_endpoint)
     response = sns.list_topics()
     for topic in response["Topics"]:
