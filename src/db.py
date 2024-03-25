@@ -15,11 +15,10 @@ from db_config import (
 
 from datetime import datetime
 from pytz import timezone
+from typing import Any
 
-from typing import Dict, Any
 
-
-def populate_db(data: Dict[str, Dict[str, Any]]) -> None:
+def populate_db(data: dict[str, dict[str, Any]]) -> None:
     cur, conn = connect_to_db()
 
     create_tables(cur)

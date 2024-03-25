@@ -3,7 +3,6 @@ from bs4.element import Tag
 from ratings import rating
 from datetime import datetime
 import re
-from typing import Optional
 
 
 def parse_subject_page(
@@ -74,7 +73,7 @@ def parse_crn_page(html: str, data: dict) -> None:
 
 def get_instructors(
     instructors_str: str, include_ratings: bool, ratings_cache: dict
-) -> Optional[list]:
+) -> list | None:
     if instructors_str == "STAFF":
         return None
 
@@ -149,7 +148,7 @@ def fix_encoding_issue(text: str) -> str:
     return text.replace("\xa0", " ")
 
 
-def parse_days(d: str) -> Optional[list[str]]:
+def parse_days(d: str) -> list[str] | None:
     if d == "TBD":
         return None
 
@@ -170,7 +169,7 @@ def parse_days(d: str) -> Optional[list[str]]:
     return days
 
 
-def parse_time(t: str) -> tuple[Optional[str], Optional[str]]:
+def parse_time(t: str) -> tuple[str | None, str | None]:
     if t == "TBD":
         return (None, None)
     start_str, end_str = t.split(" - ")
