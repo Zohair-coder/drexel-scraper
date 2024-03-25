@@ -1,7 +1,9 @@
 from bs4 import BeautifulSoup
+from bs4.element import Tag
 from ratings import rating
 from datetime import datetime
 import re
+from typing import Optional
 
 
 def parse_subject_page(
@@ -61,7 +63,7 @@ def parse_crn_page(html, data: dict):
     sibling_texts = []
     if prereqs_heading_element is not None:
         for sibling in prereqs_heading_element.next_siblings:
-            if sibling.name == "span":
+            if isinstance(sibling, Tag) and sibling.name == "span":
                 sibling_texts.append(sibling.text.strip())
 
     prereqs = " ".join(sibling_texts)
@@ -72,7 +74,7 @@ def parse_crn_page(html, data: dict):
 
 def get_instructors(
     instructors_str: str, include_ratings: bool, ratings_cache: dict
-) -> list or None:
+) -> Optional[list]:
     if instructors_str == "STAFF":
         return None
 

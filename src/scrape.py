@@ -2,15 +2,16 @@ from requests import Session
 from bs4 import BeautifulSoup
 import json
 import os
-from helpers import send_request
+from typing import Dict, Any
 
+from helpers import send_request
 from parse import parse_subject_page, parse_crn_page
 import config
 
 
 def scrape(include_ratings: bool = False, all_colleges: bool = False):
     session = Session()
-    data = {}
+    data = {} # type: Dict[str, Dict[str, Any]]
 
     if not all_colleges:
         college_codes = [config.college_code]

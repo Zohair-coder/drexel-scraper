@@ -12,9 +12,9 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "cwd": "${workspaceFolder}",
-      "args": ["--ratings"]
+      // "args": ["--ratings"]
       // "args": ["--all-colleges"]
-      // "args": ["--db"]
+      "args": ["--db"]
       // "args": ["--ratings", "--db", "--all-colleges"]
       // "args": ["--ratings", "--db"]
       // "args": ["--email"]

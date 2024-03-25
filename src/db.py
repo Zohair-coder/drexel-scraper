@@ -16,8 +16,10 @@ from db_config import (
 from datetime import datetime
 from pytz import timezone
 
+from typing import Dict, Any
 
-def populate_db(data: dict):
+
+def populate_db(data: Dict[str, Dict[str, Any]]):
     cur, conn = connect_to_db()
 
     create_tables(cur)
@@ -35,7 +37,7 @@ def populate_db(data: dict):
         for instructor_id in instructor_ids:
             course_instructor_relationships.append((course["crn"], instructor_id))
 
-    bulk_insert_courses(cur, data.values())
+    bulk_insert_courses(cur, list(data.values()))
     bulk_insert_course_instructors(cur, course_instructor_relationships)
 
     conn.commit()

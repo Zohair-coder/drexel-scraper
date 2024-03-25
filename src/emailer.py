@@ -5,6 +5,7 @@
 
 import boto3
 import config
+from typing import Optional
 
 
 def send_email(subject: str, body: str) -> bool:
@@ -12,7 +13,7 @@ def send_email(subject: str, body: str) -> bool:
     return publish_to_sns(topic_arn, subject, body)
 
 
-def publish_to_sns(topic_arn: str, subject: str, body: str) -> bool:
+def publish_to_sns(topic_arn: Optional[str], subject: str, body: str) -> bool:
     sns = boto3.client("sns", endpoint_url=config.sns_endpoint)
 
     if topic_arn is None:  # will be None for local testing
