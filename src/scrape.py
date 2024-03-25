@@ -62,7 +62,6 @@ def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings
     for subject_page_link in college_page_soup.find_all(
         "a", href=lambda href: href and href.startswith("/webtms_du/courseList")
     ):
-
         try:
             response = send_request(
                 session, config.tms_base_url + subject_page_link["href"]

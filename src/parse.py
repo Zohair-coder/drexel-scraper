@@ -7,7 +7,6 @@ import re
 def parse_subject_page(
     html, data: dict, include_ratings: bool = False, ratings_cache: dict = {}
 ):
-
     soup = BeautifulSoup(html, "html.parser")
     table_rows = soup.find_all("tr", class_=["odd", "even"])
 
@@ -82,7 +81,6 @@ def get_instructors(
         name = instructor.strip()
 
         if include_ratings:
-
             # Search for first word and last word in name first
             # If that doesn't work, try first two words
             # If that still doesn't work, don't include rating
@@ -98,19 +96,15 @@ def get_instructors(
 
             rating_obj = ratings_cache[name]
 
-            instructors.append(
-                {
-                    "name": name,
-                    "rating": rating_obj,
-                }
-            )
+            instructors.append({
+                "name": name,
+                "rating": rating_obj,
+            })
 
         else:
-            instructors.append(
-                {
-                    "name": name,
-                }
-            )
+            instructors.append({
+                "name": name,
+            })
 
     return instructors
 
@@ -142,7 +136,6 @@ def fix_encoding_issue(text: str) -> str:
 
 
 def parse_days(d: str):
-
     if d == "TBD":
         return None
 
