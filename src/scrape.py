@@ -29,7 +29,9 @@ def get_all_college_codes(session: Session):
     soup = get_soup(response.text)
     college_codes = []
 
-    for link in soup.find_all("a", href=lambda href: href and href.startswith("/webtms_du/collegesSubjects")):
+    for link in soup.find_all(
+        "a", href=lambda href: href and href.startswith("/webtms_du/collegesSubjects")
+    ):
         college_codes.append(link["href"].split("=")[-1])
 
     return college_codes
@@ -55,15 +57,25 @@ def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings
             ratings_cache = json.load(f)
     except FileNotFoundError:
         ratings_cache = {}
-    
+
     college_page_soup = get_soup(html)
-    for subject_page_link in college_page_soup.find_all("a", href=lambda href: href and href.startswith("/webtms_du/courseList")):
-        
+    for subject_page_link in college_page_soup.find_all(
+        "a", href=lambda href: href and href.startswith("/webtms_du/courseList")
+    ):
+
         try:
-            response = send_request(session, config.tms_base_url + subject_page_link["href"])
-            parsed_crns = parse_subject_page(response.text, data, include_ratings, ratings_cache)
+            response = send_request(
+                session, config.tms_base_url + subject_page_link["href"]
+            )
+            parsed_crns = parse_subject_page(
+                response.text, data, include_ratings, ratings_cache
+            )
         except Exception as e:
-            raise Exception("Error scraping/parsing subject page: {}".format(subject_page_link["href"])) from e
+            raise Exception(
+                "Error scraping/parsing subject page: {}".format(
+                    subject_page_link["href"]
+                )
+            ) from e
 
         for crn, crn_page_link in parsed_crns.items():
             if crn in extra_course_data_cache:
@@ -71,11 +83,15 @@ def scrape_all_subjects(session: Session, data: dict, html: str, include_ratings
                 data[crn]["prereqs"] = extra_course_data_cache[crn]["prereqs"]
             else:
                 try:
-                    response = send_request(session, config.tms_base_url + crn_page_link)
+                    response = send_request(
+                        session, config.tms_base_url + crn_page_link
+                    )
                     parse_crn_page(response.text, data)
                 except Exception as e:
-                    raise Exception("Error scraping/parsing CRN {}: {}".format(crn, crn_page_link)) from e
-                
+                    raise Exception(
+                        "Error scraping/parsing CRN {}: {}".format(crn, crn_page_link)
+                    ) from e
+
                 extra_course_data_cache[crn] = {
                     "credits": data[crn]["credits"],
                     "prereqs": data[crn]["prereqs"],

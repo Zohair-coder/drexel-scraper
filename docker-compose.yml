@@ -8,10 +8,15 @@ services:
       SCHEDULER_DB_HOSTNAME: postgres
       SCHEDULER_DB_PORT: 5432
       SCHEDULER_DB_PG_PASSWORD: super-secret-password
+      SNS_ENDPOINT_URL: http://localstack:4566
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: "my-access-key"
+      AWS_SECRET_ACCESS_KEY: "my-secret-access-key"
     volumes:
       - ./:/app
     depends_on:
       - postgres
+      - localstack
 
   grafana:
     image: grafana/grafana-oss
@@ -49,3 +54,16 @@ services:
       - DATABASE_URL=postgres://postgres:super-secret-password@postgres:5432/postgres?sslmode=disable
     depends_on:
       - postgres
+  
+  # Used to imitate AWS services locally
+  # We are using SNS in this case for sending error emails
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=sns
+      - EDGE_PORT=4566
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./sns-init-scripts/create-sns-topic.sh:/etc/localstack/init/ready.d/init-aws.sh"

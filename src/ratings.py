@@ -29,21 +29,15 @@ def search_professors(professor_name):
         }
     }"""
 
-    variables = {
-        "query": {
-            "text": professor_name,
-            "schoolID": DREXEL_RMP_ID
-        }
-    }
+    variables = {"query": {"text": professor_name, "schoolID": DREXEL_RMP_ID}}
 
     response = send_request(
         requests.Session(),
         "https://www.ratemyprofessors.com/graphql",
         "POST",
         json={"query": query, "variables": variables},
-        headers={
-            "Authorization": AUTHORIZATION_HEADER
-        })
+        headers={"Authorization": AUTHORIZATION_HEADER},
+    )
 
     return response.json()["data"]["newSearch"]["teachers"]["edges"]
 
@@ -61,19 +55,16 @@ def get_ratings(id):
         }
     }"""
 
-    variables = {
-        "id": id
-    }
+    variables = {"id": id}
 
     response = send_request(
         requests.Session(),
         "https://www.ratemyprofessors.com/graphql",
         "POST",
         json={"query": query, "variables": variables},
-        headers={
-            "Authorization": AUTHORIZATION_HEADER
-        })
-    
+        headers={"Authorization": AUTHORIZATION_HEADER},
+    )
+
     return response.json()["data"]["node"]
 
 
@@ -90,7 +81,7 @@ def rating(professor_name):
     if ratings is None:
         return None
 
-    del ratings["__typename"] # Not needed
+    del ratings["__typename"]  # Not needed
 
     if ratings["numRatings"] == 0:
         return None
