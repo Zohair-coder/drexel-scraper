@@ -99,29 +99,31 @@ def bulk_insert_instructors(cur: cursor, course: dict) -> list[int]:
     instructor_data = []
     instructor_names = []
     for instructor in course["instructors"]:
-        instructor_data.append((
-            instructor["name"],
+        instructor_data.append(
             (
-                instructor["rating"]["legacyId"]
-                if instructor.get("rating", None) is not None
-                else None
-            ),
-            (
-                instructor["rating"]["avgDifficulty"]
-                if instructor.get("rating", None) is not None
-                else None
-            ),
-            (
-                instructor["rating"]["avgRating"]
-                if instructor.get("rating", None) is not None
-                else None
-            ),
-            (
-                instructor["rating"]["numRatings"]
-                if instructor.get("rating", None) is not None
-                else None
-            ),
-        ))
+                instructor["name"],
+                (
+                    instructor["rating"]["legacyId"]
+                    if instructor.get("rating", None) is not None
+                    else None
+                ),
+                (
+                    instructor["rating"]["avgDifficulty"]
+                    if instructor.get("rating", None) is not None
+                    else None
+                ),
+                (
+                    instructor["rating"]["avgRating"]
+                    if instructor.get("rating", None) is not None
+                    else None
+                ),
+                (
+                    instructor["rating"]["numRatings"]
+                    if instructor.get("rating", None) is not None
+                    else None
+                ),
+            )
+        )
 
         instructor_names.append(instructor["name"])
 
@@ -153,22 +155,24 @@ def bulk_insert_instructors(cur: cursor, course: dict) -> list[int]:
 def bulk_insert_courses(cur: cursor, courses_data: list[dict]):
     courses = []
     for course in courses_data:
-        courses.append((
-            course["crn"],
-            course["subject_code"],
-            course["course_number"],
-            course["instruction_type"],
-            course["instruction_method"],
-            course["section"],
-            course["enroll"],
-            course["max_enroll"],
-            course["course_title"],
-            course["credits"],
-            course["prereqs"],
-            course["start_time"],
-            course["end_time"],
-            course["days"],
-        ))
+        courses.append(
+            (
+                course["crn"],
+                course["subject_code"],
+                course["course_number"],
+                course["instruction_type"],
+                course["instruction_method"],
+                course["section"],
+                course["enroll"],
+                course["max_enroll"],
+                course["course_title"],
+                course["credits"],
+                course["prereqs"],
+                course["start_time"],
+                course["end_time"],
+                course["days"],
+            )
+        )
 
     cur.executemany(
         """

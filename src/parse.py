@@ -96,15 +96,19 @@ def get_instructors(
 
             rating_obj = ratings_cache[name]
 
-            instructors.append({
-                "name": name,
-                "rating": rating_obj,
-            })
+            instructors.append(
+                {
+                    "name": name,
+                    "rating": rating_obj,
+                }
+            )
 
         else:
-            instructors.append({
-                "name": name,
-            })
+            instructors.append(
+                {
+                    "name": name,
+                }
+            )
 
     return instructors
 
