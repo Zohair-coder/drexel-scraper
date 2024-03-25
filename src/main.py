@@ -66,7 +66,7 @@ if __name__ == "__main__":
         if not os.path.exists("performance"):
             os.makedirs("performance")
         cProfile.run("main(args)", "performance/profile_output.pstat")
-    except Exception:
+    except Exception as e:
         trace = traceback.format_exc()
         print(trace)
 
