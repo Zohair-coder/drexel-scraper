@@ -16,7 +16,7 @@
       // "args": ["--all-colleges"]
       // "args": ["--db"]
       // "args": ["--ratings", "--db", "--all-colleges"]
-      "args": ["--ratings", "--db"]
+      // "args": ["--ratings", "--db"]
       // "args": ["--email"]
     }
   ]
