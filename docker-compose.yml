@@ -13,6 +13,8 @@ services:
       AWS_ACCESS_KEY_ID: "my-access-key"
       AWS_SECRET_ACCESS_KEY: "my-secret-access-key"
       DREXEL_TMS_SHIB_IDP_SESSION_COOKIE: ${DREXEL_TMS_SHIB_IDP_SESSION_COOKIE}
+    volumes:
+      - ./:/app
     depends_on:
       - postgres
       - localstack
