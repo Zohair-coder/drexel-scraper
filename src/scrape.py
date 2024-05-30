@@ -14,7 +14,7 @@ def scrape(
 ) -> dict[str, dict[str, Any]]:
     
     session = Session()
-    session.cookies.set("shib_idp_session", config.shib_idp_session_cookie)
+    session.cookies.set("shib_idp_session", config.shib_idp_session_cookie) # type: ignore
 
     data: dict[str, dict[str, Any]] = {}
 
