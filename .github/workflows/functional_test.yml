@@ -4,9 +4,6 @@ on:
   pull_request:
     branches: [ main, dev ]
 
-env:
-    DREXEL_SCHEDULER_SHIB_IDP_SESSION_COOKIE: ${{ secrets.DREXEL_SCHEDULER_SHIB_IDP_SESSION_COOKIE }}
-
 jobs:
   functional-test:
     name: Functional Test
@@ -50,6 +47,8 @@ jobs:
       run: rm cache/*
     
     - name: Run the scraper
+      env:
+        DREXEL_SCHEDULER_SHIB_IDP_SESSION_COOKIE: ${{ secrets.DREXEL_SCHEDULER_SHIB_IDP_SESSION_COOKIE }}
       run: docker compose run scraper python3 src/main.py --db --all-colleges --ratings
     
     - name: Verify courses data exists in database
@@ -106,6 +105,8 @@ jobs:
       run: docker compose run scraper sh -c 'apk add postgresql-client && ./scripts/reset-db.sh;'
 
     - name: Run scraper again (to test cache)
+      env:
+        DREXEL_SCHEDULER_SHIB_IDP_SESSION_COOKIE: ${{ secrets.DREXEL_SCHEDULER_SHIB_IDP_SESSION_COOKIE }}
       run: docker compose run scraper python3 src/main.py --db --all-colleges --ratings
       
     - name: Verify courses data exists in database
