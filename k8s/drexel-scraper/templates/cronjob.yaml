@@ -33,6 +33,8 @@ spec:
                     name: grafana-sa-pwd
                 - secretRef:
                     name: postgres-pwd
+                - secretRef:
+                    name: drexel-scheduler-secrets
               volumeMounts:
                 - name: shared-pvc
                   mountPath: /app/cache

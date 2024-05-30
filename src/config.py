@@ -20,6 +20,9 @@ tms_base_url = "https://termmasterschedule.drexel.edu"
 tms_home_url = tms_base_url + "/webtms_du"
 tms_quarter_url = tms_home_url + "/collegesSubjects/" + year + quarter
 
+# Cookies
+shib_idp_session_cookie = os.environ["DREXEL_SCHEDULER_SHIB_IDP_SESSION_COOKIE"]
+
 # Email AWS Configuration
 topic_arn = os.getenv("DREXEL_SCHEDULER_TOPIC_ARN")
 sns_endpoint = os.getenv("SNS_ENDPOINT_URL", None)
