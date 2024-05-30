@@ -12,9 +12,8 @@ import config
 def scrape(
     include_ratings: bool = False, all_colleges: bool = False
 ) -> dict[str, dict[str, Any]]:
-    
     session = Session()
-    session.cookies.set("shib_idp_session", config.shib_idp_session_cookie) # type: ignore
+    session.cookies.set("shib_idp_session", config.shib_idp_session_cookie)  # type: ignore
 
     data: dict[str, dict[str, Any]] = {}
 
