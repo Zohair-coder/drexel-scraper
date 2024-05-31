@@ -108,7 +108,9 @@ jobs:
 
     - name: Run scraper again (to test cache)
       env:
-        DREXEL_SCHEDULER_SHIB_IDP_SESSION_COOKIE: ${{ secrets.DREXEL_SCHEDULER_SHIB_IDP_SESSION_COOKIE }}
+        DREXEL_USERNAME: ${{ secrets.DREXEL_USERNAME }}
+        DREXEL_PASSWORD: ${{ secrets.DREXEL_PASSWORD }}
+        DREXEL_MFA_SECRET_KEY: ${{ secrets.DREXEL_MFA_SECRET_KEY }}
       run: docker compose run scraper python3 src/main.py --db --all-colleges --ratings
       
     - name: Verify courses data exists in database
