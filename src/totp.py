@@ -4,6 +4,7 @@ import struct
 import time
 import hashlib
 
+
 # https://stackoverflow.com/questions/8529265/google-authenticator-implementation-in-python
 def get_token(secret: str) -> str:
     period = 30
