@@ -1,91 +1,91 @@
-# name: Build and Deploy to Kubernetes
+name: Build and Deploy to Kubernetes
 
-# on:
-#   push:
-#     branches:
-#       - main
-#       - dev
+on:
+  push:
+    branches:
+      - main
+      - dev
 
-# env:
-#   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-#   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-#   KUBECONFIG: ${{ secrets.KUBECONFIG }}
-#   IMAGE_NAME: zohairr/drexelscheduler-scraper
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  KUBECONFIG: ${{ secrets.KUBECONFIG }}
+  IMAGE_NAME: zohairr/drexelscheduler-scraper
 
-# jobs:
-#   build-and-push:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v4
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-#       - name: Set up QEMU
-#         uses: docker/setup-qemu-action@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
-#       - name: Set up Docker Buildx
-#         uses: docker/setup-buildx-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-#       - name: Login to DockerHub
-#         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Login to DockerHub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-#       - name: Build and push Docker image
-#         run: |
-#           COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
-#           docker buildx create --use
-#           docker buildx build --platform linux/arm64 -t $IMAGE_NAME:$COMMIT_SHA . --push
+      - name: Build and push Docker image
+        run: |
+          COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+          docker buildx create --use
+          docker buildx build --platform linux/arm64 -t $IMAGE_NAME:$COMMIT_SHA . --push
 
-#   deploy:
-#     needs: build-and-push
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v4
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-#       - name: Install and configure kubectl
-#         run: |
-#           sudo snap install kubectl --classic
-#           echo "$KUBECONFIG" | base64 --decode > kubeconfig.yaml
+      - name: Install and configure kubectl
+        run: |
+          sudo snap install kubectl --classic
+          echo "$KUBECONFIG" | base64 --decode > kubeconfig.yaml
 
-#       - name: Set Namespace based on Branch
-#         run: echo "NAMESPACE=$(if [ "${{ github.ref }}" = "refs/heads/main" ]; then echo 'default'; else echo 'dev'; fi)" >> $GITHUB_ENV
+      - name: Set Namespace based on Branch
+        run: echo "NAMESPACE=$(if [ "${{ github.ref }}" = "refs/heads/main" ]; then echo 'default'; else echo 'dev'; fi)" >> $GITHUB_ENV
       
-#       - name: Set up Helm
-#         run: |
-#           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-#           chmod 700 get_helm.sh
-#           ./get_helm.sh
+      - name: Set up Helm
+        run: |
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          chmod 700 get_helm.sh
+          ./get_helm.sh
       
-#       - name: Check for running Kubernetes jobs
-#         run: |
-#           KUBECONFIG=kubeconfig.yaml
-#           while kubectl get jobs -n ${{ env.NAMESPACE }} -o jsonpath='{.items[?(@.status.active)].metadata.name}' | grep "drexel-scheduler-cronjob"; do
-#             echo "Waiting for jobs to complete..."
-#             sleep 30
-#           done
+      - name: Check for running Kubernetes jobs
+        run: |
+          KUBECONFIG=kubeconfig.yaml
+          while kubectl get jobs -n ${{ env.NAMESPACE }} -o jsonpath='{.items[?(@.status.active)].metadata.name}' | grep "drexel-scheduler-cronjob"; do
+            echo "Waiting for jobs to complete..."
+            sleep 30
+          done
 
-#       - name: Deploy to Kubernetes
-#         run: |
-#           COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
-#           VALUES_FILE="./k8s/drexel-scraper/values-${{ env.NAMESPACE }}.yaml"
-#           RELEASE_NAME="drexel-scraper-${{ env.NAMESPACE }}"
-#           KUBECONFIG=kubeconfig.yaml helm upgrade --install $RELEASE_NAME ./k8s/drexel-scraper -f $VALUES_FILE -n ${{ env.NAMESPACE }} --set image.tag=$COMMIT_SHA --atomic
+      - name: Deploy to Kubernetes
+        run: |
+          COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+          VALUES_FILE="./k8s/drexel-scraper/values-${{ env.NAMESPACE }}.yaml"
+          RELEASE_NAME="drexel-scraper-${{ env.NAMESPACE }}"
+          KUBECONFIG=kubeconfig.yaml helm upgrade --install $RELEASE_NAME ./k8s/drexel-scraper -f $VALUES_FILE -n ${{ env.NAMESPACE }} --set image.tag=$COMMIT_SHA --atomic
 
-#       - name: Clear Cache
-#         run: |
-#           kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-extra-course-data-cronjob github-actions-delete-credits-job --kubeconfig=kubeconfig.yaml
-#           kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-ratings-cronjob github-actions-delete-ratings-job --kubeconfig=kubeconfig.yaml
+      - name: Clear Cache
+        run: |
+          kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-extra-course-data-cronjob github-actions-delete-credits-job --kubeconfig=kubeconfig.yaml
+          kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-ratings-cronjob github-actions-delete-ratings-job --kubeconfig=kubeconfig.yaml
 
-#       - name: Add Grafana Helm Repo
-#         run: |
-#           helm repo add grafana https://grafana.github.io/helm-charts
-#           helm repo update
+      - name: Add Grafana Helm Repo
+        run: |
+          helm repo add grafana https://grafana.github.io/helm-charts
+          helm repo update
 
-#       - name: Deploy Grafana to Dev
-#         if: github.ref == 'refs/heads/dev'
-#         run: |
-#           KUBECONFIG=kubeconfig.yaml helm upgrade --install grafana-dev grafana/grafana -f k8s/grafana-dev-values.yaml -n dev
+      - name: Deploy Grafana to Dev
+        if: github.ref == 'refs/heads/dev'
+        run: |
+          KUBECONFIG=kubeconfig.yaml helm upgrade --install grafana-dev grafana/grafana -f k8s/grafana-dev-values.yaml -n dev
 
-#       - name: Deploy Grafana to Prod
-#         if: github.ref == 'refs/heads/main'
-#         run: |
-#           KUBECONFIG=kubeconfig.yaml helm upgrade --install grafana grafana/grafana -f k8s/grafana-default-values.yaml --set env.GF_ANALYTICS_GOOGLE_ANALYTICS_4_ID=${{ secrets.GOOGLE_ANALYTICS_ID }} -n default
+      - name: Deploy Grafana to Prod
+        if: github.ref == 'refs/heads/main'
+        run: |
+          KUBECONFIG=kubeconfig.yaml helm upgrade --install grafana grafana/grafana -f k8s/grafana-default-values.yaml --set env.GF_ANALYTICS_GOOGLE_ANALYTICS_4_ID=${{ secrets.GOOGLE_ANALYTICS_ID }} -n default

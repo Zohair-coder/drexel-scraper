@@ -7,4 +7,6 @@ grafana_data
 trash.py
 profile_output.pstat
 callgrind.out.profile
-scraperenv
+.venv
+test.py
+test.txt
