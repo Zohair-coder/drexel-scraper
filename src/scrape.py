@@ -16,6 +16,7 @@ def scrape(
     session = Session()
 
     session = login.login_with_drexel_connect(session)
+    assert "shib_idp_session" in session.cookies, "Failed to log in to Drexel Connect"
 
     data: dict[str, dict[str, Any]] = {}
 
