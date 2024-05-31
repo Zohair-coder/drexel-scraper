@@ -10,6 +10,7 @@ from helpers import send_request
 
 def login_with_drexel_connect(session: Session) -> Session:
     response = send_request(session, config.drexel_connect_base_url, method="GET")
+    assert response.status_code == 200, "Failed to get Drexel Connect login page"
     soup = BeautifulSoup(response.text, "html.parser")
 
     csrf_token = extract_csrf_token(soup)
@@ -24,11 +25,13 @@ def login_with_drexel_connect(session: Session) -> Session:
 
     # this should send the credentials and send the MFA request
     response = send_request(session, config.drexel_connect_base_url + form_action_path, data=login_payload, method="POST")
+    assert response.status_code == 200, "Failed to send request to Drexel Connect with username and password"
 
     soup = BeautifulSoup(response.text, "html.parser")
     data = parse_initial_mfa_page(soup)
 
     response = send_request(session, config.drexel_connect_base_url + data["url"], data=data["form-data"], method="POST")
+    assert response.status_code == 200, "Failed to request MFA code page from Drexel Connect"
     json_response = response.json()
 
     data = {
@@ -37,6 +40,7 @@ def login_with_drexel_connect(session: Session) -> Session:
     }
 
     response = send_request(session, config.drexel_connect_base_url + json_response["flowExURL"], data=data, method="POST")
+    assert response.status_code == 200, "Failed to receive MFA code page from Drexel Connect"
     soup = BeautifulSoup(response.text, "html.parser")
 
     parsed_data = parse_final_mfa_page(soup)
@@ -49,10 +53,9 @@ def login_with_drexel_connect(session: Session) -> Session:
         "j_mfaToken": totp_code,
     }
 
-    # session.post(
-    #     config.drexel_connect_base_url + parsed_data["url"], data=data
-    # )
-    send_request(session, config.drexel_connect_base_url + parsed_data["url"], data=data, method="POST")
+    response = send_request(session, config.drexel_connect_base_url + parsed_data["url"], data=data, method="POST")
+    assert response.status_code == 200, "Failed to send MFA code to Drexel Connect (final step)"
+
     return session
 
 
