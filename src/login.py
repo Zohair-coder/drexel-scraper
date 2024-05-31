@@ -6,7 +6,7 @@ import re
 import config
 import totp
 
-def login_with_drexel_connect(session: Session):
+def login_with_drexel_connect(session: Session) -> Session:
     response = session.get(config.drexel_connect_base_url)
     soup = BeautifulSoup(response.text, "html.parser")
 
