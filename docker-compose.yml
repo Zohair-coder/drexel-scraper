@@ -12,7 +12,9 @@ services:
       AWS_DEFAULT_REGION: us-east-1
       AWS_ACCESS_KEY_ID: "my-access-key"
       AWS_SECRET_ACCESS_KEY: "my-secret-access-key"
-      DREXEL_SCHEDULER_SHIB_IDP_SESSION_COOKIE: ${DREXEL_SCHEDULER_SHIB_IDP_SESSION_COOKIE}
+      DREXEL_USERNAME: ${DREXEL_USERNAME}
+      DREXEL_PASSWORD: ${DREXEL_PASSWORD}
+      DREXEL_MFA_SECRET_KEY: ${DREXEL_MFA_SECRET_KEY}
     volumes:
       - ./:/app
     depends_on:

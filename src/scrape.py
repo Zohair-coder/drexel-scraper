@@ -7,13 +7,14 @@ from typing import Any
 from helpers import send_request
 from parse import parse_subject_page, parse_crn_page
 import config
-
+import login
 
 def scrape(
     include_ratings: bool = False, all_colleges: bool = False
 ) -> dict[str, dict[str, Any]]:
     session = Session()
-    session.cookies.set("shib_idp_session", config.shib_idp_session_cookie)  # type: ignore
+
+    session = login.login_with_drexel_connect(session)
 
     data: dict[str, dict[str, Any]] = {}
 
