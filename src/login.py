@@ -1,6 +1,5 @@
 from requests import Session
 from bs4 import BeautifulSoup, Tag
-import sys
 import re
 
 import config
