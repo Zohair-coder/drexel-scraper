@@ -33,7 +33,7 @@ def scrape(
 
         failiure_count += 1
         if failiure_count > 20:
-            raise Exception("Failed to log in to Drexel Connect after 5 attempts")
+            raise Exception("Failed to log in to Drexel Connect after {} attempts".format(failiure_count))
         
         reset_period *= 2
         time.sleep(reset_period)
