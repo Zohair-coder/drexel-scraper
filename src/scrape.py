@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import json
 import os
 from typing import Any
+import traceback
+import time
 
 from helpers import send_request
 from parse import parse_subject_page, parse_crn_page
@@ -15,8 +17,23 @@ def scrape(
 ) -> dict[str, dict[str, Any]]:
     session = Session()
 
-    session = login.login_with_drexel_connect(session)
-    assert "shib_idp_session" in session.cookies, "Failed to log in to Drexel Connect"
+    is_logged_into_drexel_connect = False
+    failiure_count = 0
+    while not is_logged_into_drexel_connect:
+        try:
+            session = login.login_with_drexel_connect(session)
+            if "shib_idp_session" in session.cookies:
+                is_logged_into_drexel_connect = True
+                break
+        except Exception:
+            print("Error logging in to Drexel Connect: ")
+            print(traceback.format_exc())
+            print("Trying again...")
+
+        failiure_count += 1
+        if failiure_count > 5:
+            raise Exception("Failed to log in to Drexel Connect after 5 attempts")
+        time.sleep(1)
 
     data: dict[str, dict[str, Any]] = {}
 

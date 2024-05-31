@@ -10,15 +10,16 @@ def send_request(
     method: str = "GET",
     json: dict[str, Any] = {},
     headers: dict[str, str] = {},
+    data: dict[str, Any] = {},
 ) -> Response:
     try:
-        resp = send_request_helper(session, url, method, json, headers)
+        resp = send_request_helper(session, url, method, json, headers, data)
         resp.raise_for_status()
     except Exception as ex:
         retries = 10
         for _ in range(retries):
             try:
-                resp = send_request_helper(session, url, method, json, headers)
+                resp = send_request_helper(session, url, method, json, headers, data)
                 resp.raise_for_status()
             except Exception as inner_ex:
                 if (
@@ -51,12 +52,13 @@ def send_request_helper(
     method: str,
     json: dict[str, Any],
     headers: dict[str, str],
+    data: dict[str, Any],
 ) -> Response:
     timeout = 2
     if method == "GET":
         resp = session.get(url, headers=headers, timeout=timeout)
     elif method == "POST":
-        resp = session.post(url, json=json, headers=headers, timeout=timeout)
+        resp = session.post(url, json=json, data=data, headers=headers, timeout=timeout)
     else:
         raise Exception("Invalid method: {}".format(method))
     return resp
