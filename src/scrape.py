@@ -33,7 +33,7 @@ def scrape(
             print(f"Trying again in {reset_period} seconds...")
 
         failiure_count += 1
-        if failiure_count > 20:
+        if failiure_count > 8:
             raise Exception(
                 "Failed to log in to Drexel Connect after {} attempts".format(
                     failiure_count
