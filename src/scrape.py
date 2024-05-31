@@ -19,6 +19,7 @@ def scrape(
 
     is_logged_into_drexel_connect = False
     failiure_count = 0
+    reset_period = 1 # seconds
     while not is_logged_into_drexel_connect:
         try:
             session = login.login_with_drexel_connect(session)
@@ -31,9 +32,11 @@ def scrape(
             print("Trying again...")
 
         failiure_count += 1
-        if failiure_count > 5:
+        if failiure_count > 20:
             raise Exception("Failed to log in to Drexel Connect after 5 attempts")
-        time.sleep(1)
+        
+        reset_period *= 2
+        time.sleep(reset_period)
 
     data: dict[str, dict[str, Any]] = {}
 
