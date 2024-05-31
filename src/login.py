@@ -1,13 +1,15 @@
 from requests import Session
 from bs4 import BeautifulSoup, Tag
 import re
+from typing import Any
 
 import config
 import totp
+from helpers import send_request
 
 
 def login_with_drexel_connect(session: Session) -> Session:
-    response = session.get(config.drexel_connect_base_url)
+    response = send_request(session, config.drexel_connect_base_url, method="GET")
     soup = BeautifulSoup(response.text, "html.parser")
 
     csrf_token = extract_csrf_token(soup)
@@ -21,16 +23,12 @@ def login_with_drexel_connect(session: Session) -> Session:
     }
 
     # this should send the credentials and send the MFA request
-    response = session.post(
-        config.drexel_connect_base_url + form_action_path, data=login_payload
-    )
+    response = send_request(session, config.drexel_connect_base_url + form_action_path, data=login_payload, method="POST")
 
     soup = BeautifulSoup(response.text, "html.parser")
     data = parse_initial_mfa_page(soup)
 
-    response = session.post(
-        config.drexel_connect_base_url + data["url"], data=data["form-data"]
-    )
+    response = send_request(session, config.drexel_connect_base_url + data["url"], data=data["form-data"], method="POST")
     json_response = response.json()
 
     data = {
@@ -38,9 +36,7 @@ def login_with_drexel_connect(session: Session) -> Session:
         "_eventId": json_response["actValue"],
     }
 
-    response = session.post(
-        config.drexel_connect_base_url + json_response["flowExURL"], data=data
-    )
+    response = send_request(session, config.drexel_connect_base_url + json_response["flowExURL"], data=data, method="POST")
     soup = BeautifulSoup(response.text, "html.parser")
 
     parsed_data = parse_final_mfa_page(soup)
@@ -53,10 +49,10 @@ def login_with_drexel_connect(session: Session) -> Session:
         "j_mfaToken": totp_code,
     }
 
-    response = session.post(
-        config.drexel_connect_base_url + parsed_data["url"], data=data
-    )
-
+    # session.post(
+    #     config.drexel_connect_base_url + parsed_data["url"], data=data
+    # )
+    send_request(session, config.drexel_connect_base_url + parsed_data["url"], data=data, method="POST")
     return session
 
 
@@ -98,7 +94,7 @@ def extract_form_action_path(soup: BeautifulSoup) -> str:
     return form_action_path
 
 
-def parse_initial_mfa_page(soup: BeautifulSoup) -> dict[str, str]:
+def parse_initial_mfa_page(soup: BeautifulSoup) -> dict[str, Any]:
     data = {}
 
     # get the first script tag that isn't empty
