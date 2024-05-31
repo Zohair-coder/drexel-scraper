@@ -29,12 +29,12 @@ def scrape(
             print("Error logging in to Drexel Connect: ")
             print(traceback.format_exc())
             print("Trying again...")
-        
+
         failiure_count += 1
         if failiure_count > 5:
             raise Exception("Failed to log in to Drexel Connect after 5 attempts")
         time.sleep(1)
-        
+
     data: dict[str, dict[str, Any]] = {}
 
     if not all_colleges:
