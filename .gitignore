@@ -8,3 +8,5 @@ trash.py
 profile_output.pstat
 callgrind.out.profile
 .venv
+test.py
+test.txt

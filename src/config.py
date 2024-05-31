@@ -15,13 +15,17 @@ quarter = "45"
 # example values = CI, A, AS
 college_code = "CI"
 
+# Drexel Connect Credentials
+drexel_username = os.environ["DREXEL_USERNAME"]
+drexel_password = os.environ["DREXEL_PASSWORD"]
+drexel_mfa_secret_key = os.environ["DREXEL_MFA_SECRET_KEY"]
+
 # URL's
 tms_base_url = "https://termmasterschedule.drexel.edu"
 tms_home_url = tms_base_url + "/webtms_du"
 tms_quarter_url = tms_home_url + "/collegesSubjects/" + year + quarter
 
-# Cookies
-shib_idp_session_cookie = os.environ["DREXEL_SCHEDULER_SHIB_IDP_SESSION_COOKIE"]
+drexel_connect_base_url = "https://connect.drexel.edu"
 
 # Email AWS Configuration
 topic_arn = os.getenv("DREXEL_SCHEDULER_TOPIC_ARN")
