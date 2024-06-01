@@ -1,4 +1,5 @@
 from requests import Session
+from requests.exceptions import JSONDecodeError
 from bs4 import BeautifulSoup, Tag
 import re
 from typing import Any
@@ -46,7 +47,15 @@ def login_with_drexel_connect(session: Session) -> Session:
     assert (
         response.status_code == 200
     ), "Failed to request MFA code page from Drexel Connect"
-    json_response = response.json()
+
+    try:
+        json_response = response.json()
+    except JSONDecodeError:
+        raise Exception(
+            "Failed to decode JSON response from Drexel Connect. Response: {}".format(
+                response.text
+            )
+        )
 
     data = {
         json_response["csrfN"]: json_response["csrfV"],
