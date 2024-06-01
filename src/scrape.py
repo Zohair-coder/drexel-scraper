@@ -27,6 +27,10 @@ def scrape(
             if "shib_idp_session" in session.cookies:
                 is_logged_into_drexel_connect = True
                 break
+            else:
+                print(
+                    f"shib_idp_session cookie not found in session. Trying again in {reset_period} seconds..."
+                )
         except Exception:
             print("Error logging in to Drexel Connect: ")
             print(traceback.format_exc())
