@@ -3,4 +3,4 @@ dbName: schedulerdb
 host: scheduler.zohair.dev
 tlsSecretName: grafana-tls
 serviceName: grafana
-schedule: "7,27,47 * * * *"
+schedule: "10,30,50 * * * *"
