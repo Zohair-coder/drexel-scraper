@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: drexel-scheduler-cronjob
 spec:
-  schedule: "10,30,50 * * * *"
+  schedule: {{ .Values.schedule }}
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
   timeZone: "US/Eastern"
