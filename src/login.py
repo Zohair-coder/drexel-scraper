@@ -38,6 +38,8 @@ def login_with_drexel_connect(session: Session) -> Session:
     soup = BeautifulSoup(response.text, "html.parser")
     data = parse_initial_mfa_page(soup)
 
+    # the intial MFA page does not have the 'verification code' form field
+    # the following two requests are sent to fetch the html page with the 'verification code' form field
     response = send_request(
         session,
         config.drexel_connect_base_url + data["url"],
@@ -68,6 +70,7 @@ def login_with_drexel_connect(session: Session) -> Session:
         data=data,
         method="POST",
     )
+    # the response should be in HTML format that contains the 'verification code' form field
     assert (
         response.status_code == 200
     ), "Failed to receive MFA code page from Drexel Connect"
@@ -83,6 +86,7 @@ def login_with_drexel_connect(session: Session) -> Session:
         "j_mfaToken": totp_code,
     }
 
+    # this request sends the MFA code to Drexel Connect
     response = send_request(
         session,
         config.drexel_connect_base_url + parsed_data["url"],
@@ -93,6 +97,7 @@ def login_with_drexel_connect(session: Session) -> Session:
         response.status_code == 200
     ), "Failed to send MFA code to Drexel Connect (final step)"
 
+    # the session should now have the required cookies to access the TMS website 
     return session
 
 
