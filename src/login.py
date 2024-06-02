@@ -97,7 +97,7 @@ def login_with_drexel_connect(session: Session) -> Session:
         response.status_code == 200
     ), "Failed to send MFA code to Drexel Connect (final step)"
 
-    # the session should now have the required cookies to access the TMS website 
+    # the session should now have the required cookies to access the TMS website
     return session
 
 
