@@ -21,7 +21,7 @@ grafana.ini:
     news_feed_enabled: false
 
   users:
-    default_theme: dark
+    default_theme: light
 
 persistence:
   enabled: true
