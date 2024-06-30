@@ -23,14 +23,6 @@
         "credits": "3.00",
         "prereqs": "CS 265  Minimum Grade: C"
     },
-    "40957": {
-        "credits": "3.00",
-        "prereqs": "CS 265  Minimum Grade: C"
-    },
-    "40958": {
-        "credits": "3.00",
-        "prereqs": "CS 265  Minimum Grade: C"
-    },
     "40710": {
         "credits": "3.00",
         "prereqs": "CS 172  Minimum Grade: C or CS 176  Minimum Grade: C or ECE 105  Minimum Grade: D or ECEC 201  Minimum Grade: D"
@@ -111,10 +103,6 @@
         "credits": "3.00",
         "prereqs": "CS 502  Minimum Grade: B"
     },
-    "41903": {
-        "credits": "3.00",
-        "prereqs": "CS 591  Minimum Grade: C"
-    },
     "41904": {
         "credits": "3.00",
         "prereqs": "CS 591  Minimum Grade: C"
@@ -127,10 +115,6 @@
         "credits": "3.00",
         "prereqs": "INFO 629  Minimum Grade: C  (INFO 629  may be taken concurrently with CS 614) or CS 613  Minimum Grade: C  (CS 613  may be taken concurrently with CS 614) or DSCI 631  Minimum Grade: C  (DSCI 631  may be taken concurrently with CS 614)"
     },
-    "41167": {
-        "credits": "3.00",
-        "prereqs": "CS 613  Minimum Grade: C"
-    },
     "41168": {
         "credits": "3.00",
         "prereqs": "CS 613  Minimum Grade: C"
@@ -142,6 +126,78 @@
     "40965": {
         "credits": "3.00",
         "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "42355": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42357": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42359": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42360": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42361": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42362": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42363": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42364": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42670": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42365": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42367": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42366": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42368": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42369": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42370": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42371": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42373": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "42374": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
     },
     "41373": {
         "credits": "3.00",
@@ -195,10 +251,6 @@
         "credits": "3.00",
         "prereqs": ""
     },
-    "40767": {
-        "credits": "3.00",
-        "prereqs": ""
-    },
     "40768": {
         "credits": "3.00",
         "prereqs": ""
@@ -231,6 +283,10 @@
         "credits": "3.00",
         "prereqs": "DSCI 501  Minimum Grade: C  (DSCI 501  may be taken concurrently with DSCI 521)"
     },
+    "42276": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
     "42118": {
         "credits": "3.00",
         "prereqs": ""
@@ -250,10 +306,6 @@
     "41613": {
         "credits": "3.00",
         "prereqs": "DSCI 521  Minimum Grade: C  (DSCI 521  may be taken concurrently with DSCI 632)"
-    },
-    "41913": {
-        "credits": "3.00",
-        "prereqs": "DSCI 521  Minimum Grade: C"
     },
     "41914": {
         "credits": "3.00",
@@ -279,10 +331,6 @@
         "credits": "3.00",
         "prereqs": ""
     },
-    "40975": {
-        "credits": "3.00",
-        "prereqs": "INFO 151  Minimum Grade: D or CS 140  Minimum Grade: D"
-    },
     "40833": {
         "credits": "3.00",
         "prereqs": "INFO 151  Minimum Grade: D or CS 140  Minimum Grade: D"
@@ -292,6 +340,10 @@
         "prereqs": "INFO 101  Minimum Grade: D"
     },
     "40107": {
+        "credits": "3.00",
+        "prereqs": "INFO 101  Minimum Grade: D or SE 210  Minimum Grade: D"
+    },
+    "42634": {
         "credits": "3.00",
         "prereqs": "INFO 101  Minimum Grade: D or SE 210  Minimum Grade: D"
     },
@@ -338,10 +390,6 @@
     "40770": {
         "credits": "3.00",
         "prereqs": "INFO 365  Minimum Grade: D"
-    },
-    "41919": {
-        "credits": "3.00",
-        "prereqs": "(INFO 200  Minimum Grade: D or SE 210  Minimum Grade: D ) and (CS 172  Minimum Grade: D or CS 265  Minimum Grade: D or INFO 152  Minimum Grade: D or SE 103  Minimum Grade: D or CS 176  Minimum Grade: D )"
     },
     "41622": {
         "credits": "3.00",
@@ -419,10 +467,6 @@
         "credits": "3.00",
         "prereqs": "INFO 508  Minimum Grade: C  (INFO 508  may be taken concurrently with INFO 690) or INFO 608  Minimum Grade: C  (INFO 608  may be taken concurrently with INFO 690) or DSRE 620  Minimum Grade: C  (DSRE 620  may be taken concurrently with INFO 690)"
     },
-    "41627": {
-        "credits": "3.00",
-        "prereqs": "INFO 540  Minimum Grade: C or INFO 590  Minimum Grade: C or CS 502  Minimum Grade: C or INFO 517  Minimum Grade: C"
-    },
     "40834": {
         "credits": "3.00",
         "prereqs": "INFO 540  Minimum Grade: C or INFO 590  Minimum Grade: C or CS 502  Minimum Grade: C or INFO 517  Minimum Grade: C"
@@ -450,118 +494,6 @@
     "40772": {
         "credits": "3.00",
         "prereqs": ""
-    },
-    "41907": {
-        "credits": "3.00",
-        "prereqs": "CS 172  Minimum Grade: C or CS 176  Minimum Grade: C"
-    },
-    "41169": {
-        "credits": "3.00",
-        "prereqs": "CS 504  Minimum Grade: C"
-    },
-    "41170": {
-        "credits": "3.00",
-        "prereqs": "CS 504  Minimum Grade: C"
-    },
-    "41911": {
-        "credits": "3.00",
-        "prereqs": "SE 570  Minimum Grade: C"
-    },
-    "41912": {
-        "credits": "3.00",
-        "prereqs": "SE 570  Minimum Grade: C"
-    },
-    "42355": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42356": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42357": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42358": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42359": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42360": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42361": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42362": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42363": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42364": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42365": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42367": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42366": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42368": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42369": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42370": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42371": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42372": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42373": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42374": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42375": {
-        "credits": "1.00 TO 12.00",
-        "prereqs": ""
-    },
-    "42276": {
-        "credits": "3.00",
-        "prereqs": ""
-    },
-    "42634": {
-        "credits": "3.00",
-        "prereqs": "INFO 101  Minimum Grade: D or SE 210  Minimum Grade: D"
     },
     "42376": {
         "credits": "1.00 TO 12.00",
@@ -618,5 +550,25 @@
     "42486": {
         "credits": "1.00 TO 12.00",
         "prereqs": ""
+    },
+    "41907": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C or CS 176  Minimum Grade: C"
+    },
+    "41169": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "41170": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "41911": {
+        "credits": "3.00",
+        "prereqs": "SE 570  Minimum Grade: C"
+    },
+    "41912": {
+        "credits": "3.00",
+        "prereqs": "SE 570  Minimum Grade: C"
     }
 }
