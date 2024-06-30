@@ -18,7 +18,8 @@ college_code = "CI"
 # Drexel Connect Credentials
 drexel_username = os.environ["DREXEL_USERNAME"]
 drexel_password = os.environ["DREXEL_PASSWORD"]
-drexel_mfa_secret_key = os.environ["DREXEL_MFA_SECRET_KEY"]
+# This is not required if the user is using a separate authenticator app and will manually approve the login attempt
+drexel_mfa_secret_key = os.environ["DREXEL_MFA_SECRET_KEY"] if "DREXEL_MFA_SECRET_KEY" in os.environ else None
 
 # URL's
 tms_base_url = "https://termmasterschedule.drexel.edu"

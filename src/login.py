@@ -78,12 +78,15 @@ def login_with_drexel_connect(session: Session) -> Session:
 
     parsed_data = parse_final_mfa_page(soup)
 
-    totp_code = totp.get_token(config.drexel_mfa_secret_key)
+    if config.drexel_mfa_secret_key != None:
+        mfa_token = totp.get_token(config.drexel_mfa_secret_key)
+    else:
+        mfa_token = input("Please input your MFA verification code: ")
 
     data = {
         "csrf_token": parsed_data["csrf_token"],
         "_eventId": "proceed",
-        "j_mfaToken": totp_code,
+        "j_mfaToken": mfa_token,
     }
 
     # this request sends the MFA code to Drexel Connect
