@@ -17,15 +17,22 @@ quarter = "15"
 college_code = "CI"
 
 # Warn users if they have missing required environment variables
-environ_help_url = "https://github.com/Zohair-coder/drexel-scraper?tab=readme-ov-file#authentication"
+environ_help_url = (
+    "https://github.com/Zohair-coder/drexel-scraper?tab=readme-ov-file#authentication"
+)
+
+
 def get_environ(key: str, required: bool = True) -> str:
     if key in os.environ:
         return os.environ[key]
     elif required:
-        print(f"{key} is missing from your environment variables and is required to run this script. See {environ_help_url} for more information and help.")
+        print(
+            f"{key} is missing from your environment variables and is required to run this script. See {environ_help_url} for more information and help."
+        )
         sys.exit(1)
     else:
         return ""
+
 
 # Drexel Connect Credentials
 drexel_username = get_environ("DREXEL_USERNAME")

@@ -16,9 +16,13 @@ def get_token(secret: str) -> str:
     h = (struct.unpack(">I", h[o : o + 4])[0] & 0x7FFFFFFF) % 1000000
     return str(h).zfill(6)
 
+
 if __name__ == "__main__":
     import config
+
     if config.drexel_mfa_secret_key is not None:
         print(get_token(config.drexel_mfa_secret_key))
     else:
-        print(f"Please set your MFA secret key to run this script. See {config.environ_help_url} for more information and help")
+        print(
+            f"Please set your MFA secret key to run this script. See {config.environ_help_url} for more information and help"
+        )
