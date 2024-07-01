@@ -54,7 +54,7 @@ There are two ways to provide MFA for the script to authenticate with. The first
 
 ###### Authenticate manually
 
-You will authenticate the scraper manually as if you were logging into Drexel One, using a one-time code either from an authenticator app or that is texted to you. After setting your Drexel username and password, run the scraper as expained above, and you will be prompted for your verification code.
+You will authenticate the scraper manually as if you were logging into Drexel One, using a one-time code either from an authenticator app or that is texted to you. After setting the `DREXEL_USERNAME` and `DREXEL_PASSWORD` environment variables, run the scraper as explained [above](#Usage), and you will be prompted for your verification code.
 
 ###### Authenticate using a secret key
 
@@ -72,7 +72,7 @@ If you set this up, you will not need to manually enter an authentication code e
 10. Enter this code into the Microsoft website, and select 'Next'
 11. 'Authenticator app' with TOTP should have been added to the list of available methods.
 
-Now, when you run the scraper as explained above, it should authenticate itself automatically using this secret key.
+Now, when you run the scraper as explained [above](#Usage), it should authenticate itself automatically using this secret key.
 
 #### All Colleges
 
