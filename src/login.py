@@ -78,7 +78,7 @@ def login_with_drexel_connect(session: Session) -> Session:
 
     parsed_data = parse_final_mfa_page(soup)
 
-    if config.drexel_mfa_secret_key != None:
+    if config.drexel_mfa_secret_key is not None:
         mfa_token = totp.get_token(config.drexel_mfa_secret_key)
     else:
         mfa_token = input("Please input your MFA verification code: ")

@@ -18,4 +18,7 @@ def get_token(secret: str) -> str:
 
 if __name__ == "__main__":
     import config
-    print(get_token(config.drexel_mfa_secret_key))
+    if config.drexel_mfa_secret_key is not None:
+        print(get_token(config.drexel_mfa_secret_key))
+    else:
+        print(f"Please set your MFA secret key to run this script. See {config.environ_help_url} for more information and help")

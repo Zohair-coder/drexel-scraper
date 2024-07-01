@@ -18,7 +18,7 @@ college_code = "CI"
 
 # Warn users if they have missing required environment variables
 environ_help_url = "https://github.com/Zohair-coder/drexel-scraper?tab=readme-ov-file#authentication"
-def get_environ(key: str, required = True) -> str:
+def get_environ(key: str, required: bool = True) -> str:
     if key in os.environ:
         return os.environ[key]
     elif required:
