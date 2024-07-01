@@ -18,20 +18,20 @@ college_code = "CI"
 
 # Warn users if they have missing required environment variables
 environ_help_url = "https://github.com/Zohair-coder/drexel-scraper?tab=readme-ov-file#authentication"
-def get_environ(key, required = True):
+def get_environ(key: str, required = True) -> str:
     if key in os.environ:
         return os.environ[key]
     elif required:
         print(f"{key} is missing from your environment variables and is required to run this script. See {environ_help_url} for more information and help.")
         sys.exit(1)
     else:
-        return None
+        return ""
 
 # Drexel Connect Credentials
 drexel_username = get_environ("DREXEL_USERNAME")
 drexel_password = get_environ("DREXEL_PASSWORD")
 # This is not required if the user is using a separate authenticator app and will manually approve the login attempt
-drexel_mfa_secret_key = get_environ("DREXEL_MFA_SECRET_KEY", False)
+drexel_mfa_secret_key = get_environ("DREXEL_MFA_SECRET_KEY", False) or None
 
 # URL's
 tms_base_url = "https://termmasterschedule.drexel.edu"
