@@ -27,7 +27,8 @@ pip install -r requirements.txt
 
 ## Usage
 
-To run the scraper, simply run:
+First, [set up authentication](#Authentication).
+Then, to run the scraper, simply run:
 
 ###### Mac/Linux
 ```bash
@@ -42,6 +43,36 @@ python src/main.py
 The scraper will output a JSON file called `data.json` in the same directory as the scraper.
 
 You can modify the scraper to scrape other terms by changing the `year`, `quarter`, and `college_code` variables in `src/config.py`.
+
+#### Authentication
+
+Since the term master schedule is only accessible to logged-in Drexel students, to run the scraper, you will need to provide your Drexel credentials as well as provide multi-factor authentication (MFA).
+
+To provide your Drexel credentials, set the environment variable `DREXEL_USERNAME` to your Drexel username (abc123) and `DREXEL_PASSWORD` to the password you use to login to Drexel One. You can follow [this](https://phoenixnap.com/kb/windows-set-environment-variable) guide for Windows, and [this](https://phoenixnap.com/kb/set-environment-variable-mac) guide for MacOS to set environment variables.
+
+There are two ways to provide MFA for the script to authenticate with. The first is easier if you're looking to run the script manually and quickly. The second is better if you are going to be running the script frequently, or if it needs to be automated.
+
+###### Authenticate manually
+
+You will authenticate the scraper manually as if you were logging into Drexel One, using a one-time code either from an authenticator app or that is texted to you. After setting the `DREXEL_USERNAME` and `DREXEL_PASSWORD` environment variables, run the scraper as explained [above](#Usage), and you will be prompted for your verification code.
+
+###### Authenticate using a secret key
+
+If you set this up, you will not need to manually enter an authentication code each time you run the scraper. 
+
+1. Go to [connect.drexel.edu](connect.drexel.edu). 
+2. Click 'Help & Settings', then 'Change MFA settings'.
+3. Log in to the Microsoft portal, then click 'Add sign-in method' on the 'Security info' tab.
+4. Select 'Authenticator app' for the method, and click 'Add'.
+5. Select 'I want to use a different authenticator app', and then 'Next'.
+6. Select 'Can't scan image?' when prompted with a QR code, and you should see an Account name and Secret key.
+7. Set your `DREXEL_MFA_SECRET_KEY` environment variable to the given Secret key.
+8. Select 'Next', you should be prompted to enter an authentication code.
+9. With the secret key environment variable set, run `python3 src/totp.py` which will generate a one-time code.
+10. Enter this code into the Microsoft website, and select 'Next'
+11. 'Authenticator app' with TOTP should have been added to the list of available methods.
+
+Now, when you run the scraper as explained [above](#Usage), it should authenticate itself automatically using this secret key.
 
 #### All Colleges
 
