@@ -16,8 +16,8 @@ def main() -> None:
         description="Scrape data from Drexel Term Master Schedule and save it to a JSON file.",
     )
     parser.add_argument(
-        "-o",
-        "--output-file",
+        "-f",
+        "--file",
         metavar="FILE",
         action="store",
         default="data.json",
