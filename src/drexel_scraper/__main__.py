@@ -9,10 +9,11 @@ import os
 import traceback
 import argparse
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         prog="python3 src/main.py",
-        description="Scrape data from Drexel Term Master Schedule and save it to a JSON file."
+        description="Scrape data from Drexel Term Master Schedule and save it to a JSON file.",
     )
     parser.add_argument(
         "-o",
@@ -64,6 +65,7 @@ def main() -> None:
                 print("Error sending exception email")
         sys.exit(1)
 
+
 def start(args: argparse.Namespace) -> None:
     start_time = time.time()
 
@@ -86,6 +88,7 @@ def start(args: argparse.Namespace) -> None:
         print("Done!")
 
     print("--- {} seconds ---".format(time.time() - start_time))
+
 
 if __name__ == "__main__":
     main()
