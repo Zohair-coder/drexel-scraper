@@ -24,9 +24,9 @@ def main() -> None:
         help="File to write the data to (include the .json extension in the file name)",
     )
     parser.add_argument(
-        "--ratings",
+        "--no-ratings",
         action="store_true",
-        help="Include Rate My Professor ratings in the data",
+        help="Do not include Rate My Professor ratings in the data",
     )
     parser.add_argument(
         "--all-colleges",
@@ -69,16 +69,17 @@ def main() -> None:
 def start(args: argparse.Namespace) -> None:
     start_time = time.time()
 
-    data = scrape(include_ratings=args.ratings, all_colleges=args.all_colleges)
+    include_ratings = not args.no_ratings
+    data = scrape(include_ratings=include_ratings, all_colleges=args.all_colleges)
 
     assert len(data) > 0, "No data found"
     print("Found {} items".format(len(data)))
 
     if not args.no_file:
-        with open(args.output_file, "w") as f:
+        with open(args.file, "w") as f:
             json.dump(data, f, indent=4)
 
-        print(f"Data written to {args.output_file}")
+        print(f"Data written to {args.file}")
 
     if args.db:
         print("Time taken to scrape data: {} seconds".format(time.time() - start_time))
