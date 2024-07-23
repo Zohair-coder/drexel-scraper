@@ -29,11 +29,6 @@ def main() -> None:
         help="Do not include Rate My Professor ratings in the data",
     )
     parser.add_argument(
-        "--all-colleges",
-        action="store_true",
-        help="Include all colleges in the data, not just the one in the config.py file",
-    )
-    parser.add_argument(
         "--no-file",
         action="store_true",
         help="Do not write the data to a file",
@@ -70,7 +65,7 @@ def start(args: argparse.Namespace) -> None:
     start_time = time.time()
 
     include_ratings = not args.no_ratings
-    data = scrape(include_ratings=include_ratings, all_colleges=args.all_colleges)
+    data = scrape(include_ratings=include_ratings)
 
     assert len(data) > 0, "No data found"
     print("Found {} items".format(len(data)))

@@ -13,7 +13,7 @@ import drexel_scraper.login as login
 
 
 def scrape(
-    include_ratings: bool = False, all_colleges: bool = False
+    include_ratings: bool = False
 ) -> dict[str, dict[str, Any]]:
     session = Session()
 
@@ -48,10 +48,7 @@ def scrape(
 
     data: dict[str, dict[str, Any]] = {}
 
-    if not all_colleges:
-        college_codes = [config.college_code]
-    else:
-        college_codes = get_all_college_codes(session)
+    college_codes = get_all_college_codes(session)
 
     for college_code in college_codes:
         response = go_to_college_page(session, college_code)
