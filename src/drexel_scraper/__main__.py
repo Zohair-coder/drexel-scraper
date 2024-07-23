@@ -1,4 +1,6 @@
-from scrape import scrape
+from drexel_scraper.scrape import scrape
+import drexel_scraper.emailer as emailer
+import drexel_scraper.db as db
 
 import json
 import sys
@@ -7,35 +9,8 @@ import os
 import cProfile
 import traceback
 import argparse
-import emailer
-import db
 
-
-def main(args: argparse.Namespace) -> None:
-    start_time = time.time()
-
-    data = scrape(include_ratings=args.ratings, all_colleges=args.all_colleges)
-
-    assert len(data) > 0, "No data found"
-    print("Found {} items".format(len(data)))
-
-    if not args.no_file:
-        with open(args.output_file, "w") as f:
-            json.dump(data, f, indent=4)
-
-        print(f"Data written to {args.output_file}")
-
-    if args.db:
-        print("Time taken to scrape data: {} seconds".format(time.time() - start_time))
-        print()
-        print("Updating database...")
-        db.populate_db(data)
-        print("Done!")
-
-    print("--- {} seconds ---".format(time.time() - start_time))
-
-
-if __name__ == "__main__":
+def main() -> None:
     parser = argparse.ArgumentParser(
         prog="python3 src/main.py",
         description="Scrape data from Drexel Term Master Schedule and save it to a JSON file."
@@ -79,7 +54,7 @@ if __name__ == "__main__":
     try:
         if not os.path.exists("performance"):
             os.makedirs("performance")
-        cProfile.run("main(args)", "performance/profile_output.pstat")
+        cProfile.run("start(args)", "performance/profile_output.pstat")
     except Exception:
         trace = traceback.format_exc()
         print(trace)
@@ -91,3 +66,29 @@ if __name__ == "__main__":
             else:
                 print("Error sending exception email")
         sys.exit(1)
+
+def start(args: argparse.Namespace) -> None:
+    start_time = time.time()
+
+    data = scrape(include_ratings=args.ratings, all_colleges=args.all_colleges)
+
+    assert len(data) > 0, "No data found"
+    print("Found {} items".format(len(data)))
+
+    if not args.no_file:
+        with open(args.output_file, "w") as f:
+            json.dump(data, f, indent=4)
+
+        print(f"Data written to {args.output_file}")
+
+    if args.db:
+        print("Time taken to scrape data: {} seconds".format(time.time() - start_time))
+        print()
+        print("Updating database...")
+        db.populate_db(data)
+        print("Done!")
+
+    print("--- {} seconds ---".format(time.time() - start_time))
+
+if __name__ == "__main__":
+    main()

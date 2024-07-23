@@ -6,10 +6,10 @@ from typing import Any
 import traceback
 import time
 
-from helpers import send_request
-from parse import parse_subject_page, parse_crn_page
-import config
-import login
+from drexel_scraper.helpers import send_request
+from drexel_scraper.parse import parse_subject_page, parse_crn_page
+import drexel_scraper.config as config
+import drexel_scraper.login as login
 
 
 def scrape(

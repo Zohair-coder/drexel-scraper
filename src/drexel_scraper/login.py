@@ -4,9 +4,9 @@ from bs4 import BeautifulSoup, Tag
 import re
 from typing import Any
 
-import config
-import totp
-from helpers import send_request
+import drexel_scraper.config as config
+import drexel_scraper.totp as totp
+from drexel_scraper.helpers import send_request
 
 
 def login_with_drexel_connect(session: Session) -> Session:

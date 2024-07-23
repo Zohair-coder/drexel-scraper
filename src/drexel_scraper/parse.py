@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 from bs4.element import Tag
-from ratings import rating
+from drexel_scraper.ratings import rating
 from datetime import datetime
 import re
 from typing import Any

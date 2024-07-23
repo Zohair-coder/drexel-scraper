@@ -4,7 +4,7 @@
 # AWS_SECRET_ACCESS_KEY
 
 import boto3
-import config
+import drexel_scraper.config as config
 
 
 def send_email(subject: str, body: str) -> bool:

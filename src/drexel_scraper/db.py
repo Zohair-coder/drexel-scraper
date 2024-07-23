@@ -2,7 +2,7 @@ import psycopg2
 from psycopg2 import sql
 from psycopg2.extensions import cursor, connection
 
-from db_config import (
+from drexel_scraper.db_config import (
     DBNAME,
     USER,
     PASSWORD,

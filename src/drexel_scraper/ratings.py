@@ -3,7 +3,7 @@
 # I found out that the GraphQL API is used by inspecting the network tab in the browser
 
 import requests
-from helpers import send_request
+from drexel_scraper.helpers import send_request
 from typing import Any, cast
 
 DREXEL_RMP_ID = "U2Nob29sLTE1MjE="
