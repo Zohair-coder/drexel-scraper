@@ -44,6 +44,8 @@ The scraper will output a JSON file called `data.json` in the same directory as 
 
 You can modify the scraper to scrape other terms by changing the `year`, `quarter`, and `college_code` variables in `src/config.py`.
 
+To view all the options that the scraper supports, run `python3 src/main.py --help` on Mac/Linux, or `python src/main.py --help` on Windows.  
+
 #### Authentication
 
 Since the term master schedule is only accessible to logged-in Drexel students, to run the scraper, you will need to provide your Drexel credentials as well as provide multi-factor authentication (MFA).

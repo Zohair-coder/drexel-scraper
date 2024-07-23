@@ -17,27 +17,36 @@ def main(args: argparse.Namespace) -> None:
     data = scrape(include_ratings=args.ratings, all_colleges=args.all_colleges)
 
     assert len(data) > 0, "No data found"
-
-    with open("data.json", "w") as f:
-        json.dump(data, f, indent=4)
-
     print("Found {} items".format(len(data)))
-    print("Data written to data.json")
+
+    if not args.no_file:
+        with open(args.output_file, "w") as f:
+            json.dump(data, f, indent=4)
+
+        print(f"Data written to {args.output_file}")
 
     if args.db:
         print("Time taken to scrape data: {} seconds".format(time.time() - start_time))
         print()
         print("Updating database...")
         db.populate_db(data)
-
-    print("Done!")
+        print("Done!")
 
     print("--- {} seconds ---".format(time.time() - start_time))
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Scrape data from Term Master Schedule and save it to a data.json file."
+        prog="python3 src/main.py",
+        description="Scrape data from Drexel Term Master Schedule and save it to a JSON file."
+    )
+    parser.add_argument(
+        "-o",
+        "--output-file",
+        metavar="FILE",
+        action="store",
+        default="data.json",
+        help="File to write the data to (include the .json extension in the file name)",
     )
     parser.add_argument(
         "--ratings",
@@ -48,6 +57,11 @@ if __name__ == "__main__":
         "--all-colleges",
         action="store_true",
         help="Include all colleges in the data, not just the one in the config.py file",
+    )
+    parser.add_argument(
+        "--no-file",
+        action="store_true",
+        help="Do not write the data to a file",
     )
     parser.add_argument(
         "--db",
