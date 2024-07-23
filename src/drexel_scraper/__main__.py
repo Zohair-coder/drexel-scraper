@@ -6,7 +6,6 @@ import json
 import sys
 import time
 import os
-import cProfile
 import traceback
 import argparse
 
@@ -52,9 +51,7 @@ def main() -> None:
     args = parser.parse_args()
 
     try:
-        if not os.path.exists("performance"):
-            os.makedirs("performance")
-        cProfile.run("start(args)", "performance/profile_output.pstat")
+        start(args)
     except Exception:
         trace = traceback.format_exc()
         print(trace)
