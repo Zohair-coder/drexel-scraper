@@ -1,6 +1,8 @@
+from __future__ import annotations # https://stackoverflow.com/a/49872353
 from drexel_scraper.scrape import scrape
 import drexel_scraper.emailer as emailer
 import drexel_scraper.db as db
+from drexel_scraper.config import Config
 
 import json
 import sys
@@ -115,14 +117,15 @@ def main() -> None:
             )
 
     args = parser.parse_args()
+    config = Config.generate_config_from_args(args)
 
     try:
-        start(args)
+        start(config)
     except Exception:
         trace = traceback.format_exc()
         print(trace)
 
-        if args.email:
+        if config.should_send_email_on_exception:
             environment = os.environ.get("ENVIRONMENT", "UNKNOWN")
             if emailer.send_email(f"{environment}: Error running scraper", trace):
                 print("Exeception email sent")
@@ -130,24 +133,21 @@ def main() -> None:
                 print("Error sending exception email")
         sys.exit(1)
 
-def start(args: configargparse.Namespace) -> None:
+def start(config: Config) -> None:
     start_time = time.time()
-    # config = Config(vars(args))
-    sys.exit(0)
 
-    include_ratings = not args.no_ratings
-    data = scrape(include_ratings=include_ratings)
+    data = scrape(config)
 
     assert len(data) > 0, "No data found"
     print("Found {} items".format(len(data)))
 
-    if not args.no_file:
-        with open(args.file, "w") as f:
+    if config.should_write_to_file:
+        with open(config.output_file_name, "w") as f:
             json.dump(data, f, indent=4)
 
-        print(f"Data written to {args.file}")
+        print(f"Data written to {config.output_file_name}")
 
-    if args.db:
+    if config.should_write_to_db:
         print("Time taken to scrape data: {} seconds".format(time.time() - start_time))
         print()
         print("Updating database...")

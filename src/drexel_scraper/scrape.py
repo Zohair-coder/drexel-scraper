@@ -8,11 +8,10 @@ import time
 
 from drexel_scraper.helpers import send_request
 from drexel_scraper.parse import parse_subject_page, parse_crn_page
-import drexel_scraper.config as config
+from drexel_scraper.config import Config
 import drexel_scraper.login as login
 
-
-def scrape(include_ratings: bool = False) -> dict[str, dict[str, Any]]:
+def scrape(config: Config) -> dict[str, dict[str, Any]]:
     session = Session()
 
     is_logged_into_drexel_connect = False
@@ -46,16 +45,16 @@ def scrape(include_ratings: bool = False) -> dict[str, dict[str, Any]]:
 
     data: dict[str, dict[str, Any]] = {}
 
-    college_codes = get_all_college_codes(session)
+    college_codes = get_all_college_codes(session, config)
 
     for college_code in college_codes:
-        response = go_to_college_page(session, college_code)
-        scrape_all_subjects(session, data, response.text, include_ratings)
+        response = go_to_college_page(session, college_code, config)
+        scrape_all_subjects(session, data, response.text, config)
 
     return data
 
 
-def get_all_college_codes(session: Session) -> list[str]:
+def get_all_college_codes(session: Session, config: Config) -> list[str]:
     response = send_request(session, config.get_college_page_url(""))
     soup = get_soup(response.text)
     college_codes = []
@@ -72,12 +71,12 @@ def get_soup(html: str) -> BeautifulSoup:
     return BeautifulSoup(html, "html.parser")
 
 
-def go_to_college_page(session: Session, college_code: str) -> Response:
+def go_to_college_page(session: Session, college_code: str, config: Config) -> Response:
     return send_request(session, config.get_college_page_url(college_code))
 
 
 def scrape_all_subjects(
-    session: Session, data: dict[str, dict[str, Any]], html: str, include_ratings: bool
+    session: Session, data: dict[str, dict[str, Any]], html: str, config: Config
 ) -> dict[str, dict[str, Any]]:
     try:
         with open("cache/extra_course_data_cache.json", "r") as f:
@@ -100,7 +99,7 @@ def scrape_all_subjects(
                 session, config.tms_base_url + subject_page_link["href"]
             )
             parsed_crns = parse_subject_page(
-                response.text, data, include_ratings, ratings_cache
+                response.text, data, config.include_ratings, ratings_cache
             )
         except Exception as e:
             raise Exception(
