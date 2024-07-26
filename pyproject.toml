@@ -19,7 +19,7 @@ requires-python = ">=3.10"
 license = "MIT"
 keywords = ["drexel", "scraper", "term-master-schedule", "tms"]
 authors = [
-  { name = "Zohair-coder", email = "zohair.ul.hasan@gmail.com" },
+{ name = "Zohair-coder", email = "zohair.ul.hasan@gmail.com" },
 ]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
@@ -36,6 +36,7 @@ dependencies = [
   "requests==2.31.0",
   "boto3==1.34.69",
   "pytz==2024.1",
+  "ConfigArgParse==1.7",
 ]
 
 [project.scripts]
@@ -64,6 +65,9 @@ dependencies = [
   "types-pytz==2024.1.0.20240203",
   "boto3-stubs==1.34.69",
 ]
+
+[tool.hatch.envs.default.scripts]
+start = "python3 -m drexel_scraper"
 
 [[tool.hatch.envs.all.matrix]]
 python = ["3.10", "3.11", "3.12"]

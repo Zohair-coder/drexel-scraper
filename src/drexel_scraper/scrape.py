@@ -12,9 +12,7 @@ import drexel_scraper.config as config
 import drexel_scraper.login as login
 
 
-def scrape(
-    include_ratings: bool = False
-) -> dict[str, dict[str, Any]]:
+def scrape(include_ratings: bool = False) -> dict[str, dict[str, Any]]:
     session = Session()
 
     is_logged_into_drexel_connect = False

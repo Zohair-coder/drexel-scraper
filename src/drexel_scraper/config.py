@@ -1,61 +1,45 @@
 import os
-import sys
 
-# in format YYYY (e.g. 2022)
-# example value: 2022
-year = "2024"
-# 15 for Fall, 25 for Winter, 35 for Spring, 45 for Summer
-# example value: 45
-quarter = "15"
-# check college code by going to the tms website and selecting your college from the left sidebar
-# the URL bar should update and it should end with something like collCode=CI
-# the characters after the = sign is your college code
-# e.g. in this URL the college code is CI
-# https://termmasterschedule.drexel.edu/webtms_du/collegesSubjects/202245?collCode=CI
-# NOTE: This configuration will be ignored if the --all-colleges flag is used
-# example values = CI, A, AS
-college_code = "CI"
-
-# Warn users if they have missing required environment variables
-environ_help_url = (
-    "https://github.com/Zohair-coder/drexel-scraper?tab=readme-ov-file#authentication"
-)
-
-
-def get_environ(key: str, required: bool = True) -> str:
-    if key in os.environ:
-        return os.environ[key]
-    elif required:
-        print(
-            f"{key} is missing from your environment variables and is required to run this script. See {environ_help_url} for more information and help."
+class Config:
+    def __init__(
+        self,
+        term: str,
+        college_code: str | None,
+        drexel_username: str | None,
+        drexel_password: str | None,
+        mfa_secret_key: str | None,
+        include_ratings: bool,
+        should_write_to_file: bool,
+        should_write_to_db: bool,
+        should_send_email_on_exception: bool,
+        aws_topic_arn: str | None,
+        aws_sns_endpoint_url: str | None,
+    ):
+        self.drexel_username = drexel_username or os.getenv("DREXEL_USERNAME")
+        self.drexel_password = drexel_password or os.getenv("DREXEL_PASSWORD")
+        self.drexel_mfa_secret_key = mfa_secret_key or os.getenv(
+            "DREXEL_MFA_SECRET_KEY"
         )
-        sys.exit(1)
-    else:
-        return ""
+
+        self.term = term
+        self.college_code = college_code
+
+        
+        self.include_ratings = include_ratings
+        self.should_write_to_file = should_write_to_file
+        self.should_write_to_db = should_write_to_db
+        self.should_send_email_on_exception = should_send_email_on_exception
+
+        self.aws_topic_arn = aws_topic_arn
+        self.aws_sns_endpoint_url = aws_sns_endpoint_url or os.getenv(
+            "SNS_ENDPOINT_URL", None
+        )
+
+        self.tms_base_url = "https://termmasterschedule.drexel.edu"
+        self.tms_home_url = self.tms_base_url + "/webtms_du"
+        self.tms_quarter_url = self.tms_home_url + "/collegesSubjects/" + self.term
+        self.drexel_connect_base_url = "https://connect.drexel.edu"
 
 
-# Drexel Connect Credentials
-drexel_username = get_environ("DREXEL_USERNAME")
-drexel_password = get_environ("DREXEL_PASSWORD")
-# This is not required if the user is using a separate authenticator app and will manually approve the login attempt
-drexel_mfa_secret_key = get_environ("DREXEL_MFA_SECRET_KEY", False) or None
-
-# URL's
-tms_base_url = "https://termmasterschedule.drexel.edu"
-tms_home_url = tms_base_url + "/webtms_du"
-tms_quarter_url = tms_home_url + "/collegesSubjects/" + year + quarter
-
-drexel_connect_base_url = "https://connect.drexel.edu"
-
-# Email AWS Configuration
-topic_arn = os.getenv("DREXEL_SCHEDULER_TOPIC_ARN")
-sns_endpoint = os.getenv("SNS_ENDPOINT_URL", None)
-
-
-# element attribute dictionaries the soup will look for
-class attributes:
-    rows = {"role": "row"}
-
-
-def get_college_page_url(college_name: str) -> str:
-    return tms_quarter_url + "?collCode=" + college_name
+    def get_college_page_url(self, college_name: str) -> str:
+        return self.tms_quarter_url + "?collCode=" + college_name
