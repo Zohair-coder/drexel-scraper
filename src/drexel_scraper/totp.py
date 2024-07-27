@@ -1,8 +1,8 @@
-import hmac
 import base64
+import hashlib
+import hmac
 import struct
 import time
-import hashlib
 
 
 # https://stackoverflow.com/questions/8529265/google-authenticator-implementation-in-python

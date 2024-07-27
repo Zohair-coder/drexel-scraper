@@ -1,15 +1,17 @@
-from requests import Session, Response
-from bs4 import BeautifulSoup
 import json
 import os
-from typing import Any
-import traceback
 import time
+import traceback
+from typing import Any
 
-from drexel_scraper.helpers import send_request
-from drexel_scraper.parse import parse_subject_page, parse_crn_page
+from bs4 import BeautifulSoup
+from requests import Response, Session
+
+from drexel_scraper import login
 from drexel_scraper.config import Config
-import drexel_scraper.login as login
+from drexel_scraper.helpers import send_request
+from drexel_scraper.parse import parse_crn_page, parse_subject_page
+
 
 def scrape(config: Config) -> dict[str, dict[str, Any]]:
     session = Session()
@@ -36,9 +38,7 @@ def scrape(config: Config) -> dict[str, dict[str, Any]]:
         failiure_count += 1
         if failiure_count > 8:
             raise Exception(
-                "Failed to log in to Drexel Connect after {} attempts".format(
-                    failiure_count
-                )
+                f"Failed to log in to Drexel Connect after {failiure_count} attempts"
             )
 
         time.sleep(reset_period)
@@ -79,13 +79,13 @@ def scrape_all_subjects(
     session: Session, data: dict[str, dict[str, Any]], html: str, config: Config
 ) -> dict[str, dict[str, Any]]:
     try:
-        with open("cache/extra_course_data_cache.json", "r") as f:
+        with open("cache/extra_course_data_cache.json") as f:
             extra_course_data_cache = json.load(f)
     except FileNotFoundError:
         extra_course_data_cache = {}
 
     try:
-        with open("cache/ratings_cache.json", "r") as f:
+        with open("cache/ratings_cache.json") as f:
             ratings_cache = json.load(f)
     except FileNotFoundError:
         ratings_cache = {}
@@ -120,7 +120,7 @@ def scrape_all_subjects(
                     parse_crn_page(response.text, data)
                 except Exception as e:
                     raise Exception(
-                        "Error scraping/parsing CRN {}: {}".format(crn, crn_page_link)
+                        f"Error scraping/parsing CRN {crn}: {crn_page_link}"
                     ) from e
 
                 extra_course_data_cache[crn] = {

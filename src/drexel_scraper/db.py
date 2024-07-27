@@ -1,21 +1,21 @@
+from datetime import datetime
+from typing import Any
+
 import psycopg2
 from psycopg2 import sql
-from psycopg2.extensions import cursor, connection
+from psycopg2.extensions import connection, cursor
+from pytz import timezone
 
 from drexel_scraper.db_config import (
     DBNAME,
-    USER,
-    PASSWORD,
-    HOST,
-    PORT,
     DEFAULT_DB,
-    GRAFANA_SERVICE_ACCOUNT_USERNAME,
     GRAFANA_SERVICE_ACCOUNT_PASSWORD,
+    GRAFANA_SERVICE_ACCOUNT_USERNAME,
+    HOST,
+    PASSWORD,
+    PORT,
+    USER,
 )
-
-from datetime import datetime
-from pytz import timezone
-from typing import Any
 
 
 def populate_db(data: dict[str, dict[str, Any]]) -> None:
@@ -135,7 +135,7 @@ def bulk_insert_instructors(cur: cursor, course: dict[str, Any]) -> list[int]:
         INSERT INTO instructors (name, rmp_id, avg_difficulty, avg_rating, num_ratings)
         VALUES (%s, %s, %s, %s, %s)
         ON CONFLICT (name)
-        DO UPDATE SET 
+        DO UPDATE SET
             rmp_id = EXCLUDED.rmp_id,
             avg_difficulty = EXCLUDED.avg_difficulty,
             avg_rating = EXCLUDED.avg_rating,
@@ -179,14 +179,14 @@ def bulk_insert_courses(cur: cursor, courses_data: list[dict[str, Any]]) -> None
 
     cur.executemany(
         """
-        INSERT INTO courses (crn, subject_code, course_number, instruction_type, instruction_method, 
+        INSERT INTO courses (crn, subject_code, course_number, instruction_type, instruction_method,
                              section, enroll, max_enroll, course_title, credits, prereqs, start_time, end_time, days)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         ON CONFLICT (crn)
-        DO UPDATE SET 
-            subject_code = EXCLUDED.subject_code, 
-            course_number = EXCLUDED.course_number, 
-            instruction_type = EXCLUDED.instruction_type, 
+        DO UPDATE SET
+            subject_code = EXCLUDED.subject_code,
+            course_number = EXCLUDED.course_number,
+            instruction_type = EXCLUDED.instruction_type,
             instruction_method = EXCLUDED.instruction_method,
             section = EXCLUDED.section,
             enroll = EXCLUDED.enroll,

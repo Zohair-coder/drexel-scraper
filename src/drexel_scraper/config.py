@@ -1,5 +1,7 @@
-from __future__ import annotations # https://stackoverflow.com/a/49872353
+from __future__ import annotations  # https://stackoverflow.com/a/49872353
+
 import configargparse
+
 
 class Config:
     def __init__(
@@ -25,7 +27,7 @@ class Config:
 
         self.term = term
         self.college_code = college_code
-        
+
         self.output_file_name = output_file_name
 
         self.include_ratings = include_ratings
@@ -59,6 +61,9 @@ class Config:
             tms_base_url=args.tms_base_url,
             drexel_connect_base_url=args.drexel_connect_base_url,
         )
+
+    def validate(self) -> bool:
+        return True
 
     def get_college_page_url(self, college_name: str) -> str:
         return self.tms_quarter_url + "?collCode=" + college_name

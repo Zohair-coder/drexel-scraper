@@ -2,9 +2,11 @@
 # Makes a request to the RateMyProfessors GraphQL API
 # I found out that the GraphQL API is used by inspecting the network tab in the browser
 
-import requests
-from drexel_scraper.helpers import send_request
 from typing import Any, cast
+
+import requests
+
+from drexel_scraper.helpers import send_request
 
 DREXEL_RMP_ID = "U2Nob29sLTE1MjE="
 

@@ -1,7 +1,8 @@
-from requests import Session, Response
-from requests.exceptions import HTTPError
 import time
 from typing import Any
+
+from requests import Response, Session
+from requests.exceptions import HTTPError
 
 
 def send_request(
@@ -41,7 +42,7 @@ def send_request(
                     url, resp_headers, resp_text
                 )
             ) from ex
-        raise Exception("Error sending HTTP request to {}.".format(url)) from ex
+        raise Exception(f"Error sending HTTP request to {url}.") from ex
 
     return resp
 
@@ -60,5 +61,5 @@ def send_request_helper(
     elif method == "POST":
         resp = session.post(url, json=json, data=data, headers=headers, timeout=timeout)
     else:
-        raise Exception("Invalid method: {}".format(method))
+        raise Exception(f"Invalid method: {method}")
     return resp

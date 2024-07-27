@@ -1,9 +1,11 @@
+import re
+from datetime import datetime
+from typing import Any
+
 from bs4 import BeautifulSoup
 from bs4.element import Tag
+
 from drexel_scraper.ratings import rating
-from datetime import datetime
-import re
-from typing import Any
 
 
 def parse_subject_page(

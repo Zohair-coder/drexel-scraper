@@ -1,11 +1,11 @@
-from requests import Session
-from requests.exceptions import JSONDecodeError
-from bs4 import BeautifulSoup, Tag
 import re
 from typing import Any
 
-import drexel_scraper.config as config
-import drexel_scraper.totp as totp
+from bs4 import BeautifulSoup, Tag
+from requests import Session
+from requests.exceptions import JSONDecodeError
+
+from drexel_scraper import config, totp
 from drexel_scraper.helpers import send_request
 
 
@@ -54,9 +54,7 @@ def login_with_drexel_connect(session: Session) -> Session:
         json_response = response.json()
     except JSONDecodeError:
         raise Exception(
-            "Failed to decode JSON response from Drexel Connect. Response: {}".format(
-                response.text
-            )
+            f"Failed to decode JSON response from Drexel Connect. Response: {response.text}"
         )
 
     data = {

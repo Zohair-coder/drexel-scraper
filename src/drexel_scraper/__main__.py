@@ -1,15 +1,17 @@
-from __future__ import annotations # https://stackoverflow.com/a/49872353
-from drexel_scraper.scrape import scrape
-import drexel_scraper.emailer as emailer
-import drexel_scraper.db as db
-from drexel_scraper.config import Config
+from __future__ import annotations  # https://stackoverflow.com/a/49872353
 
 import json
+import os
 import sys
 import time
-import os
 import traceback
+
 import configargparse
+
+from drexel_scraper import db, emailer
+from drexel_scraper.config import Config
+from drexel_scraper.scrape import scrape
+
 
 def main() -> None:
     parser = configargparse.ArgumentParser(
@@ -19,7 +21,7 @@ def main() -> None:
     parser.add_argument(
             "-u",
             "--username",
-            action="store", 
+            action="store",
             env_var="DS_DREXEL_USERNAME",
             help="DrexelOne abc123 username (without @drexel.edu).",
             required=True,
@@ -28,7 +30,7 @@ def main() -> None:
     parser.add_argument(
             "-p",
             "--password",
-            action="store", 
+            action="store",
             env_var="DS_DREXEL_PASSWORD",
             help="DrexelOne password.",
             required=True,
@@ -45,7 +47,7 @@ def main() -> None:
     parser.add_argument(
             "-m",
             "--mfa-secret",
-            action="store", 
+            action="store",
             env_var="DS_DREXEL_MFA_SECRET_KEY",
             help="DrexelOne MFA secret key (https://github.com/Zohair-coder/drexel-scraper?tab=readme-ov-file#authenticate-using-a-secret-key).",
             )
@@ -118,6 +120,7 @@ def main() -> None:
 
     args = parser.parse_args()
     config = Config.generate_config_from_args(args)
+    config.validate()
 
     try:
         start(config)
@@ -139,7 +142,7 @@ def start(config: Config) -> None:
     data = scrape(config)
 
     assert len(data) > 0, "No data found"
-    print("Found {} items".format(len(data)))
+    print(f"Found {len(data)} items")
 
     if config.should_write_to_file:
         with open(config.output_file_name, "w") as f:
@@ -148,13 +151,13 @@ def start(config: Config) -> None:
         print(f"Data written to {config.output_file_name}")
 
     if config.should_write_to_db:
-        print("Time taken to scrape data: {} seconds".format(time.time() - start_time))
+        print(f"Time taken to scrape data: {time.time() - start_time} seconds")
         print()
         print("Updating database...")
         db.populate_db(data)
         print("Done!")
 
-    print("--- {} seconds ---".format(time.time() - start_time))
+    print(f"--- {time.time() - start_time} seconds ---")
 
 
 if __name__ == "__main__":
