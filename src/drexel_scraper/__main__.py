@@ -24,7 +24,6 @@ def main() -> None:
             action="store",
             env_var="DS_DREXEL_USERNAME",
             help="DrexelOne abc123 username (without @drexel.edu).",
-            required=True,
             )
     #TODO: find a way to hide the password when typing it in
     parser.add_argument(
@@ -33,7 +32,6 @@ def main() -> None:
             action="store",
             env_var="DS_DREXEL_PASSWORD",
             help="DrexelOne password.",
-            required=True,
             )
     parser.add_argument(
             "-o",

@@ -1,6 +1,10 @@
 from __future__ import annotations  # https://stackoverflow.com/a/49872353
+import os
+
+from .models.result import Result
 
 import configargparse
+from getpass import getpass
 
 
 class Config:
@@ -45,6 +49,12 @@ class Config:
 
     @staticmethod
     def generate_config_from_args(args: configargparse.Namespace) -> Config:
+        if not args.username:
+            args.username = input("Drexel username (abc123): ")
+
+        if not args.password:
+            args.password = getpass("Drexel password: ")
+        
         return Config(
             drexel_username=args.username,
             drexel_password=args.password,
@@ -62,8 +72,34 @@ class Config:
             drexel_connect_base_url=args.drexel_connect_base_url,
         )
 
-    def validate(self) -> bool:
-        return True
+    def validate(self) -> Result:
+        errors = []
+        
+        if not self.drexel_username or self.drexel_username == "":
+            errors.append("Drexel username is required")
+        
+        if not self.drexel_password or self.drexel_password == "":
+            errors.append("Drexel password is required")
+            
+        if self.should_write_to_file and (not self.output_file_name or self.output_file_name == ""):
+            errors.append("Output file name is required")
+        
+        if self.term is None or len(self.term) != 6:
+            errors.append("Term is required and must be in the format YYYYTT")
+            
+        if self.should_send_email_on_exception and (not self.aws_topic_arn or self.aws_topic_arn == ""):
+            errors.append("AWS SNS Topic ARN is required to send emails")
+        
+        if self.should_send_email_on_exception and (not os.getenv("AWS_DEFAULT_REGION") or os.getenv("AWS_DEFAULT_REGION") == ""):
+            errors.append("AWS_DEFAULT_REGION ennvironment variable is required to send emails")
+        
+        if self.should_send_email_on_exception and (not os.getenv("AWS_ACCESS_KEY_ID") or os.getenv("AWS_ACCESS_KEY_ID") == ""):
+            errors.append("AWS_ACCESS_KEY_ID ennvironment variable is required to send emails")
+        
+        if self.should_send_email_on_exception and (not os.getenv("AWS_SECRET_ACCESS_KEY") or os.getenv("AWS_SECRET_ACCESS_KEY") == ""):
+            errors.append("AWS_SECRET_ACCESS_KEY ennvironment variable is required to send emails")
+
+        return Result(ok=len(errors) == 0, errors=errors)
 
     def get_college_page_url(self, college_name: str) -> str:
         return self.tms_quarter_url + "?collCode=" + college_name
