@@ -43,9 +43,15 @@ class Config:
         self.aws_sns_endpoint_url = aws_sns_endpoint_url
 
         self.tms_base_url = tms_base_url
-        self.tms_home_url = self.tms_base_url + "/webtms_du"
-        self.tms_quarter_url = self.tms_home_url + "/collegesSubjects/" + self.term
         self.drexel_connect_base_url = drexel_connect_base_url
+
+    @property
+    def tms_home_url(self) -> str:
+        return self.tms_base_url + "/webtms_du"
+
+    @property
+    def tms_quarter_url(self) -> str:
+        return self.tms_home_url + "/collegesSubjects/" + self.term
 
     @staticmethod
     def generate_config_from_args(args: configargparse.Namespace) -> Config:
@@ -98,6 +104,12 @@ class Config:
         
         if self.should_send_email_on_exception and (not os.getenv("AWS_SECRET_ACCESS_KEY") or os.getenv("AWS_SECRET_ACCESS_KEY") == ""):
             errors.append("AWS_SECRET_ACCESS_KEY ennvironment variable is required to send emails")
+            
+        if self.tms_base_url is None:
+            errors.append("TMS base URL is required")
+        
+        if self.drexel_connect_base_url is None:
+            errors.append("Drexel Connect base URL is required")
 
         return Result(ok=len(errors) == 0, errors=errors)
 
