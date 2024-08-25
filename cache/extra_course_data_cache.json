@@ -854,5 +854,217 @@
     "13241": {
         "credits": "1.00",
         "prereqs": ""
+    },
+    "12555": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "14785": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "15543": {
+        "credits": "0.00",
+        "prereqs": "CS 265  Minimum Grade: C"
+    },
+    "15545": {
+        "credits": "3.00",
+        "prereqs": "CS 265  Minimum Grade: C"
+    },
+    "15546": {
+        "credits": "3.00",
+        "prereqs": "CS 265  Minimum Grade: C"
+    },
+    "14795": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "14796": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "15367": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15368": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15369": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15370": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15371": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15372": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15373": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15374": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15375": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15376": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15377": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15378": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15379": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15380": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15381": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15382": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15383": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15384": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15385": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15386": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15387": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15388": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15389": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15529": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "14819": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "15333": {
+        "credits": "3.00",
+        "prereqs": "INFO 881  Minimum Grade: C"
+    },
+    "15334": {
+        "credits": "3.00",
+        "prereqs": "INFO 881  Minimum Grade: C"
+    },
+    "15305": {
+        "credits": "3.00 TO 6.00",
+        "prereqs": ""
+    },
+    "15390": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15391": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15392": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15393": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15394": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15395": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15396": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15397": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15398": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15399": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15400": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15401": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15402": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15403": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15404": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15405": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15517": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15544": {
+        "credits": "3.00",
+        "prereqs": "CS 265  Minimum Grade: C and CS 260  Minimum Grade: C and (SE 181  Minimum Grade: C or SE 201  Minimum Grade: C )"
     }
 }
