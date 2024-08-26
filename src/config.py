@@ -35,7 +35,7 @@ def get_environ(key: str, required: bool = True) -> str:
 
 
 # Drexel Connect Credentials
-drexel_username = get_environ("DREXEL_USERNAME")
+drexel_email = get_environ("DREXEL_EMAIL")
 drexel_password = get_environ("DREXEL_PASSWORD")
 # This is not required if the user is using a separate authenticator app and will manually approve the login attempt
 drexel_mfa_secret_key = get_environ("DREXEL_MFA_SECRET_KEY", False) or None

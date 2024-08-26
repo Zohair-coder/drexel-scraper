@@ -18,11 +18,13 @@ Make sure you have [Python 3](https://www.python.org/downloads/) installed. Then
 ###### Mac/Linux
 ```bash
 pip3 install -r requirements.txt
+playwright install
 ```
 
 ###### Windows
 ```bash
 pip install -r requirements.txt
+playwright install
 ```
 
 ## Usage
@@ -44,17 +46,21 @@ The scraper will output a JSON file called `data.json` in the same directory as 
 
 You can modify the scraper to scrape other terms by changing the `year`, `quarter`, and `college_code` variables in `src/config.py`.
 
+To view all the options that the scraper supports, run `python3 src/main.py --help` on Mac/Linux, or `python src/main.py --help` on Windows.  
+
 #### Authentication
 
 Since the term master schedule is only accessible to logged-in Drexel students, to run the scraper, you will need to provide your Drexel credentials as well as provide multi-factor authentication (MFA).
 
-To provide your Drexel credentials, set the environment variable `DREXEL_USERNAME` to your Drexel username (abc123) and `DREXEL_PASSWORD` to the password you use to login to Drexel One. You can follow [this](https://phoenixnap.com/kb/windows-set-environment-variable) guide for Windows, and [this](https://phoenixnap.com/kb/set-environment-variable-mac) guide for MacOS to set environment variables.
+To provide your Drexel credentials, set the environment variable `DREXEL_EMAIL` to your Drexel email (abc123@drexel.edu) and `DREXEL_PASSWORD` to the password you use to login to Drexel One. You can follow [this](https://phoenixnap.com/kb/windows-set-environment-variable) guide for Windows, and [this](https://phoenixnap.com/kb/set-environment-variable-mac) guide for MacOS to set environment variables.
+
+You will also need to go to [this page](https://mysignins.microsoft.com/security-info) and make sure "Authenticator app or hardware token" is the preferred sign-in method. Unfortunately, if you use Microsoft Authenticator as your MFA app you will not be able to run the scraper. You will have to delete the Microsoft Authenticator sign in method and install a different MFA app. 
 
 There are two ways to provide MFA for the script to authenticate with. The first is easier if you're looking to run the script manually and quickly. The second is better if you are going to be running the script frequently, or if it needs to be automated.
 
 ###### Authenticate manually
 
-You will authenticate the scraper manually as if you were logging into Drexel One, using a one-time code either from an authenticator app or that is texted to you. After setting the `DREXEL_USERNAME` and `DREXEL_PASSWORD` environment variables, run the scraper as explained [above](#Usage), and you will be prompted for your verification code.
+You will authenticate the scraper manually as if you were logging into Drexel One, using a one-time code either from an authenticator app or that is texted to you. After setting the `DREXEL_EMAIL` and `DREXEL_PASSWORD` environment variables, run the scraper as explained [above](#Usage), and you will be prompted for your verification code.
 
 ###### Authenticate using a secret key
 

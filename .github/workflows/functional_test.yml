@@ -34,7 +34,7 @@ jobs:
       uses: docker/setup-buildx-action@v3
 
     - name: Start PostgreSQL
-      run: docker-compose up -d postgres
+      run: docker compose up -d postgres
 
     - name: Wait for PostgreSQL to become ready
       run: |
@@ -48,7 +48,7 @@ jobs:
     
     - name: Run the scraper
       env:
-        DREXEL_USERNAME: ${{ secrets.DREXEL_USERNAME }}
+        DREXEL_EMAIL: ${{ secrets.DREXEL_EMAIL }}
         DREXEL_PASSWORD: ${{ secrets.DREXEL_PASSWORD }}
         DREXEL_MFA_SECRET_KEY: ${{ secrets.DREXEL_MFA_SECRET_KEY }}
       run: docker compose run scraper python3 src/main.py --db --all-colleges --ratings
@@ -104,11 +104,11 @@ jobs:
         fi
 
     - name: Reset database
-      run: docker compose run scraper sh -c 'apk add postgresql-client && ./scripts/reset-db.sh;'
+      run: docker compose run scraper sh -c 'apt-get install -y postgresql-client && ./scripts/reset-db.sh;'
 
     - name: Run scraper again (to test cache)
       env:
-        DREXEL_USERNAME: ${{ secrets.DREXEL_USERNAME }}
+        DREXEL_EMAIL: ${{ secrets.DREXEL_EMAIL }}
         DREXEL_PASSWORD: ${{ secrets.DREXEL_PASSWORD }}
         DREXEL_MFA_SECRET_KEY: ${{ secrets.DREXEL_MFA_SECRET_KEY }}
       run: docker compose run scraper python3 src/main.py --db --all-colleges --ratings
@@ -164,4 +164,4 @@ jobs:
         fi
     
     - name: Cleanup
-      run: docker-compose down -v
+      run: docker compose down -v

@@ -1,0 +1,1070 @@
+{
+    "12550": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "13581": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "11643": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "12551": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "12552": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "13065": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "12553": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "14784": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "12554": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "10240": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "10688": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "10994": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "10995": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "10996": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "11325": {
+        "credits": "0.00",
+        "prereqs": "CS 171  Minimum Grade: C or CS 175  Minimum Grade: C"
+    },
+    "11326": {
+        "credits": "3.00",
+        "prereqs": "CS 171  Minimum Grade: C or CS 175  Minimum Grade: C"
+    },
+    "14786": {
+        "credits": "0.00",
+        "prereqs": "CS 265  Minimum Grade: C"
+    },
+    "14787": {
+        "credits": "0.00",
+        "prereqs": "CS 265  Minimum Grade: C"
+    },
+    "14789": {
+        "credits": "4.00",
+        "prereqs": "CS 265  Minimum Grade: C"
+    },
+    "10202": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C or ECE 105  Minimum Grade: D or ECEC 201  Minimum Grade: D"
+    },
+    "13583": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C or ECE 105  Minimum Grade: D or ECEC 201  Minimum Grade: D"
+    },
+    "12154": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C or ECE 105  Minimum Grade: D or ECEC 201  Minimum Grade: D"
+    },
+    "12558": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C or ECE 105  Minimum Grade: D or ECEC 201  Minimum Grade: D"
+    },
+    "10712": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C or ECE 105  Minimum Grade: D or ECEC 201  Minimum Grade: D"
+    },
+    "11835": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C or ECE 105  Minimum Grade: D or ECEC 201  Minimum Grade: D"
+    },
+    "12559": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C or CS 265  Minimum Grade: C or ECE 105  Minimum Grade: D or ECEC 201  Minimum Grade: D"
+    },
+    "13584": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C or CS 265  Minimum Grade: C or ECE 105  Minimum Grade: D or ECEC 201  Minimum Grade: D"
+    },
+    "11836": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C or CS 265  Minimum Grade: C or ECE 105  Minimum Grade: D or ECEC 201  Minimum Grade: D"
+    },
+    "14791": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C or CS 265  Minimum Grade: C or ECE 105  Minimum Grade: D or ECEC 201  Minimum Grade: D"
+    },
+    "12560": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C or CS 265  Minimum Grade: C or ECE 105  Minimum Grade: D or ECEC 201  Minimum Grade: D"
+    },
+    "12562": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C and CS 270  Minimum Grade: C and MATH 221  Minimum Grade: C"
+    },
+    "13585": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C and CS 270  Minimum Grade: C and MATH 221  Minimum Grade: C"
+    },
+    "14792": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C and CS 270  Minimum Grade: C and MATH 221  Minimum Grade: C"
+    },
+    "10959": {
+        "credits": "0.00",
+        "prereqs": "(CS 270  Minimum Grade: C or ECE 200  Minimum Grade: D ) and (CS 172  Minimum Grade: C or ECEC 201  Minimum Grade: D or ECE 105  Minimum Grade: D )"
+    },
+    "10732": {
+        "credits": "0.00",
+        "prereqs": "(CS 270  Minimum Grade: C or ECE 200  Minimum Grade: D ) and (CS 172  Minimum Grade: C or ECEC 201  Minimum Grade: D or ECE 105  Minimum Grade: D )"
+    },
+    "11501": {
+        "credits": "0.00",
+        "prereqs": "(CS 270  Minimum Grade: C or ECE 200  Minimum Grade: D ) and (CS 172  Minimum Grade: C or ECEC 201  Minimum Grade: D or ECE 105  Minimum Grade: D )"
+    },
+    "10731": {
+        "credits": "4.00",
+        "prereqs": "(CS 270  Minimum Grade: C or ECE 200  Minimum Grade: D ) and (CS 172  Minimum Grade: C or ECEC 201  Minimum Grade: D or ECE 105  Minimum Grade: D )"
+    },
+    "10902": {
+        "credits": "4.00",
+        "prereqs": "(CS 270  Minimum Grade: C or ECE 200  Minimum Grade: D ) and (CS 172  Minimum Grade: C or ECEC 201  Minimum Grade: D or ECE 105  Minimum Grade: D )"
+    },
+    "13586": {
+        "credits": "4.00",
+        "prereqs": "(CS 270  Minimum Grade: C or ECE 200  Minimum Grade: D ) and (CS 172  Minimum Grade: C or ECEC 201  Minimum Grade: D or ECE 105  Minimum Grade: D )"
+    },
+    "13587": {
+        "credits": "3.00",
+        "prereqs": "CS 265  Minimum Grade: C"
+    },
+    "10567": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C and (CS 281  Minimum Grade: C or ECEC 355  Minimum Grade: D )"
+    },
+    "13366": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C and (CS 281  Minimum Grade: C or ECEC 355  Minimum Grade: D )"
+    },
+    "13066": {
+        "credits": "3.00",
+        "prereqs": "CS 265  Minimum Grade: C"
+    },
+    "14793": {
+        "credits": "3.00",
+        "prereqs": "CS 265  Minimum Grade: C"
+    },
+    "12098": {
+        "credits": "3.00",
+        "prereqs": "CS 283  Minimum Grade: C or ECEC 353  Minimum Grade: D"
+    },
+    "10129": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C and CS 270  Minimum Grade: C"
+    },
+    "12099": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C and CS 270  Minimum Grade: C"
+    },
+    "13067": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C and CS 380  Minimum Grade: C"
+    },
+    "10961": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C and (MATH 201  Minimum Grade: C or MATH 261  Minimum Grade: C or ENGR 231  Minimum Grade: D )"
+    },
+    "12563": {
+        "credits": "0.00",
+        "prereqs": "CS 260  Minimum Grade: C and CS 270  Minimum Grade: C and CS 277  Minimum Grade: C and (MATH 221  Minimum Grade: C or MATH 222  Minimum Grade: C )"
+    },
+    "12564": {
+        "credits": "4.00",
+        "prereqs": "CS 260  Minimum Grade: C and CS 270  Minimum Grade: C and CS 277  Minimum Grade: C and (MATH 221  Minimum Grade: C or MATH 222  Minimum Grade: C )"
+    },
+    "12565": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C"
+    },
+    "13370": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C"
+    },
+    "10107": {
+        "credits": "3.00",
+        "prereqs": "CS 361  Minimum Grade: D or CS 283  Minimum Grade: C or ECEC 353  Minimum Grade: D"
+    },
+    "12566": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "12100": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "12567": {
+        "credits": "3.00",
+        "prereqs": "CS 501  Minimum Grade: C  (CS 501  may be taken concurrently with CS 503)"
+    },
+    "12101": {
+        "credits": "3.00",
+        "prereqs": "CS 501  Minimum Grade: C  (CS 501  may be taken concurrently with CS 503)"
+    },
+    "11163": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "11178": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "12568": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "10265": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "12155": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "12156": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "13588": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "13589": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "13068": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "13071": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "14797": {
+        "credits": "3.00",
+        "prereqs": "(CS 510  Minimum Grade: C and CS 613  Minimum Grade: C and CS 615  Minimum Grade: C ) or (CS 614  Minimum Grade: C and INFO 629  Minimum Grade: C )"
+    },
+    "12779": {
+        "credits": "3.00",
+        "prereqs": "(CS 510  Minimum Grade: C and CS 613  Minimum Grade: C and CS 615  Minimum Grade: C ) or (CS 614  Minimum Grade: C and INFO 629  Minimum Grade: C )"
+    },
+    "14798": {
+        "credits": "3.00",
+        "prereqs": "CS 510  Minimum Grade: C"
+    },
+    "14799": {
+        "credits": "3.00",
+        "prereqs": "CS 510  Minimum Grade: C"
+    },
+    "12102": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "12103": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "11186": {
+        "credits": "3.00",
+        "prereqs": "INFO 101  Minimum Grade: D"
+    },
+    "14179": {
+        "credits": "3.00",
+        "prereqs": "INFO 101  Minimum Grade: D"
+    },
+    "11528": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "11529": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "13592": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "13593": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "13594": {
+        "credits": "3.00",
+        "prereqs": "CT 420  Minimum Grade: D or CT 301  Minimum Grade: D"
+    },
+    "13595": {
+        "credits": "3.00",
+        "prereqs": "CT 420  Minimum Grade: D or CT 301  Minimum Grade: D"
+    },
+    "13596": {
+        "credits": "3.00",
+        "prereqs": "CT 330  Minimum Grade: D"
+    },
+    "13597": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "13072": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "12579": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "12571": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "12572": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "12573": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "12574": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "12575": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "12576": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "12721": {
+        "credits": "2.00",
+        "prereqs": ""
+    },
+    "10876": {
+        "credits": "2.00",
+        "prereqs": ""
+    },
+    "10877": {
+        "credits": "2.00",
+        "prereqs": ""
+    },
+    "10878": {
+        "credits": "2.00",
+        "prereqs": ""
+    },
+    "10879": {
+        "credits": "2.00",
+        "prereqs": ""
+    },
+    "12224": {
+        "credits": "2.00",
+        "prereqs": ""
+    },
+    "11837": {
+        "credits": "2.00",
+        "prereqs": ""
+    },
+    "12577": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "11162": {
+        "credits": "2.00",
+        "prereqs": ""
+    },
+    "10909": {
+        "credits": "2.00",
+        "prereqs": ""
+    },
+    "13950": {
+        "credits": "2.00",
+        "prereqs": ""
+    },
+    "10934": {
+        "credits": "2.00",
+        "prereqs": ""
+    },
+    "14810": {
+        "credits": "3.00",
+        "prereqs": "INFO 442  Minimum Grade: D or SE 310  Minimum Grade: D or (INFO 324  Minimum Grade: D and INFO 355  Minimum Grade: D )"
+    },
+    "12578": {
+        "credits": "3.00",
+        "prereqs": "CS 570  Minimum Grade: C  (CS 570  may be taken concurrently with DSCI 511)"
+    },
+    "13591": {
+        "credits": "3.00",
+        "prereqs": "CS 570  Minimum Grade: C  (CS 570  may be taken concurrently with DSCI 511)"
+    },
+    "11504": {
+        "credits": "3.00",
+        "prereqs": "CS 570  Minimum Grade: C  (CS 570  may be taken concurrently with DSCI 511)"
+    },
+    "12135": {
+        "credits": "3.00",
+        "prereqs": "DSCI 521  Minimum Grade: C  (DSCI 521  may be taken concurrently with DSCI 631)"
+    },
+    "12176": {
+        "credits": "3.00",
+        "prereqs": "DSCI 521  Minimum Grade: C  (DSCI 521  may be taken concurrently with DSCI 631)"
+    },
+    "11716": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "10881": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "10658": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "11711": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "11717": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "10882": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "10709": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "13958": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "10710": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "12580": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "12581": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "12582": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "11468": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "11530": {
+        "credits": "3.00",
+        "prereqs": "INFO 101  Minimum Grade: D"
+    },
+    "12583": {
+        "credits": "3.00",
+        "prereqs": "INFO 101  Minimum Grade: D or SE 210  Minimum Grade: D"
+    },
+    "13073": {
+        "credits": "3.00",
+        "prereqs": "INFO 153  Minimum Grade: D or CS 172  Minimum Grade: D"
+    },
+    "12107": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "12584": {
+        "credits": "3.00",
+        "prereqs": "INFO 110  Minimum Grade: D or INFO 151  Minimum Grade: D or CS 171  Minimum Grade: D or ECE 105  Minimum Grade: D or ECE 203  Minimum Grade: D"
+    },
+    "13074": {
+        "credits": "3.00",
+        "prereqs": "INFO 110  Minimum Grade: D or INFO 151  Minimum Grade: D or CS 171  Minimum Grade: D or ECE 105  Minimum Grade: D or ECE 203  Minimum Grade: D"
+    },
+    "12585": {
+        "credits": "3.00",
+        "prereqs": "(INFO 153  Minimum Grade: D or CS 172  Minimum Grade: D ) and INFO 200  Minimum Grade: D"
+    },
+    "13303": {
+        "credits": "3.00",
+        "prereqs": "INFO 210  Minimum Grade: D and (CS 171  Minimum Grade: D or CS 175  Minimum Grade: D or INFO 152  Minimum Grade: D or SE 102  Minimum Grade: D )"
+    },
+    "11426": {
+        "credits": "3.00",
+        "prereqs": "INFO 210  Minimum Grade: D and (CS 171  Minimum Grade: D or CS 175  Minimum Grade: D or INFO 152  Minimum Grade: D or SE 102  Minimum Grade: D )"
+    },
+    "13598": {
+        "credits": "3.00",
+        "prereqs": "STAT 201  Minimum Grade: D or PBHL 211  Minimum Grade: D or MATH 311  Minimum Grade: D"
+    },
+    "12586": {
+        "credits": "3.00",
+        "prereqs": "INFO 310  Minimum Grade: D or INFO 110  Minimum Grade: D"
+    },
+    "13599": {
+        "credits": "3.00",
+        "prereqs": "(INFO 200  Minimum Grade: D or SE 210  Minimum Grade: D ) and (CS 172  Minimum Grade: D or CS 265  Minimum Grade: D or INFO 152  Minimum Grade: D )"
+    },
+    "11222": {
+        "credits": "3.00",
+        "prereqs": "(INFO 200  Minimum Grade: D or SE 210  Minimum Grade: D ) and (CS 172  Minimum Grade: D or CS 265  Minimum Grade: D or INFO 152  Minimum Grade: D )"
+    },
+    "14812": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "14813": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "14814": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "11847": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "11848": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "10754": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "12587": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "10704": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "11187": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "11188": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "13600": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "12588": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "12589": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "14815": {
+        "credits": "3.00",
+        "prereqs": "INFO 590  Minimum Grade: C or INFO 522  Minimum Grade: C"
+    },
+    "11532": {
+        "credits": "3.00",
+        "prereqs": "INFO 590  Minimum Grade: C or INFO 522  Minimum Grade: C"
+    },
+    "10520": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "14816": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "10115": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "14817": {
+        "credits": "3.00",
+        "prereqs": "INFO 508  Minimum Grade: C  (INFO 508  may be taken concurrently with INFO 615) or INFO 608  Minimum Grade: C  (INFO 608  may be taken concurrently with INFO 615) or DSRE 620  Minimum Grade: C  (DSRE 620  may be taken concurrently with INFO 615)"
+    },
+    "13601": {
+        "credits": "3.00",
+        "prereqs": "INFO 508  Minimum Grade: C  (INFO 508  may be taken concurrently with INFO 615) or INFO 608  Minimum Grade: C  (INFO 608  may be taken concurrently with INFO 615) or DSRE 620  Minimum Grade: C  (DSRE 620  may be taken concurrently with INFO 615)"
+    },
+    "14818": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "13076": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "13602": {
+        "credits": "3.00",
+        "prereqs": "INFO 540  Minimum Grade: C  (INFO 540  may be taken concurrently with INFO 624) or INFO 590  Minimum Grade: C or CS 502  Minimum Grade: C or DSCI 511  Minimum Grade: C  (DSCI 511  may be taken concurrently with INFO 624) or DSCI 521  Minimum Grade: C  (DSCI 521  may be taken concurrently with INFO 624)"
+    },
+    "13603": {
+        "credits": "3.00",
+        "prereqs": "INFO 540  Minimum Grade: C  (INFO 540  may be taken concurrently with INFO 624) or INFO 590  Minimum Grade: C or CS 502  Minimum Grade: C or DSCI 511  Minimum Grade: C  (DSCI 511  may be taken concurrently with INFO 624) or DSCI 521  Minimum Grade: C  (DSCI 521  may be taken concurrently with INFO 624)"
+    },
+    "11849": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "11850": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "10477": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "10695": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "11642": {
+        "credits": "3.00",
+        "prereqs": "INFO 540  Minimum Grade: C or INFO 590  Minimum Grade: C or INFO 648  Minimum Grade: C or DSCI 511  Minimum Grade: C  (DSCI 511  may be taken concurrently with INFO 659) or DSCI 521  Minimum Grade: C  (DSCI 521  may be taken concurrently with INFO 659)"
+    },
+    "11533": {
+        "credits": "3.00",
+        "prereqs": "INFO 540  Minimum Grade: C or INFO 590  Minimum Grade: C or INFO 648  Minimum Grade: C or DSCI 511  Minimum Grade: C  (DSCI 511  may be taken concurrently with INFO 659) or DSCI 521  Minimum Grade: C  (DSCI 521  may be taken concurrently with INFO 659)"
+    },
+    "12108": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "11851": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "13604": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "13605": {
+        "credits": "3.00",
+        "prereqs": "INFO 508  Minimum Grade: C  (INFO 508  may be taken concurrently with INFO 691) or INFO 608  Minimum Grade: C  (INFO 608  may be taken concurrently with INFO 691) or DSRE 620  Minimum Grade: C  (DSRE 620  may be taken concurrently with INFO 691)"
+    },
+    "12209": {
+        "credits": "3.00",
+        "prereqs": "INFO 508  Minimum Grade: C  (INFO 508  may be taken concurrently with INFO 691) or INFO 608  Minimum Grade: C  (INFO 608  may be taken concurrently with INFO 691) or DSRE 620  Minimum Grade: C  (DSRE 620  may be taken concurrently with INFO 691)"
+    },
+    "13077": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "13079": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "14820": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "12590": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "14821": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "11900": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "15013": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "14822": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "14801": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C"
+    },
+    "14802": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C"
+    },
+    "14803": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C"
+    },
+    "14804": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C"
+    },
+    "14805": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C"
+    },
+    "10182": {
+        "credits": "3.00",
+        "prereqs": "CS 172  Minimum Grade: C"
+    },
+    "10233": {
+        "credits": "3.00",
+        "prereqs": "CS 265  Minimum Grade: C and CS 260  Minimum Grade: C and (SE 181  Minimum Grade: C or SE 201  Minimum Grade: C )"
+    },
+    "12106": {
+        "credits": "3.00",
+        "prereqs": "CS 265  Minimum Grade: C and CS 260  Minimum Grade: C and (SE 181  Minimum Grade: C or SE 201  Minimum Grade: C )"
+    },
+    "11502": {
+        "credits": "3.00",
+        "prereqs": "CS 265  Minimum Grade: C and CS 260  Minimum Grade: C and (SE 181  Minimum Grade: C or SE 201  Minimum Grade: C )"
+    },
+    "10175": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C and (SE 181  Minimum Grade: C or SE 201  Minimum Grade: C )"
+    },
+    "12219": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C and (SE 181  Minimum Grade: C or SE 201  Minimum Grade: C )"
+    },
+    "11896": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C"
+    },
+    "13957": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C"
+    },
+    "12569": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "12570": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "11327": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "11328": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "11329": {
+        "credits": "3.00",
+        "prereqs": "INFO 620  Minimum Grade: C or CS 502  Minimum Grade: C or INFO 600  Minimum Grade: C"
+    },
+    "11330": {
+        "credits": "3.00",
+        "prereqs": "INFO 620  Minimum Grade: C or CS 502  Minimum Grade: C or INFO 600  Minimum Grade: C"
+    },
+    "12782": {
+        "credits": "3.00",
+        "prereqs": "INFO 620  Minimum Grade: C or CS 502  Minimum Grade: C or SE 630  Minimum Grade: C or INFO 532  Minimum Grade: C"
+    },
+    "12783": {
+        "credits": "3.00",
+        "prereqs": "INFO 620  Minimum Grade: C or CS 502  Minimum Grade: C or SE 630  Minimum Grade: C or INFO 532  Minimum Grade: C"
+    },
+    "14808": {
+        "credits": "3.00",
+        "prereqs": "SE 570  Minimum Grade: C"
+    },
+    "11503": {
+        "credits": "3.00",
+        "prereqs": "SE 570  Minimum Grade: C"
+    },
+    "10903": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "11701": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "10904": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "10905": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "11332": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "12677": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "12678": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "12679": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "12680": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "13239": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "13240": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "13241": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "12555": {
+        "credits": "0.00",
+        "prereqs": ""
+    },
+    "14785": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "15543": {
+        "credits": "0.00",
+        "prereqs": "CS 265  Minimum Grade: C"
+    },
+    "15545": {
+        "credits": "3.00",
+        "prereqs": "CS 265  Minimum Grade: C"
+    },
+    "15546": {
+        "credits": "3.00",
+        "prereqs": "CS 265  Minimum Grade: C"
+    },
+    "14795": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "14796": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
+    },
+    "15367": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15368": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15369": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15370": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15371": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15372": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15373": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15374": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15375": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15376": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15377": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15378": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15379": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15380": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15381": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15382": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15383": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15384": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15385": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15386": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15387": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15388": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15389": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15529": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "14819": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "15333": {
+        "credits": "3.00",
+        "prereqs": "INFO 881  Minimum Grade: C"
+    },
+    "15334": {
+        "credits": "3.00",
+        "prereqs": "INFO 881  Minimum Grade: C"
+    },
+    "15305": {
+        "credits": "3.00 TO 6.00",
+        "prereqs": ""
+    },
+    "15390": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15391": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15392": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15393": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15394": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15395": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15396": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15397": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15398": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15399": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15400": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15401": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15402": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15403": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15404": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15405": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15517": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "15544": {
+        "credits": "3.00",
+        "prereqs": "CS 265  Minimum Grade: C and CS 260  Minimum Grade: C and (SE 181  Minimum Grade: C or SE 201  Minimum Grade: C )"
+    }
+}

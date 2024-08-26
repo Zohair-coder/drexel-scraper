@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import json
 import os
 from typing import Any
-import traceback
 import time
 
 from helpers import send_request
@@ -17,6 +16,7 @@ def scrape(
 ) -> dict[str, dict[str, Any]]:
     session = Session()
 
+    print("Signing in...")
     is_logged_into_drexel_connect = False
     failiure_count = 0
     reset_period = 1  # seconds
@@ -33,7 +33,7 @@ def scrape(
                 )
         except Exception:
             print("Error logging in to Drexel Connect: ")
-            print(traceback.format_exc())
+            # not printing stack trace in case password gets accidentally logged
             print(f"Trying again in {reset_period} seconds...")
 
         failiure_count += 1
