@@ -38,7 +38,7 @@ def main(args: argparse.Namespace) -> None:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="python3 src/main.py",
-        description="Scrape data from Drexel Term Master Schedule and save it to a JSON file."
+        description="Scrape data from Drexel Term Master Schedule and save it to a JSON file.",
     )
     parser.add_argument(
         "-o",
