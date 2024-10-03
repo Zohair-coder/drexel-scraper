@@ -51,6 +51,9 @@ drexel_connect_base_url = "https://connect.drexel.edu"
 topic_arn = os.getenv("DREXEL_SCHEDULER_TOPIC_ARN")
 sns_endpoint = os.getenv("SNS_ENDPOINT_URL", None)
 
+# Logfire Configuration
+logfire_api_key = get_environ("LOGFIRE_API_KEY")
+logfire_environment = get_environ("LOGFIRE_ENVIRONMENT")
 
 # element attribute dictionaries the soup will look for
 class attributes:

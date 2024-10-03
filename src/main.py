@@ -9,7 +9,7 @@ import traceback
 import argparse
 import emailer
 import db
-
+import logfire
 
 def main(args: argparse.Namespace) -> None:
     start_time = time.time()
@@ -77,11 +77,13 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     try:
+        logfire.init(api_key=os.environ["LOGFIRE_API_KEY"], environment=os.environ["LOGFIRE_ENVIRONMENT"])
         if not os.path.exists("performance"):
             os.makedirs("performance")
         cProfile.run("main(args)", "performance/profile_output.pstat")
     except Exception:
         trace = traceback.format_exc()
+        logfire.log_error(trace)
         print(trace)
 
         if args.email:

@@ -203,6 +203,15 @@ If you want to reset the Grafana settings, delete the grafana_data directory ins
 
 NOTE: Docker Compose is only used for local development. The production version of the scraper uses Kubernetes. The Kubernetes configuration files live in the `k8s` directory.
 
+## Logfire APM
+
+To set up Logfire APM for monitoring and error tracking, follow these steps:
+
+1. Sign up for a Logfire account at [Logfire](https://pydantic.dev/logfire).
+2. Obtain your Logfire API key from the Logfire dashboard.
+3. Set the environment variables `LOGFIRE_API_KEY` and `LOGFIRE_ENVIRONMENT` with your Logfire API key and the environment name (e.g., "development" or "production").
+4. Run the scraper as usual, and Logfire will automatically track performance and errors.
+
 ## Contributing
 
 If you wish to contribute, please take a look at the "Issues" tab and see if there are any issues you can help with. If you wish to add/request a new feature, you can create a new issue, and we can talk about it there before you start working on it. If you wish to work on an existing issue, please comment on the issue so that I can assign it to you. Once you have completed the issue, you can create a pull request to the dev branch, and I will review it. After merging the changes to the dev branch, the job will be deployed on the dev server (https://schedulerdev.zohair.dev). If there are no issues, I will merge the changes to the main branch, and the job will be deployed on the main server (https://scheduler.zohair.dev).
