@@ -40,6 +40,9 @@ drexel_password = get_environ("DREXEL_PASSWORD")
 # This is not required if the user is using a separate authenticator app and will manually approve the login attempt
 drexel_mfa_secret_key = get_environ("DREXEL_MFA_SECRET_KEY", False) or None
 
+# New environment variable to toggle between Microsoft Authenticator and other authenticator apps
+use_microsoft_authenticator = get_environ("USE_MICROSOFT_AUTHENTICATOR", False) or False
+
 # URL's
 tms_base_url = "https://termmasterschedule.drexel.edu"
 tms_home_url = tms_base_url + "/webtms_du"

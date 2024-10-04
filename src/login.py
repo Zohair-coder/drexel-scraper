@@ -53,28 +53,47 @@ def login_with_drexel_connect(session: Session) -> Session:
         page.wait_for_timeout(extra_timeout)
         page.get_by_text("Sign in").click()
 
-        if config.drexel_mfa_secret_key is not None:
-            mfa_token = totp.get_token(config.drexel_mfa_secret_key)
+        if config.use_microsoft_authenticator:
+            page.wait_for_selector("input[name='otc']")
+            page.wait_for_timeout(extra_timeout)
+
+            mfa_input = page.query_selector("input[name='otc']")
+            assert isinstance(
+                mfa_input, ElementHandle
+            ), "MFA input field on Microsoft Online not found"
+            mfa_input.fill(input("Please input your Microsoft Authenticator verification code: "))
+
+            page.wait_for_selector("input[type='submit']")
+            page.wait_for_timeout(extra_timeout)
+
+            submit_button = page.query_selector("input[type='submit']")
+            assert isinstance(
+                submit_button, ElementHandle
+            ), "Submit button on Microsoft Online for MFA not found"
+            submit_button.click()
         else:
-            mfa_token = input("Please input your MFA verification code: ")
+            if config.drexel_mfa_secret_key is not None:
+                mfa_token = totp.get_token(config.drexel_mfa_secret_key)
+            else:
+                mfa_token = input("Please input your MFA verification code: ")
 
-        page.wait_for_selector("input[name='otc']")
-        page.wait_for_timeout(extra_timeout)
+            page.wait_for_selector("input[name='otc']")
+            page.wait_for_timeout(extra_timeout)
 
-        mfa_input = page.query_selector("input[name='otc']")
-        assert isinstance(
-            mfa_input, ElementHandle
-        ), "MFA input field on Microsoft Online not found"
-        mfa_input.fill(mfa_token)
+            mfa_input = page.query_selector("input[name='otc']")
+            assert isinstance(
+                mfa_input, ElementHandle
+            ), "MFA input field on Microsoft Online not found"
+            mfa_input.fill(mfa_token)
 
-        page.wait_for_selector("input[type='submit']")
-        page.wait_for_timeout(extra_timeout)
+            page.wait_for_selector("input[type='submit']")
+            page.wait_for_timeout(extra_timeout)
 
-        submit_button = page.query_selector("input[type='submit']")
-        assert isinstance(
-            submit_button, ElementHandle
-        ), "Submit button on Microsoft Online for MFA not found"
-        submit_button.click()
+            submit_button = page.query_selector("input[type='submit']")
+            assert isinstance(
+                submit_button, ElementHandle
+            ), "Submit button on Microsoft Online for MFA not found"
+            submit_button.click()
 
         page.wait_for_url("https://connect.drexel.edu/**")
         page.wait_for_timeout(extra_timeout)

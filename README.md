@@ -80,6 +80,19 @@ If you set this up, you will not need to manually enter an authentication code e
 
 Now, when you run the scraper as explained [above](#Usage), it should authenticate itself automatically using this secret key.
 
+###### Authenticate using Microsoft Authenticator
+
+If you prefer to use Microsoft Authenticator for local development, you can set the `USE_MICROSOFT_AUTHENTICATOR` environment variable to `True`. This will allow the scraper to use Microsoft Authenticator for MFA.
+
+1. Go to [connect.drexel.edu](connect.drexel.edu).
+2. Click 'Help & Settings', then 'Change MFA settings'.
+3. Log in to the Microsoft portal, then click 'Add sign-in method' on the 'Security info' tab.
+4. Select 'Authenticator app' for the method, and click 'Add'.
+5. Follow the instructions to set up Microsoft Authenticator.
+6. Set your `USE_MICROSOFT_AUTHENTICATOR` environment variable to `True`.
+
+Now, when you run the scraper as explained [above](#Usage), it should authenticate itself using Microsoft Authenticator.
+
 #### All Colleges
 
 To scrape all colleges instead of just the one specified in the `src/config.py`, run the following command:
