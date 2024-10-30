@@ -6,7 +6,7 @@ import sys
 year = "2024"
 # 15 for Fall, 25 for Winter, 35 for Spring, 45 for Summer
 # example value: 45
-quarter = "15"
+quarter = "25"
 # check college code by going to the tms website and selecting your college from the left sidebar
 # the URL bar should update and it should end with something like collCode=CI
 # the characters after the = sign is your college code
