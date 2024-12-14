@@ -1874,5 +1874,185 @@
     "21494": {
         "credits": "3.00",
         "prereqs": "SE 570  Minimum Grade: C"
+    },
+    "25572": {
+        "credits": "3.00",
+        "prereqs": "CS 260  Minimum Grade: C and CS 270  Minimum Grade: C and MATH 221  Minimum Grade: C"
+    },
+    "25378": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25379": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25380": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25381": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25382": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25383": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25384": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25385": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25386": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25387": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25388": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25389": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25390": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25391": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25392": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25393": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25394": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25395": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25396": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25397": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25398": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25399": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25583": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25592": {
+        "credits": "3.00",
+        "prereqs": "INFO 101  Minimum Grade: D or SE 210  Minimum Grade: D"
+    },
+    "25507": {
+        "credits": "3.00",
+        "prereqs": "INFO 508  Minimum Grade: C  (INFO 508  may be taken concurrently with INFO 609) or DSRE 620  Minimum Grade: C  (DSRE 620  may be taken concurrently with INFO 609) or INFO 608  Minimum Grade: C  (INFO 608  may be taken concurrently with INFO 609)"
+    },
+    "25305": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "25400": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25401": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25402": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25403": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25404": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25405": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25406": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25407": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25408": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25409": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25410": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25411": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25412": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25413": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25414": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25415": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25416": {
+        "credits": "1.00 TO 12.00",
+        "prereqs": ""
+    },
+    "25307": {
+        "credits": "3.00",
+        "prereqs": "CS 504  Minimum Grade: C"
     }
 }

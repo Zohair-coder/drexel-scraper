@@ -8,7 +8,7 @@ grafana.ini:
     enabled: false
 
   alerting:
-    enabled: false
+    enabled: true
 
   server:
     root_url: "https://schedulerdev.zohair.dev"
