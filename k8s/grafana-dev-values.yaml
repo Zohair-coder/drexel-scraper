@@ -5,10 +5,10 @@ grafana.ini:
     org_role: Viewer
 
   unified_alerting:
-    enabled: false
+    enabled: true
 
   alerting:
-    enabled: true
+    enabled: false
 
   server:
     root_url: "https://schedulerdev.zohair.dev"
