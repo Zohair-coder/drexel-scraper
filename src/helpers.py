@@ -28,8 +28,8 @@ def send_request(
                 ):
                     if inner_ex.response.headers.get("Retry-After"):
                         time.sleep(int(inner_ex.response.headers["Retry-After"]))
-                    else:
-                        time.sleep(1)
+                        continue
+                time.sleep(2)
                 continue
             return resp
 

@@ -5,7 +5,7 @@ grafana.ini:
     org_role: Viewer
 
   unified_alerting:
-    enabled: false
+    enabled: true
 
   alerting:
     enabled: false
