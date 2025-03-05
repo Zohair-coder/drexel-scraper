@@ -6,14 +6,14 @@ metadata:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/server-snippet: |
-      if ($uri = "/") {
-        # Only rewrite if the query string does not include the kiosk parameter
-        if ($args !~ "(^|&)kiosk($|&)") {
-          if ($args = "") {
-            return 302 $scheme://$host/?kiosk;
-          }
-          return 302 $scheme://$host/?$args&kiosk;
-        }
+      access_by_lua_block {
+        local args = ngx.req.get_uri_args()
+        -- Check if we're at the root and the kiosk parameter is missing
+        if ngx.var.uri == "/" and not args["kiosk"] then
+          args["kiosk"] = ""  -- add kiosk (even if empty)
+          local new_query = ngx.encode_args(args)
+          return ngx.redirect(ngx.var.scheme .. "://" .. ngx.var.host .. "/?" .. new_query, 302)
+        end
       }
 spec:
   rules:
