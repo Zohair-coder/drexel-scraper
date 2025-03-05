@@ -7,9 +7,11 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/server-snippet: |
       access_by_lua_block {
-        if ngx.var.uri == "/" then
+        local uri = ngx.var.uri
+        -- Check if the URI is "/" or starts with "/d/"
+        if uri == "/" or ngx.re.find(uri, "^/d/") then
           local orig_args = ngx.var.args or ""
-          -- Use ngx.re.find to match using a PCRE pattern.
+          -- Use PCRE to check if "kiosk" exists anywhere in the query string.
           local res, err = ngx.re.find(orig_args, "(^|&)kiosk($|&)")
           if not res then
             local new_query
@@ -18,7 +20,7 @@ metadata:
             else
               new_query = orig_args .. "&kiosk"
             end
-            return ngx.redirect(ngx.var.scheme .. "://" .. ngx.var.host .. "/?" .. new_query, 302)
+            return ngx.redirect(ngx.var.scheme .. "://" .. ngx.var.host .. uri .. "?" .. new_query, 302)
           end
         end
       }
