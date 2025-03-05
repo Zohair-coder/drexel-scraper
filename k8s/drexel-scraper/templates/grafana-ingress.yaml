@@ -9,13 +9,14 @@ metadata:
       access_by_lua_block {
         if ngx.var.uri == "/" then
           local orig_args = ngx.var.args or ""
-          -- Check if "kiosk" is already in the query string
-          if not string.find(orig_args, "(^|&)kiosk($|&)", 1, true) then
+          -- Use ngx.re.find to match using a PCRE pattern.
+          local res, err = ngx.re.find(orig_args, "(^|&)kiosk($|&)")
+          if not res then
             local new_query
-            if orig_args ~= "" then
-              new_query = orig_args .. "&kiosk"
-            else
+            if orig_args == "" then
               new_query = "kiosk"
+            else
+              new_query = orig_args .. "&kiosk"
             end
             return ngx.redirect(ngx.var.scheme .. "://" .. ngx.var.host .. "/?" .. new_query, 302)
           end
