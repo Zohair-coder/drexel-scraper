@@ -5,14 +5,11 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      if ($uri = "/") {
-        if ($arg_kiosk = "") {
-          if ($args = "") {
-            return 302 $scheme://$host/?kiosk;
-          }
-          return 302 $scheme://$host$request_uri&kiosk;
-        }
+    nginx.ingress.kubernetes.io/server-snippet: |
+      # Only apply when the "kiosk" query parameter is missing.
+      if ($arg_kiosk = "") {
+        # The rewrite rule only matches the root ("/") path.
+        rewrite ^/$ $scheme://$host/?$args&kiosk? redirect;
       }
 spec:
   rules:
