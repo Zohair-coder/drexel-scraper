@@ -1,444 +1,106 @@
 {
-    "Tammy R Pirmann": {
-        "avgDifficulty": 3.9,
-        "avgRating": 2,
-        "legacyId": 2558088,
-        "numRatings": 70
-    },
-    "Yusuf Osmanlioglu": {
-        "avgDifficulty": 4.3,
-        "avgRating": 4.5,
-        "legacyId": 2724440,
-        "numRatings": 14
-    },
-    "Galen Long": {
-        "avgDifficulty": 2.9,
-        "avgRating": 4.6,
-        "legacyId": 2744127,
-        "numRatings": 15
-    },
-    "Joseph A Gallego Mejia": null,
-    "Steve Earth": {
-        "avgDifficulty": 2.2,
-        "avgRating": 3.8,
-        "legacyId": 2315388,
-        "numRatings": 5
-    },
-    "Brian L Stuart": {
-        "avgDifficulty": 3.9,
-        "avgRating": 3.5,
-        "legacyId": 2019453,
-        "numRatings": 95
-    },
-    "Jeremy R Johnson": {
-        "avgDifficulty": 4.3,
-        "avgRating": 3.8,
-        "legacyId": 2311063,
-        "numRatings": 4
-    },
-    "Ehsan B Khosroshahi": {
-        "avgDifficulty": 4,
-        "avgRating": 4,
-        "legacyId": 2666934,
-        "numRatings": 1
-    },
-    "Sean P Grimes": {
-        "avgDifficulty": 4,
-        "avgRating": 4.4,
-        "legacyId": 2706967,
-        "numRatings": 12
-    },
-    "Mark W Boady": {
-        "avgDifficulty": 3,
-        "avgRating": 4.9,
-        "legacyId": 2152307,
+    "Adelaida A Medlock": {
+        "avgDifficulty": 3.4,
+        "avgRating": 2.2,
+        "legacyId": 813841,
         "numRatings": 55
-    },
-    "Boris Valerstein": {
-        "avgDifficulty": 4.6,
-        "avgRating": 2.5,
-        "legacyId": 2726277,
-        "numRatings": 13
-    },
-    "Trip E Denton": {
-        "avgDifficulty": 4,
-        "avgRating": 2,
-        "legacyId": 2605642,
-        "numRatings": 1
-    },
-    "Edward Kim": {
-        "avgDifficulty": 2,
-        "avgRating": 4.1,
-        "legacyId": 13061,
-        "numRatings": 15
-    },
-    "Matthew J Burlick": {
-        "avgDifficulty": 3.5,
-        "avgRating": 4.1,
-        "legacyId": 2152203,
-        "numRatings": 21
-    },
-    "Alejandro E Trofimoff": null,
-    "David E Breen": {
-        "avgDifficulty": 4,
-        "avgRating": 2.6,
-        "legacyId": 1885696,
-        "numRatings": 5
-    },
-    "Preetha Chatterjee": {
-        "avgDifficulty": 4,
-        "avgRating": 4,
-        "legacyId": 2726032,
-        "numRatings": 10
-    },
-    "Colin S Gordon": {
-        "avgDifficulty": 2,
-        "avgRating": 4.5,
-        "legacyId": 810201,
-        "numRatings": 17
-    },
-    "Shahin Jabbari": null,
-    "Spiros Mancoridis": null,
-    "Kaidi Xu": {
-        "avgDifficulty": 2,
-        "avgRating": 4,
-        "legacyId": 2968408,
-        "numRatings": 1
-    },
-    "Manolis Pountourakis": {
-        "avgDifficulty": 4,
-        "avgRating": 4.3,
-        "legacyId": 2577186,
-        "numRatings": 5
-    },
-    "Yuanfang Cai": null,
-    "Vasilis Gkatzelis": {
-        "avgDifficulty": 3.6,
-        "avgRating": 5,
-        "legacyId": 2339200,
-        "numRatings": 5
-    },
-    "Ali Shokoufandeh": null,
-    "Brian J Bijeau": {
-        "avgDifficulty": 1,
-        "avgRating": 1,
-        "legacyId": 2646965,
-        "numRatings": 1
-    },
-    "Hengyi M Chu": {
-        "avgDifficulty": 1.4,
-        "avgRating": 4.8,
-        "legacyId": 2290626,
-        "numRatings": 10
-    },
-    "Christopher L Stevens": {
-        "avgDifficulty": 2,
-        "avgRating": 5,
-        "legacyId": 2775886,
-        "numRatings": 3
-    },
-    "Andrew J Kane": {
-        "avgDifficulty": 4,
-        "avgRating": 1,
-        "legacyId": 2829425,
-        "numRatings": 3
-    },
-    "Chris J Carroll": {
-        "avgDifficulty": 2.5,
-        "avgRating": 5,
-        "legacyId": 1977502,
-        "numRatings": 13
-    },
-    "Emanuel S Lazar": {
-        "avgDifficulty": 3.8,
-        "avgRating": 1.9,
-        "legacyId": 1423068,
-        "numRatings": 3
-    },
-    "David J Comroe": {
-        "avgDifficulty": 3.4,
-        "avgRating": 3.4,
-        "legacyId": 2672913,
-        "numRatings": 3
-    },
-    "Andrew W Calhoun": {
-        "avgDifficulty": 4,
-        "avgRating": 1,
-        "legacyId": 2829425,
-        "numRatings": 3
-    },
-    "Chad E Peiper": {
-        "avgDifficulty": 2,
-        "avgRating": 3.3,
-        "legacyId": 2734806,
-        "numRatings": 6
-    },
-    "Lei Wang": {
-        "avgDifficulty": 4,
-        "avgRating": 4,
-        "legacyId": 2764267,
-        "numRatings": 1
-    },
-    "Bhupesh Y Shetty": {
-        "avgDifficulty": 3.6,
-        "avgRating": 4.5,
-        "legacyId": 2612284,
-        "numRatings": 11
-    },
-    "Pragati Awasthi": null,
-    "Melvin E Moore": {
-        "avgDifficulty": 2,
-        "avgRating": 4,
-        "legacyId": 2333223,
-        "numRatings": 3
-    },
-    "Milad Toutounchian": {
-        "avgDifficulty": 2.9,
-        "avgRating": 4.4,
-        "legacyId": 2764268,
-        "numRatings": 34
-    },
-    "Polly A College": {
-        "avgDifficulty": 2,
-        "avgRating": 5,
-        "legacyId": 2704562,
-        "numRatings": 1
-    },
-    "Bo Song": {
-        "avgDifficulty": 3.6,
-        "avgRating": 1.9,
-        "legacyId": 2700769,
-        "numRatings": 17
-    },
-    "Hegler Correa Tissot": {
-        "avgDifficulty": 4.4,
-        "avgRating": 3.3,
-        "legacyId": 2711796,
-        "numRatings": 19
-    },
-    "Abass O Ahmed": {
-        "avgDifficulty": 2.9,
-        "avgRating": 3.8,
-        "legacyId": 1109819,
-        "numRatings": 45
-    },
-    "Erjia Yan": {
-        "avgDifficulty": 2.8,
-        "avgRating": 2.1,
-        "legacyId": 2100295,
-        "numRatings": 11
-    },
-    "Tim J Gorichanaz": {
-        "avgDifficulty": 3.4,
-        "avgRating": 4.4,
-        "legacyId": 2462835,
-        "numRatings": 14
-    },
-    "Thomas J Heverin": {
-        "avgDifficulty": 4,
-        "avgRating": 3.1,
-        "legacyId": 2773350,
-        "numRatings": 4
-    },
-    "Philip H Kulp": {
-        "avgDifficulty": 4,
-        "avgRating": 3.5,
-        "legacyId": 1316639,
-        "numRatings": 1
-    },
-    "Joseph D Adair": null,
-    "Ram Arthanari": {
-        "avgDifficulty": 3,
-        "avgRating": 5,
-        "legacyId": 2945332,
-        "numRatings": 2
-    },
-    "Alex J Kalinowski": {
-        "avgDifficulty": 2.5,
-        "avgRating": 2.9,
-        "legacyId": 919687,
-        "numRatings": 16
-    },
-    "Ashley L Todd-Diaz": {
-        "avgDifficulty": 2.5,
-        "avgRating": 5,
-        "legacyId": 2229974,
-        "numRatings": 16
-    },
-    "Heather L Willever-Farr": null,
-    "Deborah A Garwood": {
-        "avgDifficulty": 3,
-        "avgRating": 5,
-        "legacyId": 2546814,
-        "numRatings": 1
-    },
-    "Diva Smriti": null,
-    "Erica J Racine": null,
-    "Robert A Sieczkiewicz": {
-        "avgDifficulty": 3.5,
-        "avgRating": 4,
-        "legacyId": 986445,
-        "numRatings": 2
-    },
-    "Monique G Breaux": {
-        "avgDifficulty": 2.3,
-        "avgRating": 5,
-        "legacyId": 2145934,
-        "numRatings": 7
-    },
-    "Michelle A Tarbutton": {
-        "avgDifficulty": 1.4,
-        "avgRating": 5,
-        "legacyId": 2750933,
-        "numRatings": 11
-    },
-    "Joanna R Weidler-Lewis": {
-        "avgDifficulty": 3.4,
-        "avgRating": 4.5,
-        "legacyId": 1880949,
-        "numRatings": 7
-    },
-    "Jane Greenberg": {
-        "avgDifficulty": 3.3,
-        "avgRating": 4.3,
-        "legacyId": 2279139,
-        "numRatings": 7
-    },
-    "Xiaohua Hu": {
-        "avgDifficulty": 4.2,
-        "avgRating": 1.9,
-        "legacyId": 903316,
-        "numRatings": 9
-    },
-    "Weimao Ke": {
-        "avgDifficulty": 3.8,
-        "avgRating": 4.1,
-        "legacyId": 2669796,
-        "numRatings": 6
-    },
-    "Mat R Kelly": {
-        "avgDifficulty": 5,
-        "avgRating": 1,
-        "legacyId": 2782054,
-        "numRatings": 1
-    },
-    "Afsaneh Razi": null,
-    "Shadi Rezapour": {
-        "avgDifficulty": 3.5,
-        "avgRating": 2,
-        "legacyId": 2787557,
-        "numRatings": 4
-    },
-    "Aleksandra Sarcevic": {
-        "avgDifficulty": 2.6,
-        "avgRating": 1.8,
-        "legacyId": 1754421,
-        "numRatings": 4
-    },
-    "John S Seberger": {
-        "avgDifficulty": 2.1,
-        "avgRating": 5,
-        "legacyId": 2898208,
-        "numRatings": 4
-    },
-    "Rosina O Weber": {
-        "avgDifficulty": 4,
-        "avgRating": 1.6,
-        "legacyId": 1462799,
-        "numRatings": 11
-    },
-    "Jake Williams": {
-        "avgDifficulty": 4.6,
-        "avgRating": 1,
-        "legacyId": 2578037,
-        "numRatings": 21
-    },
-    "Christopher C Yang": {
-        "avgDifficulty": 3,
-        "avgRating": 2.5,
-        "legacyId": 1993340,
-        "numRatings": 2
-    },
-    "Denise E Agosto": {
-        "avgDifficulty": 2.4,
-        "avgRating": 5,
-        "legacyId": 239980,
-        "numRatings": 15
-    },
-    "Jina Huh-Yoo": null,
-    "Nadya B Sultanik": {
-        "avgDifficulty": 4.4,
-        "avgRating": 1.6,
-        "legacyId": 2939644,
-        "numRatings": 8
     },
     "Daniel W Moix": {
         "avgDifficulty": 3.4,
-        "avgRating": 2.4,
+        "avgRating": 1.8,
         "legacyId": 2840871,
-        "numRatings": 10
+        "numRatings": 25
     },
-    "Adelaida A Medlock": {
-        "avgDifficulty": 3.5,
-        "avgRating": 2.1,
-        "legacyId": 813841,
-        "numRatings": 48
+    "Tammy R Pirmann": {
+        "avgDifficulty": 3.3,
+        "avgRating": 1.7,
+        "legacyId": 2558088,
+        "numRatings": 76
+    },
+    "Yusuf Osmanlioglu": {
+        "avgDifficulty": 4.2,
+        "avgRating": 4.5,
+        "legacyId": 2724440,
+        "numRatings": 15
     },
     "Kurt Schmidt": {
-        "avgDifficulty": 4.3,
-        "avgRating": 2.5,
+        "avgDifficulty": 4.1,
+        "avgRating": 2.2,
         "legacyId": 435636,
-        "numRatings": 71
+        "numRatings": 78
+    },
+    "Joseph A Gallego Mejia": {
+        "avgDifficulty": 3,
+        "avgRating": 3.5,
+        "legacyId": 3028198,
+        "numRatings": 2
+    },
+    "Steve Earth": {
+        "avgDifficulty": 4.4,
+        "avgRating": 2.4,
+        "legacyId": 2622416,
+        "numRatings": 32
+    },
+    "Mark W Boady": {
+        "avgDifficulty": 2.8,
+        "avgRating": 4.3,
+        "legacyId": 2152307,
+        "numRatings": 59
     },
     "Brian S Mitchell": {
-        "avgDifficulty": 3.8,
-        "avgRating": 3.9,
-        "legacyId": 2836246,
-        "numRatings": 4
-    },
-    "Dario D Salvucci": {
-        "avgDifficulty": 3.4,
-        "avgRating": 5,
-        "legacyId": 2411977,
-        "numRatings": 7
-    },
-    "Widchard Faustin": null,
-    "Sam M Bever": {
-        "avgDifficulty": 2,
-        "avgRating": 5,
-        "legacyId": 2672839,
-        "numRatings": 3
-    },
-    "Feng Liu": {
-        "avgDifficulty": 3.8,
-        "avgRating": 3.7,
-        "legacyId": 2409027,
-        "numRatings": 4
-    },
-    "Eric Sun": {
         "avgDifficulty": 3.6,
-        "avgRating": 3,
-        "legacyId": 1802507,
-        "numRatings": 17
+        "avgRating": 4,
+        "legacyId": 2836246,
+        "numRatings": 5
+    },
+    "Tiffany Do": {
+        "avgDifficulty": 5,
+        "avgRating": 2,
+        "legacyId": 2351434,
+        "numRatings": 1
+    },
+    "Jenn A Engimann": {
+        "avgDifficulty": 1.5,
+        "avgRating": 5,
+        "legacyId": 2956855,
+        "numRatings": 2
+    },
+    "Matthew J Burlick": {
+        "avgDifficulty": 3.1,
+        "avgRating": 3.6,
+        "legacyId": 2152203,
+        "numRatings": 21
     },
     "Geoffrey B Mainland": {
-        "avgDifficulty": 3.9,
-        "avgRating": 4.3,
+        "avgDifficulty": 3.6,
+        "avgRating": 4.1,
         "legacyId": 2446149,
         "numRatings": 9
     },
-    "Santiago Ontanon": null,
-    "Michelle L Rogers": {
-        "avgDifficulty": 2.5,
-        "avgRating": 2.5,
-        "legacyId": 1364532,
-        "numRatings": 8
+    "Kapil R Dandekar": {
+        "avgDifficulty": 3,
+        "avgRating": 5,
+        "legacyId": 1721154,
+        "numRatings": 1
     },
-    "Sherri Hackett": {
-        "avgDifficulty": 4,
-        "avgRating": 1,
-        "legacyId": 2793029,
-        "numRatings": 2
+    "Colin S Gordon": {
+        "avgDifficulty": 3.8,
+        "avgRating": 4.2,
+        "legacyId": 2354840,
+        "numRatings": 5
+    },
+    "Eric Sun": {
+        "avgDifficulty": 3.3,
+        "avgRating": 2.6,
+        "legacyId": 1802507,
+        "numRatings": 19
+    },
+    "Spiros Mancoridis": null,
+    "Ehsan B Khosroshahi": {
+        "avgDifficulty": 3.3,
+        "avgRating": 4.7,
+        "legacyId": 2666934,
+        "numRatings": 3
     },
     "Jeff K Salvage": {
         "avgDifficulty": 3,
@@ -446,29 +108,345 @@
         "legacyId": 756839,
         "numRatings": 15
     },
-    "Filippos I Vokolos": {
-        "avgDifficulty": 3.3,
-        "avgRating": 2.9,
-        "legacyId": 1940069,
-        "numRatings": 15
-    },
-    "Mike J Galloway": {
-        "avgDifficulty": 2,
-        "avgRating": 3.5,
-        "legacyId": 1627698,
+    "Samantha R Bewley": {
+        "avgDifficulty": 4,
+        "avgRating": 2,
+        "legacyId": 2972701,
         "numRatings": 1
     },
-    "Sumaiya Tabassum": null,
-    "Yuan An": {
-        "avgDifficulty": 2.4,
+    "Benji Lilley": null,
+    "Nadya B Sultanik": {
+        "avgDifficulty": 4.2,
+        "avgRating": 1.9,
+        "legacyId": 2939644,
+        "numRatings": 9
+    },
+    "Shahin Jabbari": null,
+    "Sean P Grimes": {
+        "avgDifficulty": 3.7,
+        "avgRating": 4.3,
+        "legacyId": 2706967,
+        "numRatings": 15
+    },
+    "Sam M Bever": {
+        "avgDifficulty": 2,
         "avgRating": 5,
-        "legacyId": 2797629,
+        "legacyId": 2672839,
+        "numRatings": 3
+    },
+    "Trip E Denton": {
+        "avgDifficulty": 2.8,
+        "avgRating": 4.8,
+        "legacyId": 2876940,
         "numRatings": 5
+    },
+    "Edward Kim": {
+        "avgDifficulty": 2.7,
+        "avgRating": 4.4,
+        "legacyId": 1701267,
+        "numRatings": 7
+    },
+    "Manolis Pountourakis": {
+        "avgDifficulty": 3.8,
+        "avgRating": 4.2,
+        "legacyId": 2577186,
+        "numRatings": 5
+    },
+    "Harry Zhang": {
+        "avgDifficulty": 2.5,
+        "avgRating": 4,
+        "legacyId": 2803892,
+        "numRatings": 2
+    },
+    "David E Breen": {
+        "avgDifficulty": 4,
+        "avgRating": 2.6,
+        "legacyId": 1885696,
+        "numRatings": 5
+    },
+    "Yuanfang Cai": {
+        "avgDifficulty": 2.5,
+        "avgRating": 5,
+        "legacyId": 2884425,
+        "numRatings": 16
+    },
+    "Preetha Chatterjee": {
+        "avgDifficulty": 3.7,
+        "avgRating": 4,
+        "legacyId": 2726032,
+        "numRatings": 12
+    },
+    "Vasilis Gkatzelis": {
+        "avgDifficulty": 3.7,
+        "avgRating": 5,
+        "legacyId": 2339200,
+        "numRatings": 6
+    },
+    "Jeremy R Johnson": {
+        "avgDifficulty": 3.7,
+        "avgRating": 3.1,
+        "legacyId": 2311063,
+        "numRatings": 7
+    },
+    "Ali Shokoufandeh": null,
+    "Santiago Ontanon": null,
+    "Kaidi Xu": {
+        "avgDifficulty": 2.5,
+        "avgRating": 4.5,
+        "legacyId": 2968408,
+        "numRatings": 2
+    },
+    "Chris J Carroll": {
+        "avgDifficulty": 2.1,
+        "avgRating": 4.9,
+        "legacyId": 1977502,
+        "numRatings": 14
+    },
+    "David J Comroe": {
+        "avgDifficulty": 3.3,
+        "avgRating": 3.3,
+        "legacyId": 2672913,
+        "numRatings": 3
+    },
+    "Hengyi M Chu": {
+        "avgDifficulty": 2.3,
+        "avgRating": 5,
+        "legacyId": 3035700,
+        "numRatings": 3
+    },
+    "Emanuel S Lazar": {
+        "avgDifficulty": 2.3,
+        "avgRating": 2,
+        "legacyId": 3020713,
+        "numRatings": 3
     },
     "David A Appelbaum": {
         "avgDifficulty": 2,
+        "avgRating": 4.5,
+        "legacyId": 2887629,
+        "numRatings": 2
+    },
+    "Michelle A Tarbutton": {
+        "avgDifficulty": 1.2,
+        "avgRating": 4.8,
+        "legacyId": 2750933,
+        "numRatings": 11
+    },
+    "Andrew W Calhoun": {
+        "avgDifficulty": 3,
+        "avgRating": 2,
+        "legacyId": 3029681,
+        "numRatings": 1
+    },
+    "Natasha Staples": {
+        "avgDifficulty": 2.5,
+        "avgRating": 5,
+        "legacyId": 2688163,
+        "numRatings": 2
+    },
+    "Christopher L Stevens": {
+        "avgDifficulty": 2.3,
+        "avgRating": 4.7,
+        "legacyId": 2775886,
+        "numRatings": 6
+    },
+    "Thomas J Heverin": {
+        "avgDifficulty": 3.3,
+        "avgRating": 5,
+        "legacyId": 2391161,
+        "numRatings": 33
+    },
+    "Andrew J Kane": {
+        "avgDifficulty": 1.6,
+        "avgRating": 4.7,
+        "legacyId": 2442491,
+        "numRatings": 35
+    },
+    "Michelle L Rogers": {
+        "avgDifficulty": 2.1,
+        "avgRating": 2.2,
+        "legacyId": 1364532,
+        "numRatings": 8
+    },
+    "Erjia Yan": {
+        "avgDifficulty": 3.3,
+        "avgRating": 1.6,
+        "legacyId": 2100295,
+        "numRatings": 18
+    },
+    "Briana Green": {
+        "avgDifficulty": 1,
+        "avgRating": 3,
+        "legacyId": 2947960,
+        "numRatings": 2
+    },
+    "Milad Toutounchian": {
+        "avgDifficulty": 2.6,
+        "avgRating": 4.4,
+        "legacyId": 2764268,
+        "numRatings": 42
+    },
+    "Bhupesh Y Shetty": {
+        "avgDifficulty": 3.2,
+        "avgRating": 4.5,
+        "legacyId": 2612284,
+        "numRatings": 13
+    },
+    "Jake Williams": {
+        "avgDifficulty": 2.4,
+        "avgRating": 4.5,
+        "legacyId": 1307164,
+        "numRatings": 12
+    },
+    "Pragati Awasthi": {
+        "avgDifficulty": 1,
+        "avgRating": 5,
+        "legacyId": 3077519,
+        "numRatings": 1
+    },
+    "Lei Wang": {
+        "avgDifficulty": 2.5,
+        "avgRating": 2.5,
+        "legacyId": 2764267,
+        "numRatings": 2
+    },
+    "Michael S Cordano": {
+        "avgDifficulty": 2.3,
+        "avgRating": 5,
+        "legacyId": 2796899,
+        "numRatings": 8
+    },
+    "Ram Arthanari": {
+        "avgDifficulty": 2.4,
+        "avgRating": 5,
+        "legacyId": 2945332,
+        "numRatings": 5
+    },
+    "Il-Yeol Song": {
+        "avgDifficulty": 3.6,
+        "avgRating": 3.8,
+        "legacyId": 957870,
+        "numRatings": 11
+    },
+    "Erica J Racine": {
+        "avgDifficulty": 1.9,
+        "avgRating": 4.6,
+        "legacyId": 2755932,
+        "numRatings": 14
+    },
+    "Jwawon Seo": null,
+    "Tim J Gorichanaz": {
+        "avgDifficulty": 3.3,
+        "avgRating": 4.4,
+        "legacyId": 2462835,
+        "numRatings": 14
+    },
+    "Mike J Galloway": {
+        "avgDifficulty": 3,
+        "avgRating": 5,
+        "legacyId": 3077515,
+        "numRatings": 1
+    },
+    "Josh G Gdovin": {
+        "avgDifficulty": 4,
+        "avgRating": 2.1,
+        "legacyId": 2600882,
+        "numRatings": 7
+    },
+    "Bo Song": {
+        "avgDifficulty": 3.4,
+        "avgRating": 2,
+        "legacyId": 2700769,
+        "numRatings": 23
+    },
+    "Mat R Kelly": {
+        "avgDifficulty": 3.5,
+        "avgRating": 2.5,
+        "legacyId": 2782054,
+        "numRatings": 2
+    },
+    "Hegler Correa Tissot": {
+        "avgDifficulty": 3.9,
+        "avgRating": 3.1,
+        "legacyId": 2711796,
+        "numRatings": 20
+    },
+    "Yuan An": {
+        "avgDifficulty": 2.2,
+        "avgRating": 4.8,
+        "legacyId": 2797629,
+        "numRatings": 6
+    },
+    "John S Seberger": {
+        "avgDifficulty": 2.2,
+        "avgRating": 5,
+        "legacyId": 2898208,
+        "numRatings": 5
+    },
+    "Weimao Ke": {
+        "avgDifficulty": 3.5,
         "avgRating": 4,
-        "legacyId": 1703030,
+        "legacyId": 2669796,
+        "numRatings": 6
+    },
+    "Wendy Khoo": {
+        "avgDifficulty": 1.3,
+        "avgRating": 4.7,
+        "legacyId": 813839,
+        "numRatings": 3
+    },
+    "Katie A Zellner": {
+        "avgDifficulty": 5,
+        "avgRating": 2,
+        "legacyId": 2575109,
+        "numRatings": 1
+    },
+    "Joseph D Adair": {
+        "avgDifficulty": 2.4,
+        "avgRating": 5,
+        "legacyId": 2689313,
+        "numRatings": 5
+    },
+    "Lee S Karpo": {
+        "avgDifficulty": 3.4,
+        "avgRating": 2.7,
+        "legacyId": 1967219,
+        "numRatings": 54
+    },
+    "Charles Dorner": {
+        "avgDifficulty": 2.4,
+        "avgRating": 3.6,
+        "legacyId": 594879,
+        "numRatings": 13
+    },
+    "Spencer L Hopkins": {
+        "avgDifficulty": 2,
+        "avgRating": 5,
+        "legacyId": 2733242,
+        "numRatings": 3
+    },
+    "Shadi Rezapour": {
+        "avgDifficulty": 3.3,
+        "avgRating": 2.3,
+        "legacyId": 2787557,
+        "numRatings": 3
+    },
+    "Alexander H Poole": {
+        "avgDifficulty": 5,
+        "avgRating": 4,
+        "legacyId": 2833092,
+        "numRatings": 1
+    },
+    "Heather L Willever-Farr": {
+        "avgDifficulty": 3.5,
+        "avgRating": 2,
+        "legacyId": 2234037,
+        "numRatings": 2
+    },
+    "Scott McClellan": {
+        "avgDifficulty": 2,
+        "avgRating": 5,
+        "legacyId": 3020711,
         "numRatings": 1
     },
     "Jung-Ran Park": {
@@ -477,97 +455,135 @@
         "legacyId": 1296385,
         "numRatings": 14
     },
-    "Il-Yeol Song": {
-        "avgDifficulty": 3.6,
-        "avgRating": 4,
-        "legacyId": 957870,
+    "Afsaneh Razi": null,
+    "Shruti V Phadke": {
+        "avgDifficulty": 2.4,
+        "avgRating": 4.4,
+        "legacyId": 2773496,
         "numRatings": 11
     },
-    "Alexander H Poole": {
-        "avgDifficulty": 5,
-        "avgRating": 4,
-        "legacyId": 2833092,
-        "numRatings": 1
+    "Chad E Peiper": {
+        "avgDifficulty": 3.2,
+        "avgRating": 4.2,
+        "legacyId": 2734806,
+        "numRatings": 13
     },
-    "Sonia M Pascua": {
-        "avgDifficulty": 2.5,
+    "Melvin E Moore": {
+        "avgDifficulty": 2,
         "avgRating": 4,
-        "legacyId": 2567272,
-        "numRatings": 8
-    },
-    "Shruti V Phadke": {
-        "avgDifficulty": 1.7,
-        "avgRating": 5,
-        "legacyId": 1771085,
+        "legacyId": 2333223,
         "numRatings": 3
     },
-    "Chaomei Chen": null,
-    "Elizabeth A Campbell": {
-        "avgDifficulty": 1.5,
-        "avgRating": 5,
-        "legacyId": 2752748,
-        "numRatings": 2
+    "Chaomei Chen": {
+        "avgDifficulty": 2.1,
+        "avgRating": 4.6,
+        "legacyId": 2238040,
+        "numRatings": 21
+    },
+    "Michael D Ekstrand": {
+        "avgDifficulty": 3.2,
+        "avgRating": 3.5,
+        "legacyId": 1313100,
+        "numRatings": 36
+    },
+    "Jane Greenberg": {
+        "avgDifficulty": 3.3,
+        "avgRating": 3.8,
+        "legacyId": 2279139,
+        "numRatings": 9
     },
     "Jeff E Bullard": {
         "avgDifficulty": 3.6,
-        "avgRating": 2.5,
+        "avgRating": 2.3,
         "legacyId": 565937,
         "numRatings": 28
     },
-    "Michael D Ekstrand": {
-        "avgDifficulty": 3.3,
-        "avgRating": 4.4,
-        "legacyId": 2399980,
+    "Aleksandra Sarcevic": {
+        "avgDifficulty": 2.5,
+        "avgRating": 1.8,
+        "legacyId": 1754421,
         "numRatings": 4
     },
+    "Prateek Goel": null,
     "Karthik Seetharama Bhat": {
         "avgDifficulty": 2,
         "avgRating": 4.5,
         "legacyId": 2399987,
         "numRatings": 2
     },
+    "Mary M Lucas": {
+        "avgDifficulty": 3,
+        "avgRating": 4.8,
+        "legacyId": 1681445,
+        "numRatings": 4
+    },
+    "Xiaohua Hu": {
+        "avgDifficulty": 4.2,
+        "avgRating": 1.9,
+        "legacyId": 903316,
+        "numRatings": 9
+    },
     "Helena Mentis": null,
+    "Rosina O Weber": {
+        "avgDifficulty": 4,
+        "avgRating": 1.6,
+        "legacyId": 1462799,
+        "numRatings": 11
+    },
+    "Christopher C Yang": {
+        "avgDifficulty": 3,
+        "avgRating": 2.5,
+        "legacyId": 1993340,
+        "numRatings": 2
+    },
+    "Reza Moradinezhad": {
+        "avgDifficulty": 3.8,
+        "avgRating": 1.8,
+        "legacyId": 2729408,
+        "numRatings": 12
+    },
+    "Filippos I Vokolos": {
+        "avgDifficulty": 2.9,
+        "avgRating": 2.5,
+        "legacyId": 1940069,
+        "numRatings": 15
+    },
     "Gregory W Hislop": {
         "avgDifficulty": 3,
         "avgRating": 3,
         "legacyId": 2805770,
         "numRatings": 1
     },
+    "Mq Quraishi": null,
     "Thomas M Shortell": {
         "avgDifficulty": 3.5,
         "avgRating": 1,
         "legacyId": 2698578,
         "numRatings": 2
     },
-    "Briana Green": {
-        "avgDifficulty": 1,
-        "avgRating": 3,
-        "legacyId": 2947960,
-        "numRatings": 1
-    },
-    "William T Ahern": {
-        "avgDifficulty": 2,
-        "avgRating": 3.8,
-        "legacyId": 2284507,
-        "numRatings": 28
-    },
-    "Kristy L Eells": {
-        "avgDifficulty": 4,
-        "avgRating": 4,
-        "legacyId": 2764267,
-        "numRatings": 1
-    },
-    "Alexis M Pinto": {
-        "avgDifficulty": 2,
-        "avgRating": 3.8,
-        "legacyId": 2604989,
-        "numRatings": 3
-    },
-    "Alla Fedosenko": null,
     "Antonia M Hannon": {
         "avgDifficulty": 3,
         "avgRating": 4.5,
         "legacyId": 2842539,
         "numRatings": 2
+    },
+    "William T Ahern": {
+        "avgDifficulty": 1.9,
+        "avgRating": 3.6,
+        "legacyId": 2284507,
+        "numRatings": 28
+    },
+    "Alexis M Pinto": {
+        "avgDifficulty": 2,
+        "avgRating": 3.7,
+        "legacyId": 2604989,
+        "numRatings": 3
+    },
+    "Alla Fedosenko": null,
+    "Kristy L Eells": {
+        "avgDifficulty": 2.8,
+        "avgRating": 4.8,
+        "legacyId": 2876940,
+        "numRatings": 5
     }
 }
