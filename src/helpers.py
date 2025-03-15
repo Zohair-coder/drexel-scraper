@@ -13,6 +13,9 @@ def send_request(
     data: dict[str, Any] = {},
 ) -> Response:
     try:
+        headers["User-Agent"] = (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"
+        )
         resp = send_request_helper(session, url, method, json, headers, data)
         resp.raise_for_status()
     except Exception as ex:
