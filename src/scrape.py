@@ -24,27 +24,21 @@ def scrape(
         reset_period *= 2
         try:
             session = login.login_with_drexel_connect(session)
-            if "shib_idp_session" in session.cookies:
-                is_logged_into_drexel_connect = True
-                break
-            else:
-                print(
-                    f"shib_idp_session cookie not found in session. Trying again in {reset_period} seconds..."
-                )
+            is_logged_into_drexel_connect = True
         except Exception:
             print("Error logging in to Drexel Connect: ")
             # not printing stack trace in case password gets accidentally logged
             print(f"Trying again in {reset_period} seconds...")
 
-        failiure_count += 1
-        if failiure_count > 8:
-            raise Exception(
-                "Failed to log in to Drexel Connect after {} attempts".format(
-                    failiure_count
+            failiure_count += 1
+            if failiure_count > 8:
+                raise Exception(
+                    "Failed to log in to Drexel Connect after {} attempts".format(
+                        failiure_count
+                    )
                 )
-            )
 
-        time.sleep(reset_period)
+            time.sleep(reset_period)
 
     data: dict[str, dict[str, Any]] = {}
 
