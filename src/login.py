@@ -16,7 +16,7 @@ def login_with_drexel_connect(session: Session) -> Session:
     # changed easily if the site changes
 
     with sync_playwright() as p:
-        browser = p.chromium.launch()
+        browser = p.chromium.launch(headless=True)
         context = browser.new_context()
         page = context.new_page()
         page.goto("https://connect.drexel.edu")
