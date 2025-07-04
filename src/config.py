@@ -1,5 +1,6 @@
 import os
 import sys
+
 from quarter_utils import get_current_quarter_and_year, get_quarter_name
 
 # Automatically determine the current quarter and year
@@ -7,10 +8,16 @@ from quarter_utils import get_current_quarter_and_year, get_quarter_name
 if "DREXEL_YEAR" in os.environ and "DREXEL_QUARTER" in os.environ:
     year = os.environ["DREXEL_YEAR"]
     quarter = os.environ["DREXEL_QUARTER"]
-    print(f"Using manually configured {get_quarter_name(quarter)} {year} quarter (code: {quarter})")
+    print(
+        f"Using manually configured {get_quarter_name(quarter)} {year} "
+        f"quarter (code: {quarter})"
+    )
 else:
     year, quarter = get_current_quarter_and_year()
-    print(f"Using auto-detected {get_quarter_name(quarter)} {year} quarter (code: {quarter})")
+    print(
+        f"Using auto-detected {get_quarter_name(quarter)} {year} "
+        f"quarter (code: {quarter})"
+    )
 
 # Note: These values are now automatically determined based on the current date
 # Fall (15): July 1 - September 27
