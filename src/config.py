@@ -1,13 +1,31 @@
 import os
 import sys
 
-# in format YYYY (e.g. 2022)
-# example value: 2022
-year = "2024"
-# 15 for Fall, 25 for Winter, 35 for Spring, 45 for Summer
-# example value: 45
-quarter = "45"
-# check college code by going to the tms website and selecting your college from the left sidebar
+from quarter_utils import get_current_quarter_and_year, get_quarter_name
+
+# Automatically determine the current quarter and year
+# Can be overridden with DREXEL_YEAR and DREXEL_QUARTER environment variables
+if "DREXEL_YEAR" in os.environ and "DREXEL_QUARTER" in os.environ:
+    year = os.environ["DREXEL_YEAR"]
+    quarter = os.environ["DREXEL_QUARTER"]
+    print(
+        f"Using manually configured {get_quarter_name(quarter)} {year} "
+        f"quarter (code: {quarter})"
+    )
+else:
+    year, quarter = get_current_quarter_and_year()
+    print(
+        f"Using auto-detected {get_quarter_name(quarter)} {year} "
+        f"quarter (code: {quarter})"
+    )
+
+# Note: These values are now automatically determined based on the current date
+# Fall (15): July 1 - September 27
+# Winter (25): September 28 - January 15
+# Spring (35): January 16 - April 14
+# Summer (45): April 15 - June 30
+# check college code by going to the tms website and selecting your college
+# from the left sidebar
 # the URL bar should update and it should end with something like collCode=CI
 # the characters after the = sign is your college code
 # e.g. in this URL the college code is CI
@@ -27,7 +45,9 @@ def get_environ(key: str, required: bool = True) -> str:
         return os.environ[key]
     elif required:
         print(
-            f"{key} is missing from your environment variables and is required to run this script. See {environ_help_url} for more information and help."
+            f"{key} is missing from your environment variables and is required "
+            f"to run this script. See {environ_help_url} for more information "
+            f"and help."
         )
         sys.exit(1)
     else:
@@ -37,7 +57,8 @@ def get_environ(key: str, required: bool = True) -> str:
 # Drexel Connect Credentials
 drexel_email = get_environ("DREXEL_EMAIL")
 drexel_password = get_environ("DREXEL_PASSWORD")
-# This is not required if the user is using a separate authenticator app and will manually approve the login attempt
+# This is not required if the user is using a separate authenticator app
+# and will manually approve the login attempt
 drexel_mfa_secret_key = get_environ("DREXEL_MFA_SECRET_KEY", False) or None
 
 # URL's
