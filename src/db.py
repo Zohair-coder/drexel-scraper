@@ -213,22 +213,22 @@ def update_metadata(cur: cursor) -> None:
     # Import here to avoid circular imports
     import config
     from quarter_utils import get_quarter_name
-    
+
     tz = timezone("US/Eastern")
     current_datetime = datetime.now(tz).strftime("%m/%d/%y %I:%M %p")
-    
+
     # Get current quarter information
     quarter_name = get_quarter_name(config.quarter)
-    
+
     # Update multiple metadata values
     metadata_updates = [
-        ('last_updated', current_datetime),
-        ('current_year', config.year),
-        ('current_quarter', config.quarter),
-        ('current_quarter_name', quarter_name),
-        ('current_term', f"{quarter_name} {config.year}")
+        ("last_updated", current_datetime),
+        ("current_year", config.year),
+        ("current_quarter", config.quarter),
+        ("current_quarter_name", quarter_name),
+        ("current_term", f"{quarter_name} {config.year}"),
     ]
-    
+
     cur.executemany(
         """
         INSERT INTO metadata (key, value)
