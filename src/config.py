@@ -1,12 +1,22 @@
 import os
 import sys
+from quarter_utils import get_current_quarter_and_year, get_quarter_name
 
-# in format YYYY (e.g. 2022)
-# example value: 2022
-year = "2024"
-# 15 for Fall, 25 for Winter, 35 for Spring, 45 for Summer
-# example value: 45
-quarter = "45"
+# Automatically determine the current quarter and year
+# Can be overridden with DREXEL_YEAR and DREXEL_QUARTER environment variables
+if "DREXEL_YEAR" in os.environ and "DREXEL_QUARTER" in os.environ:
+    year = os.environ["DREXEL_YEAR"]
+    quarter = os.environ["DREXEL_QUARTER"]
+    print(f"Using manually configured {get_quarter_name(quarter)} {year} quarter (code: {quarter})")
+else:
+    year, quarter = get_current_quarter_and_year()
+    print(f"Using auto-detected {get_quarter_name(quarter)} {year} quarter (code: {quarter})")
+
+# Note: These values are now automatically determined based on the current date
+# Fall (15): Late September - Mid December
+# Winter (25): Early January - Late March
+# Spring (35): Late March/Early April - Mid June
+# Summer (45): Late June - Early September
 # check college code by going to the tms website and selecting your college from the left sidebar
 # the URL bar should update and it should end with something like collCode=CI
 # the characters after the = sign is your college code

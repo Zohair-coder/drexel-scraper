@@ -44,7 +44,23 @@ python src/main.py
 
 The scraper will output a JSON file called `data.json` in the same directory as the scraper.
 
-You can modify the scraper to scrape other terms by changing the `year`, `quarter`, and `college_code` variables in `src/config.py`.
+#### Automatic Quarter Detection
+
+The scraper now automatically detects the current Drexel quarter based on the current date. You no longer need to manually update the `year` and `quarter` values in `src/config.py`. The system uses the following schedule:
+
+- **Fall Quarter (15)**: September 23 - December 31
+- **Winter Quarter (25)**: January 1 - March 22
+- **Spring Quarter (35)**: March 23 - June 14
+- **Summer Quarter (45)**: June 15 - September 22
+
+If you need to override the automatic detection (e.g., for testing or scraping a specific past/future quarter), you can set the `DREXEL_YEAR` and `DREXEL_QUARTER` environment variables:
+
+```bash
+export DREXEL_YEAR=2024
+export DREXEL_QUARTER=35  # Spring quarter
+```
+
+You can still modify the `college_code` variable in `src/config.py` to scrape a specific college.
 
 To view all the options that the scraper supports, run `python3 src/main.py --help` on Mac/Linux, or `python src/main.py --help` on Windows.  
 
