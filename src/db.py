@@ -16,6 +16,8 @@ from db_config import (
 from datetime import datetime
 from pytz import timezone
 from typing import Any
+import config
+from quarter_utils import get_quarter_name
 
 
 def populate_db(data: dict[str, dict[str, Any]]) -> None:
@@ -210,10 +212,6 @@ def create_tables(cur: cursor) -> None:
 
 
 def update_metadata(cur: cursor) -> None:
-    # Import here to avoid circular imports
-    import config
-    from quarter_utils import get_quarter_name
-
     tz = timezone("US/Eastern")
     current_datetime = datetime.now(tz).strftime("%m/%d/%y %I:%M %p")
 
