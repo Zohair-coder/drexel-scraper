@@ -24,7 +24,8 @@ else:
 # Winter (25): September 28 - January 15
 # Spring (35): January 16 - April 14
 # Summer (45): April 15 - June 30
-# check college code by going to the tms website and selecting your college from the left sidebar
+# check college code by going to the tms website and selecting your college
+# from the left sidebar
 # the URL bar should update and it should end with something like collCode=CI
 # the characters after the = sign is your college code
 # e.g. in this URL the college code is CI
@@ -44,7 +45,9 @@ def get_environ(key: str, required: bool = True) -> str:
         return os.environ[key]
     elif required:
         print(
-            f"{key} is missing from your environment variables and is required to run this script. See {environ_help_url} for more information and help."
+            f"{key} is missing from your environment variables and is required "
+            f"to run this script. See {environ_help_url} for more information "
+            f"and help."
         )
         sys.exit(1)
     else:
@@ -54,7 +57,8 @@ def get_environ(key: str, required: bool = True) -> str:
 # Drexel Connect Credentials
 drexel_email = get_environ("DREXEL_EMAIL")
 drexel_password = get_environ("DREXEL_PASSWORD")
-# This is not required if the user is using a separate authenticator app and will manually approve the login attempt
+# This is not required if the user is using a separate authenticator app
+# and will manually approve the login attempt
 drexel_mfa_secret_key = get_environ("DREXEL_MFA_SECRET_KEY", False) or None
 
 # URL's
