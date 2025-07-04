@@ -7,10 +7,10 @@ def get_current_quarter_and_year() -> Tuple[str, str]:
     Determine the current Drexel quarter and year based on the current date.
     
     Drexel quarters:
-    - Fall (15): Late September - Mid December
-    - Winter (25): Early January - Late March
-    - Spring (35): Late March/Early April - Mid June
-    - Summer (45): Late June - Early September
+    - Fall (15): July 1 - September 27
+    - Winter (25): September 28 - January 15
+    - Spring (35): January 16 - April 14
+    - Summer (45): April 15 - June 30
     
     Returns:
         Tuple of (year, quarter_code) as strings
@@ -21,21 +21,24 @@ def get_current_quarter_and_year() -> Tuple[str, str]:
     year = now.year
     
     # Determine quarter based on month and day
-    if month == 1 or month == 2 or (month == 3 and day <= 22):
+    if (month == 7) or (month == 8) or (month == 9 and day <= 27):
+        # Fall quarter
+        quarter = "15"
+    elif (month == 9 and day >= 28) or month == 10 or month == 11 or month == 12 or (month == 1 and day <= 15):
         # Winter quarter
         quarter = "25"
-    elif (month == 3 and day > 22) or month == 4 or month == 5 or (month == 6 and day <= 14):
+    elif (month == 1 and day >= 16) or month == 2 or month == 3 or (month == 4 and day <= 14):
         # Spring quarter
         quarter = "35"
-    elif (month == 6 and day > 14) or month == 7 or month == 8 or (month == 9 and day <= 22):
-        # Summer quarter
-        quarter = "45"
     else:
-        # Fall quarter (Sept 23 - Dec 31)
-        quarter = "15"
+        # Summer quarter (April 15 - June 30)
+        quarter = "45"
     
-    # For Fall quarter, if we're in September-December, it's the current year
-    # For other quarters in January-August, they belong to the current year
+    # For Winter quarter spanning two calendar years (Sept 28 - Jan 15),
+    # if we're in January, it belongs to the previous year's academic year
+    if quarter == "25" and month == 1:
+        year = year - 1
+    
     return str(year), quarter
 
 

@@ -48,10 +48,10 @@ The scraper will output a JSON file called `data.json` in the same directory as 
 
 The scraper now automatically detects the current Drexel quarter based on the current date. You no longer need to manually update the `year` and `quarter` values in `src/config.py`. The system uses the following schedule:
 
-- **Fall Quarter (15)**: September 23 - December 31
-- **Winter Quarter (25)**: January 1 - March 22
-- **Spring Quarter (35)**: March 23 - June 14
-- **Summer Quarter (45)**: June 15 - September 22
+- **Fall Quarter (15)**: July 1 - September 27
+- **Winter Quarter (25)**: September 28 - January 15
+- **Spring Quarter (35)**: January 16 - April 14
+- **Summer Quarter (45)**: April 15 - June 30
 
 If you need to override the automatic detection (e.g., for testing or scraping a specific past/future quarter), you can set the `DREXEL_YEAR` and `DREXEL_QUARTER` environment variables:
 

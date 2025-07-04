@@ -13,10 +13,10 @@ else:
     print(f"Using auto-detected {get_quarter_name(quarter)} {year} quarter (code: {quarter})")
 
 # Note: These values are now automatically determined based on the current date
-# Fall (15): Late September - Mid December
-# Winter (25): Early January - Late March
-# Spring (35): Late March/Early April - Mid June
-# Summer (45): Late June - Early September
+# Fall (15): July 1 - September 27
+# Winter (25): September 28 - January 15
+# Spring (35): January 16 - April 14
+# Summer (45): April 15 - June 30
 # check college code by going to the tms website and selecting your college from the left sidebar
 # the URL bar should update and it should end with something like collCode=CI
 # the characters after the = sign is your college code
