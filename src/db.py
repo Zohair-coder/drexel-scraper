@@ -16,6 +16,8 @@ from db_config import (
 from datetime import datetime
 from pytz import timezone
 from typing import Any
+import config
+from quarter_utils import get_quarter_name
 
 
 def populate_db(data: dict[str, dict[str, Any]]) -> None:
@@ -212,14 +214,27 @@ def create_tables(cur: cursor) -> None:
 def update_metadata(cur: cursor) -> None:
     tz = timezone("US/Eastern")
     current_datetime = datetime.now(tz).strftime("%m/%d/%y %I:%M %p")
-    cur.execute(
+
+    # Get current quarter information
+    quarter_name = get_quarter_name(config.quarter)
+
+    # Update multiple metadata values
+    metadata_updates = [
+        ("last_updated", current_datetime),
+        ("current_year", config.year),
+        ("current_quarter", config.quarter),
+        ("current_quarter_name", quarter_name),
+        ("current_term", f"{quarter_name} {config.year}"),
+    ]
+
+    cur.executemany(
         """
-    INSERT INTO metadata (key, value)
-      VALUES ('last_updated', %s)
-      ON CONFLICT (key)
-      DO UPDATE SET value = EXCLUDED.value;
-""",
-        (current_datetime,),
+        INSERT INTO metadata (key, value)
+        VALUES (%s, %s)
+        ON CONFLICT (key)
+        DO UPDATE SET value = EXCLUDED.value;
+        """,
+        metadata_updates,
     )
 
 
