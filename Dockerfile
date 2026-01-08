@@ -7,12 +7,6 @@ WORKDIR /app
 COPY . /app
 
 # install dependencies
-# Pre-install fonts that playwright expects (package names changed in newer Debian)
-RUN apt-get update && apt-get install -y \
-    fonts-unifont \
-    fonts-ubuntu \
-    && rm -rf /var/lib/apt/lists/*
-
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt && \
     playwright install chromium --with-deps
