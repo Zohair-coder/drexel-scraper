@@ -30,3 +30,5 @@ spec:
                     rm /data/ratings_cache.json
                   fi
           restartPolicy: OnFailure
+          nodeSelector:
+            kubernetes.io/hostname: {{ .Values.nodeSelector.hostname }}

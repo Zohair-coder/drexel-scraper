@@ -4,3 +4,5 @@ host: schedulerdev.zohair.dev
 tlsSecretName: grafana-dev-tls
 serviceName: grafana-dev
 schedule: "7,27,47 * * * *"
+nodeSelector:
+  hostname: "10.0.10.165"

@@ -47,3 +47,5 @@ spec:
               persistentVolumeClaim:
                 claimName: shared-pvc
           restartPolicy: OnFailure
+          nodeSelector:
+            kubernetes.io/hostname: {{ .Values.nodeSelector.hostname }}
