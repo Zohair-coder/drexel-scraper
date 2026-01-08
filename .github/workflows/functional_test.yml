@@ -38,9 +38,17 @@ jobs:
 
     - name: Wait for PostgreSQL to become ready
       run: |
-        until docker compose exec postgres pg_isready ; do
+        timeout=60
+        counter=0
+        until docker compose exec -T postgres pg_isready ; do
           echo "Waiting for PostgreSQL to become ready..."
           sleep 1
+          counter=$((counter + 1))
+          if [ $counter -ge $timeout ]; then
+            echo "Timeout waiting for PostgreSQL"
+            docker compose logs postgres
+            exit 1
+          fi
         done
     
     - name: Delete cache
@@ -55,7 +63,7 @@ jobs:
     
     - name: Verify courses data exists in database
       run: |
-        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM courses;" | awk 'FNR == 3 {print $1}')
+        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM courses;" | awk 'FNR == 3 {print $1}')
         if [ -z "$RESULT" ] || [ "$RESULT" = "0" ]; then
           echo "No data found in the database. Failing the pipeline."
           exit 1
@@ -65,7 +73,7 @@ jobs:
     
     - name: Verify instructors data exists in database
       run: |
-        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM instructors;" | awk 'FNR == 3 {print $1}')
+        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM instructors;" | awk 'FNR == 3 {print $1}')
         if [ -z "$RESULT" ] || [ "$RESULT" = "0" ]; then
           echo "No data found in the database. Failing the pipeline."
           exit 1
@@ -75,7 +83,7 @@ jobs:
     
     - name: Verify course_instructor data exists in database
       run: |
-        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM course_instructor;" | awk 'FNR == 3 {print $1}')
+        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM course_instructor;" | awk 'FNR == 3 {print $1}')
         if [ -z "$RESULT" ] || [ "$RESULT" = "0" ]; then
           echo "No data found in the database. Failing the pipeline."
           exit 1
@@ -85,7 +93,7 @@ jobs:
     
     - name: Verify all_course_instructor_data exists in database
       run: |
-        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM all_course_instructor_data;" | awk 'FNR == 3 {print $1}')
+        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM all_course_instructor_data;" | awk 'FNR == 3 {print $1}')
         if [ -z "$RESULT" ] || [ "$RESULT" = "0" ]; then
           echo "No data found in the database. Failing the pipeline."
           exit 1
@@ -95,7 +103,7 @@ jobs:
     
     - name: Verify metadata exists in database
       run: |
-        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM metadata;" | awk 'FNR == 3 {print $1}')
+        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM metadata;" | awk 'FNR == 3 {print $1}')
         if [ -z "$RESULT" ] || [ "$RESULT" = "0" ]; then
           echo "No data found in the database. Failing the pipeline."
           exit 1
@@ -115,7 +123,7 @@ jobs:
       
     - name: Verify courses data exists in database
       run: |
-        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM courses;" | awk 'FNR == 3 {print $1}')
+        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM courses;" | awk 'FNR == 3 {print $1}')
         if [ -z "$RESULT" ] || [ "$RESULT" = "0" ]; then
           echo "No data found in the database. Failing the pipeline."
           exit 1
@@ -125,7 +133,7 @@ jobs:
     
     - name: Verify instructors data exists in database
       run: |
-        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM instructors;" | awk 'FNR == 3 {print $1}')
+        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM instructors;" | awk 'FNR == 3 {print $1}')
         if [ -z "$RESULT" ] || [ "$RESULT" = "0" ]; then
           echo "No data found in the database. Failing the pipeline."
           exit 1
@@ -135,7 +143,7 @@ jobs:
     
     - name: Verify course_instructor data exists in database
       run: |
-        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM course_instructor;" | awk 'FNR == 3 {print $1}')
+        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM course_instructor;" | awk 'FNR == 3 {print $1}')
         if [ -z "$RESULT" ] || [ "$RESULT" = "0" ]; then
           echo "No data found in the database. Failing the pipeline."
           exit 1
@@ -145,7 +153,7 @@ jobs:
     
     - name: Verify all_course_instructor_data exists in database
       run: |
-        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM all_course_instructor_data;" | awk 'FNR == 3 {print $1}')
+        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM all_course_instructor_data;" | awk 'FNR == 3 {print $1}')
         if [ -z "$RESULT" ] || [ "$RESULT" = "0" ]; then
           echo "No data found in the database. Failing the pipeline."
           exit 1
@@ -155,7 +163,7 @@ jobs:
     
     - name: Verify metadata exists in database
       run: |
-        RESULT=$(docker compose exec postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM metadata;" | awk 'FNR == 3 {print $1}')
+        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM metadata;" | awk 'FNR == 3 {print $1}')
         if [ -z "$RESULT" ] || [ "$RESULT" = "0" ]; then
           echo "No data found in the database. Failing the pipeline."
           exit 1
