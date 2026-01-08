@@ -38,7 +38,7 @@ services:
       - ./grafana_data:/var/lib/grafana
 
   postgres:
-    image: postgres:latest
+    image: postgres:16
     environment:
       POSTGRES_PASSWORD: super-secret-password
     ports:

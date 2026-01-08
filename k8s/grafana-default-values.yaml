@@ -28,3 +28,6 @@ persistence:
   type: pvc
   existingClaim: shared-pvc
   subPath: grafana
+
+nodeSelector:
+  kubernetes.io/hostname: "10.0.10.36"
