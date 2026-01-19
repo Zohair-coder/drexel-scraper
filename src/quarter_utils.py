@@ -51,7 +51,7 @@ def get_current_quarter_and_year() -> tuple[str, str]:
     if quarter == "25" and month == 1:
         year = year - 1
 
-    # For Spring quarter (Jan 16 - Apr 14), the academic year started the 
+    # For Spring quarter (Jan 16 - Apr 14), the academic year started the
     # previous Fall, so use previous calendar year for the code
     # e.g., Jan 2026 → Spring of academic year 2025-2026 → code 202535
     if quarter == "35":
@@ -64,7 +64,7 @@ def get_previous_quarter(year: str, quarter: str) -> tuple[str, str]:
     """Get the previous quarter given a year and quarter code."""
     quarter_order = ["15", "25", "35", "45"]  # Fall, Winter, Spring, Summer
     current_idx = quarter_order.index(quarter)
-    
+
     if current_idx == 0:
         # Fall -> previous Summer (same year)
         return year, "45"

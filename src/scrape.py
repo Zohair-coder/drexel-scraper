@@ -27,21 +27,27 @@ def check_quarter_available(session: Session, year: str, quarter: str) -> bool:
         return False
 
 
-def find_available_quarter(session: Session, start_year: str, start_quarter: str) -> tuple[str, str]:
+def find_available_quarter(
+    session: Session, start_year: str, start_quarter: str
+) -> tuple[str, str]:
     """Find the most recent available quarter, starting from the given one."""
     year, quarter = start_year, start_quarter
     attempts = 0
     max_attempts = 8  # Don't go back more than 2 years
-    
+
     while attempts < max_attempts:
-        print(f"Checking if {get_quarter_name(quarter)} {year} ({year}{quarter}) is available...")
+        print(
+            f"Checking if {get_quarter_name(quarter)} {year} ({year}{quarter}) is available..."
+        )
         if check_quarter_available(session, year, quarter):
             return year, quarter
         print("  → Not available, trying previous quarter...")
         year, quarter = get_previous_quarter(year, quarter)
         attempts += 1
-    
-    raise Exception(f"Could not find an available quarter after {max_attempts} attempts")
+
+    raise Exception(
+        f"Could not find an available quarter after {max_attempts} attempts"
+    )
 
 
 def scrape(
@@ -78,16 +84,27 @@ def scrape(
     available_year, available_quarter = find_available_quarter(
         session, config.year, config.quarter
     )
-    
+
     if available_year != config.year or available_quarter != config.quarter:
-        print(f"\n⚠️  Configured quarter {get_quarter_name(config.quarter)} {config.year} is not available!")
-        print(f"    Falling back to {get_quarter_name(available_quarter)} {available_year}")
+        print(
+            f"\n⚠️  Configured quarter {get_quarter_name(config.quarter)} {config.year} is not available!"
+        )
+        print(
+            f"    Falling back to {get_quarter_name(available_quarter)} {available_year}"
+        )
         # Update the config module's values for this run
         config.year = available_year
         config.quarter = available_quarter
-        config.tms_quarter_url = config.tms_home_url + "/collegesSubjects/" + available_year + available_quarter
+        config.tms_quarter_url = (
+            config.tms_home_url
+            + "/collegesSubjects/"
+            + available_year
+            + available_quarter
+        )
     else:
-        print(f"✓ Quarter {get_quarter_name(config.quarter)} {config.year} is available!\n")
+        print(
+            f"✓ Quarter {get_quarter_name(config.quarter)} {config.year} is available!\n"
+        )
 
     data: dict[str, dict[str, Any]] = {}
 
