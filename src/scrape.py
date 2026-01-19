@@ -9,6 +9,39 @@ from helpers import send_request
 from parse import parse_subject_page, parse_crn_page
 import config
 import login
+from quarter_utils import get_previous_quarter, get_quarter_name
+
+
+def check_quarter_available(session: Session, year: str, quarter: str) -> bool:
+    """Check if a quarter's schedule is available on TMS."""
+    url = config.tms_home_url + f"/collegesSubjects/{year}{quarter}"
+    try:
+        response = send_request(session, url)
+        if "not available online" in response.text.lower():
+            return False
+        # Check for actual content (college links)
+        soup = BeautifulSoup(response.text, "html.parser")
+        links = soup.find_all("a", href=lambda h: h and "collCode" in h)
+        return len(links) > 0
+    except Exception:
+        return False
+
+
+def find_available_quarter(session: Session, start_year: str, start_quarter: str) -> tuple[str, str]:
+    """Find the most recent available quarter, starting from the given one."""
+    year, quarter = start_year, start_quarter
+    attempts = 0
+    max_attempts = 8  # Don't go back more than 2 years
+    
+    while attempts < max_attempts:
+        print(f"Checking if {get_quarter_name(quarter)} {year} ({year}{quarter}) is available...")
+        if check_quarter_available(session, year, quarter):
+            return year, quarter
+        print(f"  → Not available, trying previous quarter...")
+        year, quarter = get_previous_quarter(year, quarter)
+        attempts += 1
+    
+    raise Exception(f"Could not find an available quarter after {max_attempts} attempts")
 
 
 def scrape(
@@ -39,6 +72,22 @@ def scrape(
                 )
 
             time.sleep(reset_period)
+
+    # Check if the configured quarter is available, fall back if not
+    print(f"\nValidating quarter availability...")
+    available_year, available_quarter = find_available_quarter(
+        session, config.year, config.quarter
+    )
+    
+    if available_year != config.year or available_quarter != config.quarter:
+        print(f"\n⚠️  Configured quarter {get_quarter_name(config.quarter)} {config.year} is not available!")
+        print(f"    Falling back to {get_quarter_name(available_quarter)} {available_year}")
+        # Update the config module's values for this run
+        config.year = available_year
+        config.quarter = available_quarter
+        config.tms_quarter_url = config.tms_home_url + "/collegesSubjects/" + available_year + available_quarter
+    else:
+        print(f"✓ Quarter {get_quarter_name(config.quarter)} {config.year} is available!\n")
 
     data: dict[str, dict[str, Any]] = {}
 

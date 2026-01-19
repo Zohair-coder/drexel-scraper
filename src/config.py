@@ -1,7 +1,7 @@
 import os
 import sys
 
-from quarter_utils import get_current_quarter_and_year, get_quarter_name
+from quarter_utils import get_current_quarter_and_year, get_quarter_name, get_previous_quarter
 
 # Automatically determine the current quarter and year
 # Can be overridden with DREXEL_YEAR and DREXEL_QUARTER environment variables
