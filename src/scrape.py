@@ -37,7 +37,7 @@ def find_available_quarter(session: Session, start_year: str, start_quarter: str
         print(f"Checking if {get_quarter_name(quarter)} {year} ({year}{quarter}) is available...")
         if check_quarter_available(session, year, quarter):
             return year, quarter
-        print(f"  → Not available, trying previous quarter...")
+        print("  → Not available, trying previous quarter...")
         year, quarter = get_previous_quarter(year, quarter)
         attempts += 1
     
@@ -74,7 +74,7 @@ def scrape(
             time.sleep(reset_period)
 
     # Check if the configured quarter is available, fall back if not
-    print(f"\nValidating quarter availability...")
+    print("\nValidating quarter availability...")
     available_year, available_quarter = find_available_quarter(
         session, config.year, config.quarter
     )
