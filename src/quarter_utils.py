@@ -51,6 +51,13 @@ def get_current_quarter_and_year() -> tuple[str, str]:
     if quarter == "25" and month == 1:
         year = year - 1
 
+    # For Spring quarter (Jan 16 - Apr 14) and Summer quarter (Apr 15 - June 30),
+    # the academic year started the previous Fall, so use previous calendar year
+    # e.g., Jan 2026 → Spring 2025-2026 → 202535
+    # e.g., June 2026 → Summer 2025-2026 → 202545
+    if quarter in ("35", "45"):
+        year = year - 1
+
     return str(year), quarter
 
 
