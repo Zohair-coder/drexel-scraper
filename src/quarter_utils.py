@@ -5,16 +5,12 @@ from datetime import datetime
 
 def get_current_quarter_and_year() -> tuple[str, str]:
     """
-    Determine the current Drexel quarter and year based on the current date.
-
-    Drexel quarters:
-    - Fall (15): July 1 - September 27
-    - Winter (25): September 28 - January 15
-    - Spring (35): January 16 - April 14
-    - Summer (45): April 15 - June 30
-
+    Determine the current Drexel quarter and the academic year start based on today's date.
+    
+    The returned year is the calendar year that begins the academic year (e.g., for Spring 2026 this function returns "2025"). Quarter codes: "15" = Fall, "25" = Winter, "35" = Spring, "45" = Summer.
+    
     Returns:
-        Tuple of (year, quarter_code) as strings
+        tuple: A two-element tuple (year, quarter_code) where `year` is the academic-year starting year as a string (YYYY) and `quarter_code` is one of "15", "25", "35", "45".
     """
     now = datetime.now()
     month = now.month
