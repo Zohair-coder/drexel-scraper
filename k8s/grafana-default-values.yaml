@@ -31,3 +31,20 @@ persistence:
 
 nodeSelector:
   kubernetes.io/hostname: "10.0.10.36"
+
+extraObjects:
+  - apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: grafana-robots
+    data:
+      robots.txt: |
+        User-agent: *
+        Allow: /
+
+extraConfigmapMounts:
+  - name: grafana-robots
+    mountPath: /usr/share/grafana/public/robots.txt
+    subPath: robots.txt
+    configMap: grafana-robots
+    readOnly: true
