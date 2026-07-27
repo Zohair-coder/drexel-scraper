@@ -6,6 +6,9 @@ import re
 from typing import Any
 
 
+UNSCHEDULED_VALUES = {"", "TBD", "Asynchronous"}
+
+
 def parse_subject_page(
     html: str,
     data: dict[str, dict[str, Any]],
@@ -157,7 +160,7 @@ def fix_encoding_issue(text: str) -> str:
 
 
 def parse_days(d: str) -> list[str] | None:
-    if d == "TBD":
+    if d in UNSCHEDULED_VALUES:
         return None
 
     days = []
@@ -178,7 +181,7 @@ def parse_days(d: str) -> list[str] | None:
 
 
 def parse_time(t: str) -> tuple[str | None, str | None]:
-    if t == "TBD":
+    if t in UNSCHEDULED_VALUES:
         return (None, None)
     start_str, end_str = t.split(" - ")
     start_time = time_str_to_object(start_str)
