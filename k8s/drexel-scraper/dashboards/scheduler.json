@@ -1,0 +1,2253 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "panels": [
+    {
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 0,
+        "y": 0
+      },
+      "id": 17,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<style>\n    .btn-primary {\n    color: #fff;\n    background-color: #0d6efd;\n    border-color: #0d6efd;\n    padding: .375rem .75rem;\n    font-size: 1rem;\n    border-radius: .2rem;\n    line-height: 1.5;\n    border: 1px solid transparent;\n    display: inline-block;\n    font-weight: 400;\n    text-align: center;\n    vertical-align: middle;\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n\n.btn-primary:hover {\n    color: #fff;\n    background-color: #0b5ed7;\n    border-color: #0a58ca;\n}\n\n.btn-primary:disabled {\n    color: #fff;\n    background-color: #0d6efd;\n    border-color: #0d6efd;\n    opacity: .65;\n    pointer-events: none;\n}\n\n.center {\n  margin: auto;\n  width: 50%;\n  padding: 8px 0px;\n  text-align: center;\n}\n\n\n</style>\n\n<div class=\"center\">\n    <button class=\"btn-primary\" onclick=\"resetFilters()\">Reset</button>\n</div>\n\n<script>\nfunction resetFilters() {\n    const currentUrl = window.location.href;\n    const newUrl = currentUrl.split(\"&\")[0];\n    window.location.href = newUrl + \"&kiosk\";\n}\n</script>\n\n<script>\nif ([\"scheduler.zohair.dev\", \"www.scheduler.zohair.dev\"].includes(window.location.hostname)) {\n    ! function(t, e) {\n        var o, n, p, r;\n        e.__SV || (window.posthog = e, e._i = [], e.init = function(i, s, a) {\n            function g(t, e) {\n                var o = e.split(\".\");\n                2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function() {\n                    t.push([e].concat(Array.prototype.slice.call(arguments, 0)))\n                }\n            }(p = t.createElement(\"script\")).type = \"text/javascript\", p.crossOrigin = \"anonymous\", p.async = !0, p.src = s.api_host.replace(\".i.posthog.com\", \"-assets.i.posthog.com\") + \"/static/array.js\", (r = t.getElementsByTagName(\"script\")[0]).parentNode.insertBefore(p, r);\n            var u = e;\n            for (void 0 !== a ? u = e[a] = [] : a = \"posthog\", u.people = u.people || [], u.toString = function(t) {\n                    var e = \"posthog\";\n                    return \"posthog\" !== a && (e += \".\" + a), t || (e += \" (stub)\"), e\n                }, u.people.toString = function() {\n                    return u.toString(1) + \".people (stub)\"\n                }, o = \"init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric\".split(\" \"), n = 0; n < o.length; n++) g(u, o[n]);\n            e._i.push([i, s, a])\n        }, e.__SV = 1)\n    }(document, window.posthog || []);\n    posthog.init('phc_tn6bp7Vd9Pk33w8M3mYbufsUkAPHcQL0xbIsXFKVbn0', {\n                api_host: 'https://us.i.posthog.com',\n                person_profiles: 'always', // or 'always' to create profiles for anonymous users as well\n                }) \n}\n</script>",
+        "mode": "html"
+      },
+      "pluginVersion": "12.3.1",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 10,
+        "x": 3,
+        "y": 0
+      },
+      "id": 19,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": true
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  CASE \n    WHEN value LIKE 'Fall %' THEN value\n    ELSE \n      CONCAT(\n        SPLIT_PART(value, ' ', 1), \n        ' ', \n        CAST(SPLIT_PART(value, ' ', 2) AS INT) + 1\n      )\n  END AS adjusted_term\nFROM metadata\nWHERE key = 'current_term';",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "metadata"
+        }
+      ],
+      "title": "Term",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 11,
+        "x": 13,
+        "y": 0
+      },
+      "id": 15,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": true
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT value FROM metadata WHERE key = 'last_updated';",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Last Updated (EST)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "description": "Data from Drexel Term Master Schedule and Rate My Professors to allow you to make an informed decision before choosing a course.\n\nClick on the filters above the table and the filter icon next to the column name to filter the data. Click on the column name to sort the data.\n\nMost Drexel TMS data is updated every 20 minutes to make sure the data is up to date (particularly the seats taken). Rate My Professors data is updated every week. \n\nNOTE: if the scraper can't scrape certain fields, it will show up as a blank cell.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Course Title"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 358
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Average RMP Rating"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 185
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Average RMP Difficulty"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 200
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Number of RMP Ratings"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 200
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CRN"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 90
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RateMyProfessors ID"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "",
+                    "url": "https://www.ratemyprofessors.com/professor/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RateMyProfessors ID"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 197
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Instruction Method"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 171
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CRN"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "",
+                    "url": "https://catalog.drexel.edu/search/?P=${__data.fields[\"Subject Code\"]}%20${__data.fields[\"Course Number\"]}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 17,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT course_id AS \"CRN\", subject_code AS \"Subject Code\", course_number AS \"Course Number\", course_title AS \"Course Title\", section AS \"Section\", instructor_name AS \"Instructor Name\", instructor_rmp_id AS \"RateMyProfessors ID\", avg_rating AS \"Average RMP Rating\", avg_difficulty AS \"Average RMP Difficulty\", num_ratings AS \"Number of RMP Ratings\", enroll AS \"Seats Taken\", max_enroll AS \"Total Seats\", instruction_type AS \"Instruction Type\", instruction_method AS \"Instruction Method\", credits AS \"Credits\", prereqs AS \"Prerequisites\", to_char(start_time, 'HH12:MI AM') AS \"Start Time\", to_char(end_time, 'HH12:MI AM') AS \"End Time\", array_to_string(days, ', ') AS \"Days\"\nFROM all_course_instructor_data\nWHERE \n    (\n        ('$null_ratings' = 'Yes')\n        OR \n        ('$null_ratings' = 'No' AND avg_rating IS NOT NULL)\n    )\n    AND \n    (\n        avg_difficulty IS NULL \n        OR avg_difficulty <= $max_difficulty\n    )\n    AND \n    (\n        avg_rating IS NULL \n        OR avg_rating >= $min_rating\n    )\n    AND \n    (\n        num_ratings IS NULL \n        OR num_ratings >= $min_num_ratings\n    )\n    AND\n    (\n        CASE \n            WHEN course_number ~ E'\\\\d+' THEN \n                CAST(substring(course_number FROM E'\\\\d+') AS INTEGER) > $course_number_greater_than \n                AND CAST(substring(course_number FROM E'\\\\d+') AS INTEGER) < $course_number_less_than\n            ELSE TRUE\n        END\n    )\n    AND \n    (\n        ('$allow_null_times' = 'Yes')\n        OR\n        ('$allow_null_times' = 'No' AND start_time IS NOT NULL AND end_time IS NOT NULL)\n    )\n    AND \n    (\n        start_time IS NULL \n        OR start_time >= CAST('$start_time' AS time)\n    )\n    AND \n    (\n        end_time IS NULL \n        OR end_time <= CAST('$end_time' AS time)\n    )\n    AND \n    (\n        ('$show_full_courses' = 'Yes')\n        OR\n        ('$show_full_courses' = 'No' AND enroll <> 'FULL')\n    )\n    AND\n    (\n        ('$only_blank_prereqs' = 'Yes')\n        OR\n        ('$only_blank_prereqs' = 'No' AND prereqs = '')\n    )\nORDER BY \n    subject_code ASC, \n    CAST(substring(course_number FROM '[0-9]+') AS INTEGER) ASC;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "All Courses",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 7,
+        "x": 0,
+        "y": 19
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT COUNT(*) FROM courses;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "all_course_instructor_data"
+        }
+      ],
+      "title": "Total Sections",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 7,
+        "x": 7,
+        "y": 19
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT COUNT(*) FROM instructors;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Total Instructors",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 14,
+        "y": 19
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n    COUNT(*)\nFROM \n    instructors\nWHERE \n    num_ratings > 0 AND num_ratings IS NOT NULL;\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "# of Instructors Rated on RMP",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 19,
+        "y": 19
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n    AVG(num_ratings) AS total_instructor_ratings\nFROM \n    instructors",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Average # of Ratings / Instructor",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-RdYlGr"
+          },
+          "mappings": [],
+          "max": 5,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 23
+      },
+      "id": 7,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n    AVG(avg_rating) AS total_instructor_ratings\nFROM \n    instructors",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Average Instructor Rating (out of 5)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-RdYlGr"
+          },
+          "mappings": [],
+          "max": 5,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 23
+      },
+      "id": 8,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n    AVG(avg_difficulty) AS total_instructor_ratings\nFROM \n    instructors",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Average Instructor Difficulty (out of 5)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 12,
+        "x": 0,
+        "y": 29
+      },
+      "id": 4,
+      "options": {
+        "displayLabels": [
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n    instruction_method,\n    COUNT(*) AS count\nFROM \n    courses\nGROUP BY \n    instruction_method\nORDER BY COUNT(*) DESC;\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Instruction Method Distribution",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 12,
+        "x": 12,
+        "y": 29
+      },
+      "id": 5,
+      "options": {
+        "displayLabels": [
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n    credits,\n    COUNT(*) AS count\nFROM \n    courses\nGROUP BY \n    credits\nORDER BY COUNT(*) DESC;\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Credits Distribution",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 12,
+        "x": 0,
+        "y": 40
+      },
+      "id": 11,
+      "options": {
+        "displayLabels": [
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n    CASE \n        WHEN start_time >= '05:00:00' AND start_time < '12:00:00' THEN 'Morning'\n        WHEN start_time >= '12:00:00' AND start_time < '17:00:00' THEN 'Afternoon'\n        WHEN start_time >= '17:00:00' AND start_time <= '23:59:59' THEN 'Evening'\n        ELSE 'Undefined'\n    END AS time_of_day,\n    COUNT(*) AS count\nFROM \n    courses\nWHERE\n    start_time IS NOT NULL\nGROUP BY \n    time_of_day;\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Class Distribution by Time of Day",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 12,
+        "x": 12,
+        "y": 40
+      },
+      "id": 13,
+      "options": {
+        "displayLabels": [
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n    unnested_days,\n    COUNT(*) AS count\nFROM \n    (\n        SELECT UNNEST(days) AS unnested_days\n        FROM courses\n        WHERE days IS NOT NULL\n    ) AS unnested\nGROUP BY \n    unnested_days\nORDER BY \n    count DESC;\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Class Distribution by Day of Week",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 12,
+        "x": 0,
+        "y": 51
+      },
+      "id": 10,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n    CONCAT(subject_code, ' ', course_number) AS \"Course\",\n    COUNT(*) AS \"Sections\"\nFROM \n    courses\nGROUP BY \n    subject_code, course_number\nORDER BY \n    \"Sections\" DESC\nLIMIT 10;\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Top 10 Courses with the Most Number of Sections",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "scheduler-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CRN"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 70
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 12,
+        "x": 12,
+        "y": 51
+      },
+      "id": 14,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "scheduler-postgres"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n    course_id AS \"CRN\",\n    CONCAT(subject_code, ' ', course_number) AS \"Course\",\n    instructor_name AS \"Instructor\",\n    avg_difficulty AS \"Average Difficulty\"\nFROM \n    all_course_instructor_data\nWHERE \n    num_ratings >= 5 AND avg_difficulty IS NOT NULL\nORDER BY \n    avg_difficulty ASC\nLIMIT 10;\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Top 10 Courses with Lowest Average Difficulty (minimum 5 ratings)",
+      "type": "table"
+    },
+    {
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 63
+      },
+      "id": 18,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "Web: [zohair.dev](https://zohair.dev)\n\nEmail: [zohair.ul.hasan@gmail.com](mailto:zohair.ul.hasan@gmail.com)\n\nCode: [github.com/Zohair-coder/drexel-scraper](https://github.com/Zohair-coder/drexel-scraper)\n\nInstagram: [www.instagram.com/drexelscheduler](https://www.instagram.com/drexelscheduler)\n\nDonate: [www.buymeacoffee.com/zohairr](https://www.buymeacoffee.com/zohairr)",
+        "mode": "markdown"
+      },
+      "pluginVersion": "11.5.2",
+      "title": "Contact Information",
+      "type": "text"
+    }
+  ],
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "Yes",
+          "value": "Yes"
+        },
+        "description": "If set to no, all rows that don't have RateMyProfessors rating data will be hidden.",
+        "includeAll": false,
+        "label": "Show blank ratings?",
+        "name": "null_ratings",
+        "options": [
+          {
+            "selected": true,
+            "text": "Yes",
+            "value": "Yes"
+          },
+          {
+            "selected": false,
+            "text": "No",
+            "value": "No"
+          }
+        ],
+        "query": "Yes, No",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "0",
+          "value": "0"
+        },
+        "description": "Filter the table to show all rows with instructor rating greater than or equal to this variable.",
+        "includeAll": false,
+        "label": "Minimum Instructor Rating",
+        "name": "min_rating",
+        "options": [
+          {
+            "selected": true,
+            "text": "0",
+            "value": "0"
+          },
+          {
+            "selected": false,
+            "text": "1.0",
+            "value": "1.0"
+          },
+          {
+            "selected": false,
+            "text": "1.5",
+            "value": "1.5"
+          },
+          {
+            "selected": false,
+            "text": "2.0",
+            "value": "2.0"
+          },
+          {
+            "selected": false,
+            "text": "2.5",
+            "value": "2.5"
+          },
+          {
+            "selected": false,
+            "text": "3.0",
+            "value": "3.0"
+          },
+          {
+            "selected": false,
+            "text": "3.5",
+            "value": "3.5"
+          },
+          {
+            "selected": false,
+            "text": "4.0",
+            "value": "4.0"
+          },
+          {
+            "selected": false,
+            "text": "4.5",
+            "value": "4.5"
+          },
+          {
+            "selected": false,
+            "text": "5.0",
+            "value": "5.0"
+          }
+        ],
+        "query": "0, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "5.0",
+          "value": "5.0"
+        },
+        "description": "Filter the table to show all rows with instructor difficulty less than or equal to this variable.",
+        "includeAll": false,
+        "label": "Maximum Instructor Difficulty",
+        "name": "max_difficulty",
+        "options": [
+          {
+            "selected": true,
+            "text": "5.0",
+            "value": "5.0"
+          },
+          {
+            "selected": false,
+            "text": "4.5",
+            "value": "4.5"
+          },
+          {
+            "selected": false,
+            "text": "4.0",
+            "value": "4.0"
+          },
+          {
+            "selected": false,
+            "text": "3.5",
+            "value": "3.5"
+          },
+          {
+            "selected": false,
+            "text": "3.0",
+            "value": "3.0"
+          },
+          {
+            "selected": false,
+            "text": "2.5",
+            "value": "2.5"
+          },
+          {
+            "selected": false,
+            "text": "2.0",
+            "value": "2.0"
+          },
+          {
+            "selected": false,
+            "text": "1.5",
+            "value": "1.5"
+          },
+          {
+            "selected": false,
+            "text": "1.0",
+            "value": "1.0"
+          },
+          {
+            "selected": false,
+            "text": "0",
+            "value": "0"
+          }
+        ],
+        "query": "5.0, 4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.0, 0",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "0",
+          "value": "0"
+        },
+        "description": "Filter the table to show all rows with number of instructor ratings greater than or equal to this variable.",
+        "includeAll": false,
+        "label": "Minimum Number of Instructor Ratings",
+        "name": "min_num_ratings",
+        "options": [
+          {
+            "selected": true,
+            "text": "0",
+            "value": "0"
+          },
+          {
+            "selected": false,
+            "text": "1",
+            "value": "1"
+          },
+          {
+            "selected": false,
+            "text": "3",
+            "value": "3"
+          },
+          {
+            "selected": false,
+            "text": "5",
+            "value": "5"
+          },
+          {
+            "selected": false,
+            "text": "7",
+            "value": "7"
+          },
+          {
+            "selected": false,
+            "text": "10",
+            "value": "10"
+          },
+          {
+            "selected": false,
+            "text": "15",
+            "value": "15"
+          },
+          {
+            "selected": false,
+            "text": "20",
+            "value": "20"
+          },
+          {
+            "selected": false,
+            "text": "25",
+            "value": "25"
+          },
+          {
+            "selected": false,
+            "text": "30",
+            "value": "30"
+          },
+          {
+            "selected": false,
+            "text": "35",
+            "value": "35"
+          },
+          {
+            "selected": false,
+            "text": "40",
+            "value": "40"
+          },
+          {
+            "selected": false,
+            "text": "45",
+            "value": "45"
+          },
+          {
+            "selected": false,
+            "text": "50",
+            "value": "50"
+          }
+        ],
+        "query": "0, 1, 3, 5, 7, 10, 15, 20, 25, 30, 35, 40, 45, 50",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "0",
+          "value": "0"
+        },
+        "description": "Only displays rows that have course number greater than the value of this variable",
+        "includeAll": false,
+        "label": "Course Number Greater Than",
+        "name": "course_number_greater_than",
+        "options": [
+          {
+            "selected": true,
+            "text": "0",
+            "value": "0"
+          },
+          {
+            "selected": false,
+            "text": "100",
+            "value": "100"
+          },
+          {
+            "selected": false,
+            "text": "200",
+            "value": "200"
+          },
+          {
+            "selected": false,
+            "text": "300",
+            "value": "300"
+          },
+          {
+            "selected": false,
+            "text": "400",
+            "value": "400"
+          },
+          {
+            "selected": false,
+            "text": "500",
+            "value": "500"
+          },
+          {
+            "selected": false,
+            "text": "600",
+            "value": "600"
+          },
+          {
+            "selected": false,
+            "text": "900",
+            "value": "900"
+          }
+        ],
+        "query": "0, 100, 200, 300, 400, 500, 600, 900",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "1000",
+          "value": "1000"
+        },
+        "description": "Only displays rows that have course number less than the value of this variable",
+        "includeAll": false,
+        "label": "Course Number Less Than",
+        "name": "course_number_less_than",
+        "options": [
+          {
+            "selected": false,
+            "text": "100",
+            "value": "100"
+          },
+          {
+            "selected": false,
+            "text": "200",
+            "value": "200"
+          },
+          {
+            "selected": false,
+            "text": "300",
+            "value": "300"
+          },
+          {
+            "selected": false,
+            "text": "400",
+            "value": "400"
+          },
+          {
+            "selected": false,
+            "text": "500",
+            "value": "500"
+          },
+          {
+            "selected": false,
+            "text": "600",
+            "value": "600"
+          },
+          {
+            "selected": false,
+            "text": "900",
+            "value": "900"
+          },
+          {
+            "selected": true,
+            "text": "1000",
+            "value": "1000"
+          }
+        ],
+        "query": "100, 200, 300, 400, 500, 600, 900, 1000",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "Yes",
+          "value": "Yes"
+        },
+        "description": "Choose whether you want to hide the courses that have prerequisites.",
+        "includeAll": false,
+        "label": "Include Courses with Prerequisites?",
+        "name": "only_blank_prereqs",
+        "options": [
+          {
+            "selected": true,
+            "text": "Yes",
+            "value": "Yes"
+          },
+          {
+            "selected": false,
+            "text": "No",
+            "value": "No"
+          }
+        ],
+        "query": "Yes,No",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "Yes",
+          "value": "Yes"
+        },
+        "description": "Some classes don't have a defined time. If set to yes, these classes will be shown, otherwise they will be hidden.",
+        "includeAll": false,
+        "label": "Show blank times?",
+        "name": "allow_null_times",
+        "options": [
+          {
+            "selected": true,
+            "text": "Yes",
+            "value": "Yes"
+          },
+          {
+            "selected": false,
+            "text": "No",
+            "value": "No"
+          }
+        ],
+        "query": "Yes, No",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "07:00 AM",
+          "value": "07:00 AM"
+        },
+        "description": "Only display rows that have start times greater than or equal to the value of this variable.",
+        "includeAll": false,
+        "label": "Start Time",
+        "name": "start_time",
+        "options": [
+          {
+            "selected": true,
+            "text": "07:00 AM",
+            "value": "07:00 AM"
+          },
+          {
+            "selected": false,
+            "text": "07:30 AM",
+            "value": "07:30 AM"
+          },
+          {
+            "selected": false,
+            "text": "08:00 AM",
+            "value": "08:00 AM"
+          },
+          {
+            "selected": false,
+            "text": "08:30 AM",
+            "value": "08:30 AM"
+          },
+          {
+            "selected": false,
+            "text": "09:00 AM",
+            "value": "09:00 AM"
+          },
+          {
+            "selected": false,
+            "text": "09:30 AM",
+            "value": "09:30 AM"
+          },
+          {
+            "selected": false,
+            "text": "10:00 AM",
+            "value": "10:00 AM"
+          },
+          {
+            "selected": false,
+            "text": "10:30 AM",
+            "value": "10:30 AM"
+          },
+          {
+            "selected": false,
+            "text": "11:00 AM",
+            "value": "11:00 AM"
+          },
+          {
+            "selected": false,
+            "text": "11:30 AM",
+            "value": "11:30 AM"
+          },
+          {
+            "selected": false,
+            "text": "12:00 PM",
+            "value": "12:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "12:30 PM",
+            "value": "12:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "01:00 PM",
+            "value": "01:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "01:30 PM",
+            "value": "01:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "02:00 PM",
+            "value": "02:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "02:30 PM",
+            "value": "02:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "03:00 PM",
+            "value": "03:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "03:30 PM",
+            "value": "03:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "04:00 PM",
+            "value": "04:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "04:30 PM",
+            "value": "04:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "05:00 PM",
+            "value": "05:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "05:30 PM",
+            "value": "05:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "06:00 PM",
+            "value": "06:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "06:30 PM",
+            "value": "06:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "07:00 PM",
+            "value": "07:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "07:30 PM",
+            "value": "07:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "08:00 PM",
+            "value": "08:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "08:30 PM",
+            "value": "08:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "09:00 PM",
+            "value": "09:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "09: 30 PM",
+            "value": "09: 30 PM"
+          },
+          {
+            "selected": false,
+            "text": "10:00 PM",
+            "value": "10:00 PM"
+          }
+        ],
+        "query": "07:00 AM, 07:30 AM, 08:00 AM, 08:30 AM, 09:00 AM, 09:30 AM, 10:00 AM, 10:30 AM, 11:00 AM, 11:30 AM, 12:00 PM, 12:30 PM, 01:00 PM, 01:30 PM, 02:00 PM, 02:30 PM, 03:00 PM, 03:30 PM, 04:00 PM, 04:30 PM, 05:00 PM, 05:30 PM, 06:00 PM, 06:30 PM, 07:00 PM, 07:30 PM, 08:00 PM, 08:30 PM, 09:00 PM, 09: 30 PM, 10:00 PM",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "10:00 PM",
+          "value": "10:00 PM"
+        },
+        "description": "Only display rows that have end times less than or equal to the value of this variable.",
+        "includeAll": false,
+        "label": "End Time",
+        "name": "end_time",
+        "options": [
+          {
+            "selected": false,
+            "text": "07:00 AM",
+            "value": "07:00 AM"
+          },
+          {
+            "selected": false,
+            "text": "07:30 AM",
+            "value": "07:30 AM"
+          },
+          {
+            "selected": false,
+            "text": "08:00 AM",
+            "value": "08:00 AM"
+          },
+          {
+            "selected": false,
+            "text": "08:30 AM",
+            "value": "08:30 AM"
+          },
+          {
+            "selected": false,
+            "text": "09:00 AM",
+            "value": "09:00 AM"
+          },
+          {
+            "selected": false,
+            "text": "09:30 AM",
+            "value": "09:30 AM"
+          },
+          {
+            "selected": false,
+            "text": "10:00 AM",
+            "value": "10:00 AM"
+          },
+          {
+            "selected": false,
+            "text": "10:30 AM",
+            "value": "10:30 AM"
+          },
+          {
+            "selected": false,
+            "text": "11:00 AM",
+            "value": "11:00 AM"
+          },
+          {
+            "selected": false,
+            "text": "11:30 AM",
+            "value": "11:30 AM"
+          },
+          {
+            "selected": false,
+            "text": "12:00 PM",
+            "value": "12:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "12:30 PM",
+            "value": "12:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "01:00 PM",
+            "value": "01:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "01:30 PM",
+            "value": "01:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "02:00 PM",
+            "value": "02:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "02:30 PM",
+            "value": "02:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "03:00 PM",
+            "value": "03:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "03:30 PM",
+            "value": "03:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "04:00 PM",
+            "value": "04:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "04:30 PM",
+            "value": "04:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "05:00 PM",
+            "value": "05:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "05:30 PM",
+            "value": "05:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "06:00 PM",
+            "value": "06:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "06:30 PM",
+            "value": "06:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "07:00 PM",
+            "value": "07:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "07:30 PM",
+            "value": "07:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "08:00 PM",
+            "value": "08:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "08:30 PM",
+            "value": "08:30 PM"
+          },
+          {
+            "selected": false,
+            "text": "09:00 PM",
+            "value": "09:00 PM"
+          },
+          {
+            "selected": false,
+            "text": "09: 30 PM",
+            "value": "09: 30 PM"
+          },
+          {
+            "selected": true,
+            "text": "10:00 PM",
+            "value": "10:00 PM"
+          }
+        ],
+        "query": "07:00 AM, 07:30 AM, 08:00 AM, 08:30 AM, 09:00 AM, 09:30 AM, 10:00 AM, 10:30 AM, 11:00 AM, 11:30 AM, 12:00 PM, 12:30 PM, 01:00 PM, 01:30 PM, 02:00 PM, 02:30 PM, 03:00 PM, 03:30 PM, 04:00 PM, 04:30 PM, 05:00 PM, 05:30 PM, 06:00 PM, 06:30 PM, 07:00 PM, 07:30 PM, 08:00 PM, 08:30 PM, 09:00 PM, 09: 30 PM, 10:00 PM",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "Yes",
+          "value": "Yes"
+        },
+        "description": "Show courses that don't have any seats remaining? ",
+        "includeAll": false,
+        "label": "Show full courses?",
+        "name": "show_full_courses",
+        "options": [
+          {
+            "selected": true,
+            "text": "Yes",
+            "value": "Yes"
+          },
+          {
+            "selected": false,
+            "text": "No",
+            "value": "No"
+          }
+        ],
+        "query": "Yes, No",
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": true
+  },
+  "timezone": "",
+  "title": "Scheduler Dashboard",
+  "uid": "db64b0ee-89cf-46ab-a3f5-af315d8e1e0f",
+  "version": 0,
+  "weekStart": ""
+}
