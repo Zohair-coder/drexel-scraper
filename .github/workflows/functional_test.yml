@@ -10,6 +10,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+
+    - name: Install Helm
+      uses: azure/setup-helm@v4
+
+    - name: Validate Grafana configuration
+      run: |
+        jq -e '
+          .uid == "db64b0ee-89cf-46ab-a3f5-af315d8e1e0f"
+          and .version == 0
+          and ([
+            .. | objects | .datasource? // empty
+            | select(type == "object")
+            | .uid? // empty
+            | select(. != "-- Grafana --" and . != "scheduler-postgres")
+          ] | length == 0)
+          and ([.panels[] | select(.id == 17) | .options.content][0]
+            | contains("if ([\"scheduler.zohair.dev\", \"www.scheduler.zohair.dev\"].includes(window.location.hostname))"))
+          and ([.panels[] | select(.id == 17) | .options.content][0]
+            | contains("posthog.init"))
+        ' k8s/drexel-scraper/dashboards/scheduler.json
+        docker compose config --quiet
+        helm template drexel-scraper-dev ./k8s/drexel-scraper \
+          -f k8s/drexel-scraper/values-dev.yaml \
+          --set image.tag=test >/dev/null
+        helm repo add grafana-community https://grafana-community.github.io/helm-charts
+        helm template grafana-dev grafana-community/grafana \
+          --version 10.5.15 \
+          -f k8s/grafana-common-values.yaml \
+          -f k8s/grafana-dev-values.yaml >/dev/null
+        helm template grafana grafana-community/grafana \
+          --version 10.5.15 \
+          -f k8s/grafana-common-values.yaml \
+          -f k8s/grafana-default-values.yaml >/dev/null
     
     - name: Install Python
       uses: actions/setup-python@v5

@@ -21,21 +21,26 @@ services:
       - localstack
 
   grafana:
-    image: grafana/grafana-oss
+    image: grafana/grafana:12.3.1
     container_name: grafana
     restart: unless-stopped
     ports:
       - "3000:3000"
     environment:
-      - GF_AUTH_ANONYMOUS_ENABLED=true
-      - GF_AUTH_ANONYMOUS_ORG_NAME="Main Org."
-      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
-      - GF_UNIFIED_ALERTING_ENABLED=false
-      - GF_ALERTING_ENABLE=false
-      - GF_PANELS_DISABLE_SANITIZE_HTML=true
-      - GF_NEWS_NEWS_FEED_ENABLED=false
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_NAME: Main Org.
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+      GF_UNIFIED_ALERTING_ENABLED: "false"
+      GF_ALERTING_ENABLED: "false"
+      GF_PANELS_DISABLE_SANITIZE_HTML: "true"
+      GF_NEWS_NEWS_FEED_ENABLED: "false"
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /var/lib/grafana/dashboards/scheduler.json
     volumes:
       - ./grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./k8s/drexel-scraper/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - postgres
 
   postgres:
     image: postgres:16
@@ -45,6 +50,12 @@ services:
       - "5432:5432"
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+      start_period: 5s
 
   pgweb:
     container_name: pgweb
@@ -53,19 +64,22 @@ services:
     ports:
       - "30012:8081"
     environment:
-      - DATABASE_URL=postgres://postgres:super-secret-password@postgres:5432/postgres?sslmode=disable
+      - PGWEB_DATABASE_URL=postgres://postgres:super-secret-password@postgres:5432/postgres?sslmode=disable
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
   
   # Used to imitate AWS services locally
   # We are using SNS in this case for sending error emails
   localstack:
-    image: localstack/localstack
+    image: localstack/localstack:4.14.0
     ports:
       - "4566:4566"
     environment:
       - SERVICES=sns
-      - EDGE_PORT=4566
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=my-access-key
+      - AWS_SECRET_ACCESS_KEY=my-secret-access-key
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "./scripts/create-sns-topic.sh:/etc/localstack/init/ready.d/init-aws.sh"

@@ -187,19 +187,23 @@ docker compose up -d --build
 
 Make sure you execute this in the project root directory. Let the scraper container finish/exit. The scraper should then output the `data.json` file in the same directory. You can view the data inside the database by going to `http://localhost:30012` in your browser.
 
-You can also view a Grafana instance by going to `http://localhost:3000`. You will have to log in with the username `admin` and password `admin`. The first time you log in, you will have to set up the datasource and dashboard. To set up the datasource, click the sidebar menu and go to `Connections -> Data Sources -> Add new data source` and search for `PostgreSQL`. Enter in the following information:
+You can also view an editable Grafana instance at `http://localhost:3000`. Docker Compose automatically provisions the PostgreSQL data source and the same Scheduler Dashboard that is deployed to dev and production. Anonymous access has the Admin role locally, so no login or manual import is required. To edit the dashboard, use its canonical URL: `http://localhost:3000/d/db64b0ee-89cf-46ab-a3f5-af315d8e1e0f/scheduler-dashboard`. Grafana treats the dashboard shown at `/` as its special home dashboard and only offers **Save as copy** there.
 
-```
-Host: postgres
-Database: postgres
-User: postgres
-Password: super-secret-password
-TLS/SSL Mode: disable
+The local dashboard starts from `k8s/drexel-scraper/dashboards/scheduler.json`. After making changes, click **Save dashboard**. Grafana recognizes that the dashboard came from a provisioning file and displays a **Provisioned dashboard** dialog instead of saving it to its database. Click **Copy JSON to clipboard**, then promote the clipboard contents back to the canonical dashboard file on macOS with:
+
+```bash
+./scripts/promote-local-dashboard.sh --clipboard
 ```
 
-And then click `Save and test`.
+Alternatively, click **Save JSON to file** and pass the downloaded file to the script:
 
-You will also have to import the dashboard at [schedulerdev.zohair.dev](https://schedulerdev.zohair.dev). Click the share icon at the top and then go to the export tab. Check the "Export for sharing externally" box and then click "Save to file". You can then import this dashboard by going to `Home > Dashboards` on your local Grafana instance and then clicking `New > Import`. Upload the file you just downloaded and everything should be set up.
+```bash
+./scripts/promote-local-dashboard.sh ~/Downloads/scheduler.json
+```
+
+The script also accepts `-` for standard input. It removes Grafana's database-specific ID, resets the dashboard version, and validates the dashboard UID, PostgreSQL data-source UID, and production-only PostHog guard before replacing the canonical file. Review the resulting Git diff and commit it normally. A push to `dev` deploys the dashboard to dev; merging to `main` deploys the same dashboard to production. The deployed dashboards are read-only.
+
+The PostHog script is included in the shared dashboard but only initializes on `scheduler.zohair.dev` or `www.scheduler.zohair.dev`, so local and dev activity is not tracked by the production PostHog project.
 
 To run the script again after the container has exited, run the following command:
 
@@ -215,7 +219,7 @@ docker compose down
 
 If you want to reset the database, delete the postgres-data directory inside the project root directory.
 
-If you want to reset the Grafana settings, delete the grafana_data directory inside the project root directory.
+If you want to reset the local Grafana database and discard unpromoted UI changes, delete the `grafana_data` directory inside the project root directory. The next startup provisions a fresh copy of the committed dashboard.
 
 NOTE: Docker Compose is only used for local development. The production version of the scraper uses Kubernetes. The Kubernetes configuration files live in the `k8s` directory.
 
