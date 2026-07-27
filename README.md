@@ -187,15 +187,21 @@ docker compose up -d --build
 
 Make sure you execute this in the project root directory. Let the scraper container finish/exit. The scraper should then output the `data.json` file in the same directory. You can view the data inside the database by going to `http://localhost:30012` in your browser.
 
-You can also view an editable Grafana instance at `http://localhost:3000`. Docker Compose automatically provisions the PostgreSQL data source and the same Scheduler Dashboard that is deployed to dev and production. Anonymous access has the Admin role locally, so no login or manual import is required.
+You can also view an editable Grafana instance at `http://localhost:3000`. Docker Compose automatically provisions the PostgreSQL data source and the same Scheduler Dashboard that is deployed to dev and production. Anonymous access has the Admin role locally, so no login or manual import is required. To edit the dashboard, use its canonical URL: `http://localhost:3000/d/db64b0ee-89cf-46ab-a3f5-af315d8e1e0f/scheduler-dashboard`. Grafana treats the dashboard shown at `/` as its special home dashboard and only offers **Save as copy** there.
 
-The local dashboard starts from `k8s/drexel-scraper/dashboards/scheduler.json`. Changes saved in the local Grafana UI are stored in the local Grafana database. When you are happy with the changes, export and promote them back to the canonical dashboard file with:
+The local dashboard starts from `k8s/drexel-scraper/dashboards/scheduler.json`. After making changes, click **Save dashboard**. Grafana recognizes that the dashboard came from a provisioning file and displays a **Provisioned dashboard** dialog instead of saving it to its database. Click **Copy JSON to clipboard**, then promote the clipboard contents back to the canonical dashboard file on macOS with:
 
 ```bash
-./scripts/promote-local-dashboard.sh
+./scripts/promote-local-dashboard.sh --clipboard
 ```
 
-The script validates the dashboard UID, PostgreSQL data-source UID, and production-only PostHog guard before replacing the canonical file. Review the resulting Git diff and commit it normally. A push to `dev` deploys the dashboard to dev; merging to `main` deploys the same dashboard to production. The deployed dashboards are read-only.
+Alternatively, click **Save JSON to file** and pass the downloaded file to the script:
+
+```bash
+./scripts/promote-local-dashboard.sh ~/Downloads/scheduler.json
+```
+
+The script also accepts `-` for standard input. It removes Grafana's database-specific ID, resets the dashboard version, and validates the dashboard UID, PostgreSQL data-source UID, and production-only PostHog guard before replacing the canonical file. Review the resulting Git diff and commit it normally. A push to `dev` deploys the dashboard to dev; merging to `main` deploys the same dashboard to production. The deployed dashboards are read-only.
 
 The PostHog script is included in the shared dashboard but only initializes on `scheduler.zohair.dev` or `www.scheduler.zohair.dev`, so local and dev activity is not tracked by the production PostHog project.
 

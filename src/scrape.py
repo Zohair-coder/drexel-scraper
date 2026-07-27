@@ -39,7 +39,6 @@ def scrape(
                 )
 
             time.sleep(reset_period)
-
     data: dict[str, dict[str, Any]] = {}
 
     if not all_colleges:
