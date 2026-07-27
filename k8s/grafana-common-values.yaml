@@ -1,0 +1,49 @@
+grafana.ini:
+  dashboards:
+    default_home_dashboard_path: /var/lib/grafana/dashboards/scheduler/scheduler.json
+
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+      - name: scheduler
+        orgId: 1
+        folder: ""
+        type: file
+        disableDeletion: false
+        updateIntervalSeconds: 30
+        allowUiUpdates: false
+        options:
+          path: /var/lib/grafana/dashboards/scheduler
+
+dashboardsConfigMaps:
+  scheduler: drexel-scheduler-dashboard
+
+envFromConfigMaps:
+  - name: postgres-configmap
+  - name: drexel-scheduler-configmap
+
+envFromSecrets:
+  - name: grafana-sa-pwd
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    prune: true
+    datasources:
+      - name: Scheduler PostgreSQL
+        uid: scheduler-postgres
+        type: postgres
+        access: proxy
+        url: "${SCHEDULER_DB_HOSTNAME}:${SCHEDULER_DB_PORT}"
+        user: "${SCHEDULER_DB_GRAFANA_SERVICE_ACCOUNT_USERNAME}"
+        isDefault: true
+        editable: false
+        version: 1
+        jsonData:
+          database: "${SCHEDULER_DB_DBNAME}"
+          sslmode: disable
+          postgresVersion: 1600
+          timescaledb: false
+        secureJsonData:
+          password: "${SCHEDULER_DB_GRAFANA_SERVICE_ACCOUNT_PASSWORD}"

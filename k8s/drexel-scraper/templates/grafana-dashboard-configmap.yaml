@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: drexel-scheduler-dashboard
+  labels:
+    app.kubernetes.io/component: grafana-dashboard
+    app.kubernetes.io/part-of: drexel-scraper
+data:
+  scheduler.json: |
+{{ .Files.Get "dashboards/scheduler.json" | indent 4 }}
