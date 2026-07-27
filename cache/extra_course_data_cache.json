@@ -20798,5 +20798,33 @@
     "14730": {
         "credits": "0.00",
         "prereqs": "HSCI 103  Minimum Grade: C and MATH 101  Minimum Grade: C"
+    },
+    "14733": {
+        "credits": "0.50",
+        "prereqs": ""
+    },
+    "14735": {
+        "credits": "1.00",
+        "prereqs": ""
+    },
+    "14731": {
+        "credits": "3.00",
+        "prereqs": "MATE 366  Minimum Grade: D"
+    },
+    "14732": {
+        "credits": "3.00",
+        "prereqs": ""
+    },
+    "14734": {
+        "credits": "2.00",
+        "prereqs": ""
+    },
+    "14736": {
+        "credits": "4.00",
+        "prereqs": ""
+    },
+    "14737": {
+        "credits": "4.00",
+        "prereqs": ""
     }
 }
