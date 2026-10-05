@@ -1,4 +1,8 @@
-from playwright.sync_api import sync_playwright, ElementHandle
+from playwright.sync_api import (
+    sync_playwright,
+    ElementHandle,
+    TimeoutError as PlaywrightTimeoutError,
+)
 import config
 import totp
 from requests import Session
@@ -76,7 +80,43 @@ def login_with_drexel_connect(session: Session) -> Session:
         ), "Submit button on Microsoft Online for MFA not found"
         submit_button.click()
 
-        page.wait_for_url("https://connect.drexel.edu/**")
+        try:
+            page.locator("#idSubmit_ProofUp_Redirect").wait_for(timeout=5000)
+        except PlaywrightTimeoutError:
+            pass
+        else:
+            raise RuntimeError(
+                "Microsoft requires the Drexel account to update its security "
+                "information before automated login can continue. Follow the "
+                "MFA rotation runbook: https://github.com/Zohair-coder/"
+                "drexel-scraper/blob/main/docs/runbooks/rotate-drexel-mfa.md"
+            )
+
+        # Microsoft may require a "Stay signed in?" response after accepting MFA.
+        # A fresh browser context makes this prompt likely on every CronJob attempt.
+        try:
+            page.locator("#idSIButton9").click(timeout=5000)
+        except PlaywrightTimeoutError:
+            pass
+
+        try:
+            page.wait_for_url("https://connect.drexel.edu/**")
+        except PlaywrightTimeoutError as error:
+            alerts = page.locator(
+                "[role='alert']:visible, #idDiv_SAOTCC_Error:visible, "
+                "#idDiv_SAOTCS_Error:visible, #service_exception_message:visible"
+            ).all_inner_texts()
+            actions = page.locator(
+                "button:visible, input[type='submit']:visible"
+            ).evaluate_all(
+                "elements => elements.map(element => "
+                "({id: element.id, label: element.innerText || element.value}))"
+            )
+            raise RuntimeError(
+                "Microsoft authentication did not return to Drexel Connect "
+                f"(stopped at {page.url!r}, page title {page.title()!r}, "
+                f"alerts {alerts!r}, actions {actions!r})"
+            ) from error
         page.wait_for_timeout(extra_timeout)
 
         for cookie in context.cookies():
