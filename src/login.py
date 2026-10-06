@@ -1,128 +1,149 @@
+import time
+from urllib.parse import urlsplit
+
 from playwright.sync_api import (
+    Page,
     sync_playwright,
-    ElementHandle,
     TimeoutError as PlaywrightTimeoutError,
 )
-import config
-import totp
 from requests import Session
 
+import config
+import totp
 
-def login_with_drexel_connect(session: Session) -> Session:
-    # extra timeout waits added because sometimes
-    # page would load without the selected element
-    # being rendered
-    # a better approach would be welcome
-    extra_timeout = 2000
+# The unattended browser has no passkey. Report cancellation to Microsoft's
+# existing sign-in flow rather than leaving a native WebAuthn dialog pending.
+# Microsoft then offers the account's other allowed methods. This does not
+# authenticate a passkey or change the account's authentication requirements.
+CANCEL_UNAVAILABLE_PASSKEY = """
+(() => {
+    if (!["login.microsoft.com", "login.microsoftonline.com"].includes(location.hostname)) return;
+    if (!navigator.credentials || !navigator.credentials.get) return;
+    const originalGet = navigator.credentials.get.bind(navigator.credentials);
+    navigator.credentials.get = (options) => {
+        if (options && options.publicKey) {
+            return Promise.reject(new DOMException(
+                "No passkey available in unattended browser", "NotAllowedError"
+            ));
+        }
+        return originalGet(options);
+    };
+})();
+"""
 
-    # ideally we would also want all our query
-    # selectors in config.py so that they can be
-    # changed easily if the site changes
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        context = browser.new_context()
-        page = context.new_page()
+def _wait_for_login_result(page: Page) -> str:
+    result = page.wait_for_function(
+        """() => {
+            const visible = selector => {
+                const element = document.querySelector(selector);
+                return element && element.getClientRects().length > 0;
+            };
+            if (location.origin === 'https://connect.drexel.edu' && visible('#logoutLink')) {
+                return 'signed-in';
+            }
+            if (visible('#idSubmit_ProofUp_Redirect')) return 'registration';
+            if (visible('#idBtn_Back') && document.body.innerText.includes('Stay signed in?')) {
+                return 'stay-signed-in';
+            }
+            const error = document.querySelector('#idDiv_SAOTCC_Error');
+            if (visible('#idDiv_SAOTCC_Error') && error.textContent.trim()) return 'invalid-code';
+            return false;
+        }"""
+    )
+    try:
+        return str(result.json_value())
+    finally:
+        result.dispose()
+
+
+def _sign_in(page: Page) -> None:
+    stage = "Drexel sign-in"
+    try:
         page.goto("https://connect.drexel.edu")
+        page.locator("button[name='_eventId_proceed']").click()
 
-        page.wait_for_timeout(extra_timeout)
+        stage = "Microsoft username"
+        page.locator("input[name='loginfmt']").fill(config.drexel_email)
+        page.get_by_role("button", name="Next", exact=True).click()
 
-        sign_in = page.query_selector("button[name='_eventId_proceed']")
-        assert isinstance(
-            sign_in, ElementHandle
-        ), "Sign in button on Drexel Connect not found"
-        sign_in.click()
+        stage = "password method selection"
+        # The username form also contains a password input. Wait for the real
+        # password submit button or the account-specific method chooser.
+        password_option = page.get_by_role("button", name="Use my password", exact=True)
+        password_submit = page.get_by_role("button", name="Sign in", exact=True)
+        password_option.or_(password_submit).first.wait_for()
+        if password_option.is_visible():
+            password_option.click()
 
-        page.wait_for_selector("input[name='loginfmt']")
-        page.wait_for_timeout(extra_timeout)
+        stage = "Microsoft password"
+        password_submit.wait_for()
+        page.locator("input[name='passwd']").fill(config.drexel_password)
+        password_submit.click()
 
-        email_input = page.query_selector("input[name='loginfmt']")
-        assert isinstance(
-            email_input, ElementHandle
-        ), "Email field on Microsoft Online not found"
-        email_input.fill(config.drexel_email)
+        stage = "verification-code method selection"
+        code_option = page.locator("[data-value='PhoneAppOTP']")
+        code_input = page.locator("input[name='otc']")
+        code_option.or_(code_input).first.wait_for()
+        if code_option.is_visible():
+            code_option.click()
 
-        page.get_by_text("Next").click()
-
-        page.wait_for_selector("input[name='passwd']")
-        page.wait_for_timeout(extra_timeout)
-
-        password_input = page.query_selector("input[name='passwd']")
-        assert isinstance(
-            password_input, ElementHandle
-        ), "Password field on Microsoft Online not found"
-        password_input.fill(config.drexel_password)
-
-        page.wait_for_selector("input[type='submit']")
-        page.wait_for_timeout(extra_timeout)
-        page.get_by_text("Sign in").click()
-
+        stage = "verification-code entry"
+        code_input.wait_for()
         if config.drexel_mfa_secret_key is not None:
+            # Generate only after the code form is ready, with enough validity
+            # remaining to submit it before the next 30-second TOTP interval.
+            remaining = 30 - time.time() % 30
+            if remaining < 5:
+                page.wait_for_timeout((remaining + 0.1) * 1000)
             mfa_token = totp.get_token(config.drexel_mfa_secret_key)
         else:
             mfa_token = input("Please input your MFA verification code: ")
+        code_input.fill(mfa_token)
+        page.get_by_role("button", name="Verify", exact=True).click()
 
-        page.wait_for_selector("input[name='otc']")
-        page.wait_for_timeout(extra_timeout)
-
-        mfa_input = page.query_selector("input[name='otc']")
-        assert isinstance(
-            mfa_input, ElementHandle
-        ), "MFA input field on Microsoft Online not found"
-        mfa_input.fill(mfa_token)
-
-        page.wait_for_selector("input[type='submit']")
-        page.wait_for_timeout(extra_timeout)
-
-        submit_button = page.query_selector("input[type='submit']")
-        assert isinstance(
-            submit_button, ElementHandle
-        ), "Submit button on Microsoft Online for MFA not found"
-        submit_button.click()
-
-        try:
-            page.locator("#idSubmit_ProofUp_Redirect").wait_for(timeout=5000)
-        except PlaywrightTimeoutError:
-            pass
-        else:
+        stage = "return to Drexel after MFA"
+        result = _wait_for_login_result(page)
+        if result == "stay-signed-in":
+            page.get_by_role("button", name="No", exact=True).click()
+            result = _wait_for_login_result(page)
+        if result == "registration":
             raise RuntimeError(
-                "Microsoft requires the Drexel account to update its security "
-                "information before automated login can continue. Follow the "
-                "MFA rotation runbook: https://github.com/Zohair-coder/"
-                "drexel-scraper/blob/main/docs/runbooks/rotate-drexel-mfa.md"
+                "Microsoft requires interactive security-information registration. "
+                "Complete the prompt in a normal browser and keep both the passkey "
+                "and TOTP method registered."
             )
-
-        # Microsoft may require a "Stay signed in?" response after accepting MFA.
-        # A fresh browser context makes this prompt likely on every CronJob attempt.
-        try:
-            page.locator("#idSIButton9").click(timeout=5000)
-        except PlaywrightTimeoutError:
-            pass
-
-        try:
-            page.wait_for_url("https://connect.drexel.edu/**")
-        except PlaywrightTimeoutError as error:
-            alerts = page.locator(
-                "[role='alert']:visible, #idDiv_SAOTCC_Error:visible, "
-                "#idDiv_SAOTCS_Error:visible, #service_exception_message:visible"
-            ).all_inner_texts()
-            actions = page.locator(
-                "button:visible, input[type='submit']:visible"
-            ).evaluate_all(
-                "elements => elements.map(element => "
-                "({id: element.id, label: element.innerText || element.value}))"
-            )
+        if result == "invalid-code":
             raise RuntimeError(
-                "Microsoft authentication did not return to Drexel Connect "
-                f"(stopped at {page.url!r}, page title {page.title()!r}, "
-                f"alerts {alerts!r}, actions {actions!r})"
-            ) from error
-        page.wait_for_timeout(extra_timeout)
+                "Microsoft rejected the verification code. Check the registered "
+                "TOTP secret and system clock."
+            )
+        if result != "signed-in":
+            raise RuntimeError("Microsoft authentication did not return to Drexel")
+    except PlaywrightTimeoutError:
+        # Playwright call logs and URLs can contain credential values and
+        # authentication query parameters. Report only the stage and hostname.
+        raise RuntimeError(
+            f"Login timed out during {stage} at {urlsplit(page.url).hostname}."
+        ) from None
 
-        for cookie in context.cookies():
-            session.cookies.set(
-                cookie["name"], cookie["value"], domain=cookie["domain"]
-            )  # type: ignore
 
-        browser.close()
-        return session
+def login_with_drexel_connect(session: Session) -> Session:
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        try:
+            context = browser.new_context()
+            context.add_init_script(CANCEL_UNAVAILABLE_PASSKEY)
+            page = context.new_page()
+            _sign_in(page)
+
+            for cookie in context.cookies():
+                session.cookies.set(  # type: ignore[no-untyped-call]
+                    cookie["name"],
+                    cookie["value"],
+                    domain=cookie["domain"],
+                    path=cookie["path"],
+                )
+            return session
+        finally:
+            browser.close()
