@@ -47,6 +47,7 @@ def main(args: argparse.Namespace) -> None:
                 session=session,
                 term_index=term_index,
                 term_count=len(selected),
+                term_name=catalogue[code],
             )
             if not data:
                 raise ValueError(f"No data for {code}; retaining existing quarter")
