@@ -57,7 +57,7 @@ def send_request_helper(
     headers: dict[str, str],
     data: dict[str, Any],
 ) -> Response:
-    timeout = 2
+    timeout = 30
     if method == "GET":
         resp = session.get(url, headers=headers, timeout=timeout)
     elif method == "POST":
