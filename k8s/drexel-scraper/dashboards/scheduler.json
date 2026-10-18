@@ -1490,8 +1490,8 @@
           "type": "postgres",
           "uid": "scheduler-postgres"
         },
-        "query": "SELECT label AS __text, code AS __value FROM terms WHERE available\nORDER BY (code = to_char(CURRENT_DATE - interval '8 months', 'YYYY') ||\nCASE WHEN extract(month FROM CURRENT_DATE) >= 9 THEN '15'\nWHEN extract(month FROM CURRENT_DATE) <= 3 THEN '25'\nWHEN extract(month FROM CURRENT_DATE) <= 6 THEN '35' ELSE '45' END) DESC, code DESC",
-        "definition": "SELECT label AS __text, code AS __value FROM terms WHERE available\nORDER BY (code = to_char(CURRENT_DATE - interval '8 months', 'YYYY') ||\nCASE WHEN extract(month FROM CURRENT_DATE) >= 9 THEN '15'\nWHEN extract(month FROM CURRENT_DATE) <= 3 THEN '25'\nWHEN extract(month FROM CURRENT_DATE) <= 6 THEN '35' ELSE '45' END) DESC, code DESC",
+        "query": "SELECT label AS __text, code AS __value FROM terms WHERE available\nORDER BY is_default DESC, code DESC",
+        "definition": "SELECT label AS __text, code AS __value FROM terms WHERE available\nORDER BY is_default DESC, code DESC",
         "refresh": 1,
         "sort": 0,
         "multi": false,

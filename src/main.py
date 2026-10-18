@@ -18,14 +18,14 @@ def main(args: argparse.Namespace) -> None:
     start_time = time.time()
 
     if args.db or args.migrate_only:
-        db.initialize()
+        db.initialize(config.year + config.quarter)
     if args.migrate_only:
         print("Database migration complete")
         return
     session = authenticated_session()
     catalogue = discover_terms(send_request(session, BASE).text)
     if args.db:
-        db.update_catalogue(catalogue)
+        db.update_catalogue(catalogue, config.year + config.quarter)
     selected = (
         list(catalogue)
         if args.all_quarters

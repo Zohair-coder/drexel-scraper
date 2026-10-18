@@ -92,7 +92,7 @@ jobs:
     - name: Run multi-quarter PostgreSQL integration tests
       run: |
         docker compose exec -T postgres createdb -U postgres multi_quarter_test
-        TEST_DATABASE_DSN='host=127.0.0.1 port=5432 dbname=multi_quarter_test user=postgres password=super-secret-password' pytest tests/test_multi_quarter.py -v
+        TEST_DATABASE_DSN='host=127.0.0.1 port=5432 dbname=multi_quarter_test user=postgres password=super-secret-password' pytest --rootdir=tests --confcutdir=tests tests/test_multi_quarter.py -v
 
     - name: Delete cache
       run: rm cache/*

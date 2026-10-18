@@ -161,6 +161,31 @@ def test_dashboard_queries(database):
                     assert result == [(1,)]
 
 
+def test_dashboard_default_uses_scraper_logic_and_config_override(
+    database, monkeypatch
+):
+    seed_schema(database)
+    monkeypatch.setattr(db, "get_current_quarter_and_year", lambda: ("2026", "25"))
+    catalogue = {
+        "202615": "Fall 2026",
+        "202625": "Winter 2027",
+        "202645": "Summer 2027",
+    }
+    db.update_catalogue(catalogue)
+    path = (
+        Path(__file__).resolve().parents[1]
+        / "k8s/drexel-scraper/dashboards/scheduler.json"
+    )
+    dashboard = json.loads(path.read_text())
+    quarter = next(v for v in dashboard["templating"]["list"] if v["name"] == "quarter")
+    assert quarter["current"] == {}
+    assert rows(database, quarter["query"])[0] == ("Winter 2027", "202625")
+    db.update_catalogue(catalogue, "202615")
+    assert rows(database, quarter["query"])[0] == ("Fall 2026", "202615")
+    db.update_catalogue(catalogue, "202715")
+    assert rows(database, quarter["query"])[0] == ("Summer 2027", "202645")
+
+
 def test_legacy_migration_is_preserving_and_idempotent(database):
     cur, conn = database()
     with conn, cur:
