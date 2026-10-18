@@ -34,14 +34,20 @@ def main(args: argparse.Namespace) -> None:
     if any(code not in catalogue for code in selected):
         raise ValueError("Requested quarter is not advertised by TMS")
     failures = []
-    for code in selected:
-        print(f"Scraping {catalogue[code]} ({code})", flush=True)
+    for term_index, code in enumerate(selected, start=1):
+        print(
+            f"Scraping {catalogue[code]} ({code}) ({term_index}/{len(selected)})",
+            flush=True,
+        )
         try:
             data = scrape(
                 include_ratings=args.ratings,
                 all_colleges=args.all_colleges,
                 term_code=code,
                 session=session,
+                term_index=term_index,
+                term_count=len(selected),
+                term_name=catalogue[code],
             )
             if not data:
                 raise ValueError(f"No data for {code}; retaining existing quarter")

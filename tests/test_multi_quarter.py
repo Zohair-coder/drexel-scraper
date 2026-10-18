@@ -16,8 +16,8 @@ from terms import discover_terms, term_label
 
 def test_catalogue():
     html = '<a href="/webtms_du/collegesSubjects/202625?collCode=">Winter Quarter 26-27</a><a href="/webtms_du/collegesSubjects/202611">Fall Semester</a>'
-    assert discover_terms(html) == {"202625": "Winter 2027"}
-    assert term_label("202615") == "Fall 2026"
+    assert discover_terms(html) == {"202625": "Winter Quarter 26-27"}
+    assert term_label("202615") == "Fall Quarter 26-27"
     with pytest.raises(ValueError):
         discover_terms("Sign in")
 
@@ -167,9 +167,9 @@ def test_dashboard_default_uses_scraper_logic_and_config_override(
     seed_schema(database)
     monkeypatch.setattr(db, "get_current_quarter_and_year", lambda: ("2026", "25"))
     catalogue = {
-        "202615": "Fall 2026",
-        "202625": "Winter 2027",
-        "202645": "Summer 2027",
+        "202615": "Fall Quarter 26-27",
+        "202625": "Winter Quarter 26-27",
+        "202645": "Summer Quarter 26-27",
     }
     db.update_catalogue(catalogue)
     path = (
@@ -179,11 +179,11 @@ def test_dashboard_default_uses_scraper_logic_and_config_override(
     dashboard = json.loads(path.read_text())
     quarter = next(v for v in dashboard["templating"]["list"] if v["name"] == "quarter")
     assert quarter["current"] == {}
-    assert rows(database, quarter["query"])[0] == ("Winter 2027", "202625")
+    assert rows(database, quarter["query"])[0] == ("Winter Quarter 26-27", "202625")
     db.update_catalogue(catalogue, "202615")
-    assert rows(database, quarter["query"])[0] == ("Fall 2026", "202615")
+    assert rows(database, quarter["query"])[0] == ("Fall Quarter 26-27", "202615")
     db.update_catalogue(catalogue, "202715")
-    assert rows(database, quarter["query"])[0] == ("Summer 2027", "202645")
+    assert rows(database, quarter["query"])[0] == ("Summer Quarter 26-27", "202645")
 
 
 def test_legacy_migration_is_preserving_and_idempotent(database):
@@ -209,6 +209,29 @@ def test_legacy_migration_is_preserving_and_idempotent(database):
     assert rows(database, "SELECT count(*) FROM legacy_single_quarter.courses") == [
         (1,)
     ]
-    assert rows(database, "SELECT label FROM terms") == [("Winter 2027",)]
+    assert rows(database, "SELECT label FROM terms") == [("Winter Quarter 26-27",)]
     db.populate_db(course("New Professor", 456), "202615")
     assert rows(database, "SELECT count(*) FROM courses") == [(2,)]
+
+
+def test_source_labels_survive_course_refresh_and_old_labels_upgrade(database):
+    seed_schema(database)
+    # Keep the source text even if TMS changes its naming convention later.
+    source = (
+        '<a href="/webtms_du/collegesSubjects/202625">Winter Quarter   2026-2027</a>'
+    )
+    db.update_catalogue(discover_terms(source), "202625")
+    db.populate_db(course(), "202625")
+    cur, conn = database()
+    with conn, cur:
+        cur.execute(
+            "INSERT INTO terms(code,label,source_url) VALUES ('202615','Fall 2026','test')"
+        )
+        db.create_tables(cur)
+        db.create_tables(cur)
+    conn.close()
+    assert rows(database, "SELECT code,label FROM terms ORDER BY code") == [
+        ("202615", "Fall Quarter 26-27"),
+        ("202625", "Winter Quarter 2026-2027"),
+    ]
+    assert rows(database, "SELECT count(*) FROM courses") == [(1,)]
