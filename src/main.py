@@ -33,28 +33,43 @@ def main(args: argparse.Namespace) -> None:
     )
     if any(code not in catalogue for code in selected):
         raise ValueError("Requested quarter is not advertised by TMS")
+    failures = []
     for code in selected:
         print(f"Scraping {catalogue[code]} ({code})", flush=True)
-        data = scrape(
-            include_ratings=args.ratings,
-            all_colleges=args.all_colleges,
-            term_code=code,
-            session=session,
-        )
-        if not data:
-            raise ValueError(f"No data for {code}; retaining existing quarter")
-        print(f"Found {len(data)} sections for {code}", flush=True)
-        if not args.no_file:
-            filename = (
-                f"{os.path.splitext(args.output_file)[0]}-{code}.json"
-                if args.all_quarters
-                else args.output_file
+        try:
+            data = scrape(
+                include_ratings=args.ratings,
+                all_colleges=args.all_colleges,
+                term_code=code,
+                session=session,
             )
-            with open(filename, "w") as f:
-                json.dump(data, f, indent=4)
-        if args.db:
-            db.populate_db(data, code)
-            print(f"Published {code}", flush=True)
+            if not data:
+                raise ValueError(f"No data for {code}; retaining existing quarter")
+            print(f"Found {len(data)} sections for {code}", flush=True)
+            if not args.no_file:
+                filename = (
+                    f"{os.path.splitext(args.output_file)[0]}-{code}.json"
+                    if args.all_quarters
+                    else args.output_file
+                )
+                with open(filename, "w") as f:
+                    json.dump(data, f, indent=4)
+            if args.db:
+                db.populate_db(data, code)
+                print(f"Published {code}", flush=True)
+        except Exception as exc:
+            if not args.all_quarters:
+                raise
+            # Exception messages can include upstream response headers or bodies.
+            # Report the quarter and exception type without leaking those details.
+            print(
+                f"Failed {code} ({type(exc).__name__}); continuing with remaining quarters",
+                flush=True,
+            )
+            failures.append(code)
+
+    if failures:
+        raise RuntimeError(f"Quarters failed: {', '.join(failures)}")
 
     print("--- {} seconds ---".format(time.time() - start_time))
 

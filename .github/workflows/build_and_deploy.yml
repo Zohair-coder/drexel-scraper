@@ -74,11 +74,11 @@ jobs:
                     | jq --arg image "$IMAGE_NAME:$COMMIT_SHA" '
                       .spec.template.spec.containers[0].image = $image |
                       .spec.template.spec.containers[0].command = ["python3", "src/main.py", "--migrate-only"] |
-                      .spec.backoffLimit = 0 | .spec.activeDeadlineSeconds = 300 |
+                      .spec.backoffLimit = 0 | .spec.activeDeadlineSeconds = 900 |
                       .spec.ttlSecondsAfterFinished = 86400' \
                     | kubectl --kubeconfig=kubeconfig.yaml apply -f -
                   kubectl --kubeconfig=kubeconfig.yaml wait -n "$NAMESPACE" \
-                    --for=condition=complete "job/$JOB_NAME" --timeout=300s
+                    --for=condition=complete "job/$JOB_NAME" --timeout=960s
 
             - name: Deploy to Kubernetes
               run: |

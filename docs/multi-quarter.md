@@ -52,8 +52,11 @@ coordinated operation, not merely reverting the image.
 - Each complete nonempty term is published in one transaction. Stale sections
   and assignments for that term disappear; other terms remain intact.
 - Empty results, expired sessions, parse failures and invalid DB rows fail
-  closed. A failure in a later quarter leaves earlier successful quarters
-  committed and the failed quarter unchanged.
+  closed. In an all-quarter run, failures in collection, file output or database
+  publication are recorded per quarter and later quarters are still attempted.
+  An aggregate error at the end keeps the Job/exception notification marked as
+  failed. Successful quarters remain committed and failed quarters retain their
+  previous database data. Single-quarter runs still propagate errors immediately.
 - Availability is independently updated from a successfully parsed catalogue;
   disappeared terms remain stored but are excluded from the dropdown.
 - Cache keys are `term_code:crn`; ambiguous old CRN-only entries are ignored.
@@ -79,6 +82,8 @@ Grafana does not duplicate the Python date-boundary rules in SQL.
 The existing dev-branch GitHub workflow builds the ARM64 image, waits for active
 scraper jobs, migrates using the existing CronJob's environment, then provisions
 the Helm release and dashboard. Main is not updated or merged during dev review.
+The migration Job has a 900-second deadline to allow for scheduling and image
+pulls; the client waits up to 960 seconds, longer than the Job deadline.
 
 `tests/test_multi_quarter.py` uses an explicitly configured disposable `_test`
 database to test migration preservation/idempotence, CRN and instructor identity
