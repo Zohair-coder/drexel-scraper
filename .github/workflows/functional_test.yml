@@ -89,6 +89,11 @@ jobs:
           fi
         done
     
+    - name: Run multi-quarter PostgreSQL integration tests
+      run: |
+        docker compose exec -T postgres createdb -U postgres multi_quarter_test
+        TEST_DATABASE_DSN='host=127.0.0.1 port=5432 dbname=multi_quarter_test user=postgres password=super-secret-password' pytest --rootdir=tests --confcutdir=tests tests/test_multi_quarter.py -v
+
     - name: Delete cache
       run: rm cache/*
     
@@ -121,7 +126,7 @@ jobs:
     
     - name: Verify course_instructor data exists in database
       run: |
-        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM course_instructor;" | awk 'FNR == 3 {print $1}')
+        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM course_instructors;" | awk 'FNR == 3 {print $1}')
         if [ -z "$RESULT" ] || [ "$RESULT" = "0" ]; then
           echo "No data found in the database. Failing the pipeline."
           exit 1
@@ -141,7 +146,7 @@ jobs:
     
     - name: Verify metadata exists in database
       run: |
-        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM metadata;" | awk 'FNR == 3 {print $1}')
+        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM terms;" | awk 'FNR == 3 {print $1}')
         if [ -z "$RESULT" ] || [ "$RESULT" = "0" ]; then
           echo "No data found in the database. Failing the pipeline."
           exit 1
@@ -149,8 +154,8 @@ jobs:
           echo "Data successfully stored in the database. Found $RESULT records."
         fi
 
-    - name: Reset database
-      run: docker compose run scraper sh -c 'apt-get install -y postgresql-client && ./scripts/reset-db.sh;'
+    - name: Verify schema initialization is idempotent
+      run: docker compose run scraper python3 src/main.py --migrate-only
 
     - name: Run scraper again (to test cache)
       env:
@@ -181,7 +186,7 @@ jobs:
     
     - name: Verify course_instructor data exists in database
       run: |
-        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM course_instructor;" | awk 'FNR == 3 {print $1}')
+        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM course_instructors;" | awk 'FNR == 3 {print $1}')
         if [ -z "$RESULT" ] || [ "$RESULT" = "0" ]; then
           echo "No data found in the database. Failing the pipeline."
           exit 1
@@ -201,7 +206,7 @@ jobs:
     
     - name: Verify metadata exists in database
       run: |
-        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM metadata;" | awk 'FNR == 3 {print $1}')
+        RESULT=$(docker compose exec -T postgres psql -U postgres -d postgres -c "SELECT COUNT(*) FROM terms;" | awk 'FNR == 3 {print $1}')
         if [ -z "$RESULT" ] || [ "$RESULT" = "0" ]; then
           echo "No data found in the database. Failing the pipeline."
           exit 1

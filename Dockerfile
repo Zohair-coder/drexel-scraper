@@ -15,4 +15,4 @@ RUN pip install --upgrade pip && \
     playwright install chromium --with-deps
 
 # Run the Python script
-CMD ["python3", "src/main.py", "--db", "--all-colleges", "--ratings", "--email"]
+CMD ["python3", "src/main.py", "--db", "--all-colleges", "--all-quarters", "--ratings", "--email"]

@@ -1,4 +1,7 @@
-from scrape import scrape
+from scrape import scrape, authenticated_session
+from helpers import send_request
+from terms import BASE, discover_terms
+import config
 
 import json
 import sys
@@ -14,23 +17,59 @@ import db
 def main(args: argparse.Namespace) -> None:
     start_time = time.time()
 
-    data = scrape(include_ratings=args.ratings, all_colleges=args.all_colleges)
-
-    assert len(data) > 0, "No data found"
-    print("Found {} items".format(len(data)))
-
-    if not args.no_file:
-        with open(args.output_file, "w") as f:
-            json.dump(data, f, indent=4)
-
-        print(f"Data written to {args.output_file}")
-
+    if args.db or args.migrate_only:
+        db.initialize(config.year + config.quarter)
+    if args.migrate_only:
+        print("Database migration complete")
+        return
+    session = authenticated_session()
+    catalogue = discover_terms(send_request(session, BASE).text)
     if args.db:
-        print("Time taken to scrape data: {} seconds".format(time.time() - start_time))
-        print()
-        print("Updating database...")
-        db.populate_db(data)
-        print("Done!")
+        db.update_catalogue(catalogue, config.year + config.quarter)
+    selected = (
+        list(catalogue)
+        if args.all_quarters
+        else [args.term or config.year + config.quarter]
+    )
+    if any(code not in catalogue for code in selected):
+        raise ValueError("Requested quarter is not advertised by TMS")
+    failures = []
+    for code in selected:
+        print(f"Scraping {catalogue[code]} ({code})", flush=True)
+        try:
+            data = scrape(
+                include_ratings=args.ratings,
+                all_colleges=args.all_colleges,
+                term_code=code,
+                session=session,
+            )
+            if not data:
+                raise ValueError(f"No data for {code}; retaining existing quarter")
+            print(f"Found {len(data)} sections for {code}", flush=True)
+            if not args.no_file:
+                filename = (
+                    f"{os.path.splitext(args.output_file)[0]}-{code}.json"
+                    if args.all_quarters
+                    else args.output_file
+                )
+                with open(filename, "w") as f:
+                    json.dump(data, f, indent=4)
+            if args.db:
+                db.populate_db(data, code)
+                print(f"Published {code}", flush=True)
+        except Exception as exc:
+            if not args.all_quarters:
+                raise
+            # Exception messages can include upstream response headers or bodies.
+            # Report the quarter and exception type without leaking those details.
+            print(
+                f"Failed {code} ({type(exc).__name__}); continuing with remaining quarters",
+                flush=True,
+            )
+            failures.append(code)
+
+    if failures:
+        raise RuntimeError(f"Quarters failed: {', '.join(failures)}")
 
     print("--- {} seconds ---".format(time.time() - start_time))
 
@@ -39,6 +78,18 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="python3 src/main.py",
         description="Scrape data from Drexel Term Master Schedule and save it to a JSON file.",
+    )
+    quarters = parser.add_mutually_exclusive_group()
+    quarters.add_argument(
+        "--all-quarters",
+        action="store_true",
+        help="Collect every quarter currently advertised by TMS",
+    )
+    quarters.add_argument("--term", help="Collect one TMS quarter code, e.g. 202625")
+    parser.add_argument(
+        "--migrate-only",
+        action="store_true",
+        help="Initialize/migrate the database without scraping",
     )
     parser.add_argument(
         "-o",
