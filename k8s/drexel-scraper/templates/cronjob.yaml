@@ -3,6 +3,7 @@ kind: CronJob
 metadata:
   name: drexel-scheduler-cronjob
 spec:
+  suspend: false
   schedule: {{ .Values.schedule }}
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
@@ -10,8 +11,8 @@ spec:
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
-      activeDeadlineSeconds: 3600
-      backoffLimit: 10
+      activeDeadlineSeconds: 21600
+      backoffLimit: 1
       template:
         spec:
           containers:

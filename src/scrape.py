@@ -4,16 +4,23 @@ import json
 import os
 from typing import Any
 import time
-
+from urllib.parse import parse_qs, urlsplit
+from terms import term_url
 from helpers import send_request
 from parse import parse_subject_page, parse_crn_page
 import config
 import login
 
 
-def scrape(
-    include_ratings: bool = False, all_colleges: bool = False
-) -> dict[str, dict[str, Any]]:
+def require_tms(response: Response) -> None:
+    if urlsplit(response.url).hostname != "termmasterschedule.drexel.edu":
+        raise ValueError("TMS session expired; retaining existing quarter")
+    title = get_soup(response.text).title
+    if title is None or "WebTMS" not in title.get_text():
+        raise ValueError("Unexpected TMS response; refusing partial refresh")
+
+
+def authenticated_session() -> Session:
     session = Session()
 
     print("Signing in...")
@@ -39,29 +46,53 @@ def scrape(
                 )
 
             time.sleep(reset_period)
+    return session
+
+
+def scrape(
+    include_ratings: bool = False,
+    all_colleges: bool = False,
+    term_code: str | None = None,
+    session: Session | None = None,
+) -> dict[str, dict[str, Any]]:
+    term_code = term_code or config.year + config.quarter
+    session = session or authenticated_session()
     data: dict[str, dict[str, Any]] = {}
 
     if not all_colleges:
         college_codes = [config.college_code]
     else:
-        college_codes = get_all_college_codes(session)
+        college_codes = get_all_college_codes(session, term_code)
 
     for college_code in college_codes:
-        response = go_to_college_page(session, college_code)
-        scrape_all_subjects(session, data, response.text, include_ratings)
+        response = go_to_college_page(session, college_code, term_code)
+        require_tms(response)
+        college_data: dict[str, dict[str, Any]] = {}
+        scrape_all_subjects(
+            session, college_data, response.text, include_ratings, term_code
+        )
+        for course in college_data.values():
+            course["college_code"] = college_code
+        data.update(college_data)
 
     return data
 
 
-def get_all_college_codes(session: Session) -> list[str]:
-    response = send_request(session, config.get_college_page_url(""))
+def get_all_college_codes(session: Session, term_code: str) -> list[str]:
+    response = send_request(session, term_url(term_code) + "?collCode=")
+    require_tms(response)
     soup = get_soup(response.text)
     college_codes = []
 
     for link in soup.find_all(
         "a", href=lambda href: href and href.startswith("/webtms_du/collegesSubjects")
     ):
-        college_codes.append(link["href"].split("=")[-1])
+        code = parse_qs(urlsplit(str(link["href"])).query).get("collCode", [""])[0]
+        if code and code not in college_codes:
+            college_codes.append(code)
+
+    if not college_codes:
+        raise ValueError(f"No colleges found for {term_code}; refusing partial refresh")
 
     return college_codes
 
@@ -70,12 +101,16 @@ def get_soup(html: str) -> BeautifulSoup:
     return BeautifulSoup(html, "html.parser")
 
 
-def go_to_college_page(session: Session, college_code: str) -> Response:
-    return send_request(session, config.get_college_page_url(college_code))
+def go_to_college_page(session: Session, college_code: str, term_code: str) -> Response:
+    return send_request(session, term_url(term_code) + "?collCode=" + college_code)
 
 
 def scrape_all_subjects(
-    session: Session, data: dict[str, dict[str, Any]], html: str, include_ratings: bool
+    session: Session,
+    data: dict[str, dict[str, Any]],
+    html: str,
+    include_ratings: bool,
+    term_code: str,
 ) -> dict[str, dict[str, Any]]:
     try:
         with open("cache/extra_course_data_cache.json", "r") as f:
@@ -97,6 +132,7 @@ def scrape_all_subjects(
             response = send_request(
                 session, config.tms_base_url + subject_page_link["href"]
             )
+            require_tms(response)
             parsed_crns = parse_subject_page(
                 response.text, data, include_ratings, ratings_cache
             )
@@ -108,9 +144,10 @@ def scrape_all_subjects(
             ) from e
 
         for crn, crn_page_link in parsed_crns.items():
-            if crn in extra_course_data_cache:
-                data[crn]["credits"] = extra_course_data_cache[crn]["credits"]
-                data[crn]["prereqs"] = extra_course_data_cache[crn]["prereqs"]
+            cache_key = f"{term_code}:{crn}"
+            if cache_key in extra_course_data_cache:
+                data[crn]["credits"] = extra_course_data_cache[cache_key]["credits"]
+                data[crn]["prereqs"] = extra_course_data_cache[cache_key]["prereqs"]
             else:
                 try:
                     response = send_request(
@@ -122,7 +159,7 @@ def scrape_all_subjects(
                         "Error scraping/parsing CRN {}: {}".format(crn, crn_page_link)
                     ) from e
 
-                extra_course_data_cache[crn] = {
+                extra_course_data_cache[cache_key] = {
                     "credits": data[crn]["credits"],
                     "prereqs": data[crn]["prereqs"],
                 }

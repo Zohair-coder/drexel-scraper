@@ -34,7 +34,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<style>\n    .btn-primary {\n    color: #fff;\n    background-color: #0d6efd;\n    border-color: #0d6efd;\n    padding: .375rem .75rem;\n    font-size: 1rem;\n    border-radius: .2rem;\n    line-height: 1.5;\n    border: 1px solid transparent;\n    display: inline-block;\n    font-weight: 400;\n    text-align: center;\n    vertical-align: middle;\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n\n.btn-primary:hover {\n    color: #fff;\n    background-color: #0b5ed7;\n    border-color: #0a58ca;\n}\n\n.btn-primary:disabled {\n    color: #fff;\n    background-color: #0d6efd;\n    border-color: #0d6efd;\n    opacity: .65;\n    pointer-events: none;\n}\n\n.center {\n  margin: auto;\n  width: 50%;\n  padding: 8px 0px;\n  text-align: center;\n}\n\n\n</style>\n\n<div class=\"center\">\n    <button class=\"btn-primary\" onclick=\"resetFilters()\">Reset</button>\n</div>\n\n<script>\nfunction resetFilters() {\n    const currentUrl = window.location.href;\n    const newUrl = currentUrl.split(\"&\")[0];\n    window.location.href = newUrl + \"&kiosk\";\n}\n</script>\n\n<script>\nif ([\"scheduler.zohair.dev\", \"www.scheduler.zohair.dev\"].includes(window.location.hostname)) {\n    ! function(t, e) {\n        var o, n, p, r;\n        e.__SV || (window.posthog = e, e._i = [], e.init = function(i, s, a) {\n            function g(t, e) {\n                var o = e.split(\".\");\n                2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function() {\n                    t.push([e].concat(Array.prototype.slice.call(arguments, 0)))\n                }\n            }(p = t.createElement(\"script\")).type = \"text/javascript\", p.crossOrigin = \"anonymous\", p.async = !0, p.src = s.api_host.replace(\".i.posthog.com\", \"-assets.i.posthog.com\") + \"/static/array.js\", (r = t.getElementsByTagName(\"script\")[0]).parentNode.insertBefore(p, r);\n            var u = e;\n            for (void 0 !== a ? u = e[a] = [] : a = \"posthog\", u.people = u.people || [], u.toString = function(t) {\n                    var e = \"posthog\";\n                    return \"posthog\" !== a && (e += \".\" + a), t || (e += \" (stub)\"), e\n                }, u.people.toString = function() {\n                    return u.toString(1) + \".people (stub)\"\n                }, o = \"init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric\".split(\" \"), n = 0; n < o.length; n++) g(u, o[n]);\n            e._i.push([i, s, a])\n        }, e.__SV = 1)\n    }(document, window.posthog || []);\n    posthog.init('phc_tn6bp7Vd9Pk33w8M3mYbufsUkAPHcQL0xbIsXFKVbn0', {\n                api_host: 'https://us.i.posthog.com',\n                person_profiles: 'always', // or 'always' to create profiles for anonymous users as well\n                }) \n}\n</script>",
+        "content": "<style>\n    .btn-primary {\n    color: #fff;\n    background-color: #0d6efd;\n    border-color: #0d6efd;\n    padding: .375rem .75rem;\n    font-size: 1rem;\n    border-radius: .2rem;\n    line-height: 1.5;\n    border: 1px solid transparent;\n    display: inline-block;\n    font-weight: 400;\n    text-align: center;\n    vertical-align: middle;\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n\n.btn-primary:hover {\n    color: #fff;\n    background-color: #0b5ed7;\n    border-color: #0a58ca;\n}\n\n.btn-primary:disabled {\n    color: #fff;\n    background-color: #0d6efd;\n    border-color: #0d6efd;\n    opacity: .65;\n    pointer-events: none;\n}\n\n.center {\n  margin: auto;\n  width: 50%;\n  padding: 8px 0px;\n  text-align: center;\n}\n\n\n</style>\n\n<div class=\"center\">\n    <button class=\"btn-primary\" onclick=\"resetFilters()\">Reset</button>\n</div>\n\n<script>\nfunction resetFilters() {\n    const currentUrl = window.location.href;\n    const url = new URL(currentUrl);\n    for (const key of [...url.searchParams.keys()]) {\n        if (key.startsWith(\"var-\") && key !== \"var-quarter\") url.searchParams.delete(key);\n    }\n    url.searchParams.set(\"kiosk\", \"true\");\n    window.location.href = url.toString();\n}\n</script>\n\n<script>\nif ([\"scheduler.zohair.dev\", \"www.scheduler.zohair.dev\"].includes(window.location.hostname)) {\n    ! function(t, e) {\n        var o, n, p, r;\n        e.__SV || (window.posthog = e, e._i = [], e.init = function(i, s, a) {\n            function g(t, e) {\n                var o = e.split(\".\");\n                2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function() {\n                    t.push([e].concat(Array.prototype.slice.call(arguments, 0)))\n                }\n            }(p = t.createElement(\"script\")).type = \"text/javascript\", p.crossOrigin = \"anonymous\", p.async = !0, p.src = s.api_host.replace(\".i.posthog.com\", \"-assets.i.posthog.com\") + \"/static/array.js\", (r = t.getElementsByTagName(\"script\")[0]).parentNode.insertBefore(p, r);\n            var u = e;\n            for (void 0 !== a ? u = e[a] = [] : a = \"posthog\", u.people = u.people || [], u.toString = function(t) {\n                    var e = \"posthog\";\n                    return \"posthog\" !== a && (e += \".\" + a), t || (e += \" (stub)\"), e\n                }, u.people.toString = function() {\n                    return u.toString(1) + \".people (stub)\"\n                }, o = \"init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric\".split(\" \"), n = 0; n < o.length; n++) g(u, o[n]);\n            e._i.push([i, s, a])\n        }, e.__SV = 1)\n    }(document, window.posthog || []);\n    posthog.init('phc_tn6bp7Vd9Pk33w8M3mYbufsUkAPHcQL0xbIsXFKVbn0', {\n                api_host: 'https://us.i.posthog.com',\n                person_profiles: 'always', // or 'always' to create profiles for anonymous users as well\n                }) \n}\n</script>",
         "mode": "html"
       },
       "pluginVersion": "12.3.1",
@@ -97,7 +97,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \n  CASE \n    WHEN value LIKE 'Fall %' THEN value\n    ELSE \n      CONCAT(\n        SPLIT_PART(value, ' ', 1), \n        ' ', \n        CAST(SPLIT_PART(value, ' ', 2) AS INT) + 1\n      )\n  END AS adjusted_term\nFROM metadata\nWHERE key = 'current_term';",
+          "rawSql": "SELECT label FROM terms WHERE code = ${quarter:sqlstring}",
           "refId": "A",
           "sql": {
             "columns": [
@@ -184,7 +184,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT value FROM metadata WHERE key = 'last_updated';",
+          "rawSql": "SELECT COALESCE(to_char(last_scraped_at AT TIME ZONE 'America/New_York', 'MM/DD/YY HH12:MI AM'), 'Not loaded yet') AS updated FROM terms WHERE code = ${quarter:sqlstring}",
           "refId": "A",
           "sql": {
             "columns": [
@@ -205,7 +205,7 @@
           }
         }
       ],
-      "title": "Last Updated (EST)",
+      "title": "Selected Quarter Updated (Eastern)",
       "type": "stat"
     },
     {
@@ -390,7 +390,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT course_id AS \"CRN\", subject_code AS \"Subject Code\", course_number AS \"Course Number\", course_title AS \"Course Title\", section AS \"Section\", instructor_name AS \"Instructor Name\", instructor_rmp_id AS \"RateMyProfessors ID\", avg_rating AS \"Average RMP Rating\", avg_difficulty AS \"Average RMP Difficulty\", num_ratings AS \"Number of RMP Ratings\", enroll AS \"Seats Taken\", max_enroll AS \"Total Seats\", instruction_type AS \"Instruction Type\", instruction_method AS \"Instruction Method\", credits AS \"Credits\", prereqs AS \"Prerequisites\", to_char(start_time, 'HH12:MI AM') AS \"Start Time\", to_char(end_time, 'HH12:MI AM') AS \"End Time\", array_to_string(days, ', ') AS \"Days\"\nFROM all_course_instructor_data\nWHERE \n    (\n        ('$null_ratings' = 'Yes')\n        OR \n        ('$null_ratings' = 'No' AND avg_rating IS NOT NULL)\n    )\n    AND \n    (\n        avg_difficulty IS NULL \n        OR avg_difficulty <= $max_difficulty\n    )\n    AND \n    (\n        avg_rating IS NULL \n        OR avg_rating >= $min_rating\n    )\n    AND \n    (\n        num_ratings IS NULL \n        OR num_ratings >= $min_num_ratings\n    )\n    AND\n    (\n        CASE \n            WHEN course_number ~ E'\\\\d+' THEN \n                CAST(substring(course_number FROM E'\\\\d+') AS INTEGER) > $course_number_greater_than \n                AND CAST(substring(course_number FROM E'\\\\d+') AS INTEGER) < $course_number_less_than\n            ELSE TRUE\n        END\n    )\n    AND \n    (\n        ('$allow_null_times' = 'Yes')\n        OR\n        ('$allow_null_times' = 'No' AND start_time IS NOT NULL AND end_time IS NOT NULL)\n    )\n    AND \n    (\n        start_time IS NULL \n        OR start_time >= CAST('$start_time' AS time)\n    )\n    AND \n    (\n        end_time IS NULL \n        OR end_time <= CAST('$end_time' AS time)\n    )\n    AND \n    (\n        ('$show_full_courses' = 'Yes')\n        OR\n        ('$show_full_courses' = 'No' AND enroll <> 'FULL')\n    )\n    AND\n    (\n        ('$only_blank_prereqs' = 'Yes')\n        OR\n        ('$only_blank_prereqs' = 'No' AND prereqs = '')\n    )\nORDER BY \n    subject_code ASC, \n    CAST(substring(course_number FROM '[0-9]+') AS INTEGER) ASC;",
+          "rawSql": "WITH courses AS (\n SELECT *, prerequisites AS prereqs,\n CASE WHEN is_full THEN 'FULL' ELSE enrolled::text END AS enroll,\n capacity::text AS max_enroll\n FROM public.courses WHERE term_code = ${quarter:sqlstring}\n), instructors AS (\n SELECT DISTINCT i.* FROM public.instructors i\n JOIN public.course_instructors ci ON ci.instructor_id=i.id\n WHERE ci.term_code = ${quarter:sqlstring}\n), all_course_instructor_data AS (\n SELECT * FROM public.all_course_instructor_data WHERE term_code = ${quarter:sqlstring}\n)\nSELECT course_id AS \"CRN\", subject_code AS \"Subject Code\", course_number AS \"Course Number\", course_title AS \"Course Title\", section AS \"Section\", instructor_name AS \"Instructor Name\", instructor_rmp_id AS \"RateMyProfessors ID\", avg_rating AS \"Average RMP Rating\", avg_difficulty AS \"Average RMP Difficulty\", num_ratings AS \"Number of RMP Ratings\", enroll AS \"Seats Taken\", max_enroll AS \"Total Seats\", instruction_type AS \"Instruction Type\", instruction_method AS \"Instruction Method\", credits AS \"Credits\", prereqs AS \"Prerequisites\", to_char(start_time, 'HH12:MI AM') AS \"Start Time\", to_char(end_time, 'HH12:MI AM') AS \"End Time\", array_to_string(days, ', ') AS \"Days\"\nFROM all_course_instructor_data\nWHERE \n    (\n        ('$null_ratings' = 'Yes')\n        OR \n        ('$null_ratings' = 'No' AND avg_rating IS NOT NULL)\n    )\n    AND \n    (\n        avg_difficulty IS NULL \n        OR avg_difficulty <= $max_difficulty\n    )\n    AND \n    (\n        avg_rating IS NULL \n        OR avg_rating >= $min_rating\n    )\n    AND \n    (\n        num_ratings IS NULL \n        OR num_ratings >= $min_num_ratings\n    )\n    AND\n    (\n        CASE \n            WHEN course_number ~ E'\\\\d+' THEN \n                CAST(substring(course_number FROM E'\\\\d+') AS INTEGER) > $course_number_greater_than \n                AND CAST(substring(course_number FROM E'\\\\d+') AS INTEGER) < $course_number_less_than\n            ELSE TRUE\n        END\n    )\n    AND \n    (\n        ('$allow_null_times' = 'Yes')\n        OR\n        ('$allow_null_times' = 'No' AND start_time IS NOT NULL AND end_time IS NOT NULL)\n    )\n    AND \n    (\n        start_time IS NULL \n        OR start_time >= CAST('$start_time' AS time)\n    )\n    AND \n    (\n        end_time IS NULL \n        OR end_time <= CAST('$end_time' AS time)\n    )\n    AND \n    (\n        ('$show_full_courses' = 'Yes')\n        OR\n        ('$show_full_courses' = 'No' AND enroll <> 'FULL')\n    )\n    AND\n    (\n        ('$only_blank_prereqs' = 'Yes')\n        OR\n        ('$only_blank_prereqs' = 'No' AND prereqs = '')\n    )\nORDER BY \n    subject_code ASC, \n    CAST(substring(course_number FROM '[0-9]+') AS INTEGER) ASC;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -476,7 +476,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT COUNT(*) FROM courses;",
+          "rawSql": "WITH courses AS (\n SELECT *, prerequisites AS prereqs,\n CASE WHEN is_full THEN 'FULL' ELSE enrolled::text END AS enroll,\n capacity::text AS max_enroll\n FROM public.courses WHERE term_code = ${quarter:sqlstring}\n), instructors AS (\n SELECT DISTINCT i.* FROM public.instructors i\n JOIN public.course_instructors ci ON ci.instructor_id=i.id\n WHERE ci.term_code = ${quarter:sqlstring}\n), all_course_instructor_data AS (\n SELECT * FROM public.all_course_instructor_data WHERE term_code = ${quarter:sqlstring}\n)\nSELECT COUNT(*) FROM courses;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -563,7 +563,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT COUNT(*) FROM instructors;",
+          "rawSql": "WITH courses AS (\n SELECT *, prerequisites AS prereqs,\n CASE WHEN is_full THEN 'FULL' ELSE enrolled::text END AS enroll,\n capacity::text AS max_enroll\n FROM public.courses WHERE term_code = ${quarter:sqlstring}\n), instructors AS (\n SELECT DISTINCT i.* FROM public.instructors i\n JOIN public.course_instructors ci ON ci.instructor_id=i.id\n WHERE ci.term_code = ${quarter:sqlstring}\n), all_course_instructor_data AS (\n SELECT * FROM public.all_course_instructor_data WHERE term_code = ${quarter:sqlstring}\n)\nSELECT COUNT(*) FROM instructors;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -649,7 +649,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \n    COUNT(*)\nFROM \n    instructors\nWHERE \n    num_ratings > 0 AND num_ratings IS NOT NULL;\n",
+          "rawSql": "WITH courses AS (\n SELECT *, prerequisites AS prereqs,\n CASE WHEN is_full THEN 'FULL' ELSE enrolled::text END AS enroll,\n capacity::text AS max_enroll\n FROM public.courses WHERE term_code = ${quarter:sqlstring}\n), instructors AS (\n SELECT DISTINCT i.* FROM public.instructors i\n JOIN public.course_instructors ci ON ci.instructor_id=i.id\n WHERE ci.term_code = ${quarter:sqlstring}\n), all_course_instructor_data AS (\n SELECT * FROM public.all_course_instructor_data WHERE term_code = ${quarter:sqlstring}\n)\nSELECT \n    COUNT(*)\nFROM \n    instructors\nWHERE \n    num_ratings > 0 AND num_ratings IS NOT NULL;\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -735,7 +735,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \n    AVG(num_ratings) AS total_instructor_ratings\nFROM \n    instructors",
+          "rawSql": "WITH courses AS (\n SELECT *, prerequisites AS prereqs,\n CASE WHEN is_full THEN 'FULL' ELSE enrolled::text END AS enroll,\n capacity::text AS max_enroll\n FROM public.courses WHERE term_code = ${quarter:sqlstring}\n), instructors AS (\n SELECT DISTINCT i.* FROM public.instructors i\n JOIN public.course_instructors ci ON ci.instructor_id=i.id\n WHERE ci.term_code = ${quarter:sqlstring}\n), all_course_instructor_data AS (\n SELECT * FROM public.all_course_instructor_data WHERE term_code = ${quarter:sqlstring}\n)\nSELECT \n    AVG(num_ratings) AS total_instructor_ratings\nFROM \n    instructors",
           "refId": "A",
           "sql": {
             "columns": [
@@ -820,7 +820,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \n    AVG(avg_rating) AS total_instructor_ratings\nFROM \n    instructors",
+          "rawSql": "WITH courses AS (\n SELECT *, prerequisites AS prereqs,\n CASE WHEN is_full THEN 'FULL' ELSE enrolled::text END AS enroll,\n capacity::text AS max_enroll\n FROM public.courses WHERE term_code = ${quarter:sqlstring}\n), instructors AS (\n SELECT DISTINCT i.* FROM public.instructors i\n JOIN public.course_instructors ci ON ci.instructor_id=i.id\n WHERE ci.term_code = ${quarter:sqlstring}\n), all_course_instructor_data AS (\n SELECT * FROM public.all_course_instructor_data WHERE term_code = ${quarter:sqlstring}\n)\nSELECT \n    AVG(avg_rating) AS total_instructor_ratings\nFROM \n    instructors",
           "refId": "A",
           "sql": {
             "columns": [
@@ -905,7 +905,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \n    AVG(avg_difficulty) AS total_instructor_ratings\nFROM \n    instructors",
+          "rawSql": "WITH courses AS (\n SELECT *, prerequisites AS prereqs,\n CASE WHEN is_full THEN 'FULL' ELSE enrolled::text END AS enroll,\n capacity::text AS max_enroll\n FROM public.courses WHERE term_code = ${quarter:sqlstring}\n), instructors AS (\n SELECT DISTINCT i.* FROM public.instructors i\n JOIN public.course_instructors ci ON ci.instructor_id=i.id\n WHERE ci.term_code = ${quarter:sqlstring}\n), all_course_instructor_data AS (\n SELECT * FROM public.all_course_instructor_data WHERE term_code = ${quarter:sqlstring}\n)\nSELECT \n    AVG(avg_difficulty) AS total_instructor_ratings\nFROM \n    instructors",
           "refId": "A",
           "sql": {
             "columns": [
@@ -990,7 +990,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \n    instruction_method,\n    COUNT(*) AS count\nFROM \n    courses\nGROUP BY \n    instruction_method\nORDER BY COUNT(*) DESC;\n",
+          "rawSql": "WITH courses AS (\n SELECT *, prerequisites AS prereqs,\n CASE WHEN is_full THEN 'FULL' ELSE enrolled::text END AS enroll,\n capacity::text AS max_enroll\n FROM public.courses WHERE term_code = ${quarter:sqlstring}\n), instructors AS (\n SELECT DISTINCT i.* FROM public.instructors i\n JOIN public.course_instructors ci ON ci.instructor_id=i.id\n WHERE ci.term_code = ${quarter:sqlstring}\n), all_course_instructor_data AS (\n SELECT * FROM public.all_course_instructor_data WHERE term_code = ${quarter:sqlstring}\n)\nSELECT \n    instruction_method,\n    COUNT(*) AS count\nFROM \n    courses\nGROUP BY \n    instruction_method\nORDER BY COUNT(*) DESC;\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1075,7 +1075,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \n    credits,\n    COUNT(*) AS count\nFROM \n    courses\nGROUP BY \n    credits\nORDER BY COUNT(*) DESC;\n",
+          "rawSql": "WITH courses AS (\n SELECT *, prerequisites AS prereqs,\n CASE WHEN is_full THEN 'FULL' ELSE enrolled::text END AS enroll,\n capacity::text AS max_enroll\n FROM public.courses WHERE term_code = ${quarter:sqlstring}\n), instructors AS (\n SELECT DISTINCT i.* FROM public.instructors i\n JOIN public.course_instructors ci ON ci.instructor_id=i.id\n WHERE ci.term_code = ${quarter:sqlstring}\n), all_course_instructor_data AS (\n SELECT * FROM public.all_course_instructor_data WHERE term_code = ${quarter:sqlstring}\n)\nSELECT \n    credits,\n    COUNT(*) AS count\nFROM \n    courses\nGROUP BY \n    credits\nORDER BY COUNT(*) DESC;\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1160,7 +1160,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \n    CASE \n        WHEN start_time >= '05:00:00' AND start_time < '12:00:00' THEN 'Morning'\n        WHEN start_time >= '12:00:00' AND start_time < '17:00:00' THEN 'Afternoon'\n        WHEN start_time >= '17:00:00' AND start_time <= '23:59:59' THEN 'Evening'\n        ELSE 'Undefined'\n    END AS time_of_day,\n    COUNT(*) AS count\nFROM \n    courses\nWHERE\n    start_time IS NOT NULL\nGROUP BY \n    time_of_day;\n",
+          "rawSql": "WITH courses AS (\n SELECT *, prerequisites AS prereqs,\n CASE WHEN is_full THEN 'FULL' ELSE enrolled::text END AS enroll,\n capacity::text AS max_enroll\n FROM public.courses WHERE term_code = ${quarter:sqlstring}\n), instructors AS (\n SELECT DISTINCT i.* FROM public.instructors i\n JOIN public.course_instructors ci ON ci.instructor_id=i.id\n WHERE ci.term_code = ${quarter:sqlstring}\n), all_course_instructor_data AS (\n SELECT * FROM public.all_course_instructor_data WHERE term_code = ${quarter:sqlstring}\n)\nSELECT \n    CASE \n        WHEN start_time >= '05:00:00' AND start_time < '12:00:00' THEN 'Morning'\n        WHEN start_time >= '12:00:00' AND start_time < '17:00:00' THEN 'Afternoon'\n        WHEN start_time >= '17:00:00' AND start_time <= '23:59:59' THEN 'Evening'\n        ELSE 'Undefined'\n    END AS time_of_day,\n    COUNT(*) AS count\nFROM \n    courses\nWHERE\n    start_time IS NOT NULL\nGROUP BY \n    time_of_day;\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1245,7 +1245,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \n    unnested_days,\n    COUNT(*) AS count\nFROM \n    (\n        SELECT UNNEST(days) AS unnested_days\n        FROM courses\n        WHERE days IS NOT NULL\n    ) AS unnested\nGROUP BY \n    unnested_days\nORDER BY \n    count DESC;\n",
+          "rawSql": "WITH courses AS (\n SELECT *, prerequisites AS prereqs,\n CASE WHEN is_full THEN 'FULL' ELSE enrolled::text END AS enroll,\n capacity::text AS max_enroll\n FROM public.courses WHERE term_code = ${quarter:sqlstring}\n), instructors AS (\n SELECT DISTINCT i.* FROM public.instructors i\n JOIN public.course_instructors ci ON ci.instructor_id=i.id\n WHERE ci.term_code = ${quarter:sqlstring}\n), all_course_instructor_data AS (\n SELECT * FROM public.all_course_instructor_data WHERE term_code = ${quarter:sqlstring}\n)\nSELECT \n    unnested_days,\n    COUNT(*) AS count\nFROM \n    (\n        SELECT UNNEST(days) AS unnested_days\n        FROM courses\n        WHERE days IS NOT NULL\n    ) AS unnested\nGROUP BY \n    unnested_days\nORDER BY \n    count DESC;\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1331,7 +1331,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \n    CONCAT(subject_code, ' ', course_number) AS \"Course\",\n    COUNT(*) AS \"Sections\"\nFROM \n    courses\nGROUP BY \n    subject_code, course_number\nORDER BY \n    \"Sections\" DESC\nLIMIT 10;\n",
+          "rawSql": "WITH courses AS (\n SELECT *, prerequisites AS prereqs,\n CASE WHEN is_full THEN 'FULL' ELSE enrolled::text END AS enroll,\n capacity::text AS max_enroll\n FROM public.courses WHERE term_code = ${quarter:sqlstring}\n), instructors AS (\n SELECT DISTINCT i.* FROM public.instructors i\n JOIN public.course_instructors ci ON ci.instructor_id=i.id\n WHERE ci.term_code = ${quarter:sqlstring}\n), all_course_instructor_data AS (\n SELECT * FROM public.all_course_instructor_data WHERE term_code = ${quarter:sqlstring}\n)\nSELECT \n    CONCAT(subject_code, ' ', course_number) AS \"Course\",\n    COUNT(*) AS \"Sections\"\nFROM \n    courses\nGROUP BY \n    subject_code, course_number\nORDER BY \n    \"Sections\" DESC\nLIMIT 10;\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1430,7 +1430,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \n    course_id AS \"CRN\",\n    CONCAT(subject_code, ' ', course_number) AS \"Course\",\n    instructor_name AS \"Instructor\",\n    avg_difficulty AS \"Average Difficulty\"\nFROM \n    all_course_instructor_data\nWHERE \n    num_ratings >= 5 AND avg_difficulty IS NOT NULL\nORDER BY \n    avg_difficulty ASC\nLIMIT 10;\n",
+          "rawSql": "WITH courses AS (\n SELECT *, prerequisites AS prereqs,\n CASE WHEN is_full THEN 'FULL' ELSE enrolled::text END AS enroll,\n capacity::text AS max_enroll\n FROM public.courses WHERE term_code = ${quarter:sqlstring}\n), instructors AS (\n SELECT DISTINCT i.* FROM public.instructors i\n JOIN public.course_instructors ci ON ci.instructor_id=i.id\n WHERE ci.term_code = ${quarter:sqlstring}\n), all_course_instructor_data AS (\n SELECT * FROM public.all_course_instructor_data WHERE term_code = ${quarter:sqlstring}\n)\nSELECT \n    course_id AS \"CRN\",\n    CONCAT(subject_code, ' ', course_number) AS \"Course\",\n    instructor_name AS \"Instructor\",\n    avg_difficulty AS \"Average Difficulty\"\nFROM \n    all_course_instructor_data\nWHERE \n    num_ratings >= 5 AND avg_difficulty IS NOT NULL\nORDER BY \n    avg_difficulty ASC\nLIMIT 10;\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1482,6 +1482,23 @@
   "tags": [],
   "templating": {
     "list": [
+      {
+        "name": "quarter",
+        "label": "Quarter",
+        "type": "query",
+        "datasource": {
+          "type": "postgres",
+          "uid": "scheduler-postgres"
+        },
+        "query": "SELECT label AS __text, code AS __value FROM terms WHERE available\nORDER BY (code = to_char(CURRENT_DATE - interval '8 months', 'YYYY') ||\nCASE WHEN extract(month FROM CURRENT_DATE) >= 9 THEN '15'\nWHEN extract(month FROM CURRENT_DATE) <= 3 THEN '25'\nWHEN extract(month FROM CURRENT_DATE) <= 6 THEN '35' ELSE '45' END) DESC, code DESC",
+        "definition": "SELECT label AS __text, code AS __value FROM terms WHERE available\nORDER BY (code = to_char(CURRENT_DATE - interval '8 months', 'YYYY') ||\nCASE WHEN extract(month FROM CURRENT_DATE) >= 9 THEN '15'\nWHEN extract(month FROM CURRENT_DATE) <= 3 THEN '25'\nWHEN extract(month FROM CURRENT_DATE) <= 6 THEN '35' ELSE '45' END) DESC, code DESC",
+        "refresh": 1,
+        "sort": 0,
+        "multi": false,
+        "includeAll": false,
+        "current": {},
+        "options": []
+      },
       {
         "current": {
           "text": "Yes",

@@ -59,10 +59,26 @@ jobs:
             - name: Check for running Kubernetes jobs
               run: |
                   KUBECONFIG=kubeconfig.yaml
+                  kubectl patch cronjob drexel-scheduler-cronjob -n "${{ env.NAMESPACE }}" --type merge -p '{"spec":{"suspend":true}}'
                   while kubectl get jobs -n ${{ env.NAMESPACE }} -o jsonpath='{.items[?(@.status.active)].metadata.name}' | grep "drexel-scheduler-cronjob"; do
                     echo "Waiting for jobs to complete..."
                     sleep 30
                   done
+
+            - name: Migrate existing database before dashboard provisioning
+              run: |
+                  COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+                  JOB_NAME="drexel-migrate-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+                  kubectl --kubeconfig=kubeconfig.yaml create job "$JOB_NAME" \
+                    --from=cronjob/drexel-scheduler-cronjob -n "$NAMESPACE" --dry-run=client -o json \
+                    | jq --arg image "$IMAGE_NAME:$COMMIT_SHA" '
+                      .spec.template.spec.containers[0].image = $image |
+                      .spec.template.spec.containers[0].command = ["python3", "src/main.py", "--migrate-only"] |
+                      .spec.backoffLimit = 0 | .spec.activeDeadlineSeconds = 300 |
+                      .spec.ttlSecondsAfterFinished = 86400' \
+                    | kubectl --kubeconfig=kubeconfig.yaml apply -f -
+                  kubectl --kubeconfig=kubeconfig.yaml wait -n "$NAMESPACE" \
+                    --for=condition=complete "job/$JOB_NAME" --timeout=300s
 
             - name: Deploy to Kubernetes
               run: |
