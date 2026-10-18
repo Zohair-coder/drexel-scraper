@@ -110,6 +110,20 @@ python3 src/main.py --all-colleges
 python src/main.py --all-colleges
 ```
 
+#### Multiple quarters
+
+Grafana's **Quarter** selector lists quarters currently advertised by TMS. To
+collect every available quarter and college, including course details and ratings:
+
+```bash
+python3 src/main.py --db --all-quarters --all-colleges --ratings
+```
+
+Use `--term 202625` to refresh only Winter 2027. Without either quarter flag,
+the existing configured/automatic quarter selection applies. Each quarter is
+stored independently; a failed refresh retains its previous data. The scheduled
+container collects all quarters. See [the architecture and migration notes](docs/multi-quarter.md).
+
 #### Ratings
 
 To also include the ratings field in `data.json` that requests data from RateMyProfessor, run the following command:
@@ -142,10 +156,13 @@ python3 src/main.py --db
 python src/main.py --db
 ```
 
-This will create a new database `schedulerdb` and the necessary tables if they aren't already created, and then insert the data into the database. If the data is already populated, it will update the existing data. To delete all the data, make sure the environment variables specified in `src/db_config.py` are set and then run the following command (make sure you're using the Git Bash terminal if you're using Windows):
+This creates the database/tables if needed and atomically replaces only the
+selected quarter's data. Existing single-quarter databases are migrated while
+preserving their old tables in `legacy_single_quarter`. To initialize or migrate
+without scraping, use:
 
 ```bash
-./scripts/reset-db.sh
+python3 src/main.py --migrate-only
 ```
 
 To view the schema for the tables, you can look at the `src/create_tables.sql` file.
@@ -159,7 +176,8 @@ psql -U postgres schedulerdb
 ```sql
 schedulerdb=# SELECT * FROM courses;
 schedulerdb=# SELECT * FROM instructors;
-schedulerdb=# SELECT * FROM course_instructor;
+schedulerdb=# SELECT * FROM terms;
+schedulerdb=# SELECT * FROM course_instructors;
 schedulerdb=# SELECT * FROM all_course_instructor_data;
 ```
 

@@ -154,8 +154,8 @@ jobs:
           echo "Data successfully stored in the database. Found $RESULT records."
         fi
 
-    - name: Reset database
-      run: docker compose run scraper sh -c 'apt-get install -y postgresql-client && ./scripts/reset-db.sh;'
+    - name: Verify schema initialization is idempotent
+      run: docker compose run scraper python3 src/main.py --migrate-only
 
     - name: Run scraper again (to test cache)
       env:
