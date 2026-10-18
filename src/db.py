@@ -89,6 +89,13 @@ def create_tables(cur: cursor) -> None:
             "ALTER VIEW public.all_course_instructor_data SET SCHEMA legacy_single_quarter"
         )
     cur.execute(Path(__file__).with_name("create_tables.sql").read_text())
+    # Upgrade labels from the original multi-quarter release without needing
+    # authentication during migration. Preserve labels already supplied by TMS.
+    cur.execute(
+        "SELECT code FROM terms WHERE label ~ '^(Fall|Winter|Spring|Summer) [0-9]{4}$'"
+    )
+    for (code,) in cur.fetchall():
+        cur.execute("UPDATE terms SET label=%s WHERE code=%s", (term_label(code), code))
     if old and not new:
         cur.execute("SELECT key,value FROM legacy_single_quarter.metadata")
         metadata = dict(cur.fetchall())
@@ -115,11 +122,13 @@ def create_tables(cur: cursor) -> None:
         # Unknown legacy timestamp is deliberately left NULL until a verified refresh.
 
 
-def upsert_term(cur: cursor, code: str) -> None:
+def upsert_term(cur: cursor, code: str, label: str | None = None) -> None:
     cur.execute(
         """INSERT INTO terms(code,label,source_url) VALUES (%s,%s,%s)
-        ON CONFLICT(code) DO UPDATE SET label=excluded.label,source_url=excluded.source_url""",
-        (code, term_label(code), term_url(code)),
+        ON CONFLICT(code) DO UPDATE SET
+            label=CASE WHEN %s IS NOT NULL THEN excluded.label ELSE terms.label END,
+            source_url=excluded.source_url""",
+        (code, label if label is not None else term_label(code), term_url(code), label),
     )
 
 
@@ -141,8 +150,8 @@ def update_catalogue(terms: dict[str, str], default_term: str | None = None) -> 
     with closing(conn), conn, cur:
         cur.execute("SELECT pg_advisory_xact_lock(712410)")
         cur.execute("UPDATE terms SET available=false")
-        for code in terms:
-            upsert_term(cur, code)
+        for code, label in terms.items():
+            upsert_term(cur, code, label)
             cur.execute("UPDATE terms SET available=true WHERE code=%s", (code,))
         set_dashboard_default(cur, default_term)
 

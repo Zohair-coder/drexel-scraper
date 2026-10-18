@@ -56,6 +56,7 @@ def scrape(
     session: Session | None = None,
     term_index: int = 1,
     term_count: int = 1,
+    term_name: str | None = None,
 ) -> dict[str, dict[str, Any]]:
     term_code = term_code or config.year + config.quarter
     session = session or authenticated_session()
@@ -78,6 +79,7 @@ def scrape(
             term_code,
             term_index,
             term_count,
+            term_name,
         )
         for course in college_data.values():
             course["college_code"] = college_code
@@ -121,6 +123,7 @@ def scrape_all_subjects(
     term_code: str,
     term_index: int = 1,
     term_count: int = 1,
+    term_name: str | None = None,
 ) -> dict[str, dict[str, Any]]:
     try:
         with open("cache/extra_course_data_cache.json", "r") as f:
@@ -176,7 +179,7 @@ def scrape_all_subjects(
 
             print(
                 f"Parsed CRN: {crn} ({data[crn]['course_title']}) "
-                f"— {term_label(term_code)} ({term_code}) ({term_index}/{term_count})"
+                f"— {term_name or term_label(term_code)} ({term_code}) ({term_index}/{term_count})"
             )
             print()
 
