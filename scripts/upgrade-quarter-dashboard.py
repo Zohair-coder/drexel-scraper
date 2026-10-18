@@ -5,10 +5,7 @@ from pathlib import Path
 path = Path(__file__).resolve().parents[1] / "k8s/drexel-scraper/dashboards/scheduler.json"
 dashboard = json.loads(path.read_text())
 query = """SELECT label AS __text, code AS __value FROM terms WHERE available
-ORDER BY (code = to_char(CURRENT_DATE - interval '8 months', 'YYYY') ||
-CASE WHEN extract(month FROM CURRENT_DATE) >= 9 THEN '15'
-WHEN extract(month FROM CURRENT_DATE) <= 3 THEN '25'
-WHEN extract(month FROM CURRENT_DATE) <= 6 THEN '35' ELSE '45' END) DESC, code DESC"""
+ORDER BY is_default DESC, code DESC"""
 if not any(v["name"] == "quarter" for v in dashboard["templating"]["list"]):
     dashboard["templating"]["list"].insert(0, {
         "name": "quarter", "label": "Quarter", "type": "query",
@@ -16,6 +13,8 @@ if not any(v["name"] == "quarter" for v in dashboard["templating"]["list"]):
         "query": query, "definition": query, "refresh": 1, "sort": 0,
         "multi": False, "includeAll": False, "current": {}, "options": []
     })
+quarter = next(v for v in dashboard["templating"]["list"] if v["name"] == "quarter")
+quarter.update(query=query, definition=query, current={}, options=[])
 scope = """WITH courses AS (
  SELECT *, prerequisites AS prereqs,
  CASE WHEN is_full THEN 'FULL' ELSE enrolled::text END AS enroll,

@@ -66,6 +66,14 @@ other filters but preserves the quarter. A not-yet-loaded term explicitly says
 `Not loaded yet`. Summary panels retain their previous semantics: they describe
 the selected quarter, independently of course-table rating/time filters.
 
+The scraper stores `terms.is_default` from its configured quarter (the existing
+`get_current_quarter_and_year()` logic, including environment overrides). Grafana
+orders this quarter first and has no saved hardcoded selection. Fresh visits use
+that default; `var-quarter` links retain the explicitly chosen quarter. If TMS
+does not yet advertise the configured quarter, the newest available quarter is
+the fallback. The default is refreshed with each successful catalogue discovery;
+Grafana does not duplicate the Python date-boundary rules in SQL.
+
 ## Deployment / tests
 
 The existing dev-branch GitHub workflow builds the ARM64 image, waits for active

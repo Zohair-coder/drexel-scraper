@@ -60,7 +60,7 @@ jobs:
               run: |
                   KUBECONFIG=kubeconfig.yaml
                   kubectl patch cronjob drexel-scheduler-cronjob -n "${{ env.NAMESPACE }}" --type merge -p '{"spec":{"suspend":true}}'
-                  while kubectl get jobs -n ${{ env.NAMESPACE }} -o jsonpath='{.items[?(@.status.active)].metadata.name}' | grep "drexel-scheduler-cronjob"; do
+                  while kubectl get jobs -n "$NAMESPACE" -o json | jq -e --arg image "$IMAGE_NAME:" '.items[] | select((.status.active // 0) > 0) | select(any(.spec.template.spec.containers[]; .image | startswith($image))) | .metadata.name'; do
                     echo "Waiting for jobs to complete..."
                     sleep 30
                   done

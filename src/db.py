@@ -19,6 +19,7 @@ from db_config import (
     GRAFANA_SERVICE_ACCOUNT_PASSWORD,
 )
 from terms import term_label, term_url
+from quarter_utils import get_current_quarter_and_year
 
 
 def connect_to_db() -> tuple[cursor, connection]:
@@ -45,10 +46,11 @@ def connect_to_db() -> tuple[cursor, connection]:
     return conn.cursor(), conn
 
 
-def initialize() -> None:
+def initialize(default_term: str | None = None) -> None:
     cur, conn = connect_to_db()
     with closing(conn), conn, cur:
         create_tables(cur)
+        set_dashboard_default(cur, default_term)
         cur.execute(
             "SELECT 1 FROM pg_roles WHERE rolname=%s",
             (GRAFANA_SERVICE_ACCOUNT_USERNAME,),
@@ -121,7 +123,18 @@ def upsert_term(cur: cursor, code: str) -> None:
     )
 
 
-def update_catalogue(terms: dict[str, str]) -> None:
+def set_dashboard_default(cur: cursor, default_term: str | None = None) -> None:
+    if default_term is None:
+        year, quarter = get_current_quarter_and_year()
+        default_term = year + quarter
+    term_label(default_term)
+    cur.execute("UPDATE terms SET is_default=false WHERE is_default")
+    cur.execute(
+        "UPDATE terms SET is_default=true WHERE code=%s AND available", (default_term,)
+    )
+
+
+def update_catalogue(terms: dict[str, str], default_term: str | None = None) -> None:
     if not terms:
         raise ValueError("Refusing empty catalogue")
     cur, conn = connect_to_db()
@@ -131,6 +144,7 @@ def update_catalogue(terms: dict[str, str]) -> None:
         for code in terms:
             upsert_term(cur, code)
             cur.execute("UPDATE terms SET available=true WHERE code=%s", (code,))
+        set_dashboard_default(cur, default_term)
 
 
 def number(value: Any) -> int | None:
