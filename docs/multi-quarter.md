@@ -48,6 +48,10 @@ coordinated operation, not merely reverting the image.
   last year's quarters; ignore semester links. One authenticated session is
   reused serially because TMS subject/detail routes depend on session state.
 - `--term 202625`: explicitly refresh one available quarter.
+- Quarter names are taken from the TMS catalogue (for example, `Winter Quarter
+  26-27`) and used in Grafana and scraper logs. Migration uses the same
+  academic-year format for legacy calendar labels without changing term codes
+  or course records. Publishing course data does not overwrite source labels.
 - Without either flag, the existing configured/auto-selected quarter is used.
 - Each complete nonempty term is published in one transaction. Stale sections
   and assignments for that term disappear; other terms remain intact.

@@ -119,7 +119,7 @@ collect every available quarter and college, including course details and rating
 python3 src/main.py --db --all-quarters --all-colleges --ratings
 ```
 
-Use `--term 202625` to refresh only Winter 2027. Without either quarter flag,
+Use `--term 202625` to refresh only Winter Quarter 26-27. Without either quarter flag,
 the existing configured/automatic quarter selection applies. Each quarter is
 stored independently; a failed refresh retains its previous data. The scheduled
 container collects all quarters. See [the architecture and migration notes](docs/multi-quarter.md).
