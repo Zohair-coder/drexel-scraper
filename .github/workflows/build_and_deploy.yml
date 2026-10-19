@@ -89,8 +89,8 @@ jobs:
 
             - name: Clear Cache
               run: |
-                  kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-extra-course-data-cronjob github-actions-delete-credits-job --kubeconfig=kubeconfig.yaml
-                  kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-ratings-cronjob github-actions-delete-ratings-job --kubeconfig=kubeconfig.yaml
+                  kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-extra-course-data-cronjob "delete-credits-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" --kubeconfig=kubeconfig.yaml
+                  kubectl create job -n ${{ env.NAMESPACE }} --from=cronjob/delete-ratings-cronjob "delete-ratings-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" --kubeconfig=kubeconfig.yaml
 
             - name: Add Grafana Helm Repo
               run: |
