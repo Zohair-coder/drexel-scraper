@@ -5,7 +5,8 @@ metadata:
 spec:
   schedule: "0 5 * * *" # Every night at 05:00
   timeZone: "US/Eastern"
-  successfulJobsHistoryLimit: 0
+  # Cronitor fetches the completed Job and Pod when processing completion events.
+  successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
