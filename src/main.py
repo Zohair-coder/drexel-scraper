@@ -8,10 +8,10 @@ import sys
 import time
 import os
 import cProfile
-import traceback
 import argparse
 import emailer
 import db
+from diagnostics import QuarterFailures, format_failure, persist_failure
 
 
 def main(args: argparse.Namespace) -> None:
@@ -33,7 +33,7 @@ def main(args: argparse.Namespace) -> None:
     )
     if any(code not in catalogue for code in selected):
         raise ValueError("Requested quarter is not advertised by TMS")
-    failures = []
+    failures: dict[str, str] = {}
     for term_index, code in enumerate(selected, start=1):
         print(
             f"Scraping {catalogue[code]} ({code}) ({term_index}/{len(selected)})",
@@ -66,16 +66,17 @@ def main(args: argparse.Namespace) -> None:
         except Exception as exc:
             if not args.all_quarters:
                 raise
-            # Exception messages can include upstream response headers or bodies.
-            # Report the quarter and exception type without leaking those details.
+            detail = format_failure(exc)
+            failures[code] = detail
             print(
-                f"Failed {code} ({type(exc).__name__}); continuing with remaining quarters",
+                f"Failed {code}; continuing with remaining quarters\n{detail}",
                 flush=True,
             )
-            failures.append(code)
+            # Save immediately, even if the job is terminated before the loop ends.
+            persist_failure(f"Quarter {code}:\n{detail}")
 
     if failures:
-        raise RuntimeError(f"Quarters failed: {', '.join(failures)}")
+        raise QuarterFailures(failures)
 
     print("--- {} seconds ---".format(time.time() - start_time))
 
@@ -137,14 +138,15 @@ if __name__ == "__main__":
         if not os.path.exists("performance"):
             os.makedirs("performance")
         cProfile.run("main(args)", "performance/profile_output.pstat")
-    except Exception:
-        trace = traceback.format_exc()
+    except Exception as exc:
+        trace = format_failure(exc)
         print(trace)
+        persist_failure(trace)
 
         if args.email:
             environment = os.environ.get("ENVIRONMENT", "UNKNOWN")
             if emailer.send_email(f"{environment}: Error running scraper", trace):
-                print("Exeception email sent")
+                print("Exception email sent")
             else:
                 print("Error sending exception email")
         sys.exit(1)
