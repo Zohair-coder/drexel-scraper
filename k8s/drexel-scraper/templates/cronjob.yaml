@@ -21,6 +21,8 @@ spec:
               env:
                 - name: ENVIRONMENT
                   value: {{ .Values.env }}
+                - name: SCRAPER_FAILURE_DIR
+                  value: /app/performance/failures
               envFrom:
                 - configMapRef:
                     name: drexel-scheduler-configmap
