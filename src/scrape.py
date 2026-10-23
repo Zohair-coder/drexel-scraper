@@ -1,7 +1,6 @@
 from requests import Session, Response
 from bs4 import BeautifulSoup
-import json
-import os
+from cache_store import load_cache, save_cache
 from typing import Any
 import time
 from urllib.parse import parse_qs, urlsplit
@@ -125,17 +124,8 @@ def scrape_all_subjects(
     term_count: int = 1,
     term_name: str | None = None,
 ) -> dict[str, dict[str, Any]]:
-    try:
-        with open("cache/extra_course_data_cache.json", "r") as f:
-            extra_course_data_cache = json.load(f)
-    except FileNotFoundError:
-        extra_course_data_cache = {}
-
-    try:
-        with open("cache/ratings_cache.json", "r") as f:
-            ratings_cache = json.load(f)
-    except FileNotFoundError:
-        ratings_cache = {}
+    extra_course_data_cache = load_cache("cache/extra_course_data_cache.json")
+    ratings_cache = load_cache("cache/ratings_cache.json")
 
     college_page_soup = get_soup(html)
     for subject_page_link in college_page_soup.find_all(
@@ -183,13 +173,7 @@ def scrape_all_subjects(
             )
             print()
 
-    if not os.path.exists("cache"):
-        os.makedirs("cache")
-
-    with open("cache/ratings_cache.json", "w") as f:
-        json.dump(ratings_cache, f, indent=4)
-
-    with open("cache/extra_course_data_cache.json", "w") as f:
-        json.dump(extra_course_data_cache, f, indent=4)
+    save_cache("cache/ratings_cache.json", ratings_cache)
+    save_cache("cache/extra_course_data_cache.json", extra_course_data_cache)
 
     return data
