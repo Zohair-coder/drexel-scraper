@@ -11,7 +11,8 @@ from requests import Response
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 
-def test_cache_keys_and_session_expiry(tmp_path, monkeypatch):
+@pytest.mark.parametrize("corrupt_cache", [False, True])
+def test_cache_keys_and_session_expiry(tmp_path, monkeypatch, corrupt_cache):
     monkeypatch.setenv("DREXEL_EMAIL", "test@example.test")
     monkeypatch.setenv("DREXEL_PASSWORD", "test")
     import scrape
@@ -26,6 +27,9 @@ def test_cache_keys_and_session_expiry(tmp_path, monkeypatch):
             }
         )
     )
+    if corrupt_cache:
+        Path("cache/extra_course_data_cache.json").write_text('{"interrupted":')
+        Path("cache/ratings_cache.json").write_text("")
     response = Response()
     response.url = "https://termmasterschedule.drexel.edu/webtms_du/courseList/CS"
     response._content = b"<title>WebTMS - Courses</title>"
@@ -52,8 +56,9 @@ def test_cache_keys_and_session_expiry(tmp_path, monkeypatch):
     assert len(calls) == 2
     calls.clear()
     scrape.scrape_all_subjects(None, data, html, False, "202615")
-    assert data["12345"]["prereqs"] == "fall"
-    assert len(calls) == 1
+    assert data["12345"]["prereqs"] == ("winter" if corrupt_cache else "fall")
+    assert len(calls) == (2 if corrupt_cache else 1)
+    assert json.loads(Path("cache/ratings_cache.json").read_text()) == {}
     response.url = "https://connect.drexel.edu/login"
     with pytest.raises(ValueError, match="session expired"):
         scrape.require_tms(response)
